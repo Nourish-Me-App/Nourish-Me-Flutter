@@ -8,16 +8,40 @@ version: 1.0.0+1
 environment:
   sdk: '>=3.3.2 <4.0.0'
 
+# An extension for generating assets file located in helpers folder.
+flutter_assets:
+  assets_path: assets/
+  output_path: lib/core/helpers/
+  filename: app_images.dart
+  field_prefix:
+
 dependencies:
   flutter:
     sdk: flutter
 
-  cupertino_icons: ^1.0.6
-  # For responsivity
-  flutter_screenutil: ^5.9.0
-  # App deployment
-  flutter_native_splash: ^2.4.0
+  cupertino_icons: ^1.0.2
+  #To store data.
+  shared_preferences: ^2.2.2
+  #Theming and gifs.
+  font_awesome_flutter: ^10.7.0
+  lottie: ^3.0.0
+  google_fonts: ^6.1.0
+  #Image handling.
+  flutter_svg: ^2.0.9
+  image_picker: ^1.0.7
+  cached_network_image: ^3.3.1
+  #App deployment.
+  flutter_native_splash: ^2.0.2
   flutter_launcher_icons: ^0.13.1
+  # For networking.
+  dio: ^5.4.0
+  # State Management & Logic.
+  flutter_bloc: ^8.1.3
+  # For responsivity.
+  flutter_screenutil: ^5.9.0
+  # For dependency injection.
+  get_it: ^7.6.7
+
 
 #changing the application icon.
 flutter_launcher_icons:
