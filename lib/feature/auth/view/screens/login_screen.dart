@@ -52,7 +52,7 @@ class LoginScreen extends StatelessWidget {
                   CustomTFF(
                     focusNode: FocusNode(),
                     hintText: 'ادخل كلمة المرور',
-                    kbType: TextInputType.emailAddress,
+                    kbType: TextInputType.visiblePassword,
                   ),
                   SizedBox(height: 8.h),
                   Directionality(

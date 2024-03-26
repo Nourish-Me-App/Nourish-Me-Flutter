@@ -50,7 +50,7 @@ class SignUpScreen extends StatelessWidget {
                   CustomTFF(
                     focusNode: FocusNode(),
                     hintText: 'ادخل كلمة المرور',
-                    kbType: TextInputType.emailAddress,
+                    kbType: TextInputType.visiblePassword,
                   ),
                   SizedBox(height: 16.h),
                   const TFFLabel(label: 'تأكيد كلمة المرور'),
@@ -58,7 +58,7 @@ class SignUpScreen extends StatelessWidget {
                   CustomTFF(
                     focusNode: FocusNode(),
                     hintText: 'تأكيد كلمة المرور',
-                    kbType: TextInputType.emailAddress,
+                    kbType: TextInputType.visiblePassword,
                   ),
                   SizedBox(height: 24.h),
                   CustomButton(
