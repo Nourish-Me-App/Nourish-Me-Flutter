@@ -9,7 +9,6 @@ class CustomTFF extends StatefulWidget {
   final TextInputType kbType;
   final TextEditingController? controller;
   final Widget? prefixIcon;
-  final FocusNode focusNode;
   final dynamic validate;
   const CustomTFF({
     super.key,
@@ -18,7 +17,6 @@ class CustomTFF extends StatefulWidget {
     required this.kbType,
     this.controller,
     this.validate,
-    required this.focusNode,
   });
 
   @override
@@ -38,7 +36,6 @@ class _CustomTFFState extends State<CustomTFF> {
     return SizedBox(
       height: 40.h,
       child: TextFormField(
-        focusNode: widget.focusNode,
         obscureText: widget.hintText == 'ادخل كلمة المرور' ||
                 widget.hintText == 'تأكيد كلمة المرور'
             ? showPassword

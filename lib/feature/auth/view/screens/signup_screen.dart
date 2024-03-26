@@ -39,24 +39,21 @@ class SignUpScreen extends StatelessWidget {
                   SizedBox(height: 32.h),
                   const TFFLabel(label: 'البريد الإلكتروني'),
                   SizedBox(height: 8.h),
-                  CustomTFF(
-                    focusNode: FocusNode(),
+                  const CustomTFF(
                     hintText: 'ادخل البريد الإلكتروني',
                     kbType: TextInputType.emailAddress,
                   ),
                   SizedBox(height: 16.h),
                   const TFFLabel(label: 'كلمة المرور'),
                   SizedBox(height: 8.h),
-                  CustomTFF(
-                    focusNode: FocusNode(),
+                  const CustomTFF(
                     hintText: 'ادخل كلمة المرور',
                     kbType: TextInputType.visiblePassword,
                   ),
                   SizedBox(height: 16.h),
                   const TFFLabel(label: 'تأكيد كلمة المرور'),
                   SizedBox(height: 8.h),
-                  CustomTFF(
-                    focusNode: FocusNode(),
+                  const CustomTFF(
                     hintText: 'تأكيد كلمة المرور',
                     kbType: TextInputType.visiblePassword,
                   ),
