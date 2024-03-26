@@ -5,6 +5,10 @@ class Assets {
   /// assets/icons/app_icon.png
   static const String iconsAppIcon = "assets/icons/app_icon.png";
 
+  /// Assets for imagesNourishMeLogo
+  /// assets/images/nourish_me_logo.png
+  static const String imagesNourishMeLogo = "assets/images/nourish_me_logo.png";
+
   /// Assets for imagesSplashLogoAndroid12
   /// assets/images/splash_logo_android12.png
   static const String imagesSplashLogoAndroid12 = "assets/images/splash_logo_android12.png";
