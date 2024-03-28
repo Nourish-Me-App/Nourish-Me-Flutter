@@ -26,6 +26,7 @@ class Assets {
   /// Assets for verifyEmail
   /// assets/svgs/verify.svg
   static const String verifyEmail = "assets/svgs/verify.svg";
+
   /// assets for success
   /// assets/svgs/congratulation.svg
   static const String success = "assets/svgs/congratulation.svg";

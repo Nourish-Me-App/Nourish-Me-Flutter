@@ -36,7 +36,7 @@ class _CustomTFFState extends State<CustomTFF> {
     return SizedBox(
       height: 40.h,
       child: TextFormField(
-        obscureText: widget.hintText == 'ادخل كلمة المرور' ||
+        obscureText: widget.hintText == 'أدخل كلمة المرور' ||
                 widget.hintText == 'تأكيد كلمة المرور'
             ? showPassword
                 ? false
@@ -48,7 +48,7 @@ class _CustomTFFState extends State<CustomTFF> {
         textAlignVertical: TextAlignVertical.center,
         textDirection: TextDirection.rtl,
         cursorColor: AppColors.tFFContentColor,
-        textAlign: TextAlign.right,
+        textAlign: TextAlign.left,
         controller: widget.controller,
         onChanged: (value) {
           setState(() {
@@ -57,7 +57,7 @@ class _CustomTFFState extends State<CustomTFF> {
         },
         decoration: InputDecoration(
           hintFadeDuration: const Duration(milliseconds: 100),
-          prefixIcon: widget.hintText == 'ادخل كلمة المرور' ||
+          prefixIcon: widget.hintText == 'أدخل كلمة المرور' ||
                   widget.hintText == 'تأكيد كلمة المرور'
               ? IconButton(
                   style: const ButtonStyle(

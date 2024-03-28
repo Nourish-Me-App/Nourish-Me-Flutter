@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nourish_me/core/theme/app_colors.dart';
+import 'app_colors.dart';
 
 class AppTextStyles {
   static TextStyle cairo20BoldBlack = GoogleFonts.cairo(
@@ -15,8 +15,8 @@ class AppTextStyles {
     fontWeight: FontWeight.bold,
   );
 
-  static TextStyle cairo32BoldotpfontColor = GoogleFonts.cairo(
-    color: AppColors.otpfontColor,
+  static TextStyle cairo32BoldOtpFontColor = GoogleFonts.cairo(
+    color: AppColors.otpFontColor,
     fontSize: 32.sp,
     fontWeight: FontWeight.bold,
   );
@@ -31,7 +31,7 @@ class AppTextStyles {
     fontWeight: FontWeight.bold,
   );
 
-  static TextStyle cairo16BoldmainColor = GoogleFonts.cairo(
+  static TextStyle cairo16BoldMainColor = GoogleFonts.cairo(
     color: AppColors.mainColor,
     fontSize: 16.sp,
     fontWeight: FontWeight.bold,

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nourish_me/core/helpers/app_images.dart';
-import 'package:nourish_me/core/routing/routes.dart';
-import 'package:nourish_me/core/theme/app_text_styles.dart';
-import 'package:nourish_me/core/widgets/custom_button.dart';
-import 'package:nourish_me/core/widgets/custom_text_form_field.dart';
-import 'package:nourish_me/feature/auth/view/widgets/auth_continue_question.dart';
-import 'package:nourish_me/feature/auth/view/widgets/tff_label.dart';
+import '../../../../core/helpers/app_images.dart';
+import '../../../../core/routing/routes.dart';
+import '../../../../core/theme/app_text_styles.dart';
+import '../../../../core/widgets/custom_button.dart';
+import '../../../../core/widgets/custom_text_form_field.dart';
+import '../widgets/auth_continue_question.dart';
+import '../widgets/tff_label.dart';
 
 import '../widgets/remember_me.dart';
 
@@ -42,14 +42,14 @@ class LoginScreen extends StatelessWidget {
                   const TFFLabel(label: 'البريد الإلكتروني'),
                   SizedBox(height: 8.h),
                   const CustomTFF(
-                    hintText: 'ادخل البريد الإلكتروني',
+                    hintText: 'أدخل البريد الإلكتروني',
                     kbType: TextInputType.emailAddress,
                   ),
                   SizedBox(height: 16.h),
                   const TFFLabel(label: 'كلمة المرور'),
                   SizedBox(height: 8.h),
                   const CustomTFF(
-                    hintText: 'ادخل كلمة المرور',
+                    hintText: 'أدخل كلمة المرور',
                     kbType: TextInputType.visiblePassword,
                   ),
                   SizedBox(height: 8.h),
