@@ -67,7 +67,12 @@ class LoginScreen extends StatelessWidget {
                           style: const ButtonStyle(
                             splashFactory: NoSplash.splashFactory,
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(
+                              context,
+                              Routes.forgotScreen,
+                            );
+                          },
                           child: Text(
                             'هل نسيت كلمة السر ؟',
                             style: AppTextStyles.cairo12SemiBoldBlack,
