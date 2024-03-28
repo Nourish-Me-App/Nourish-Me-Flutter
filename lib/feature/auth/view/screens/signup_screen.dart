@@ -37,6 +37,36 @@ class SignUpScreen extends StatelessWidget {
                     style: AppTextStyles.cairo20BoldBlack,
                   ),
                   SizedBox(height: 32.h),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          children: [
+                            const TFFLabel(label: 'الإسم الأول'),
+                            SizedBox(height: 8.h),
+                            const CustomTFF(
+                              hintText: 'أدخل الإسم الأول',
+                              kbType: TextInputType.name,
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(width: 8.w),
+                      Expanded(
+                        child: Column(
+                          children: [
+                            const TFFLabel(label: 'الإسم الأخير'),
+                            SizedBox(height: 8.h),
+                            const CustomTFF(
+                              hintText: 'أدخل الإسم الأخير',
+                              kbType: TextInputType.name,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 16.h),
                   const TFFLabel(label: 'البريد الإلكتروني'),
                   SizedBox(height: 8.h),
                   const CustomTFF(

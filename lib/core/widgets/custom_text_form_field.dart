@@ -48,7 +48,7 @@ class _CustomTFFState extends State<CustomTFF> {
         textAlignVertical: TextAlignVertical.center,
         textDirection: TextDirection.rtl,
         cursorColor: AppColors.tFFContentColor,
-        textAlign: TextAlign.left,
+        textAlign: content.isEmpty ? TextAlign.right : TextAlign.left,
         controller: widget.controller,
         onChanged: (value) {
           setState(() {
