@@ -15,11 +15,17 @@ class NourishMe extends StatelessWidget {
       designSize: const Size(390, 844),
       minTextAdapt: true,
       splitScreenMode: true,
-      child: MaterialApp(
+      builder: (context, _) => MaterialApp(
         initialRoute: Routes.signUpScreen,
         onGenerateRoute: AppRoutes().generateRoute,
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
+          appBarTheme: AppBarTheme(
+            iconTheme: IconThemeData(
+              color: AppColors.mainColor,
+              size: 28.r,
+            ),
+          ),
           primaryColorLight: AppColors.mainColor,
           scaffoldBackgroundColor: const Color(0xffFFFFFF),
           useMaterial3: true,

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nourish_me/core/helpers/app_images.dart';
-import 'package:nourish_me/core/routing/routes.dart';
-import 'package:nourish_me/core/theme/app_text_styles.dart';
-import 'package:nourish_me/core/widgets/custom_button.dart';
+import '../../../../core/helpers/app_images.dart';
+import '../../../../core/routing/routes.dart';
+import '../../../../core/theme/app_text_styles.dart';
+import '../../../../core/widgets/custom_button.dart';
 import 'package:nourish_me/core/widgets/custom_text_form_field.dart';
 import 'package:nourish_me/feature/auth/view/widgets/auth_continue_question.dart';
 import 'package:nourish_me/feature/auth/view/widgets/tff_label.dart';
@@ -31,7 +31,7 @@ class SignUpScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 16.h),
                   Text(
-                    'انشئ حساب جديد',
+                    'أنشئ حساب جديد',
                     textDirection: TextDirection.rtl,
                     textAlign: TextAlign.center,
                     style: AppTextStyles.cairo20BoldBlack,
@@ -40,14 +40,14 @@ class SignUpScreen extends StatelessWidget {
                   const TFFLabel(label: 'البريد الإلكتروني'),
                   SizedBox(height: 8.h),
                   const CustomTFF(
-                    hintText: 'ادخل البريد الإلكتروني',
+                    hintText: 'أدخل البريد الإلكتروني',
                     kbType: TextInputType.emailAddress,
                   ),
                   SizedBox(height: 16.h),
                   const TFFLabel(label: 'كلمة المرور'),
                   SizedBox(height: 8.h),
                   const CustomTFF(
-                    hintText: 'ادخل كلمة المرور',
+                    hintText: 'أدخل كلمة المرور',
                     kbType: TextInputType.visiblePassword,
                   ),
                   SizedBox(height: 16.h),
@@ -59,7 +59,7 @@ class SignUpScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 24.h),
                   CustomButton(
-                    buttonText: 'انشئ حساب',
+                    buttonText: 'أنشئ حساب',
                     buttonAction: () {},
                     buttonStyle: AppTextStyles.cairo16BoldWhite,
                   ),
