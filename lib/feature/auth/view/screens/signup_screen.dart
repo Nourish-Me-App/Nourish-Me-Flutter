@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/helpers/app_images.dart';
 import '../../../../core/routing/routes.dart';
@@ -42,10 +43,10 @@ class SignUpScreen extends StatelessWidget {
                       Expanded(
                         child: Column(
                           children: [
-                            const TFFLabel(label: 'الإسم الأول'),
+                            const TFFLabel(label: 'الإسم الأخير'),
                             SizedBox(height: 8.h),
                             const CustomTFF(
-                              hintText: 'أدخل الإسم الأول',
+                              hintText: 'أدخل الإسم الأخير',
                               kbType: TextInputType.name,
                             ),
                           ],
@@ -55,10 +56,10 @@ class SignUpScreen extends StatelessWidget {
                       Expanded(
                         child: Column(
                           children: [
-                            const TFFLabel(label: 'الإسم الأخير'),
+                            const TFFLabel(label: 'الإسم الأول'),
                             SizedBox(height: 8.h),
                             const CustomTFF(
-                              hintText: 'أدخل الإسم الأخير',
+                              hintText: 'أدخل الإسم الأول',
                               kbType: TextInputType.name,
                             ),
                           ],
