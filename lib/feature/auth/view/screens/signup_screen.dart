@@ -4,9 +4,9 @@ import '../../../../core/helpers/app_images.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/widgets/custom_button.dart';
-import 'package:nourish_me/core/widgets/custom_text_form_field.dart';
-import 'package:nourish_me/feature/auth/view/widgets/auth_continue_question.dart';
-import 'package:nourish_me/feature/auth/view/widgets/tff_label.dart';
+import '../../../../core/widgets/custom_text_form_field.dart';
+import '../widgets/auth_continue_question.dart';
+import '../widgets/tff_label.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});

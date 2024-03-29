@@ -21,12 +21,12 @@ class Otp extends StatelessWidget {
           textAlign: TextAlign.center,
           inputFormatters: [
             LengthLimitingTextInputFormatter(1),
-            FilteringTextInputFormatter.digitsOnly
+            FilteringTextInputFormatter.digitsOnly,
           ],
           decoration: InputDecoration(
             fillColor: AppColors.otpBackGround,
             filled: true,
-            contentPadding: EdgeInsets.symmetric(horizontal: 20.h),
+            contentPadding: EdgeInsets.symmetric(vertical: 58.h),
             border: OutlineInputBorder(
               borderSide: BorderSide.none,
               borderRadius: BorderRadius.all(Radius.circular(7.r)),

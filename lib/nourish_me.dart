@@ -21,6 +21,10 @@ class NourishMe extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           appBarTheme: AppBarTheme(
+            elevation: 0,
+            color: Colors.white,
+            surfaceTintColor: Colors.white,
+            scrolledUnderElevation: 0,
             iconTheme: IconThemeData(
               color: AppColors.mainColor,
               size: 28.r,

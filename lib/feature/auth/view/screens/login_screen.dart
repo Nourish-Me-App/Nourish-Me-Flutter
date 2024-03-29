@@ -66,6 +66,10 @@ class LoginScreen extends StatelessWidget {
                         TextButton(
                           style: const ButtonStyle(
                             splashFactory: NoSplash.splashFactory,
+                            overlayColor:
+                                MaterialStatePropertyAll(Colors.transparent),
+                            surfaceTintColor:
+                                MaterialStatePropertyAll(Colors.transparent),
                           ),
                           onPressed: () {
                             Navigator.pushNamed(
