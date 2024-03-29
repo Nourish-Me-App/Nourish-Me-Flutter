@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'routes.dart';
-import '../../feature/auth/view/screens/forgot_password/forgot_screen.dart';
+import '../../feature/forgot_password/views/screens/forgot_screen.dart';
 import '../../feature/auth/view/screens/login_screen.dart';
-import '../../feature/auth/view/screens/forgot_password/reset_screen.dart';
+import '../../feature/forgot_password/views/screens/reset_screen.dart';
 import '../../feature/auth/view/screens/signup_screen.dart';
-import '../../feature/auth/view/screens/forgot_password/succes_screen.dart';
-import '../../feature/auth/view/screens/forgot_password/verfication_screen.dart';
+import '../../feature/forgot_password/views/screens/succes_screen.dart';
+import '../../feature/forgot_password/views/screens/verfication_screen.dart';
 
 class AppRoutes {
   Route? generateRoute(RouteSettings routeSettings) {

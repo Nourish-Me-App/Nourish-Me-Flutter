@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../core/routing/routes.dart';
-import 'package:nourish_me/core/theme/app_colors.dart';
+import '../../../../core/theme/app_colors.dart';
 
 import '../../../../core/theme/app_text_styles.dart';
 
@@ -25,8 +25,10 @@ class AuthContinueQuestion extends StatelessWidget {
             style: AppTextStyles.cairo12SemiBoldBlack,
           ),
           TextButton(
-            style: TextButton.styleFrom(
-              padding: EdgeInsets.zero,
+            style: const ButtonStyle(
+              padding: MaterialStatePropertyAll(EdgeInsets.zero),
+              overlayColor: MaterialStatePropertyAll(Colors.transparent),
+              surfaceTintColor: MaterialStatePropertyAll(Colors.transparent),
               splashFactory: NoSplash.splashFactory,
             ),
             onPressed: () => route == Routes.loginScreen
