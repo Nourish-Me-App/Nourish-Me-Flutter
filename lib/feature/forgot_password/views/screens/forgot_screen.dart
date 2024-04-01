@@ -39,7 +39,7 @@ class ForgotScreen extends StatelessWidget {
                     style: AppTextStyles.cairo12RegularBlack,
                   ),
                   SizedBox(height: 22.h),
-                  SvgPicture.asset(Assets.forgotPassword),
+                  SvgPicture.asset(Assets.svgsForgotpasswoedscreen),
                   SizedBox(height: 28.h),
                   const TFFLabel(label: 'البريد الإلكتروني'),
                   SizedBox(height: 8.h),
