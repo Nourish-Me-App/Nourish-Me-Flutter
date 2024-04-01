@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../core/helpers/app_images.dart';
 import '../../../../core/routing/routes.dart';
-import 'package:nourish_me/core/theme/app_text_styles.dart';
-import 'package:nourish_me/core/widgets/custom_button.dart';
+import '../../../../core/theme/app_text_styles.dart';
+import '../../../../core/widgets/custom_button.dart';
 
 class SuccesScreen extends StatelessWidget {
   const SuccesScreen({super.key});
@@ -18,7 +18,7 @@ class SuccesScreen extends StatelessWidget {
           child: Column(
             children: [
               Center(
-                child: SvgPicture.asset(Assets.success),
+                child: SvgPicture.asset(Assets.svgsCongratulation),
               ),
               SizedBox(height: 16.h),
               Text(

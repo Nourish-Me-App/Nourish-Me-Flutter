@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../logic/cubit/auth_cubit.dart';
 
 import '../../../../core/theme/app_colors.dart';
 
@@ -16,6 +18,8 @@ class _RememberMeState extends State<RememberMe> {
   bool _isChecked = false;
   @override
   Widget build(BuildContext context) {
+    AuthCubit authCubit = BlocProvider.of<AuthCubit>(context);
+
     return Container(
       padding: EdgeInsets.zero,
       margin: EdgeInsets.only(left: 8.w, right: 1.w),
@@ -30,6 +34,7 @@ class _RememberMeState extends State<RememberMe> {
         onTap: () {
           setState(() {
             _isChecked = !_isChecked;
+            authCubit.rememberMe = _isChecked;
           });
         },
         child: _isChecked

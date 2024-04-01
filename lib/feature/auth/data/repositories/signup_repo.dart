@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:nourish_me/feature/auth/data/models/signup_model.dart';
+import '../models/signup_model.dart';
 
 import '../../../../core/networking/api_services.dart';
 

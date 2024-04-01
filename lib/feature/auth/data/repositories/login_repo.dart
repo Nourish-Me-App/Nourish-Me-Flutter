@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:nourish_me/feature/auth/data/models/login_model.dart';
+import '../models/login_model.dart';
 
 import '../../../../core/networking/api_services.dart';
 

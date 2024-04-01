@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'core/helpers/app_constants.dart';
+import 'core/helpers/cache_helper.dart';
 
 import 'core/routing/app_routes.dart';
 import 'core/routing/routes.dart';
@@ -16,7 +18,9 @@ class NourishMe extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, _) => MaterialApp(
-        initialRoute: Routes.signUpScreen,
+        initialRoute: CacheHelper().getData(key: AppConstants.token) == null
+            ? Routes.signUpScreen
+            : Routes.fakeScreen,
         onGenerateRoute: AppRoutes().generateRoute,
         debugShowCheckedModeBanner: false,
         theme: ThemeData(

@@ -8,11 +8,9 @@ class CustomTFF extends StatefulWidget {
   final String hintText;
   final TextInputType kbType;
   final TextEditingController? controller;
-  final Widget? prefixIcon;
-  final dynamic validate;
+  final String? Function(String?)? validate;
   const CustomTFF({
     super.key,
-    this.prefixIcon,
     required this.hintText,
     required this.kbType,
     this.controller,
@@ -33,74 +31,80 @@ class _CustomTFFState extends State<CustomTFF> {
       color: AppColors.tFFEnabledBorderColor,
       width: 1,
     );
-    return SizedBox(
-      height: 40.h,
-      child: TextFormField(
-        obscureText: widget.hintText == 'أدخل كلمة المرور' ||
-                widget.hintText == 'تأكيد كلمة المرور'
-            ? showPassword
-                ? false
-                : true
-            : false,
-        obscuringCharacter: '●',
-        enabled: true,
-        style: AppTextStyles.cairo12ExtraBoldTFFContentColor,
-        textAlignVertical: TextAlignVertical.center,
-        textDirection: TextDirection.rtl,
-        cursorColor: AppColors.tFFContentColor,
-        textAlign: content.isEmpty ? TextAlign.right : TextAlign.left,
-        controller: widget.controller,
-        onChanged: (value) {
-          setState(() {
-            content = value;
-          });
-        },
-        decoration: InputDecoration(
-          hintFadeDuration: const Duration(milliseconds: 100),
-          prefixIcon: widget.hintText == 'أدخل كلمة المرور' ||
-                  widget.hintText == 'تأكيد كلمة المرور'
-              ? IconButton(
-                  style: const ButtonStyle(
-                    splashFactory: NoSplash.splashFactory,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      showPassword = !showPassword;
-                    });
-                  },
-                  icon: Icon(
-                    showPassword ? Icons.visibility : Icons.visibility_off,
-                    color: AppColors.mainColor,
-                    size: 20.r,
-                  ),
-                )
-              : widget.prefixIcon,
-          prefixIconColor: AppColors.mainColor,
-          fillColor: content.isEmpty
-              ? AppColors.tFFEmptyColor
-              : AppColors.tFFFilledColor,
-          filled: true,
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.r),
-            borderSide: borderSide,
-          ),
-          // errorBorder: OutlineInputBorder(
-          //   borderRadius: BorderRadius.circular(10.r),
-          //   borderSide: borderSide,
-          // ),
-          // focusedErrorBorder: OutlineInputBorder(
-          //   borderRadius: BorderRadius.circular(10.r),
-          //   borderSide: borderSide,
-          // ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.r),
-            borderSide: BorderSide.none,
-          ),
-          hintText: widget.hintText,
-          contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
-          hintStyle: AppTextStyles.cairo12MediumTFFContentColor,
+    return TextFormField(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      keyboardType: widget.kbType,
+      validator: widget.validate,
+      obscureText: widget.hintText == 'أدخل كلمة المرور' ||
+              widget.hintText == 'تأكيد كلمة المرور'
+          ? showPassword
+              ? false
+              : true
+          : false,
+      obscuringCharacter: '●',
+      enabled: true,
+      style: AppTextStyles.cairo12ExtraBoldTFFContentColor,
+      textAlignVertical: TextAlignVertical.center,
+      textDirection: TextDirection.rtl,
+      cursorColor: AppColors.tFFContentColor,
+      textAlign: content.isEmpty ? TextAlign.right : TextAlign.left,
+      controller: widget.controller,
+      onChanged: (value) {
+        setState(() {
+          content = value;
+        });
+      },
+      decoration: InputDecoration(
+        hintFadeDuration: const Duration(milliseconds: 100),
+        prefixIcon: content.isNotEmpty ? tFFIconPosition() : null,
+        suffixIcon: content.isEmpty ? tFFIconPosition() : null,
+        prefixIconColor: AppColors.mainColor,
+        suffixIconColor: AppColors.mainColor,
+        fillColor: content.isEmpty
+            ? AppColors.tFFEmptyColor
+            : AppColors.tFFFilledColor,
+        filled: true,
+        hintText: widget.hintText,
+        contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
+        hintStyle: AppTextStyles.cairo12MediumTFFContentColor,
+        errorStyle: AppTextStyles.cairo12RegularTFFErrorColor,
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.r),
+          borderSide: borderSide,
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.r),
+          borderSide: borderSide.copyWith(color: AppColors.tFFErrorColor),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.r),
+          borderSide: borderSide.copyWith(color: AppColors.tFFErrorColor),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.r),
+          borderSide: BorderSide.none,
         ),
       ),
     );
+  }
+
+  Widget? tFFIconPosition() {
+    return widget.hintText == 'أدخل كلمة المرور' ||
+            widget.hintText == 'تأكيد كلمة المرور'
+        ? IconButton(
+            style: const ButtonStyle(
+              splashFactory: NoSplash.splashFactory,
+            ),
+            onPressed: () {
+              setState(() {
+                showPassword = !showPassword;
+              });
+            },
+            icon: Icon(
+              showPassword ? Icons.visibility : Icons.visibility_off,
+              size: 20.r,
+            ),
+          )
+        : null;
   }
 }

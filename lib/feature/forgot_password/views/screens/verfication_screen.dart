@@ -44,7 +44,7 @@ class VerifyEmailScreen extends StatelessWidget {
                     'manarGehad@gmail.com',
                     style: AppTextStyles.cairo12BoldMainColor,
                   ),
-                  SvgPicture.asset(Assets.verifyEmail),
+                  SvgPicture.asset(Assets.svgsVerify),
                   SizedBox(
                     width: 300.w,
                     child: Row(

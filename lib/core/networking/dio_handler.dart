@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:nourish_me/core/helpers/app_constants.dart';
+import '../helpers/app_constants.dart';
 
 import 'api_services.dart';
 
