@@ -50,6 +50,7 @@ class _CustomTFFState extends State<CustomTFF> {
         cursorColor: AppColors.tFFContentColor,
         textAlign: content.isEmpty ? TextAlign.right : TextAlign.left,
         controller: widget.controller,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         onChanged: (value) {
           setState(() {
             content = value;

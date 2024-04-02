@@ -46,6 +46,12 @@ class AppTextStyles {
     fontSize: 12.sp,
     fontWeight: FontWeight.w400,
   );
+
+  static TextStyle cairo12RegularGrey = GoogleFonts.cairo(
+    color: Colors.grey,
+    fontSize: 12.sp,
+    fontWeight: FontWeight.w400,
+  );
   static TextStyle cairo12BoldMainColor = GoogleFonts.cairo(
     color: AppColors.mainColor,
     fontSize: 12.sp,
