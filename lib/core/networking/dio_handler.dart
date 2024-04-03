@@ -1,6 +1,5 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
+import '../errors/api/exceptions/exception_helper_methods.dart';
 import '../helpers/app_constants.dart';
 
 import 'api_services.dart';
@@ -16,8 +15,9 @@ class DioHandler extends ApiServices {
       connectTimeout: const Duration(seconds: 20),
       headers: {
         'Content-Type': 'application/json',
-        'Accept': '*/*',
+        'Accept': 'application/json',
         'Connection': 'keep-alive',
+        'Accept-Encoding': 'gzip, deflate, br'
       },
     );
     dio = Dio(baseOptions);
@@ -39,8 +39,8 @@ class DioHandler extends ApiServices {
         options: options,
       );
       return response.data;
-    } catch (e) {
-      log(e.toString());
+    } on DioException catch (e) {
+      throw ExceptionHelperMethods.handleDioExceptionsTypes(e);
     }
   }
 
@@ -60,8 +60,8 @@ class DioHandler extends ApiServices {
         options: options,
       );
       return response.data;
-    } catch (e) {
-      log(e.toString());
+    } on DioException catch (e) {
+      throw ExceptionHelperMethods.handleDioExceptionsTypes(e);
     }
   }
 
@@ -81,8 +81,8 @@ class DioHandler extends ApiServices {
         options: options,
       );
       return response.data;
-    } catch (e) {
-      log(e.toString());
+    } on DioException catch (e) {
+      throw ExceptionHelperMethods.handleDioExceptionsTypes(e);
     }
   }
 
@@ -101,9 +101,8 @@ class DioHandler extends ApiServices {
         options: options,
       );
       return response.data;
-    } catch (e) {
-      log(e.toString());
+    } on DioException catch (e) {
+      throw ExceptionHelperMethods.handleDioExceptionsTypes(e);
     }
   }
-
 }

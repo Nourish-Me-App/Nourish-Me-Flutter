@@ -4,20 +4,20 @@ part 'login_model.g.dart';
 
 @JsonSerializable()
 class LoginModel {
- final  String? message, status;
- final  Map<String, dynamic>? data;
- final String? email, password;
+  final String? message, status;
+  final Map<String, dynamic>? data;
+  final String? email, password;
 
   @JsonKey(name: 'remember')
- final bool? rememberMe;
+  final bool? rememberMe;
 
   @JsonKey(name: 'status_code')
   final int? statusCode;
 
   LoginModel({
-     this.message,
-     this.status,
-     this.statusCode,
+    this.message,
+    this.status,
+    this.statusCode,
     this.data,
     this.email,
     this.password,

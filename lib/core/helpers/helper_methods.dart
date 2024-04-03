@@ -38,16 +38,17 @@ class HelperMethods {
       ),
     );
   }
-  static 
-  void afterLogin(BuildContext context, AuthCubit authCubit, LoginModel value) {
+
+  static void afterLogin(
+    BuildContext context,
+    AuthCubit authCubit,
+    LoginModel value,
+  ) {
     Navigator.pop(context);
     authCubit.rememberMe
         ? CacheHelper().saveData(
-            key: AppConstants.token,
-            value:
-                value.data![AppConstants.token])
-        : CacheHelper()
-            .removeData(key: AppConstants.token);
+            key: AppConstants.token, value: value.data![AppConstants.token])
+        : CacheHelper().removeData(key: AppConstants.token);
     Navigator.pushNamedAndRemoveUntil(
       context,
       Routes.fakeScreen,

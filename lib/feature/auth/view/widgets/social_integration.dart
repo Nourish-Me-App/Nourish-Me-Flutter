@@ -88,7 +88,7 @@ class PlatformCard extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16.r),
           ),
-          color: AppColors.tFFEmptyColor,
+          color: AppColors.white,
           child: Center(
             child: SvgPicture.asset(
               width: 30.w,

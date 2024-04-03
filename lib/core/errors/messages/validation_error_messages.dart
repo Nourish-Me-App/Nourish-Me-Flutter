@@ -2,15 +2,33 @@ class ValidationErrorTexts {
   ValidationErrorTexts._();
 
   static String? firstNameValidation(String? firstName) {
-    if (firstName == null || firstName.isEmpty) {
+    if (firstName == null || firstName.isEmpty || firstName.trim().isEmpty) {
       return 'برجاء إدخال الإسم الأول';
+    }
+    if (firstName.contains(RegExp(r'[^\w\s]+')) || firstName.contains('_')) {
+      return 'لا تستخدم حروف خاصة';
+    }
+    if (firstName.contains(' ')) {
+      return 'لا تستخدم مسافات';
+    }
+    if (!firstName.contains(RegExp(r'\D+'))) {
+      return 'لا تستخدم أرقام';
     }
     return null;
   }
 
   static String? lastNameValidation(String? lastName) {
-    if (lastName == null || lastName.isEmpty) {
+    if (lastName == null || lastName.isEmpty || lastName.trim().isEmpty) {
       return 'برجاء إدخال الإسم الأخير';
+    }
+    if (lastName.contains(RegExp(r'[^\w\s]+')) || lastName.contains('_')) {
+      return 'لا تستخدم حروف خاصة';
+    }
+    if (lastName.contains(' ')) {
+      return 'لا تستخدم مسافات';
+    }
+    if (!lastName.contains(RegExp(r'\D+'))) {
+      return 'لا تستخدم أرقام';
     }
     return null;
   }
@@ -31,6 +49,9 @@ class ValidationErrorTexts {
     if (!password.contains(RegExp(r'[0-9]'))) {
       return 'كلمة المرور يجب أن تحتوي على رقم علي الأقل';
     }
+    if (password.contains(' ')) {
+      return 'لا تستخدم مسافات';
+    }
     return null;
   }
 
@@ -40,6 +61,9 @@ class ValidationErrorTexts {
     }
     if (password.length < 8) {
       return 'كلمة المرور يجب ألا تقل عن 8 حروف';
+    }
+    if (password.contains(' ')) {
+      return 'لا تستخدم مسافات';
     }
     return null;
   }
@@ -54,6 +78,9 @@ class ValidationErrorTexts {
     if (password != passwordConfirmation) {
       return 'كلمة المرور غير متطابقة';
     }
+    if (passwordConfirmation.contains(' ')) {
+      return 'لا تستخدم مسافات';
+    }
     return null;
   }
 
@@ -61,11 +88,14 @@ class ValidationErrorTexts {
     if (email == null || email.isEmpty) {
       return 'برجاء إدخال البريد الإلكتروني';
     }
-    if (email.length < 5) {
+    if (email.length < 5 ||
+        !RegExp(r'^[\w-]+(?:\.[\w-]+)*@(?:[\w-]+\.)+[a-zA-Z]{2,}$')
+            .hasMatch(email)) {
       return 'برجاء إدخال البريد الإلكتروني بشكل صحيح';
     }
-    if (!email.contains('@')) {
-      return 'برجاء إدخال البريد الإلكتروني بحيث يحتوي على @';
+
+    if (email.contains(' ')) {
+      return 'لا تستخدم مسافات';
     }
     return null;
   }

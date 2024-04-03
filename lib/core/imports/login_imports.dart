@@ -8,7 +8,7 @@ export 'package:nourish_me/feature/auth/data/models/login_model.dart';
 export 'package:nourish_me/feature/auth/logic/cubit/auth_cubit.dart';
 export '../helpers/app_images.dart';
 export '../helpers/helper_methods.dart';
-export '../helpers/validation_error_texts.dart';
+export '../errors/messages/validation_error_messages.dart';
 export '../routing/routes.dart';
 export '../theme/app_text_styles.dart';
 export '../widgets/custom_button.dart';
