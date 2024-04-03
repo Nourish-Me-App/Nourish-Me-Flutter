@@ -1,6 +1,6 @@
 class AuthErrorMessages {
   AuthErrorMessages._();
-  static String authErrorMessage(String error) {
+  static String authErrorMessage(String? error) {
     if (error == 'Invalid credentials') {
       return 'يوجد خطأ في إسم المستخدم أو كلمة المرور';
     }
@@ -10,13 +10,16 @@ class AuthErrorMessages {
     if (error == 'The email has already been taken.') {
       return 'البريد الألكتروني مستخدم بالفعل';
     }
-    if (error == 'لا يوجد إتصال بالإنترنت') {
-      return 'لا يوجد إتصال بالإنترنت';
+    if (error == 'لا يوجد إتصال بالإنترنت أو يوجد خطأ في السيرفر') {
+      return 'لا يوجد إتصال بالإنترنت أو يوجد خطأ في السيرفر';
     }
-    if (error == 'حاول مرة أخري') {
-      return 'حاول مرة أخري';
+    if (error == 'حاول مرة أخري في وقت لاحق') {
+      return 'حاول مرة أخري في وقت لاحق';
+    } else {}
+    if (error == null || error.isEmpty) {
+      return 'عذرا يوجد خطأ ، حاول مرة أخري في وقت لاحق';
     } else {
-      return 'عذرا يوجد خطأ ، حاول مرة أخرى';
+      return 'عذرا يوجد خطأ ، حاول مرة أخري في وقت لاحق';
     }
   }
 }
