@@ -21,17 +21,25 @@ class HelperMethods {
 
   static showAlertDialog(context) {
     return showDialog(
+      barrierDismissible: false,
       context: context,
-      builder: (context) => AlertDialog.adaptive(
-        contentPadding: EdgeInsets.zero,
-        backgroundColor: AppColors.mainColor,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        content: SizedBox(
-          height: 200.h,
-          width: 100.w,
-          child: const Center(
-            child: CircularProgressIndicator(
-              color: Colors.white,
+      builder: (context) => PopScope(
+        canPop: false,
+        child: AbsorbPointer(
+          absorbing: true,
+          child: AlertDialog.adaptive(
+            contentPadding: EdgeInsets.zero,
+            backgroundColor: AppColors.mainColor,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            content: SizedBox(
+              height: 200.h,
+              width: 100.w,
+              child: const Center(
+                child: CircularProgressIndicator(
+                  color: Colors.white,
+                ),
+              ),
             ),
           ),
         ),
