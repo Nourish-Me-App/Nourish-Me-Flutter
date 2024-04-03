@@ -2,14 +2,35 @@ import '../../../../core/errors/messages/auth_error_messages.dart';
 
 import '../../../../core/imports/signup_screen_imports.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
+
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+  late AuthCubit authCubit;
+  @override
+  void initState() {
+    authCubit = BlocProvider.of<AuthCubit>(context);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    authCubit.emailController.dispose();
+    authCubit.passwordController.dispose();
+    authCubit.firstNameController.dispose();
+    authCubit.lastNameController.dispose();
+    authCubit.passwordConfirmationController.dispose();
+    authCubit.close();
+  }
 
   @override
   Widget build(BuildContext context) {
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
-    AuthCubit authCubit = BlocProvider.of<AuthCubit>(context);
     SignUpModel signUpModel = SignUpModel();
     return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
