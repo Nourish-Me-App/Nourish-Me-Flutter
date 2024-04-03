@@ -27,6 +27,8 @@ class ExceptionHelperMethods {
           signUpErrorModel: SignUpErrorModel.fromJson(noInternetErrorMessage),
           loginErrorModel: LoginErrorModel.fromJson(noInternetErrorMessage),
         );
+      default:
+        throwApiException();
     }
   }
 
@@ -64,17 +66,28 @@ class ExceptionHelperMethods {
 
   static void badResponseExceptionThrow(DioException e) {
     if (e.response != null || e.response!.data != null) {
-      throw ApiException(
-        signUpErrorModel: SignUpErrorModel.fromJson(e.response!.data),
-        loginErrorModel: LoginErrorModel.fromJson(e.response!.data),
-      );
+      if (e.response!.data is String) {
+        throw ApiException(
+          signUpErrorModel:
+              SignUpErrorModel.fromJson({'message': '${e.response!.data}'}),
+          loginErrorModel:
+              LoginErrorModel.fromJson({'message': '${e.response!.data}'}),
+        );
+      } else if (e.response!.data is Map<String, dynamic>) {
+        throw ApiException(
+          signUpErrorModel: SignUpErrorModel.fromJson(e.response!.data),
+          loginErrorModel: LoginErrorModel.fromJson(e.response!.data),
+        );
+      } else {
+        throwApiException();
+      }
     } else {
       throwApiException();
     }
   }
 
   static Map<String, dynamic> get connectionErrorMessage =>
-      {'message': 'حاول مرة أخري'};
+      {'message': 'حاول مرة أخري في وقت لاحق'};
   static Map<String, dynamic> get noInternetErrorMessage =>
-      {'message': 'لا يوجد إتصال بالإنترنت'};
+      {'message': 'لا يوجد إتصال بالإنترنت أو يوجد خطأ في السيرفر'};
 }
