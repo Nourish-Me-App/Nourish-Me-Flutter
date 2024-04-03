@@ -1,3 +1,4 @@
+import '../../../../core/errors/messages/auth_error_messages.dart';
 import '../../../../core/imports/login_imports.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -12,10 +13,16 @@ class LoginScreen extends StatelessWidget {
       listener: (context, state) {
         if (state is LoginFailure) {
           Navigator.pop(context);
-          HelperMethods.showCustomSnackBar(context, 'فشل تسجيل الدخول');
+          HelperMethods.showCustomSnackBar(
+            context,
+            AuthErrorMessages.authErrorMessage(state.error!),
+          );
         }
         if (state is LoginLoading) {
           HelperMethods.showAlertDialog(context);
+        }
+        if (state is LoginSuccess) {
+          HelperMethods.afterLogin(context, authCubit, state.loginModel!);
         }
       },
       child: Scaffold(
@@ -82,14 +89,6 @@ class LoginScreen extends StatelessWidget {
                                 email: authCubit.emailController.text,
                                 password: authCubit.passwordController.text,
                                 rememberMe: authCubit.rememberMe,
-                              ).then(
-                                (value) {
-                                  HelperMethods.afterLogin(
-                                    context,
-                                    authCubit,
-                                    value,
-                                  );
-                                },
                               );
                             }
                           },

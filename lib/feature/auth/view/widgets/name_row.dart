@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../logic/cubit/auth_cubit.dart';
 
-import '../../../../core/helpers/validation_error_texts.dart';
+import '../../../../core/errors/messages/validation_error_messages.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
 import 'tff_label.dart';
 

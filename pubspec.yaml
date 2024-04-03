@@ -46,6 +46,7 @@ dependencies:
   json_serializable: ^6.7.1
   # For generating code.
   build_runner: ^2.4.9
+  dartz: ^0.10.1
 
 
 #changing the application icon.
