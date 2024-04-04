@@ -11,7 +11,7 @@ class HelperMethods {
           textAlign: TextAlign.right,
           style: AppTextStyles.cairo16BoldWhite,
         ),
-        backgroundColor: AppColors.mainColor,
+        backgroundColor: AppColors.tFFErrorColor,
         duration: const Duration(seconds: 3),
         padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
         elevation: 4,
