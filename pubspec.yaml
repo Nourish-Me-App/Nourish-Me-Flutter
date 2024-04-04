@@ -41,6 +41,11 @@ dependencies:
   flutter_screenutil: ^5.9.0
   # For dependency injection.
   get_it: ^7.6.7
+  # For json operations handling.
+  json_annotation: ^4.8.1
+  json_serializable: ^6.7.1
+  # For generating code.
+  build_runner: ^2.4.9
   # for verfiying email.
   pinput: ^4.0.0
   # for make response more readable.
