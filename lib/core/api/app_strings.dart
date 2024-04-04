@@ -1,5 +1,5 @@
-class AppStrings{
+class AppStrings {
   AppStrings._();
-   //token
+  //token
   static const String token = 'token';
 }

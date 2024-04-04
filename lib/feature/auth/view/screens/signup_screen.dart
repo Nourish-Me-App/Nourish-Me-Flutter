@@ -15,7 +15,6 @@ class SignUpScreen extends StatelessWidget {
           HelperMethods.showCustomSnackBar(context, 'تم إنشاء حسابك بنجاح');
         }
         if (state is SignUpFailure) {
-          Navigator.pop(context);
           HelperMethods.showCustomSnackBar(context, 'فشل إنشاء الحساب');
         }
         if (state is SignUpLoading) {

@@ -19,6 +19,22 @@ class HelperMethods {
     );
   }
 
+  static void showCustomSnackBarError(BuildContext context, String title) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          title,
+          textAlign: TextAlign.right,
+          style: AppTextStyles.cairo16BoldWhite,
+        ),
+        backgroundColor: Colors.red,
+        duration: const Duration(seconds: 3),
+        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
+        elevation: 4,
+      ),
+    );
+  }
+
   static showAlertDialog(context) {
     return showDialog(
       context: context,

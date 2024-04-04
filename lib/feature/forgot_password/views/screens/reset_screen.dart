@@ -1,41 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nourish_me/feature/auth/forgot_password/logic/cubit/forgot_password_cubit.dart';
-import '../../../../../core/routing/routes.dart';
-import '../../../../../core/theme/app_text_styles.dart';
-import '../../../../../core/widgets/custom_border_button.dart';
-import '../../../../../core/widgets/custom_button.dart';
-import '../../../../../core/widgets/custom_text_form_field.dart';
-import '../../../view/widgets/tff_label.dart';
+import 'package:nourish_me/core/helpers/validation_error_texts.dart';
+import 'package:nourish_me/feature/forgot_password/logic/reset/cubit/reset_cubit.dart';
+import '../../../../core/helpers/helper_methods.dart';
+import '../../../../core/routing/routes.dart';
+import '../../../../core/theme/app_text_styles.dart';
+import '../../../../core/widgets/custom_border_button.dart';
+import '../../../../core/widgets/custom_button.dart';
+import '../../../../core/widgets/custom_text_form_field.dart';
+import '../../../auth/view/widgets/tff_label.dart';
 
 class ResetScreen extends StatelessWidget {
   const ResetScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ForgotPasswordCubit, ForgotPasswordState>(
+    GlobalKey<FormState> formKeyReset = GlobalKey<FormState>();
+    final TextEditingController emailController = TextEditingController();
+    final TextEditingController newPasswordController = TextEditingController();
+    final TextEditingController newPasswordConfirmationController =
+        TextEditingController();
+    return BlocConsumer<ResetCubit, ResetState>(
       listener: (context, state) {
-        if (state is ForgotPasswordResetSuccess) {
+        if (state is ResetSuccess) {
           Navigator.pushNamedAndRemoveUntil(
-            context,
-            Routes.succesScreen,
-            (route) => false,
-          );
-        } else if (state is ForgotPasswordResetFailure) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(state.message),
-            ),
-          );
+              context, Routes.loginScreen, (route) => false);
+          HelperMethods.showCustomSnackBar(
+              context, 'تم إرسال رمز التحقق بنجاح');
+        }
+        if (state is ResetFailure) {
+          Navigator.pop(context);
+          HelperMethods.showCustomSnackBar(context, 'حدث خطأ ما حاول مرة أخرى');
+        }
+        if (state is ResetLoading) {
+          HelperMethods.showAlertDialog(context);
         }
       },
       builder: (context, state) {
         return Scaffold(
-          appBar: PreferredSize(
-            preferredSize: Size.fromHeight(50.h),
-            child: AppBar(),
-          ),
           body: SafeArea(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 24.h, vertical: 21.w),
@@ -43,7 +46,8 @@ class ResetScreen extends StatelessWidget {
                 child: SizedBox(
                   width: double.infinity,
                   child: Form(
-                    key: context.read<ForgotPasswordCubit>().formKeyReset,
+                    key: formKeyReset,
+                    autovalidateMode: AutovalidateMode.always,
                     child: Column(
                       children: [
                         Text(
@@ -58,13 +62,9 @@ class ResetScreen extends StatelessWidget {
                         CustomTFF(
                           hintText: 'أدخل البريد الإلكتروني',
                           kbType: TextInputType.emailAddress,
-                          controller: context
-                              .read<ForgotPasswordCubit>()
-                              .emailResetController,
                           validate: (value) {
-                            if (value!.isEmpty) {
-                              return 'من فضلك أدخل البريد الإلكتروني';
-                            }
+                            ValidationErrorTexts.emailValidation(value);
+                            return null;
                           },
                         ),
                         SizedBox(height: 8.h),
@@ -73,13 +73,10 @@ class ResetScreen extends StatelessWidget {
                         CustomTFF(
                           hintText: 'أدخل كلمة المرور',
                           kbType: TextInputType.visiblePassword,
-                          controller: context
-                              .read<ForgotPasswordCubit>()
-                              .newPasswordController,
+                          controller: newPasswordController,
                           validate: (value) {
-                            if (value!.isEmpty) {
-                              return 'من فضلك أدخل كلمة المرور';
-                            }
+                            ValidationErrorTexts.confirmPasswordValidation(
+                                value, newPasswordController.text);
                           },
                         ),
                         SizedBox(height: 16.h),
@@ -88,33 +85,21 @@ class ResetScreen extends StatelessWidget {
                         CustomTFF(
                           hintText: 'تأكيد كلمة المرور',
                           kbType: TextInputType.visiblePassword,
-                          controller: context
-                              .read<ForgotPasswordCubit>()
-                              .newPasswordConfirmationController,
+                          controller: newPasswordConfirmationController,
                           validate: (value) {
-                            if (value!.isEmpty) {
-                              return 'من فضلك أدخل كلمة المرور';
-                            }
+                            ValidationErrorTexts.confirmPasswordValidation(
+                                value, newPasswordConfirmationController.text);
                           },
                         ),
                         SizedBox(height: 28.h),
                         CustomButton(
                           buttonText: 'تعيين',
                           buttonAction: () {
-                            context.read<ForgotPasswordCubit>().resetPassword(
-                                  email: context
-                                      .read<ForgotPasswordCubit>()
-                                      .emailResetController
-                                      .text,
-                                  new_password: context
-                                      .read<ForgotPasswordCubit>()
-                                      .newPasswordController
-                                      .text,
-                                  new_password_confirmation: context
-                                      .read<ForgotPasswordCubit>()
-                                      .newPasswordConfirmationController
-                                      .text,
-                                );
+                            BlocProvider.of<ResetCubit>(context).resetPassword(
+                                email: emailController.text,
+                                newpassword: newPasswordController.text,
+                                confirmpassword:
+                                    newPasswordConfirmationController.text);
                           },
                           buttonStyle: AppTextStyles.cairo16BoldWhite,
                         ),

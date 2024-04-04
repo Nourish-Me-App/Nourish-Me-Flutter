@@ -15,6 +15,16 @@ class ValidationErrorTexts {
     return null;
   }
 
+  static String? otpValidation(String? feild) {
+    if (feild == null || feild.isEmpty) {
+      return 'برجاء إدخال الرمز';
+    }
+    if (feild.length < 6) {
+      return 'الرمز يجب أن يكون 6 أرقام';
+    }
+    return null;
+  }
+
   static String? signUpPasswordValidation(String? password) {
     if (password == null || password.isEmpty) {
       return 'برجاء إدخال كلمة المرور';
