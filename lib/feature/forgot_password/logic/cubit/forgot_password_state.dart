@@ -6,26 +6,13 @@ class ForgotPasswordInitial extends ForgotPasswordState {}
 
 class ForgotPasswordLoading extends ForgotPasswordState {}
 
-class ForgotPasswordSuccess extends ForgotPasswordState {}
+class ForgotPasswordSuccess extends ForgotPasswordState {
+  final ForgotPasswordModel? forgotPasswordModel;
 
-class ForgotPasswordFailure extends ForgotPasswordState {}
+  ForgotPasswordSuccess({this.forgotPasswordModel});
+}
 
-class ForgotPasswordVerifyInitial extends ForgotPasswordState {}
-
-class ForgotPasswordVerifyLoading extends ForgotPasswordState {}
-
-class ForgotPasswordVerifySuccess extends ForgotPasswordState {}
-
-class ForgotPasswordVerifyFailure extends ForgotPasswordState {}
-
-class ForgotPasswordResetInitial extends ForgotPasswordState {}
-
-class ForgotPasswordResetLoading extends ForgotPasswordState {}
-
-class ForgotPasswordResetSuccess extends ForgotPasswordState {}
-
-class ForgotPasswordResetFailure extends ForgotPasswordState {
-  final String message;
-
-  ForgotPasswordResetFailure(this.message);
+class ForgotPasswordFailure extends ForgotPasswordState {
+  final String? error;
+  ForgotPasswordFailure({this.error});
 }

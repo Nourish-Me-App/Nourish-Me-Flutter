@@ -9,4 +9,8 @@ final class CheckLoading extends CheckState {}
 
 final class CheckSuccess extends CheckState {}
 
-final class CheckFailure extends CheckState {}
+final class CheckFailure extends CheckState {
+
+  final String? error;
+  CheckFailure({this.error});
+}

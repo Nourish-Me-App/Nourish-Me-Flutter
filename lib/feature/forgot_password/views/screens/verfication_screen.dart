@@ -4,7 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:nourish_me/core/errors/messages/auth_error_messages.dart';
+import 'package:nourish_me/core/errors/messages/validation_error_messages.dart';
 import 'package:nourish_me/core/helpers/helper_methods.dart';
+import 'package:nourish_me/core/imports/app_routes_imports.dart';
+import 'package:nourish_me/core/imports/login_imports.dart';
+import 'package:nourish_me/core/imports/signup_screen_imports.dart';
 import 'package:nourish_me/feature/forgot_password/logic/cubit/forgot_password_cubit.dart';
 import '../../../../core/helpers/app_images.dart';
 import '../../../../core/routing/routes.dart';
@@ -22,23 +27,24 @@ class VerifyEmailScreen extends StatelessWidget {
   final String email;
   @override
   Widget build(BuildContext context) {
-    final formKeyotp = GlobalKey<FormState>();
+    final formKey = GlobalKey<FormState>();
     TextEditingController codeController = TextEditingController();
 
     return BlocConsumer<ForgotPasswordCubit, ForgotPasswordState>(
       listener: (context, state) {
-        if (state is ForgotPasswordVerifySuccess) {
+        if (state is CheckSuccess) {
           Navigator.pushNamedAndRemoveUntil(
               context, Routes.resetScreen, (route) => false);
-          HelperMethods.showCustomSnackBar(
+          HelperMethods.showCustomSnackBarSuccess(
               context, 'تم إرسال رمز التحقق بنجاح');
         }
-        if (state is ForgotPasswordResetFailure) {
+        if (state is CheckFailure) {
           Navigator.pop(context);
           HelperMethods.showCustomSnackBarError(
               context, 'حدث خطأ ما حاول مرة أخرى');
         }
-        if (state is ForgotPasswordVerifyLoading) {
+        if (state is CheckLoading) {
+          Navigator.pop(context);
           HelperMethods.showAlertDialog(context);
         }
       },
@@ -71,16 +77,15 @@ class VerifyEmailScreen extends StatelessWidget {
                         style: AppTextStyles.cairo12BoldMainColor,
                       ),
                       SvgPicture.asset(Assets.svgsVerify),
+                      SizedBox(height: 5.h),
                       Form(
-                        key: formKeyotp,
-                        autovalidateMode: AutovalidateMode.always,
+                        key: formKey,
                         child: Pinput(
+                          //textInputAction: TextInputAction.done,
                           controller: codeController,
                           keyboardType: TextInputType.number,
                           validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'من فضلك أدخل الرمز';
-                            }
+                            ValidationErrorTexts.otpValidation(value);
                             return null;
                           },
                           length: 6,
@@ -105,6 +110,7 @@ class VerifyEmailScreen extends StatelessWidget {
                           showCursor: true,
                           onCompleted: (pin) {
                             log('Completed: $pin');
+
                             BlocProvider.of<CheckCubit>(context)
                                 .verifyCode(
                                     email: email, token: codeController.text)
@@ -120,7 +126,7 @@ class VerifyEmailScreen extends StatelessWidget {
                       CustomButton(
                         buttonText: 'تحقق',
                         buttonAction: () {
-                          if (formKeyotp.currentState!.validate()) {
+                          if (formKey.currentState!.validate()) {
                             BlocProvider.of<CheckCubit>(context)
                                 .verifyCode(
                                     email: email, token: codeController.text)

@@ -1,13 +1,9 @@
 export 'package:flutter/material.dart';
 export 'package:flutter_bloc/flutter_bloc.dart';
 export 'package:nourish_me/feature/auth/data/repositories/login_repo.dart';
-export 'package:nourish_me/feature/auth/data/repositories/signup_repo.dart';
-export 'package:nourish_me/feature/auth/logic/cubit/auth_cubit.dart';
 export '../networking/dio_handler.dart';
 export '../routing/routes.dart';
 export '../../feature/forgot_password/views/screens/forgot_screen.dart';
-export '../../feature/auth/view/screens/login_screen.dart';
 export '../../feature/forgot_password/views/screens/reset_screen.dart';
-export '../../feature/auth/view/screens/signup_screen.dart';
 export '../../feature/forgot_password/views/screens/succes_screen.dart';
 export '../../feature/forgot_password/views/screens/verfication_screen.dart';

@@ -16,7 +16,7 @@ class ForgotScreen extends StatelessWidget {
     return BlocConsumer<ForgotPasswordCubit, ForgotPasswordState>(
       listener: (context, state) {
         if (state is ForgotPasswordSuccess) {
-          HelperMethods.showCustomSnackBar(
+          HelperMethods.showCustomSnackBarSuccess(
               context, 'تم إرسال رمز التحقق بنجاح');
         }
         if (state is ForgotPasswordFailure) {

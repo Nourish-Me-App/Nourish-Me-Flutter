@@ -1,9 +1,26 @@
 import '../imports/login_imports.dart';
+import '../imports/signup_screen_imports.dart';
 import '../theme/app_colors.dart';
 
 class HelperMethods {
   HelperMethods._();
-  static void showCustomSnackBar(BuildContext context, String title) {
+  static void showCustomSnackBarSuccess(BuildContext context, String title) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          title,
+          textAlign: TextAlign.right,
+          style: AppTextStyles.cairo16BoldWhite,
+        ),
+        backgroundColor: AppColors.mainColor,
+        duration: const Duration(seconds: 3),
+        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
+        elevation: 4,
+      ),
+    );
+  }
+
+  static void showCustomSnackBarError(BuildContext context, String title) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(

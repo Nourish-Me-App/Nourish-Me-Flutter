@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:nourish_me/feature/forgot_password/data/model/forgot_password_error.dart';
 
 import '../models/login_error_model.dart';
 import '../models/signup_error_model.dart';
@@ -61,6 +62,8 @@ class ExceptionHelperMethods {
     throw ApiException(
       signUpErrorModel: SignUpErrorModel.fromJson(connectionErrorMessage),
       loginErrorModel: LoginErrorModel.fromJson(connectionErrorMessage),
+      forgetPasswordErrorModel: ForgetPasswordErrorModel .fromJson(connectionErrorMessage)
+
     );
   }
 
@@ -72,11 +75,14 @@ class ExceptionHelperMethods {
               SignUpErrorModel.fromJson({'message': '${e.response!.data}'}),
           loginErrorModel:
               LoginErrorModel.fromJson({'message': '${e.response!.data}'}),
+          forgetPasswordErrorModel: ForgetPasswordErrorModel.fromJson({'message': '${e.response!.data}'}),
+          
         );
       } else if (e.response!.data is Map<String, dynamic>) {
         throw ApiException(
           signUpErrorModel: SignUpErrorModel.fromJson(e.response!.data),
           loginErrorModel: LoginErrorModel.fromJson(e.response!.data),
+          forgetPasswordErrorModel: ForgetPasswordErrorModel.fromJson(e.response!.data),
         );
       } else {
         throwApiException();

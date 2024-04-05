@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:dio/dio.dart';
 import 'package:nourish_me/core/api/end_points.dart';
 import 'package:nourish_me/core/api/error_file.dart';
 import 'package:nourish_me/core/api/dio_helpr.dart';
@@ -35,5 +34,17 @@ class ForegetPasswordRepoSitories {
   //   }
   //   return ForgotPasswordModel();
   // }
+
+  // Future<Either<String,ForgotPasswordModel>> forgetPassword({required String email}) async {
+  //   try {
+  //     final response = await DioHelper.postData(
+  //         data: {'email': email},
+  //         url: EndPoints.baseUrl + EndPoints.forgetPassword);
+  //     final forgotPasswordModel = ForgotPasswordModel.fromJson(response.data);
+  //     return Right(forgotPasswordModel);
+  //   } on ApiException catch (e) {
+  //     return Left(e.forgetPasswordErrorModel!.message!);
+  //   }
+  // }  
 
 }

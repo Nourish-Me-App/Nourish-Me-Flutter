@@ -5,7 +5,6 @@ export 'package:nourish_me/core/helpers/app_constants.dart';
 export 'package:nourish_me/core/helpers/auth_requests.dart';
 export 'package:nourish_me/core/helpers/cache_helper.dart';
 export 'package:nourish_me/feature/auth/data/models/login_model.dart';
-export 'package:nourish_me/feature/auth/logic/cubit/auth_cubit.dart';
 export '../helpers/app_images.dart';
 export '../helpers/helper_methods.dart';
 export '../errors/messages/validation_error_messages.dart';

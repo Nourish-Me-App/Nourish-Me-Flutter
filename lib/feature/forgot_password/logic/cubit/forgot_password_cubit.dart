@@ -31,5 +31,18 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
     return ForgotPasswordModel();
   }
 
+
+  //Future<void> forgetPassword() async {
+  //   emit(ForgotPasswordLoading());
+
+  //   final forgotPasswordModel = await foregetPasswordRepoSitories
+  //       .forgetPassword(email: emailController.text);
+
+  //   forgotPasswordModel.fold((error) {
+  //     emit(ForgotPasswordFailure(error: error));
+  //   }, (forgotPasswordModel) {
+  //     emit(ForgotPasswordSuccess(forgotPasswordModel: forgotPasswordModel));
+  //   });
+  // }
   
 }

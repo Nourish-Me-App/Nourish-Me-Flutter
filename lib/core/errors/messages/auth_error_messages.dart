@@ -15,11 +15,16 @@ class AuthErrorMessages {
     }
     if (error == 'حاول مرة أخري في وقت لاحق') {
       return 'حاول مرة أخري في وقت لاحق';
-    } else {}
+    } 
+    if(error == 'The code has already been sent before 1 minute'){
+      return 'تم إرسال الكود بالفعل منذ دقيقة';
+
+    }
     if (error == null || error.isEmpty) {
       return 'عذرا يوجد خطأ ، حاول مرة أخري في وقت لاحق';
     } else {
       return 'عذرا يوجد خطأ ، حاول مرة أخري في وقت لاحق';
     }
+    
   }
 }
