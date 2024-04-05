@@ -32,6 +32,7 @@ class _CustomTFFState extends State<CustomTFF> {
       width: 1,
     );
     return TextFormField(
+      enableInteractiveSelection: true,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       keyboardType: widget.kbType,
       validator: widget.validate,
@@ -45,7 +46,6 @@ class _CustomTFFState extends State<CustomTFF> {
       enabled: true,
       style: AppTextStyles.cairo12ExtraBoldTFFContentColor,
       textAlignVertical: TextAlignVertical.center,
-      textDirection: TextDirection.rtl,
       cursorColor: AppColors.tFFContentColor,
       textAlign: content.isEmpty ? TextAlign.right : TextAlign.left,
       controller: widget.controller,

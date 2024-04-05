@@ -1,21 +1,54 @@
+import '../../../../core/errors/messages/auth_error_messages.dart';
+
 import '../../../../core/imports/signup_screen_imports.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
+
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+  late AuthCubit authCubit;
+  @override
+  void initState() {
+    authCubit = BlocProvider.of<AuthCubit>(context);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    authCubit.emailController.dispose();
+    authCubit.passwordController.dispose();
+    authCubit.firstNameController.dispose();
+    authCubit.lastNameController.dispose();
+    authCubit.passwordConfirmationController.dispose();
+    authCubit.close();
+  }
 
   @override
   Widget build(BuildContext context) {
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
-    AuthCubit authCubit = BlocProvider.of<AuthCubit>(context);
     SignUpModel signUpModel = SignUpModel();
     return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is SignUpSuccess) {
+          Navigator.pop(context);
           HelperMethods.showCustomSnackBar(context, 'تم إنشاء حسابك بنجاح');
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            Routes.loginScreen,
+            (route) => false,
+          );
         }
         if (state is SignUpFailure) {
-          HelperMethods.showCustomSnackBar(context, 'فشل إنشاء الحساب');
+          Navigator.pop(context);
+          HelperMethods.showCustomSnackBar(
+            context,
+            AuthErrorMessages.authErrorMessage(state.error!),
+          );
         }
         if (state is SignUpLoading) {
           HelperMethods.showAlertDialog(context);
@@ -102,15 +135,6 @@ class SignUpScreen extends StatelessWidget {
                                 password: authCubit.passwordController.text,
                                 passwordConfirmation: authCubit
                                     .passwordConfirmationController.text,
-                              ).then(
-                                (value) {
-                                  Navigator.pop(context);
-                                  Navigator.pushNamedAndRemoveUntil(
-                                    context,
-                                    Routes.loginScreen,
-                                    (route) => false,
-                                  );
-                                },
                               );
                             }
                           },

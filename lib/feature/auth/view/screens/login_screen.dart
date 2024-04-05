@@ -1,21 +1,50 @@
+import '../../../../core/errors/messages/auth_error_messages.dart';
 import '../../../../core/imports/login_imports.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
   @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  late AuthCubit authCubit;
+  @override
+  void initState() {
+    authCubit = BlocProvider.of<AuthCubit>(context);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    authCubit.emailController.dispose();
+    authCubit.passwordController.dispose();
+    authCubit.firstNameController.dispose();
+    authCubit.lastNameController.dispose();
+    authCubit.passwordConfirmationController.dispose();
+    authCubit.close();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    AuthCubit authCubit = BlocProvider.of<AuthCubit>(context);
     LoginModel loginModel = LoginModel();
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
     return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is LoginFailure) {
           Navigator.pop(context);
-          HelperMethods.showCustomSnackBar(context, 'فشل تسجيل الدخول');
+          HelperMethods.showCustomSnackBar(
+            context,
+            AuthErrorMessages.authErrorMessage(state.error!),
+          );
         }
         if (state is LoginLoading) {
           HelperMethods.showAlertDialog(context);
+        }
+        if (state is LoginSuccess) {
+          HelperMethods.afterLogin(context, authCubit, state.loginModel!);
         }
       },
       child: Scaffold(
@@ -82,14 +111,6 @@ class LoginScreen extends StatelessWidget {
                                 email: authCubit.emailController.text,
                                 password: authCubit.passwordController.text,
                                 rememberMe: authCubit.rememberMe,
-                              ).then(
-                                (value) {
-                                  HelperMethods.afterLogin(
-                                    context,
-                                    authCubit,
-                                    value,
-                                  );
-                                },
                               );
                             }
                           },

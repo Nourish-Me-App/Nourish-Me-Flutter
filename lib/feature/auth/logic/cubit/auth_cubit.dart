@@ -1,11 +1,7 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import '../../data/models/login_model.dart';
-
-import '../../data/models/signup_model.dart';
 import '../../data/repositories/login_repo.dart';
 import '../../data/repositories/signup_repo.dart';
 
@@ -23,36 +19,32 @@ class AuthCubit extends Cubit<AuthState> {
   late LoginRepo loginRepo;
   late SignUpRepo signUpRepo;
 
-  Future<LoginModel> login(String path, dynamic data) async {
+  Future<void> login(String path, dynamic data) async {
     emit(LoginLoading());
-    try {
-      final loginModel = await loginRepo.login(
-        path,
-        data,
-      );
-      log('statusCode: ${loginModel.statusCode}');
-      emit(LoginSuccess());
-      return loginModel;
-    } catch (e) {
-      log('cubit: ${e.toString()}');
-      emit(LoginFailure());
-    }
-    return LoginModel();
+    final loginModel = await loginRepo.login(
+      path,
+      data,
+    );
+    loginModel.fold((error) {
+      emit(LoginFailure(error: error));
+    }, (loginModel) {
+      emit(LoginSuccess(loginModel: loginModel));
+    });
   }
 
-  Future<SignUpModel> signUp(String path, dynamic data) async {
+  Future<void> signUp(String path, dynamic data) async {
     emit(SignUpLoading());
-    try {
-      final signUpModel = await signUpRepo.signUp(
-        path,
-        data,
-      );
-      emit(SignUpSuccess());
-      return signUpModel;
-    } catch (e) {
-      log(e.toString());
-      emit(SignUpFailure());
-    }
-    return SignUpModel();
+    final signUpModel = await signUpRepo.signUp(
+      path,
+      data,
+    );
+    signUpModel.fold(
+      ((error) {
+        emit(SignUpFailure(error: error));
+      }),
+      ((signUpModel) {
+        emit(SignUpSuccess());
+      }),
+    );
   }
 }

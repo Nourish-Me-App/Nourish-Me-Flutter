@@ -1,11 +1,6 @@
-import 'package:nourish_me/core/imports/app_routes_imports.dart';
-import 'package:nourish_me/core/imports/login_imports.dart';
-import 'package:nourish_me/feature/forgot_password/data/repositories/forget_password_repo.dart';
-import 'package:nourish_me/feature/forgot_password/logic/reset/cubit/reset_cubit.dart';
-import '../../feature/forgot_password/data/repositories/reser_password_repo.dart';
-import '../../feature/forgot_password/logic/cubit/forgot_password_cubit.dart';
-import '../../feature/forgot_password/views/screens/reset_screen.dart';
-import '../../feature/forgot_password/views/screens/succes_screen.dart';
+import '../../feature/auth/view/screens/fake_screen.dart';
+
+import '../imports/app_routes_imports.dart';
 
 class AppRoutes {
   AuthCubit authCubit =
@@ -15,14 +10,16 @@ class AppRoutes {
       case Routes.signUpScreen:
         return MaterialPageRoute(
           builder: (context) => BlocProvider<AuthCubit>(
-            create: (context) => authCubit,
+            create: (context) =>
+                AuthCubit(LoginRepo(DioHandler()), SignUpRepo(DioHandler())),
             child: const SignUpScreen(),
           ),
         );
       case Routes.loginScreen:
         return MaterialPageRoute(
           builder: (context) => BlocProvider<AuthCubit>(
-            create: (context) => authCubit,
+            create: (context) =>
+                AuthCubit(LoginRepo(DioHandler()), SignUpRepo(DioHandler())),
             child: const LoginScreen(),
           ),
         );
@@ -49,6 +46,10 @@ class AppRoutes {
       case Routes.succesScreen:
         return MaterialPageRoute(
           builder: (context) => const SuccesScreen(),
+        );
+      case Routes.fakeScreen:
+        return MaterialPageRoute(
+          builder: (context) => const FakeScreen(),
         );
     }
     return null;

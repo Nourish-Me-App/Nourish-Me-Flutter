@@ -17,6 +17,7 @@ void main() async {
     GoogleFonts.cairo(),
   ]);
   await CacheHelper().init();
+  await CacheHelper().init();
   WidgetsFlutterBinding.ensureInitialized();
   GoogleFonts.config.allowRuntimeFetching = false;
 

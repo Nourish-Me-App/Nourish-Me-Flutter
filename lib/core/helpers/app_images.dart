@@ -7,7 +7,8 @@ class Assets {
 
   /// Assets for iconsFacbookFilledBlue
   /// assets/icons/facbook_filled_blue.svg
-  static const String iconsFacbookFilledBlue = "assets/icons/facbook_filled_blue.svg";
+  static const String iconsFacbookFilledBlue =
+      "assets/icons/facbook_filled_blue.svg";
 
   /// Assets for iconsGoogle
   /// assets/icons/google.svg
@@ -31,10 +32,10 @@ class Assets {
 
   /// Assets for svgsForgotpasswoedscreen
   /// assets/svgs/forgotpasswoedscreen.svg
-  static const String svgsForgotpasswoedscreen = "assets/svgs/forgotpasswoedscreen.svg";
+  static const String svgsForgotpasswoedscreen =
+      "assets/svgs/forgotpasswoedscreen.svg";
 
   /// Assets for svgsVerify
   /// assets/svgs/verify.svg
   static const String svgsVerify = "assets/svgs/verify.svg";
 }
-
