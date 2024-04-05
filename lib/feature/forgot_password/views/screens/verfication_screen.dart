@@ -30,10 +30,13 @@ class VerifyEmailScreen extends StatelessWidget {
         if (state is ForgotPasswordVerifySuccess) {
           Navigator.pushNamedAndRemoveUntil(
               context, Routes.resetScreen, (route) => false);
+          HelperMethods.showCustomSnackBar(
+              context, 'تم إرسال رمز التحقق بنجاح');
         }
         if (state is ForgotPasswordResetFailure) {
           Navigator.pop(context);
-          HelperMethods.showCustomSnackBarError(context, 'حدث خطأ ما حاول مرة أخرى');
+          HelperMethods.showCustomSnackBarError(
+              context, 'حدث خطأ ما حاول مرة أخرى');
         }
         if (state is ForgotPasswordVerifyLoading) {
           HelperMethods.showAlertDialog(context);

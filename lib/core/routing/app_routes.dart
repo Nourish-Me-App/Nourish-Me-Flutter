@@ -1,6 +1,8 @@
 import 'package:nourish_me/core/imports/app_routes_imports.dart';
 import 'package:nourish_me/core/imports/login_imports.dart';
 import 'package:nourish_me/feature/forgot_password/data/repositories/forget_password_repo.dart';
+import 'package:nourish_me/feature/forgot_password/logic/reset/cubit/reset_cubit.dart';
+import '../../feature/forgot_password/data/repositories/reser_password_repo.dart';
 import '../../feature/forgot_password/logic/cubit/forgot_password_cubit.dart';
 import '../../feature/forgot_password/views/screens/reset_screen.dart';
 import '../../feature/forgot_password/views/screens/succes_screen.dart';
@@ -35,11 +37,14 @@ class AppRoutes {
 
       case Routes.resetScreen:
         return MaterialPageRoute(
-          builder: (context) => BlocProvider<ForgotPasswordCubit>(
-            create: (context) =>
-                ForgotPasswordCubit(ForegetPasswordRepoSitories()),
-            child: const ResetScreen(),
-          ),
+          builder: (context) => MultiBlocProvider(providers: [
+            BlocProvider<ForgotPasswordCubit>(
+              create: (context) =>
+                  ForgotPasswordCubit(ForegetPasswordRepoSitories()),
+            ),
+            BlocProvider<ResetCubit>(
+                create: (context) => ResetCubit(ResetPasswordRepositories())),
+          ], child: const ResetScreen()),
         );
       case Routes.succesScreen:
         return MaterialPageRoute(

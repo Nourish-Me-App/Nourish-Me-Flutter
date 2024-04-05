@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nourish_me/core/helpers/cache_helper.dart';
 import 'package:nourish_me/core/helpers/validation_error_texts.dart';
+import 'package:nourish_me/feature/forgot_password/logic/cubit/forgot_password_cubit.dart';
 import 'package:nourish_me/feature/forgot_password/logic/reset/cubit/reset_cubit.dart';
 import '../../../../core/helpers/helper_methods.dart';
 import '../../../../core/routing/routes.dart';
@@ -12,12 +14,14 @@ import '../../../../core/widgets/custom_text_form_field.dart';
 import '../../../auth/view/widgets/tff_label.dart';
 
 class ResetScreen extends StatelessWidget {
-  const ResetScreen({super.key});
+  const ResetScreen({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     GlobalKey<FormState> formKeyReset = GlobalKey<FormState>();
-    final TextEditingController emailController = TextEditingController();
+    //final TextEditingController emailController = TextEditingController();
     final TextEditingController newPasswordController = TextEditingController();
     final TextEditingController newPasswordConfirmationController =
         TextEditingController();
@@ -26,8 +30,7 @@ class ResetScreen extends StatelessWidget {
         if (state is ResetSuccess) {
           Navigator.pushNamedAndRemoveUntil(
               context, Routes.loginScreen, (route) => false);
-          HelperMethods.showCustomSnackBar(
-              context, 'تم إرسال رمز التحقق بنجاح');
+          HelperMethods.showCustomSnackBar(context, 'تم تغير كلمة السر بنجاح ');
         }
         if (state is ResetFailure) {
           Navigator.pop(context);
@@ -47,7 +50,7 @@ class ResetScreen extends StatelessWidget {
                   width: double.infinity,
                   child: Form(
                     key: formKeyReset,
-                    autovalidateMode: AutovalidateMode.always,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     child: Column(
                       children: [
                         Text(
@@ -57,16 +60,19 @@ class ResetScreen extends StatelessWidget {
                           style: AppTextStyles.cairo18BoldBlack,
                         ),
                         SizedBox(height: 40.h),
-                        const TFFLabel(label: 'ادخل البريد الإلكتروني'),
-                        SizedBox(height: 8.h),
-                        CustomTFF(
-                          hintText: 'أدخل البريد الإلكتروني',
-                          kbType: TextInputType.emailAddress,
-                          validate: (value) {
-                            ValidationErrorTexts.emailValidation(value);
-                            return null;
-                          },
-                        ),
+                        // const TFFLabel(label: 'ادخل البريد الإلكتروني'),
+                        // SizedBox(height: 8.h),
+                        // CustomTFF(
+                        //   controller:
+                        //       BlocProvider.of<ForgotPasswordCubit>(context)
+                        //           .emailController,
+                        //   hintText: 'أدخل البريد الإلكتروني',
+                        //   kbType: TextInputType.emailAddress,
+                        //   validate: (value) {
+                        //     ValidationErrorTexts.emailValidation(value);
+                        //     return null;
+                        //   },
+                        // ),
                         SizedBox(height: 8.h),
                         const TFFLabel(label: 'كلمة مرور جديدة'),
                         SizedBox(height: 8.h),
@@ -96,7 +102,7 @@ class ResetScreen extends StatelessWidget {
                           buttonText: 'تعيين',
                           buttonAction: () {
                             BlocProvider.of<ResetCubit>(context).resetPassword(
-                                email: emailController.text,
+                                email:  CacheHelper().getDataString(key: 'email')!,
                                 newpassword: newPasswordController.text,
                                 confirmpassword:
                                     newPasswordConfirmationController.text);

@@ -1,5 +1,6 @@
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nourish_me/feature/forgot_password/data/repositories/check_code.dart';
+import '../../../../core/helpers/cache_helper.dart';
 import '../../../../core/imports/app_routes_imports.dart';
 import '../../../../core/imports/signup_screen_imports.dart';
 import '../../../../core/widgets/custom_border_button.dart';
@@ -15,22 +16,6 @@ class ForgotScreen extends StatelessWidget {
     return BlocConsumer<ForgotPasswordCubit, ForgotPasswordState>(
       listener: (context, state) {
         if (state is ForgotPasswordSuccess) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return MultiBlocProvider(
-                  providers: [
-                    BlocProvider<ForgotPasswordCubit>.value(value: forgetCubit),
-                    BlocProvider<CheckCubit>.value(
-                        value: CheckCubit(CheckCodeRepository()))
-                  ],
-                  child: VerifyEmailScreen(
-                      email: forgetCubit.emailController.text),
-                );
-              },
-            ),
-          );
           HelperMethods.showCustomSnackBar(
               context, 'تم إرسال رمز التحقق بنجاح');
         }
@@ -88,29 +73,28 @@ class ForgotScreen extends StatelessWidget {
                           buttonText: 'أرسل رمز التحقق',
                           buttonAction: () async {
                             if (forgetCubit.formKey.currentState!.validate()) {
-                              //
-                              //
-                              await forgetCubit.forgetPassword();
-                              //.then((value) =>
-                              //     Navigator.pushReplacement(
-                              //         context,
-                              //         MaterialPageRoute(
-                              //             builder: (context) =>
-                              //                 MultiBlocProvider(
-                              //                   providers: [
-                              //                     BlocProvider<
-                              //                             ForgotPasswordCubit>.value(
-                              //                         value: forgetCubit),
-                              //                     BlocProvider<
-                              //                             CheckCubit>.value(
-                              //                         value: CheckCubit(
-                              //                             CheckCodeRepository()))
-                              //                   ],
-                              //                   child: VerifyEmailScreen(
-                              //                     email: forgetCubit
-                              //                         .emailController.text,
-                              //                   ),
-                              //                 ))));
+                              await forgetCubit.forgetPassword().then((value) =>
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              MultiBlocProvider(
+                                                providers: [
+                                                  BlocProvider<
+                                                          ForgotPasswordCubit>.value(
+                                                      value: forgetCubit),
+                                                  BlocProvider<
+                                                          CheckCubit>.value(
+                                                      value: CheckCubit(
+                                                          CheckCodeRepository()))
+                                                ],
+                                                child: VerifyEmailScreen(
+                                                  email: forgetCubit
+                                                      .emailController.text,
+                                                ),
+                                              ))));
+                              CacheHelper.sharedPreferences.setString(
+                                  'email', forgetCubit.emailController.text);
                             }
                           },
                           buttonStyle: AppTextStyles.cairo16BoldWhite,
