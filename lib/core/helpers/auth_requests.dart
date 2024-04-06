@@ -1,6 +1,12 @@
+import 'package:nourish_me/core/api/end_points.dart';
+import 'package:nourish_me/core/errors/api/models/forget_password_error_model.dart';
+import 'package:nourish_me/feature/forgetpassword/data/models/forget_password_model.dart';
+import 'package:nourish_me/feature/forgetpassword/data/repo/forget_password_repo.dart';
+
 import '../../feature/auth/data/models/login_model.dart';
 import '../../feature/auth/data/models/signup_model.dart';
 import '../../feature/auth/logic/cubit/auth_cubit.dart';
+import '../../feature/forgetpassword/logic/forget_password_cubit.dart';
 import 'app_constants.dart';
 
 class AuthRequests {
@@ -25,6 +31,21 @@ class AuthRequests {
       ),
     );
   }
+//   static Future forgetPassword({
+//     required ForgetPasswordModel forgetPasswordModel,
+//     required String email,
+// }) async{
+//     await ForgetPasswordCubit.forgetPassword(
+//       EndPoints.forgetPassword,
+//       forgetPasswordModel.toJson(
+//         ForgetPasswordrModel(
+//
+//         )
+//       ),
+//
+//
+//     )
+//   }
 
   static Future login({
     required AuthCubit authCubit,

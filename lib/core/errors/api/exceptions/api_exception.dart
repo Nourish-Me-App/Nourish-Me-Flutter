@@ -1,5 +1,5 @@
-import 'package:nourish_me/feature/forgot_password/data/model/forgot_password_error.dart';
 
+import '../models/forget_password_error_model.dart';
 import '../models/login_error_model.dart';
 import '../models/signup_error_model.dart';
 

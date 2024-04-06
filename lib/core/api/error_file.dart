@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:nourish_me/feature/forgot_password/data/model/forgot_password_error.dart';
+
+import '../errors/api/models/forget_password_error_model.dart';
 
 class ServerException implements Exception {
   ForgetPasswordErrorModel errModel;

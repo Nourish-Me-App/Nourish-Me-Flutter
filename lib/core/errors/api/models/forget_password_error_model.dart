@@ -7,7 +7,7 @@ class ForgetPasswordErrorModel {
   ForgetPasswordErrorModel.fromJson(Map<String, dynamic> json) {
     message = json['message'];
     errors =
-        json['errors'] != null ? Errors.fromJson(json['errors']) : null;
+    json['errors'] != null ? Errors.fromJson(json['errors']) : null;
   }
 
   Map<String, dynamic> toJson() {

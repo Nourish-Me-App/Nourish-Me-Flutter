@@ -1,14 +1,17 @@
+import 'package:nourish_me/core/networking/api_services.dart';
+import 'package:nourish_me/feature/forgetpassword/data/repo/forget_password_repo.dart';
+import 'package:nourish_me/feature/forgetpassword/view/screens/reset_screen.dart';
+import 'package:nourish_me/feature/forgetpassword/view/screens/success_screen.dart';
+
 import '../../feature/auth/data/repositories/signup_repo.dart';
 import '../../feature/auth/view/screens/fake_screen.dart';
 import '../../feature/auth/view/screens/login_screen.dart';
 import '../../feature/auth/view/screens/signup_screen.dart';
-import '../../feature/forgot_password/logic/cubit/forgot_password_cubit.dart';
-import '../../feature/forgot_password/logic/reset/cubit/reset_cubit.dart';
-import '../../feature/forgot_password/data/repositories/forget_password_repo.dart';
-import '../../feature/forgot_password/data/repositories/reser_password_repo.dart';
+import '../../feature/forgetpassword/data/repo/verify_code_repo.dart';
+import '../../feature/forgetpassword/logic/forget_password_cubit.dart';
+import '../../feature/forgetpassword/view/screens/forget_password_screen.dart';
 import '../imports/app_routes_imports.dart';
 import '../imports/signup_screen_imports.dart';
-
 
 class AppRoutes {
   Route? generateRoute(RouteSettings routeSettings) {
@@ -26,28 +29,29 @@ class AppRoutes {
           builder: (context) => BlocProvider<AuthCubit>(
             create: (context) =>
                 AuthCubit(LoginRepo(DioHandler()), SignUpRepo(DioHandler())),
-            child:  const LoginScreen(),
+            child: const LoginScreen(),
           ),
         );
-      case Routes.forgotScreen:
+      case Routes.forgetPasswordScreen:
         return MaterialPageRoute(
-          builder: (context) => BlocProvider<ForgotPasswordCubit>(
-            create: (context) =>
-                ForgotPasswordCubit(ForegetPasswordRepoSitories()),
-            child: const ForgotScreen(),
-          ),
+          builder: (context) => BlocProvider(
+            create: (context) => ForgetPasswordCubit(
+              ForgetPasswordRepo(
+                DioHandler()
+              ),
+              VerifyCodeRepo(
+                DioHandler()
+              ),
+            ),
+              child: const ForgetPasswordScreen()),
         );
-
+      // case Routes.verifyEmailScreen:
+      //   return MaterialPageRoute(
+      //     builder: (context) => const VerifyEmailScreen(),
+      //   );
       case Routes.resetScreen:
         return MaterialPageRoute(
-          builder: (context) => MultiBlocProvider(providers: [
-            BlocProvider<ForgotPasswordCubit>(
-              create: (context) =>
-                  ForgotPasswordCubit(ForegetPasswordRepoSitories()),
-            ),
-            BlocProvider<ResetCubit>(
-                create: (context) => ResetCubit(ResetPasswordRepositories())),
-          ], child: const ResetScreen()),
+          builder: (context) => const ResetPasswordScreen(),
         );
       case Routes.succesScreen:
         return MaterialPageRoute(

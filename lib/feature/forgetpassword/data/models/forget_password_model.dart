@@ -1,11 +1,11 @@
-class ForgotPasswordModel {
+class ForgetPasswordModel {
   String? message;
   String? status;
   int? statusCode;
 
-  ForgotPasswordModel({this.message, this.status, this.statusCode});
+  ForgetPasswordModel({this.message, this.status, this.statusCode});
 
-  ForgotPasswordModel.fromJson(Map<String, dynamic> json) {
+  ForgetPasswordModel.fromJson(Map<String, dynamic> json) {
     message = json['message'];
     status = json['status'];
     statusCode = json['status_code'];
