@@ -1,14 +1,15 @@
 
-import 'package:json_annotation/json_annotation.dart';
-part 'forget_password_error_model.g.dart';
-@JsonSerializable()
 
-class ForgetPasswordErrorModel {
+import 'package:json_annotation/json_annotation.dart';
+part 'reset_password_error.g.dart';
+@JsonSerializable()
+class ResetPasswordErrorModel {
   String? message;
   Map<String, dynamic>? errors;
   String? err;
 
-  ForgetPasswordErrorModel({
+  ResetPasswordErrorModel({
+    this.err,
     this.message,
     this.errors,
   }) {
@@ -19,6 +20,6 @@ class ForgetPasswordErrorModel {
     }
   }
 
-  factory ForgetPasswordErrorModel.fromJson(Map<String, dynamic> json) =>
-      _$ForgetPasswordErrorModelFromJson(json);
+  factory ResetPasswordErrorModel.fromjson(Map<String, dynamic> json) =>
+      _$ResetPasswordErrorModelFromJson(json);
 }

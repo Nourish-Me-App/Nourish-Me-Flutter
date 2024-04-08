@@ -1,21 +1,21 @@
+import 'package:json_annotation/json_annotation.dart';
+part 'forget_password_model.g.dart';
+@JsonSerializable()
 class ForgetPasswordModel {
-  String? message;
-  String? status;
-  int? statusCode;
+  final String? message, status;
+  final Map<String, dynamic>? data;
+  final String? email;
 
-  ForgetPasswordModel({this.message, this.status, this.statusCode});
+  ForgetPasswordModel({
+    this.message,
+    this.status,
+    this.data,
+    this.email,
+  });
 
-  ForgetPasswordModel.fromJson(Map<String, dynamic> json) {
-    message = json['message'];
-    status = json['status'];
-    statusCode = json['status_code'];
-  }
+  factory ForgetPasswordModel.fromJson(Map<String, dynamic> json) =>
+      _$ForgetPasswordModelFromJson(json);
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['message'] = message;
-    data['status'] = status;
-    data['status_code'] = statusCode;
-    return data;
-  }
+  Map<String, dynamic> toJson(ForgetPasswordModel forgetPasswordModel) =>
+      _$ForgetPasswordModelToJson(forgetPasswordModel);
 }

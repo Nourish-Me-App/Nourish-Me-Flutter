@@ -1,11 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:nourish_me/core/errors/api/models/forget_password_error_model.dart';
+import '../models/check_code_error_model.dart';
 import '../models/login_error_model.dart';
+import '../models/reset_password_error.dart';
 import '../models/signup_error_model.dart';
 import 'api_exception.dart';
 
 class ExceptionHelperMethods {
   ExceptionHelperMethods._();
+
   static handleDioExceptionsTypes(DioException e) {
     switch (e.type) {
       case DioExceptionType.connectionTimeout:
@@ -59,11 +62,14 @@ class ExceptionHelperMethods {
 
   static void throwApiException() {
     throw ApiException(
-      signUpErrorModel: SignUpErrorModel.fromJson(connectionErrorMessage),
-      loginErrorModel: LoginErrorModel.fromJson(connectionErrorMessage),
-      forgetPasswordErrorModel: ForgetPasswordErrorModel .fromJson(connectionErrorMessage)
-
-    );
+        signUpErrorModel: SignUpErrorModel.fromJson(connectionErrorMessage),
+        loginErrorModel: LoginErrorModel.fromJson(connectionErrorMessage),
+        forgetPasswordErrorModel:
+            ForgetPasswordErrorModel.fromJson(connectionErrorMessage),
+        checkCodeErrorModel:
+            CheckCodeErrorModel.fromjson(connectionErrorMessage),
+        resetPasswordErrorModel:
+            ResetPasswordErrorModel.fromjson(connectionErrorMessage));
   }
 
   static void badResponseExceptionThrow(DioException e) {
@@ -74,14 +80,22 @@ class ExceptionHelperMethods {
               SignUpErrorModel.fromJson({'message': '${e.response!.data}'}),
           loginErrorModel:
               LoginErrorModel.fromJson({'message': '${e.response!.data}'}),
-          forgetPasswordErrorModel: ForgetPasswordErrorModel.fromJson({'message': '${e.response!.data}'}),
-          
+          forgetPasswordErrorModel: ForgetPasswordErrorModel.fromJson(
+              {'message': '${e.response!.data}'}),
+          checkCodeErrorModel:
+              CheckCodeErrorModel.fromjson({'message': '${e.response!.data}'}),
+          resetPasswordErrorModel: ResetPasswordErrorModel.fromjson(
+              {'message': '${e.response!.data}'}),
         );
       } else if (e.response!.data is Map<String, dynamic>) {
         throw ApiException(
           signUpErrorModel: SignUpErrorModel.fromJson(e.response!.data),
           loginErrorModel: LoginErrorModel.fromJson(e.response!.data),
-          forgetPasswordErrorModel: ForgetPasswordErrorModel.fromJson(e.response!.data),
+          forgetPasswordErrorModel:
+              ForgetPasswordErrorModel.fromJson(e.response!.data),
+          checkCodeErrorModel: CheckCodeErrorModel.fromjson(e.response!.data),
+          resetPasswordErrorModel:
+              ResetPasswordErrorModel.fromjson(e.response!.data),
         );
       } else {
         throwApiException();
@@ -93,6 +107,7 @@ class ExceptionHelperMethods {
 
   static Map<String, dynamic> get connectionErrorMessage =>
       {'message': 'حاول مرة أخري في وقت لاحق'};
+
   static Map<String, dynamic> get noInternetErrorMessage =>
       {'message': 'لا يوجد إتصال بالإنترنت أو يوجد خطأ في السيرفر'};
 }

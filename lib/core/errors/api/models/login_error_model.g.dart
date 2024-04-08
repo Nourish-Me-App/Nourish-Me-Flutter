@@ -12,3 +12,10 @@ LoginErrorModel _$LoginErrorModelFromJson(Map<String, dynamic> json) =>
       status: json['status'] as String?,
       statusCode: json['status_code'] as int?,
     );
+
+Map<String, dynamic> _$LoginErrorModelToJson(LoginErrorModel instance) =>
+    <String, dynamic>{
+      'message': instance.message,
+      'status': instance.status,
+      'status_code': instance.statusCode,
+    };

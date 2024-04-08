@@ -17,14 +17,26 @@ final class ForgetPasswordFailure extends ForgetPasswordState {
   ForgetPasswordFailure({this.error});
 }
 
-final class ForgetPasswordCodeLoading extends ForgetPasswordState {}
+final class CheckCodeLoading extends ForgetPasswordState {}
 
-final class ForgetPasswordCodeSuccess extends ForgetPasswordState {
-  final ForgetPasswordCodeSuccess? forgetPasswordCodeSuccess;
-  ForgetPasswordCodeSuccess({this.forgetPasswordCodeSuccess});
+final class CheckCodeSuccess extends ForgetPasswordState {
+  final CheckCodeModel? checkCodeModel;
+  CheckCodeSuccess({this.checkCodeModel});
 }
 
-final class ForgetPasswordCodeFailure extends ForgetPasswordState {
+final class CheckCodeFailure extends ForgetPasswordState {
   final String? error;
-  ForgetPasswordCodeFailure({this.error});
+  CheckCodeFailure({this.error});
+}
+
+final class ResetPasswordLoading extends ForgetPasswordState {}
+
+final class ResetPasswordSuccess extends ForgetPasswordState {
+  final ResetPasswordModel? resetPasswordModel;
+  ResetPasswordSuccess({this.resetPasswordModel});
+}
+
+final class ResetPasswordFailure extends ForgetPasswordState {
+  final String? error;
+  ResetPasswordFailure({this.error});
 }

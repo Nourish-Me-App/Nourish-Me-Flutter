@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nourish_me/core/helpers/app_images.dart';
+import 'package:nourish_me/core/imports/app_routes_imports.dart';
 import 'package:nourish_me/core/theme/app_text_styles.dart';
 import 'package:nourish_me/core/widgets/custom_button.dart';
-import 'package:nourish_me/feature/auth/view/screens/login_screen.dart';
 
 class SuccesScreen extends StatelessWidget {
   const SuccesScreen({super.key});
@@ -30,11 +30,7 @@ class SuccesScreen extends StatelessWidget {
               CustomButton(
                 buttonText: 'تسجيل الدخول',
                 buttonAction: () {
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const LoginScreen()),
-                          (route) => false);
+                  Navigator.pushNamed(context, Routes.loginScreen);
                 },
                 buttonStyle: AppTextStyles.cairo16BoldWhite,
               ),

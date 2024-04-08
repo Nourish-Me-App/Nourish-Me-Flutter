@@ -1,28 +1,45 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:nourish_me/core/api/end_points.dart';
 import 'package:nourish_me/core/helpers/app_images.dart';
 import 'package:nourish_me/core/imports/login_imports.dart';
 import 'package:nourish_me/core/theme/app_text_styles.dart';
 import 'package:nourish_me/core/widgets/custom_border_button.dart';
-import 'package:nourish_me/feature/forgetpassword/data/repo/forget_password_repo.dart';
 import '../../../../core/errors/messages/auth_error_messages.dart';
 
 import 'package:nourish_me/feature/forgetpassword/logic/forget_password_cubit.dart';
-import 'package:nourish_me/feature/forgetpassword/view/screens/verfication_screen.dart';
 
-class ForgetPasswordScreen extends StatelessWidget {
+import '../../data/models/forget_password_model.dart';
+
+class ForgetPasswordScreen extends StatefulWidget {
   const ForgetPasswordScreen({super.key});
 
   @override
+  State<ForgetPasswordScreen> createState() => _ForgetPasswordScreenState();
+}
+
+class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
+  late ForgetPasswordCubit forgetPasswordCubit;
+
+  @override
+  void dispose() {
+    super.dispose();
+    forgetPasswordCubit.emailController.dispose();
+    forgetPasswordCubit.passwordController.dispose();
+    forgetPasswordCubit.confirmPasswordController.dispose();
+    forgetPasswordCubit.codeController.dispose();
+    forgetPasswordCubit.close();
+  }
+  @override
   Widget build(BuildContext context) {
     final forgetPasswordCubit = context.read<ForgetPasswordCubit>();
+    ForgetPasswordModel forgetPasswordModel = ForgetPasswordModel();
 
     return BlocListener<ForgetPasswordCubit, ForgetPasswordState>(
       listener: (context, state) {
         if (state is ForgetPasswordFailure) {
-         // Navigator.pop(context);
+          Navigator.pop(context);
           HelperMethods.showCustomSnackBarError(
               context, AuthErrorMessages.authErrorMessage(state.error!));
         }
@@ -30,8 +47,10 @@ class ForgetPasswordScreen extends StatelessWidget {
           HelperMethods.showAlertDialog(context);
         }
         if (state is ForgetPasswordSuccess) {
+          Navigator.pushNamed(context, Routes.verifyEmailScreen);
           HelperMethods.showCustomSnackBarSuccess(
               context, 'تم ارسال رمز التحقق بنجاح');
+
         }
       },
       child: Scaffold(
@@ -67,10 +86,10 @@ class ForgetPasswordScreen extends StatelessWidget {
                         CustomTFF(
                           hintText: 'ادخل البريد الإلكتروني',
                           kbType: TextInputType.emailAddress,
+                          controller: forgetPasswordCubit.emailController,
                           validate: (value) {
                             return ValidationErrorTexts.emailValidation(value);
                           },
-                          controller: forgetPasswordCubit.emailController,
                         ),
                         SizedBox(height: 32.h),
                         CustomButton(
@@ -79,9 +98,16 @@ class ForgetPasswordScreen extends StatelessWidget {
                             buttonAction: () async {
                               if (forgetPasswordCubit.formKey.currentState!
                                   .validate()) {
-                                forgetPasswordCubit.forgetPassword(
-                                    EndPoints.forgetPassword,
-                                    forgetPasswordCubit.emailController.text);
+                                await AuthRequests.forgetPassword(
+                                  forgetPasswordCubit: forgetPasswordCubit,
+                                  forgetPasswordModel: forgetPasswordModel,
+                                  email:
+                                      forgetPasswordCubit.emailController.text,
+                                ).then((value) {
+                                  CacheHelper().saveData(
+                                      key: 'email',
+                                      value: forgetPasswordCubit.emailController.text);
+                                });
                               }
                             }),
                         SizedBox(height: 10.h),

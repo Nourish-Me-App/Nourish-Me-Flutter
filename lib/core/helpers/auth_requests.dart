@@ -1,7 +1,6 @@
-import 'package:nourish_me/core/api/end_points.dart';
-import 'package:nourish_me/core/errors/api/models/forget_password_error_model.dart';
+import 'package:nourish_me/feature/forgetpassword/data/models/check_code_model.dart';
 import 'package:nourish_me/feature/forgetpassword/data/models/forget_password_model.dart';
-import 'package:nourish_me/feature/forgetpassword/data/repo/forget_password_repo.dart';
+import 'package:nourish_me/feature/forgetpassword/data/models/reset_password.dart';
 
 import '../../feature/auth/data/models/login_model.dart';
 import '../../feature/auth/data/models/signup_model.dart';
@@ -31,21 +30,56 @@ class AuthRequests {
       ),
     );
   }
-//   static Future forgetPassword({
-//     required ForgetPasswordModel forgetPasswordModel,
-//     required String email,
-// }) async{
-//     await ForgetPasswordCubit.forgetPassword(
-//       EndPoints.forgetPassword,
-//       forgetPasswordModel.toJson(
-//         ForgetPasswordrModel(
-//
-//         )
-//       ),
-//
-//
-//     )
-//   }
+  static Future forgetPassword({
+    required ForgetPasswordCubit forgetPasswordCubit,
+    required ForgetPasswordModel forgetPasswordModel,
+    required String email,
+}) async{
+    await forgetPasswordCubit.forgetPassword(
+      AppConstants.forgetPassword,
+      forgetPasswordModel.toJson(
+        ForgetPasswordModel(
+          email: email,
+        ),
+      ),
+    );
+  }
+
+  static Future checkCode({
+    required ForgetPasswordCubit forgetPasswordCubit,
+    required CheckCodeModel checkCodeModel,
+    required String email,
+    required String token,
+  }) async{
+    await forgetPasswordCubit.checkCode(
+      AppConstants.checkCode,
+      checkCodeModel.toJson(
+          CheckCodeModel(
+            email: email,
+            token: token,
+          ),
+      ),
+    );
+  }
+
+  static Future resetPassword({
+    required ForgetPasswordCubit forgetPasswordCubit,
+    required ResetPasswordModel resetPasswordModel,
+    required String email,
+    required String new_password,
+    required String new_password_confirmation,
+  }) async{
+    await forgetPasswordCubit.resetPassword(
+      AppConstants.resetPassword,
+      resetPasswordModel.toJson(
+       ResetPasswordModel(
+          email: email,
+          new_password: new_password,
+          new_password_confirmation: new_password_confirmation,
+       )
+      ),
+    );
+  }
 
   static Future login({
     required AuthCubit authCubit,

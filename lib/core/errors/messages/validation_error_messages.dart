@@ -1,3 +1,5 @@
+import 'package:dartz/dartz.dart';
+
 class ValidationErrorTexts {
   ValidationErrorTexts._();
 
@@ -20,12 +22,14 @@ class ValidationErrorTexts {
     return null;
   }
 
-  static String? otpValidation(String? feild) {
-    if (feild == null || feild.isEmpty) {
-      return 'برجاء إدخال الرمز';
+  static String? otpValidation(
+    String? field,
+  ) {
+    if (field == null || field.isEmpty) {
+      return '                                                  برجاء إدخال الرمز';
     }
-    if (feild.length < 6) {
-      return 'الرمز يجب أن يكون 6 أرقام';
+    if(field.length<6){
+      return '                                           الرمز يجب أن يكون 6 أرقام';
     }
     return null;
   }

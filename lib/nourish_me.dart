@@ -19,9 +19,10 @@ class NourishMe extends StatelessWidget {
       builder: (context, _) => MaterialApp(
         
         
-        initialRoute: CacheHelper().getData(key: AppConstants.token) == null
-            ? Routes.signUpScreen
-            : Routes.fakeScreen,
+         initialRoute: Routes.verifyEmailScreen,
+        // CacheHelper().getData(key: AppConstants.token) == null
+        //     ? Routes.signUpScreen
+        //     : Routes.fakeScreen,
         onGenerateRoute: AppRoutes().generateRoute,
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
