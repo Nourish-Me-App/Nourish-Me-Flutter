@@ -1,7 +1,7 @@
-
-
 import 'package:json_annotation/json_annotation.dart';
+
 part 'reset_password_error.g.dart';
+
 @JsonSerializable()
 class ResetPasswordErrorModel {
   String? message;

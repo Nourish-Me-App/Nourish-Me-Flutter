@@ -1,8 +1,7 @@
-
 import 'package:json_annotation/json_annotation.dart';
 part 'forget_password_error_model.g.dart';
-@JsonSerializable()
 
+@JsonSerializable()
 class ForgetPasswordErrorModel {
   String? message;
   Map<String, dynamic>? errors;

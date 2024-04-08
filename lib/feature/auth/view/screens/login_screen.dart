@@ -2,7 +2,6 @@ import '../../../../core/errors/messages/auth_error_messages.dart';
 import '../../../../core/imports/login_imports.dart';
 import '../../../../core/imports/signup_screen_imports.dart';
 
-
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 

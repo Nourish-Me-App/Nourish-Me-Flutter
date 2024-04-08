@@ -1,10 +1,9 @@
-import 'package:nourish_me/feature/forgetpassword/data/models/check_code_model.dart';
-import 'package:nourish_me/feature/forgetpassword/data/models/forget_password_model.dart';
-import 'package:nourish_me/feature/forgetpassword/data/models/reset_password.dart';
-
 import '../../feature/auth/data/models/login_model.dart';
 import '../../feature/auth/data/models/signup_model.dart';
 import '../../feature/auth/logic/cubit/auth_cubit.dart';
+import '../../feature/forgetpassword/data/models/check_code_model.dart';
+import '../../feature/forgetpassword/data/models/forget_password_model.dart';
+import '../../feature/forgetpassword/data/models/reset_password.dart';
 import '../../feature/forgetpassword/logic/forget_password_cubit.dart';
 import 'app_constants.dart';
 
@@ -30,11 +29,12 @@ class AuthRequests {
       ),
     );
   }
+
   static Future forgetPassword({
     required ForgetPasswordCubit forgetPasswordCubit,
     required ForgetPasswordModel forgetPasswordModel,
     required String email,
-}) async{
+  }) async {
     await forgetPasswordCubit.forgetPassword(
       AppConstants.forgetPassword,
       forgetPasswordModel.toJson(
@@ -50,14 +50,14 @@ class AuthRequests {
     required CheckCodeModel checkCodeModel,
     required String email,
     required String token,
-  }) async{
+  }) async {
     await forgetPasswordCubit.checkCode(
       AppConstants.checkCode,
       checkCodeModel.toJson(
-          CheckCodeModel(
-            email: email,
-            token: token,
-          ),
+        CheckCodeModel(
+          email: email,
+          token: token,
+        ),
       ),
     );
   }
@@ -66,18 +66,16 @@ class AuthRequests {
     required ForgetPasswordCubit forgetPasswordCubit,
     required ResetPasswordModel resetPasswordModel,
     required String email,
-    required String new_password,
-    required String new_password_confirmation,
-  }) async{
+    required String newPassword,
+    required String newPasswordConfirmation,
+  }) async {
     await forgetPasswordCubit.resetPassword(
       AppConstants.resetPassword,
-      resetPasswordModel.toJson(
-       ResetPasswordModel(
-          email: email,
-          new_password: new_password,
-          new_password_confirmation: new_password_confirmation,
-       )
-      ),
+      resetPasswordModel.toJson(ResetPasswordModel(
+        email: email,
+        newPassword: newPassword,
+        newPasswordConfirmation: newPasswordConfirmation,
+      )),
     );
   }
 

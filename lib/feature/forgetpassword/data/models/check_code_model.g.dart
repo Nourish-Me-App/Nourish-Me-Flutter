@@ -1,7 +1,4 @@
-
 part of 'check_code_model.dart';
-
-
 
 CheckCodeModel _$CheckCodeModelFromJson(Map<String, dynamic> json) =>
     CheckCodeModel(

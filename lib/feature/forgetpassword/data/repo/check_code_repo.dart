@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:nourish_me/feature/forgetpassword/data/models/check_code_model.dart';
+import '../models/check_code_model.dart';
 
 import '../../../../core/errors/api/exceptions/api_exception.dart';
 import '../../../../core/networking/api_services.dart';

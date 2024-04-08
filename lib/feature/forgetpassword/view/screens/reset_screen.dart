@@ -1,24 +1,13 @@
 import 'dart:developer';
 
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nourish_me/core/helpers/auth_requests.dart';
-import 'package:nourish_me/core/imports/login_imports.dart';
-import 'package:nourish_me/core/theme/app_text_styles.dart';
-import 'package:nourish_me/core/widgets/custom_border_button.dart';
-import 'package:nourish_me/core/widgets/custom_button.dart';
-import 'package:nourish_me/core/widgets/custom_text_form_field.dart';
-import 'package:nourish_me/feature/auth/view/widgets/tff_label.dart';
-import 'package:nourish_me/feature/forgetpassword/logic/forget_password_cubit.dart';
-
 import '../../../../core/errors/messages/auth_error_messages.dart';
-import '../../../../core/helpers/helper_methods.dart';
-import '../../../../core/imports/app_routes_imports.dart';
+import '../../../../core/imports/login_imports.dart';
+import '../../../../core/widgets/custom_border_button.dart';
 import '../../data/models/reset_password.dart';
+import '../../logic/forget_password_cubit.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
   const ResetPasswordScreen({super.key});
-
 
   @override
   State<ResetPasswordScreen> createState() => _ResetPasswordScreenState();
@@ -85,7 +74,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                       kbType: TextInputType.visiblePassword,
                       controller: resetPasswordCubit.passwordController,
                       validate: (value) {
-                        return ValidationErrorTexts.signUpPasswordValidation(value);
+                        return ValidationErrorTexts.signUpPasswordValidation(
+                            value);
                       },
                     ),
                     SizedBox(height: 16.h),
@@ -95,8 +85,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                       hintText: 'تأكيد كلمة المرور',
                       kbType: TextInputType.visiblePassword,
                       validate: (value) {
-                        return ValidationErrorTexts
-                            .confirmPasswordValidation(
+                        return ValidationErrorTexts.confirmPasswordValidation(
                           value,
                           resetPasswordCubit.passwordController.text,
                         );
@@ -106,17 +95,17 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     SizedBox(height: 28.h),
                     CustomButton(
                       buttonText: 'تعيين',
-                      buttonAction: () async{
+                      buttonAction: () async {
                         if (resetPasswordCubit
                             .formKeyResetPassword.currentState!
                             .validate()) {
-                        await  AuthRequests.resetPassword(
+                          await AuthRequests.resetPassword(
                                   forgetPasswordCubit: resetPasswordCubit,
                                   resetPasswordModel: resetPasswordModel,
                                   email: CacheHelper().getData(key: 'email'),
-                                  new_password: resetPasswordCubit
+                                  newPassword: resetPasswordCubit
                                       .passwordController.text,
-                                  new_password_confirmation: resetPasswordCubit
+                                  newPasswordConfirmation: resetPasswordCubit
                                       .confirmPasswordController.text)
                               .then((value) {
                             log(

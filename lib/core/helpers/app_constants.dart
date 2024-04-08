@@ -6,7 +6,7 @@ class AppConstants {
   static const String logout = "logout";
   static const String register = "register";
   static const String token = "token";
-  static String forgetPassword = "forget-password";
-  static String checkCode = "reset-password/check";
-  static String resetPassword = "reset-password/reset";
+  static const String forgetPassword = "forget-password";
+  static const String checkCode = "reset-password/check";
+  static const String resetPassword = "reset-password/reset";
 }

@@ -1,10 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:nourish_me/core/helpers/app_images.dart';
-import 'package:nourish_me/core/imports/app_routes_imports.dart';
-import 'package:nourish_me/core/theme/app_text_styles.dart';
-import 'package:nourish_me/core/widgets/custom_button.dart';
+import '../../../../core/helpers/app_images.dart';
+import '../../../../core/imports/app_routes_imports.dart';
+import '../../../../core/theme/app_text_styles.dart';
+import '../../../../core/widgets/custom_button.dart';
 
 class SuccesScreen extends StatelessWidget {
   const SuccesScreen({super.key});
