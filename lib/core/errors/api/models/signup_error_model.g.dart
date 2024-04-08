@@ -12,9 +12,4 @@ SignUpErrorModel _$SignUpErrorModelFromJson(Map<String, dynamic> json) =>
       errors: json['errors'] as Map<String, dynamic>?,
     )..err = json['err'] as String?;
 
-Map<String, dynamic> _$SignUpErrorModelToJson(SignUpErrorModel instance) =>
-    <String, dynamic>{
-      'message': instance.message,
-      'errors': instance.errors,
-      'err': instance.err,
-    };
+

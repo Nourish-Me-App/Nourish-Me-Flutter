@@ -2,9 +2,7 @@
 
 part of 'login_error_model.dart';
 
-// **************************************************************************
-// JsonSerializableGenerator
-// **************************************************************************
+
 
 LoginErrorModel _$LoginErrorModelFromJson(Map<String, dynamic> json) =>
     LoginErrorModel(
@@ -13,9 +11,3 @@ LoginErrorModel _$LoginErrorModelFromJson(Map<String, dynamic> json) =>
       statusCode: json['status_code'] as int?,
     );
 
-Map<String, dynamic> _$LoginErrorModelToJson(LoginErrorModel instance) =>
-    <String, dynamic>{
-      'message': instance.message,
-      'status': instance.status,
-      'status_code': instance.statusCode,
-    };
