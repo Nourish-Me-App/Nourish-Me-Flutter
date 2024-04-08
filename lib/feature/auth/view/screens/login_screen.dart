@@ -1,5 +1,6 @@
 import '../../../../core/errors/messages/auth_error_messages.dart';
 import '../../../../core/imports/login_imports.dart';
+import '../../../../core/imports/signup_screen_imports.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -35,7 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
       listener: (context, state) {
         if (state is LoginFailure) {
           Navigator.pop(context);
-          HelperMethods.showCustomSnackBar(
+          HelperMethods.showCustomSnackBarError(
             context,
             AuthErrorMessages.authErrorMessage(state.error!),
           );

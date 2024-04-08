@@ -32,7 +32,7 @@ class ForgotAndRememberMeRow extends StatelessWidget {
           onPressed: () {
             Navigator.pushNamed(
               context,
-              Routes.forgotScreen,
+              Routes.forgetPasswordScreen,
             );
           },
           child: Text(

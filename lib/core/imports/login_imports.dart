@@ -5,7 +5,6 @@ export 'package:nourish_me/core/helpers/app_constants.dart';
 export 'package:nourish_me/core/helpers/auth_requests.dart';
 export 'package:nourish_me/core/helpers/cache_helper.dart';
 export 'package:nourish_me/feature/auth/data/models/login_model.dart';
-export 'package:nourish_me/feature/auth/logic/cubit/auth_cubit.dart';
 export '../helpers/app_images.dart';
 export '../helpers/helper_methods.dart';
 export '../errors/messages/validation_error_messages.dart';
@@ -17,4 +16,3 @@ export '../../feature/auth/view/widgets/auth_continue_question.dart';
 export '../../feature/auth/view/widgets/forgot_remember_row.dart';
 export '../../feature/auth/view/widgets/social_integration.dart';
 export '../../feature/auth/view/widgets/tff_label.dart';
-

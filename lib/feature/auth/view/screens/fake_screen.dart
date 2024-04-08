@@ -28,7 +28,7 @@ class FakeScreen extends StatelessWidget {
       body: Center(
         child: Text(
           'Hello User',
-          style: AppTextStyles.cairo32BoldOtpFontColor.copyWith(
+          style: AppTextStyles.cairo32BoldotpBackGround.copyWith(
             color: AppColors.mainColor,
           ),
         ),

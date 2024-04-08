@@ -1,6 +1,5 @@
-import '../../feature/auth/view/screens/fake_screen.dart';
-
 import '../imports/app_routes_imports.dart';
+import '../imports/signup_screen_imports.dart';
 
 class AppRoutes {
   Route? generateRoute(RouteSettings routeSettings) {
@@ -21,17 +20,35 @@ class AppRoutes {
             child: const LoginScreen(),
           ),
         );
-      case Routes.forgotScreen:
+      case Routes.forgetPasswordScreen:
         return MaterialPageRoute(
-          builder: (context) => const ForgotScreen(),
+          builder: (context) => BlocProvider(
+              create: (context) => ForgetPasswordCubit(
+                    ForgetPasswordRepo(DioHandler()),
+                    CheckCodeRepo(DioHandler()),
+                    ResetPasswordRepo(DioHandler()),
+                  ),
+              child: const ForgetPasswordScreen()),
         );
       case Routes.verifyEmailScreen:
         return MaterialPageRoute(
-          builder: (context) => const VerifyEmailScreen(),
+          builder: (context) => BlocProvider<ForgetPasswordCubit>(
+              create: (context) => ForgetPasswordCubit(
+                    ForgetPasswordRepo(DioHandler()),
+                    CheckCodeRepo(DioHandler()),
+                    ResetPasswordRepo(DioHandler()),
+                  ),
+              child: const VerifyEmailScreen()),
         );
       case Routes.resetScreen:
         return MaterialPageRoute(
-          builder: (context) => const ResetScreen(),
+          builder: (context) => BlocProvider<ForgetPasswordCubit>(
+              create: (context) => ForgetPasswordCubit(
+                    ForgetPasswordRepo(DioHandler()),
+                    CheckCodeRepo(DioHandler()),
+                    ResetPasswordRepo(DioHandler()),
+                  ),
+              child: const ResetPasswordScreen()),
         );
       case Routes.succesScreen:
         return MaterialPageRoute(

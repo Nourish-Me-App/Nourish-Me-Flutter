@@ -1,14 +1,15 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'login_error_model.dart';
+part of 'reset_password_error.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-LoginErrorModel _$LoginErrorModelFromJson(Map<String, dynamic> json) =>
-    LoginErrorModel(
+ResetPasswordErrorModel _$ResetPasswordErrorModelFromJson(
+        Map<String, dynamic> json) =>
+    ResetPasswordErrorModel(
+      err: json['err'] as String?,
       message: json['message'] as String?,
-      status: json['status'] as String?,
-      statusCode: json['status_code'] as int?,
+      errors: json['errors'] as Map<String, dynamic>?,
     );
