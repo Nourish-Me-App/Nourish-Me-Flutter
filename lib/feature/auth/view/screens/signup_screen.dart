@@ -1,6 +1,9 @@
 import '../../../../core/errors/messages/auth_error_messages.dart';
-
+import '../../../../core/imports/login_imports.dart';
+import '../../data/models/signup_model.dart';
+import '../../logic/cubit/auth_cubit.dart';
 import '../../../../core/imports/signup_screen_imports.dart';
+import '../widgets/name_row.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -36,7 +39,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       listener: (context, state) {
         if (state is SignUpSuccess) {
           Navigator.pop(context);
-          HelperMethods.showCustomSnackBar(context, 'تم إنشاء حسابك بنجاح');
+          HelperMethods.showCustomSnackBarSuccess(context, 'تم إنشاء حسابك بنجاح');
           Navigator.pushNamedAndRemoveUntil(
             context,
             Routes.loginScreen,
@@ -45,7 +48,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         }
         if (state is SignUpFailure) {
           Navigator.pop(context);
-          HelperMethods.showCustomSnackBar(
+          HelperMethods.showCustomSnackBarError(
             context,
             AuthErrorMessages.authErrorMessage(state.error!),
           );

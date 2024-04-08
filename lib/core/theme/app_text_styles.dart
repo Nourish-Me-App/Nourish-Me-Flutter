@@ -15,8 +15,8 @@ class AppTextStyles {
     fontWeight: FontWeight.bold,
   );
 
-  static TextStyle cairo32BoldOtpFontColor = GoogleFonts.cairo(
-    color: AppColors.otpFontColor,
+  static TextStyle cairo32BoldotpBackGround = GoogleFonts.cairo(
+    color: AppColors.otpBackGround,
     fontSize: 32.sp,
     fontWeight: FontWeight.bold,
   );
@@ -43,6 +43,12 @@ class AppTextStyles {
   );
   static TextStyle cairo12RegularBlack = GoogleFonts.cairo(
     color: Colors.black,
+    fontSize: 12.sp,
+    fontWeight: FontWeight.w400,
+  );
+
+  static TextStyle cairo12RegularGrey = GoogleFonts.cairo(
+    color: Colors.grey,
     fontSize: 12.sp,
     fontWeight: FontWeight.w400,
   );

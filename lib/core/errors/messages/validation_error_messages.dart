@@ -1,3 +1,4 @@
+
 class ValidationErrorTexts {
   ValidationErrorTexts._();
 
@@ -14,8 +15,20 @@ class ValidationErrorTexts {
     if (!firstName.contains(RegExp(r'\D+'))) {
       return 'لا تستخدم أرقام';
     }
-    if(firstName.length < 2){
+    if (firstName.length < 2) {
       return 'الإسم الأول يجب ألا يقل عن حرفين';
+    }
+    return null;
+  }
+
+  static String? otpValidation(
+    String? field,
+  ) {
+    if (field == null || field.isEmpty) {
+      return '                                                  برجاء إدخال الرمز';
+    }
+    if(field.length<6){
+      return '                                           الرمز يجب أن يكون 6 أرقام';
     }
     return null;
   }
@@ -33,7 +46,7 @@ class ValidationErrorTexts {
     if (!lastName.contains(RegExp(r'\D+'))) {
       return 'لا تستخدم أرقام';
     }
-    if(lastName.length < 2){
+    if (lastName.length < 2) {
       return 'الإسم الأخير يجب ألا يقل عن حرفين';
     }
     return null;
