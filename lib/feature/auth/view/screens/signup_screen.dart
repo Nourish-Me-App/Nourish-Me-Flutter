@@ -1,7 +1,6 @@
 import '../../../../core/errors/messages/auth_error_messages.dart';
 import '../../../../core/imports/login_imports.dart';
 import '../../data/models/signup_model.dart';
-import '../../logic/cubit/auth_cubit.dart';
 import '../../../../core/imports/signup_screen_imports.dart';
 import '../widgets/name_row.dart';
 

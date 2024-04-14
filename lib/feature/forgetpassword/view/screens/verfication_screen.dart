@@ -1,24 +1,5 @@
-import 'dart:developer';
-
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:nourish_me/core/errors/messages/validation_error_messages.dart';
-import 'package:nourish_me/core/helpers/app_images.dart';
-import 'package:nourish_me/core/helpers/auth_requests.dart';
-import 'package:nourish_me/core/helpers/cache_helper.dart';
-import 'package:nourish_me/core/helpers/helper_methods.dart';
-import 'package:nourish_me/core/imports/app_routes_imports.dart';
-import 'package:nourish_me/core/theme/app_text_styles.dart';
-import 'package:nourish_me/core/widgets/custom_border_button.dart';
-import 'package:nourish_me/core/widgets/custom_button.dart';
-import 'package:nourish_me/feature/forgetpassword/logic/forget_password_cubit.dart';
-import 'package:pinput/pinput.dart';
-
-import '../../../../core/errors/messages/auth_error_messages.dart';
-import '../../../../core/theme/app_colors.dart';
-import '../../../../core/widgets/pin_put_them.dart';
+import '../../../../core/imports/app_routes_imports.dart';
+import '../../../../core/imports/verification_screen_imports.dart';
 import '../../data/models/check_code_model.dart';
 import '../widgets/timer.dart';
 
@@ -87,7 +68,8 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                           textAlign: TextAlign.center,
                           style: AppTextStyles.cairo18BoldBlack),
                       SizedBox(height: 5.h),
-                      Text('من فضلك ادخل الكود الذي تم ارساله اليك علي البريد الالكتروني ',
+                      Text(
+                          'من فضلك ادخل الكود الذي تم ارساله اليك علي البريد الالكتروني ',
                           textDirection: TextDirection.rtl,
                           textAlign: TextAlign.center,
                           style: AppTextStyles.cairo12RegularBlack),
@@ -137,7 +119,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                           ),
                         ),
                       ),
-                      TimerCode(),
+                      const TimerCode(),
                       SizedBox(height: 28.h),
                       CustomButton(
                         buttonText: 'تحقق',

@@ -10,5 +10,6 @@ class AppColors {
   static const Color otpBackGround = Color(0xffD9D9D9);
   static const Color white = Color(0xffffffff);
   static const Color tFFErrorColor = Color(0xffF14E2E);
+  static const Color swipColor = Color(0xffE8E0D0);
   static Color tFFFilledColor = const Color(0xffB5C5BA).withOpacity(0.5);
 }

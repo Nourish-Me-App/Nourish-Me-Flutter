@@ -1,16 +1,15 @@
 import 'dart:async';
 import 'dart:developer';
-import 'package:flutter/material.dart';
-import 'package:nourish_me/core/helpers/cache_helper.dart';
-import 'package:nourish_me/feature/forgetpassword/data/models/forget_password_model.dart';
 
 import '../../../../core/errors/messages/auth_error_messages.dart';
 import '../../../../core/helpers/auth_requests.dart';
+import '../../../../core/helpers/cache_helper.dart';
 import '../../../../core/imports/signup_screen_imports.dart';
+import '../../data/models/forget_password_model.dart';
 import '../../logic/forget_password_cubit.dart';
 
 class TimerCode extends StatefulWidget {
-  TimerCode({
+  const TimerCode({
     super.key,
   });
 
@@ -78,25 +77,25 @@ class _TimerCodeState extends State<TimerCode> {
           Navigator.pop(context);
           HelperMethods.showCustomSnackBarSuccess(
               context, 'تم ارسال رمز التحقق بنجاح');
-
         }
       },
       child: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-
             TextButton(
               onPressed: codeSent ? null : resendCode,
-              child: const Text(
+              child:  Text(
                 'أعد إرسال الرمز',
+                  style: AppTextStyles.cairo18BoldBlack
               ),
             ),
-            codeSent ?
-            Text(
-              '($resendTime)',
-              style: AppTextStyles.cairo12BoldMainColor,
-            ) : Container(),
+            codeSent
+                ? Text(
+                    '($resendTime)',
+                    style: AppTextStyles.cairo12BoldMainColor,
+                  )
+                : Container(),
           ],
         ),
       ),

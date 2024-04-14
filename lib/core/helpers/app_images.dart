@@ -1,6 +1,6 @@
 class Assets {
   Assets._();
-  
+
   /// Assets for iconsAppIcon
   /// assets/icons/app_icon.png
   static const String iconsAppIcon = "assets/icons/app_icon.png";
@@ -20,11 +20,13 @@ class Assets {
 
   /// Assets for imagesSplashLogoAndroid12
   /// assets/images/splash_logo_android12.png
-  static const String imagesSplashLogoAndroid12 = "assets/images/splash_logo_android12.png";
+  static const String imagesSplashLogoAndroid12 =
+      "assets/images/splash_logo_android12.png";
 
   /// Assets for imagesSplashLogoBeforeAndroid12
   /// assets/images/splash_logo_before_android12.png
-  static const String imagesSplashLogoBeforeAndroid12 = "assets/images/splash_logo_before_android12.png";
+  static const String imagesSplashLogoBeforeAndroid12 =
+      "assets/images/splash_logo_before_android12.png";
 
   /// Assets for svgsCongratulation
   /// assets/svgs/congratulation.svg
@@ -38,4 +40,16 @@ class Assets {
   /// Assets for svgsVerify
   /// assets/svgs/verify.svg
   static const String svgsVerify = "assets/svgs/verify.svg";
+
+  /// Assets for onBoarding
+  /// assets/svgs/onBoardingone.svg
+  static const String onBoardingOne = "assets/svgs/onBoardingone.svg";
+
+  /// Assets for onBoarding
+  /// assets/svgs/onBoardingtwo.svg
+  static const String onBoardingTwo = "assets/svgs/onBoardingtwo.svg";
+
+  /// Assets for onBoarding
+  /// assets/svgs/onBoardingthree.svg
+  static const String onBoardingThree = "assets/svgs/onBoardingthree.svg";
 }

@@ -1,4 +1,3 @@
-
 class ValidationErrorTexts {
   ValidationErrorTexts._();
 
@@ -27,7 +26,7 @@ class ValidationErrorTexts {
     if (field == null || field.isEmpty) {
       return '                                                  برجاء إدخال الرمز';
     }
-    if(field.length<6){
+    if (field.length < 6) {
       return '                                           الرمز يجب أن يكون 6 أرقام';
     }
     return null;

@@ -7,16 +7,16 @@ class ResetPasswordModel {
   final String? message, status;
   final Map<String, dynamic>? data;
   final String? email;
-  final String? new_password;
-  final String? new_password_confirmation;
+  final String? newPassword;
+  final String? newPasswordConfirmation;
 
   ResetPasswordModel({
     this.email,
     this.message,
     this.status,
     this.data,
-    this.new_password,
-    this.new_password_confirmation,
+    this.newPassword,
+    this.newPasswordConfirmation,
   });
 
   factory ResetPasswordModel.fromJson(Map<String, dynamic> json) =>

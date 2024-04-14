@@ -1,14 +1,9 @@
-
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:nourish_me/core/helpers/app_images.dart';
-import 'package:nourish_me/core/imports/login_imports.dart';
-import 'package:nourish_me/core/theme/app_text_styles.dart';
-import 'package:nourish_me/core/widgets/custom_border_button.dart';
+import '../../../../core/imports/login_imports.dart';
+import '../../../../core/widgets/custom_border_button.dart';
 import '../../../../core/errors/messages/auth_error_messages.dart';
 
-import 'package:nourish_me/feature/forgetpassword/logic/forget_password_cubit.dart';
+import '../../logic/forget_password_cubit.dart';
 
 import '../../data/models/forget_password_model.dart';
 
@@ -31,6 +26,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
     forgetPasswordCubit.codeController.dispose();
     forgetPasswordCubit.close();
   }
+
   @override
   Widget build(BuildContext context) {
     final forgetPasswordCubit = context.read<ForgetPasswordCubit>();
@@ -50,11 +46,9 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
           Navigator.pushNamed(context, Routes.verifyEmailScreen);
           HelperMethods.showCustomSnackBarSuccess(
               context, 'تم ارسال رمز التحقق بنجاح');
-
         }
       },
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
         appBar: AppBar(),
         body: SafeArea(
           child: Directionality(
@@ -106,7 +100,8 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                                 ).then((value) {
                                   CacheHelper().saveData(
                                       key: 'email',
-                                      value: forgetPasswordCubit.emailController.text);
+                                      value: forgetPasswordCubit
+                                          .emailController.text);
                                 });
                               }
                             }),

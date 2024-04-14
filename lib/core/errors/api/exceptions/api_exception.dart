@@ -1,9 +1,8 @@
-
-import '../models/check_code_error_model.dart';
-import '../models/forget_password_error_model.dart';
-import '../models/login_error_model.dart';
-import '../models/reset_password_error.dart';
-import '../models/signup_error_model.dart';
+import '../models/auth/login_error_model.dart';
+import '../models/auth/signup_error_model.dart';
+import '../models/reset_password/check_code_error_model.dart';
+import '../models/reset_password/forget_password_error_model.dart';
+import '../models/reset_password/reset_password_error.dart';
 
 class ApiException implements Exception {
   final SignUpErrorModel? signUpErrorModel;
@@ -12,6 +11,11 @@ class ApiException implements Exception {
   final CheckCodeErrorModel? checkCodeErrorModel;
   final ResetPasswordErrorModel? resetPasswordErrorModel;
 
-
-  ApiException( {this.signUpErrorModel,this.checkCodeErrorModel,this.resetPasswordErrorModel,  this.loginErrorModel,this.forgetPasswordErrorModel});
+  ApiException({
+    this.signUpErrorModel,
+    this.checkCodeErrorModel,
+    this.resetPasswordErrorModel,
+    this.loginErrorModel,
+    this.forgetPasswordErrorModel,
+  });
 }
