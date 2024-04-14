@@ -40,4 +40,16 @@ class Assets {
   /// Assets for svgsVerify
   /// assets/svgs/verify.svg
   static const String svgsVerify = "assets/svgs/verify.svg";
+
+  /// Assets for onBoarding
+  /// assets/svgs/onBoardingone.svg
+  static const String onBoardingOne = "assets/svgs/onBoardingone.svg";
+
+  /// Assets for onBoarding
+  /// assets/svgs/onBoardingtwo.svg
+  static const String onBoardingTwo = "assets/svgs/onBoardingtwo.svg";
+
+  /// Assets for onBoarding
+  /// assets/svgs/onBoardingthree.svg
+  static const String onBoardingThree = "assets/svgs/onBoardingthree.svg";
 }

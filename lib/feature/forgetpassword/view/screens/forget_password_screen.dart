@@ -49,7 +49,6 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
         }
       },
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
         appBar: AppBar(),
         body: SafeArea(
           child: Directionality(

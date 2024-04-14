@@ -20,6 +20,19 @@ class AppTextStyles {
     fontSize: 32.sp,
     fontWeight: FontWeight.bold,
   );
+
+  static TextStyle cairo15normaltextcolorOnboarding = GoogleFonts.cairo(
+    color: Colors.black,
+    fontSize: 15.sp,
+    fontWeight: FontWeight.normal,
+  );
+
+  static TextStyle cairo16boldtextcolorOnboarding = GoogleFonts.cairo(
+    color: AppColors.mainColor,
+    fontSize: 16.sp,
+    fontWeight: FontWeight.bold,
+  );
+
   static TextStyle cairo16SemiBoldBlack = GoogleFonts.cairo(
     color: Colors.black,
     fontSize: 16.sp,

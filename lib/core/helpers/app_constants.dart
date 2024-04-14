@@ -1,6 +1,6 @@
 class AppConstants {
   static const String baseUrl =
-      "https://f3b0-197-43-155-173.ngrok-free.app/api/v1/users/";
+      "https://642d-197-43-155-173.ngrok-free.app/api/v1/users/";
 
   static const String login = "login";
   static const String logout = "logout";

@@ -85,8 +85,9 @@ class _TimerCodeState extends State<TimerCode> {
           children: [
             TextButton(
               onPressed: codeSent ? null : resendCode,
-              child: const Text(
+              child:  Text(
                 'أعد إرسال الرمز',
+                  style: AppTextStyles.cairo18BoldBlack
               ),
             ),
             codeSent

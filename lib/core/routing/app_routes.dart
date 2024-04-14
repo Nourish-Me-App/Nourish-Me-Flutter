@@ -1,3 +1,6 @@
+import 'package:nourish_me/feature/onboarding/view/screens/onboarding.dart';
+
+import '../../feature/onboarding/logic/on_boarding_cubit.dart';
 import '../imports/app_routes_imports.dart';
 import '../imports/signup_screen_imports.dart';
 
@@ -57,6 +60,13 @@ class AppRoutes {
       case Routes.fakeScreen:
         return MaterialPageRoute(
           builder: (context) => const FakeScreen(),
+        );
+      case Routes.onBoarding:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider<OnBoardingCubit>(
+            create: (context) => OnBoardingCubit(),
+            child: const OnBoardingScreen(),
+          ),
         );
     }
     return null;

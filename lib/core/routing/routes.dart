@@ -1,3 +1,4 @@
+
 class Routes {
   static const String signUpScreen = 'signUpScreen';
   static const String loginScreen = 'loginScreen';
@@ -7,4 +8,5 @@ class Routes {
   static const String succesScreen = 'succesScreen';
   static const String fakeScreen = 'fakeScreen';
   static const String home = 'home';
+  static const String onBoarding = 'onBoarding';
 }
