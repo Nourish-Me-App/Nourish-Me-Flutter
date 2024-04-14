@@ -20,6 +20,7 @@ class AppRoutes {
           builder: (context) => BlocProvider<AuthCubit>(
             create: (context) =>
                 AuthCubit(LoginRepo(DioHandler()), SignUpRepo(DioHandler())),
+                AuthCubit(LoginRepo(DioHandler()), SignUpRepo(DioHandler())),
             child: const LoginScreen(),
           ),
         );
