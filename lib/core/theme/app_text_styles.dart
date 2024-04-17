@@ -72,4 +72,10 @@ class AppTextStyles {
     fontSize: 12.sp,
     fontWeight: FontWeight.w400,
   );
+  static TextStyle cairo11MediumTFFErrorColor = GoogleFonts.cairo(
+    color: AppColors.tFFErrorColor,
+    fontSize: 11.sp,
+    fontWeight: FontWeight.w400,
+  );
+
 }

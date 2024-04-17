@@ -8,17 +8,20 @@ class CustomBorderButton extends StatelessWidget {
     required this.buttonText,
     required this.buttonAction,
     required this.buttonStyle,
+    this.height,
+    this.width,
   });
 
   final String buttonText;
   final TextStyle buttonStyle;
   final Function() buttonAction;
+  final double? width, height;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: double.infinity,
-      height: 40.h,
+      width: width ?? double.infinity,
+      height: height ?? 40.h,
       child: MaterialButton(
         onPressed: buttonAction,
         padding: EdgeInsets.zero,

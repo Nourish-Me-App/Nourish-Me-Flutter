@@ -10,5 +10,7 @@ class AppColors {
   static const Color otpBackGround = Color(0xffD9D9D9);
   static const Color white = Color(0xffffffff);
   static const Color tFFErrorColor = Color(0xffF14E2E);
+  static const Color currentQuestionColor = Color(0xfff4f4f4);
+  static const Color radioBorderColor = Color(0xffCFCBCB);
   static Color tFFFilledColor = const Color(0xffB5C5BA).withOpacity(0.5);
 }

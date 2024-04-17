@@ -37,6 +37,10 @@ class Assets {
   static const String svgsForgotpasswoedscreen =
       "assets/svgs/forgotpasswoedscreen.svg";
 
+  /// Assets for svgsQuestion
+  /// assets/svgs/question.svg
+  static const String svgsQuestion = "assets/svgs/question.svg";
+
   /// Assets for svgsVerify
   /// assets/svgs/verify.svg
   static const String svgsVerify = "assets/svgs/verify.svg";

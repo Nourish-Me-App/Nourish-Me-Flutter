@@ -1,3 +1,6 @@
+import 'package:nourish_me/feature/questions/logic/cubit/questions_cubit.dart';
+
+import '../../feature/questions/view/screens/questions.dart';
 import '../imports/app_routes_imports.dart';
 import '../imports/signup_screen_imports.dart';
 
@@ -57,6 +60,13 @@ class AppRoutes {
       case Routes.fakeScreen:
         return MaterialPageRoute(
           builder: (context) => const FakeScreen(),
+        );
+      case Routes.questions:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider<QuestionsCubit>(
+            create: (context) => QuestionsCubit(),
+            child: const Questions(),
+          ),
         );
     }
     return null;
