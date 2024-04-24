@@ -1,10 +1,10 @@
 import 'package:nourish_me/core/imports/login_imports.dart';
 import 'package:nourish_me/core/imports/signup_screen_imports.dart';
-import 'package:nourish_me/core/imports/verification_screen_imports.dart';
 import 'package:nourish_me/feature/auth/data/models/continue_register_model.dart';
 import 'package:nourish_me/feature/auth/view/widgets/counter_age.dart';
 import 'package:nourish_me/feature/auth/view/widgets/height_counter.dart';
 
+import '../../../../core/errors/messages/error_messages.dart';
 import '../widgets/continue_register_lable.dart';
 import '../widgets/custom_radio.dart';
 import '../widgets/weightcounters.dart';
@@ -53,11 +53,11 @@ class _DataScreenState extends State<ContinueRegisterScreen> {
           Navigator.pop(context);
           HelperMethods.showCustomSnackBarError(
             context,
-            AuthErrorMessages.authErrorMessage(state.error!),
+            ErrorMessages.errorMessage(state.error!),
           );
         }
         if (state is ContinueRegisterLoading) {
-          HelperMethods.showAlertDialog(context);
+          HelperMethods.showLoadingAlertDialog(context);
         }
       },
       builder: (context, state) {
@@ -84,7 +84,7 @@ class _DataScreenState extends State<ContinueRegisterScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         CustomRadio(
-                          imge: Assets.male,
+                          imge: Assets.svgsMale,
                           gender: 'ذكر',
                           value: 1,
                           groupValue: selectedValue,
@@ -95,7 +95,7 @@ class _DataScreenState extends State<ContinueRegisterScreen> {
                           },
                         ),
                         CustomRadio(
-                          imge: Assets.feMale,
+                          imge: Assets.svgsFemale,
                           gender: 'أنثى',
                           value: 2,
                           groupValue: selectedValue,

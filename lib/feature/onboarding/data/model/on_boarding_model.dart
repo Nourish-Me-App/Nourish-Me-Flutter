@@ -1,5 +1,3 @@
-
-
 class OnBoardingModel {
   final String description;
   final String image;

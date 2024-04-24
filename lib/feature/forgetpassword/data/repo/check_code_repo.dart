@@ -21,7 +21,7 @@ class CheckCodeRepo {
       var result = CheckCodeModel.fromJson(response);
       return Right(result);
     } on ApiException catch (e) {
-      return Left(e.checkCodeErrorModel!.message!);
+      return Left(e.errorModel.message!);
     }
   }
 }

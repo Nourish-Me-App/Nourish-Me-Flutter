@@ -1,4 +1,5 @@
-import '../../../../core/errors/messages/auth_error_messages.dart';
+import 'package:nourish_me/core/imports/verification_screen_imports.dart';
+
 import '../../../../core/imports/login_imports.dart';
 import '../../../../core/imports/signup_screen_imports.dart';
 
@@ -38,11 +39,11 @@ class _LoginScreenState extends State<LoginScreen> {
           Navigator.pop(context);
           HelperMethods.showCustomSnackBarError(
             context,
-            AuthErrorMessages.authErrorMessage(state.error!),
+            ErrorMessages.errorMessage(state.error!),
           );
         }
         if (state is LoginLoading) {
-          HelperMethods.showAlertDialog(context);
+          HelperMethods.showLoadingAlertDialog(context);
         }
         if (state is LoginSuccess) {
           HelperMethods.afterLogin(context, authCubit, state.loginModel!);
@@ -63,9 +64,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Padding(
-                          padding: EdgeInsets.only(left: 42.w, right: 21.w),
-                          child: Image.asset(
-                            Assets.imagesNourishMeLogo,
+                          padding: EdgeInsets.symmetric(horizontal: 102.w),
+                          child: SvgPicture.asset(
+                            height: 160.h,
+                            Assets.svgsAppLogo,
                           ),
                         ),
                         SizedBox(height: 16.h),

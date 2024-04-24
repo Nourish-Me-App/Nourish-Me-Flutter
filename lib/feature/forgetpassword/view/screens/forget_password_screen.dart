@@ -1,7 +1,7 @@
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../core/imports/login_imports.dart';
 import '../../../../core/widgets/custom_border_button.dart';
-import '../../../../core/errors/messages/auth_error_messages.dart';
+import '../../../../core/errors/messages/error_messages.dart';
 
 import '../../logic/forget_password_cubit.dart';
 
@@ -37,10 +37,10 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
         if (state is ForgetPasswordFailure) {
           Navigator.pop(context);
           HelperMethods.showCustomSnackBarError(
-              context, AuthErrorMessages.authErrorMessage(state.error!));
+              context, ErrorMessages.errorMessage(state.error!));
         }
         if (state is ForgetPasswordLoading) {
-          HelperMethods.showAlertDialog(context);
+          HelperMethods.showLoadingAlertDialog(context);
         }
         if (state is ForgetPasswordSuccess) {
           Navigator.pushNamed(context, Routes.verifyEmailScreen);

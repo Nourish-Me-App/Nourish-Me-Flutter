@@ -1,11 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:nourish_me/core/errors/api/models/continue_register/continue_register_error_model.dart';
 
-import '../models/auth/login_error_model.dart';
-import '../models/auth/signup_error_model.dart';
-import '../models/reset_password/check_code_error_model.dart';
-import '../models/reset_password/forget_password_error_model.dart';
-import '../models/reset_password/reset_password_error.dart';
+import '../models/error_model.dart';
 import 'api_exception.dart';
 
 class ExceptionHelperMethods {
@@ -29,16 +24,8 @@ class ExceptionHelperMethods {
         badResponseErrorHandle(e);
       case DioExceptionType.connectionError:
         throw ApiException(
-            signUpErrorModel: SignUpErrorModel.fromJson(noInternetErrorMessage),
-            loginErrorModel: LoginErrorModel.fromJson(noInternetErrorMessage),
-            forgetPasswordErrorModel:
-                ForgetPasswordErrorModel.fromJson(noInternetErrorMessage),
-            checkCodeErrorModel:
-                CheckCodeErrorModel.fromjson(noInternetErrorMessage),
-            resetPasswordErrorModel:
-                ResetPasswordErrorModel.fromjson(noInternetErrorMessage),
-            continueRegisterErrorModel:
-                ContinueRegisterErrorModel.fromJson(noInternetErrorMessage));
+          errorModel: ErrorModel.fromJson(noInternetErrorMessage),
+        );
       default:
         throwApiException();
     }
@@ -69,48 +56,15 @@ class ExceptionHelperMethods {
     }
   }
 
-  static void throwApiException() {
-    throw ApiException(
-        signUpErrorModel: SignUpErrorModel.fromJson(connectionErrorMessage),
-        loginErrorModel: LoginErrorModel.fromJson(connectionErrorMessage),
-        forgetPasswordErrorModel:
-            ForgetPasswordErrorModel.fromJson(connectionErrorMessage),
-        checkCodeErrorModel:
-            CheckCodeErrorModel.fromjson(connectionErrorMessage),
-        resetPasswordErrorModel:
-            ResetPasswordErrorModel.fromjson(connectionErrorMessage),
-        continueRegisterErrorModel:
-            ContinueRegisterErrorModel.fromJson(connectionErrorMessage));
-  }
-
   static void badResponseExceptionThrow(DioException e) {
     if (e.response != null || e.response!.data != null) {
       if (e.response!.data is String) {
         throw ApiException(
-          signUpErrorModel:
-              SignUpErrorModel.fromJson({'message': '${e.response!.data}'}),
-          loginErrorModel:
-              LoginErrorModel.fromJson({'message': '${e.response!.data}'}),
-          forgetPasswordErrorModel: ForgetPasswordErrorModel.fromJson(
-              {'message': '${e.response!.data}'}),
-          checkCodeErrorModel:
-              CheckCodeErrorModel.fromjson({'message': '${e.response!.data}'}),
-          resetPasswordErrorModel: ResetPasswordErrorModel.fromjson(
-              {'message': '${e.response!.data}'}),
-          continueRegisterErrorModel: ContinueRegisterErrorModel.fromJson(
-              {'message': '${e.response!.data}'}),
+          errorModel: ErrorModel.fromJson({'message': '${e.response!.data}'}),
         );
       } else if (e.response!.data is Map<String, dynamic>) {
         throw ApiException(
-          signUpErrorModel: SignUpErrorModel.fromJson(e.response!.data),
-          loginErrorModel: LoginErrorModel.fromJson(e.response!.data),
-          forgetPasswordErrorModel:
-              ForgetPasswordErrorModel.fromJson(e.response!.data),
-          checkCodeErrorModel: CheckCodeErrorModel.fromjson(e.response!.data),
-          resetPasswordErrorModel:
-              ResetPasswordErrorModel.fromjson(e.response!.data),
-          continueRegisterErrorModel:
-              ContinueRegisterErrorModel.fromJson(e.response!.data),
+          errorModel: ErrorModel.fromJson(e.response!.data),
         );
       } else {
         throwApiException();
@@ -118,6 +72,12 @@ class ExceptionHelperMethods {
     } else {
       throwApiException();
     }
+  }
+
+  static void throwApiException() {
+    throw ApiException(
+      errorModel: ErrorModel.fromJson(connectionErrorMessage),
+    );
   }
 
   static Map<String, dynamic> get connectionErrorMessage =>

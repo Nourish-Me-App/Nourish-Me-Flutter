@@ -28,8 +28,7 @@ class ContinueRegisterModel {
       this.gender,
       this.age,
       this.weight,
-      this.height
-      });
+      this.height});
 
   factory ContinueRegisterModel.fromJson(Map<String, dynamic> json) =>
       _$ContinueRegisterModelFromJson(json);

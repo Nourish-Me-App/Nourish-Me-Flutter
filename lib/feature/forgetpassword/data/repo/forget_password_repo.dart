@@ -21,8 +21,8 @@ class ForgetPasswordRepo {
       var result = ForgetPasswordModel.fromJson(response);
       return Right(result);
     } on ApiException catch (e) {
-      log(e.forgetPasswordErrorModel!.message!);
-      return Left(e.forgetPasswordErrorModel!.message!);
+      log(e.errorModel.message!);
+      return Left(e.errorModel.message!);
     }
   }
 }

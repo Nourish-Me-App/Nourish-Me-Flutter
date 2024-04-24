@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:nourish_me/core/imports/app_routes_imports.dart';
 import 'package:nourish_me/core/imports/login_imports.dart';
 import 'package:nourish_me/core/theme/app_colors.dart';
 import 'package:nourish_me/feature/auth/logic/cubit/auth_cubit.dart';

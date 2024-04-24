@@ -16,7 +16,8 @@ class CustomRadio extends StatefulWidget {
     required this.value,
     required this.groupValue,
     required this.onChanged,
-    required this.gender, required this.imge,
+    required this.gender,
+    required this.imge,
   });
 
   @override

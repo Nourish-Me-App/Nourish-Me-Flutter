@@ -13,9 +13,14 @@ class NourishMe extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, _) => MaterialApp(
-        initialRoute: CacheHelper().getData(key: AppConstants.token) == null
-            ? Routes.signUpScreen
-            : Routes.fakeScreen,
+        initialRoute:
+            CacheHelper().getData(key: AppConstants.rememberMeToken) == null
+                ? Routes.onBoarding
+                : CacheHelper().getData(
+                            key: AppConstants.isFirstQuestionsComplete) ==
+                        'no'
+                    ? Routes.questions
+                    : Routes.fakeHome,
         onGenerateRoute: AppRoutes().generateRoute,
         debugShowCheckedModeBanner: false,
         theme: ThemeData(

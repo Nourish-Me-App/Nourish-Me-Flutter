@@ -1,3 +1,5 @@
+import 'package:flutter_svg/flutter_svg.dart';
+
 import '../imports/login_imports.dart';
 import '../imports/signup_screen_imports.dart';
 import '../theme/app_colors.dart';
@@ -36,7 +38,7 @@ class HelperMethods {
     );
   }
 
-  static showAlertDialog(context) {
+  static showLoadingAlertDialog(context) {
     return showDialog(
       barrierDismissible: false,
       context: context,
@@ -69,15 +71,46 @@ class HelperMethods {
     AuthCubit authCubit,
     LoginModel value,
   ) {
+    CacheHelper cacheHelper = CacheHelper();
     Navigator.pop(context);
     authCubit.rememberMe
-        ? CacheHelper().saveData(
-            key: AppConstants.token, value: value.data![AppConstants.token])
-        : CacheHelper().removeData(key: AppConstants.token);
-    Navigator.pushNamedAndRemoveUntil(
-      context,
-      Routes.fakeScreen,
-      (route) => false,
-    );
+        ? cacheHelper.saveData(
+            key: AppConstants.rememberMeToken,
+            value: value.data![AppConstants.token])
+        : cacheHelper.removeData(key: AppConstants.rememberMeToken);
+    cacheHelper.saveData(
+        key: AppConstants.token, value: value.data![AppConstants.token]);
+    cacheHelper.saveData(
+        key: AppConstants.isFirstQuestionsComplete,
+        value: value.data!['user'][AppConstants.isFirstQuestionsComplete]);
+    value.data!['user'][AppConstants.isFirstQuestionsComplete] == 'no'
+        ? Navigator.pushNamedAndRemoveUntil(
+            context,
+            Routes.questions,
+            (route) => false,
+          )
+        : Navigator.pushNamedAndRemoveUntil(
+            context, Routes.fakeHome, (route) => false);
+  }
+
+  static void svgPrecacheImage() {
+    const cacheSvgImages = [
+      Assets.svgsQuestion,
+      Assets.svgsAppLogo,
+      Assets.svgsCongratulation,
+      Assets.svgsForgotpasswoedscreen,
+      Assets.svgsVerify,
+      Assets.svgsFemale,
+      Assets.svgsMale,
+      Assets.svgsOnBoarding1,
+      Assets.svgsOnBoarding2,
+      Assets.svgsOnBoarding3,
+    ];
+
+    for (String element in cacheSvgImages) {
+      var loader = SvgAssetLoader(element);
+      svg.cache
+          .putIfAbsent(loader.cacheKey(null), () => loader.loadBytes(null));
+    }
   }
 }

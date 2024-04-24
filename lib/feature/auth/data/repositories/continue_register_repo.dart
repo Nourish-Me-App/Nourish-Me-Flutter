@@ -19,7 +19,7 @@ class ContinueRegisterRepo {
       var result = ContinueRegisterModel.fromJson(response);
       return Right(result);
     } on ApiException catch (e) {
-      return Left(e.continueRegisterErrorModel!.message!);
+      return Left(e.errorModel.message!);
     }
   }
 }

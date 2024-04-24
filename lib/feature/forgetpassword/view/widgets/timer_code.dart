@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
-import '../../../../core/errors/messages/auth_error_messages.dart';
+import '../../../../core/errors/messages/error_messages.dart';
 import '../../../../core/helpers/auth_requests.dart';
 import '../../../../core/helpers/cache_helper.dart';
 import '../../../../core/imports/signup_screen_imports.dart';
@@ -68,10 +68,10 @@ class _TimerCodeState extends State<TimerCode> {
         if (state is ForgetPasswordFailure) {
           Navigator.pop(context);
           HelperMethods.showCustomSnackBarError(
-              context, AuthErrorMessages.authErrorMessage(state.error!));
+              context, ErrorMessages.errorMessage(state.error!));
         }
         if (state is ForgetPasswordLoading) {
-          HelperMethods.showAlertDialog(context);
+          HelperMethods.showLoadingAlertDialog(context);
         }
         if (state is ForgetPasswordSuccess) {
           Navigator.pop(context);
@@ -85,10 +85,8 @@ class _TimerCodeState extends State<TimerCode> {
           children: [
             TextButton(
               onPressed: codeSent ? null : resendCode,
-              child:  Text(
-                'أعد إرسال الرمز',
-                  style: AppTextStyles.cairo18BoldBlack
-              ),
+              child: Text('أعد إرسال الرمز',
+                  style: AppTextStyles.cairo18BoldBlack),
             ),
             codeSent
                 ? Text(

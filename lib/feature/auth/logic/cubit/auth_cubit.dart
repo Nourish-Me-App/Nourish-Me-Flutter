@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'package:nourish_me/core/imports/signup_screen_imports.dart';
 import 'package:nourish_me/feature/auth/data/repositories/continue_register_repo.dart';

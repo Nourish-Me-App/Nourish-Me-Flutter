@@ -1,7 +1,7 @@
 import '../../../../core/imports/app_routes_imports.dart';
 import '../../../../core/imports/verification_screen_imports.dart';
 import '../../data/models/check_code_model.dart';
-import '../widgets/timer.dart';
+import '../widgets/timer_code.dart';
 
 class VerifyEmailScreen extends StatefulWidget {
   const VerifyEmailScreen({super.key});
@@ -37,7 +37,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
         if (state is CheckCodeFailure) {
           Navigator.pop(context);
           HelperMethods.showCustomSnackBarError(
-              context, AuthErrorMessages.authErrorMessage(state.error!));
+              context, ErrorMessages.errorMessage(state.error!));
         }
         if (state is CheckCodeSuccess) {
           Navigator.pushNamed(
@@ -47,7 +47,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
           HelperMethods.showCustomSnackBarSuccess(context, 'تم التحقق بنجاح');
         }
         if (state is CheckCodeLoading) {
-          HelperMethods.showAlertDialog(context);
+          HelperMethods.showLoadingAlertDialog(context);
         }
       },
       builder: (context, state) {
