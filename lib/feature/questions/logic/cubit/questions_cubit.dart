@@ -2,9 +2,9 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:nourish_me/core/helpers/app_constants.dart';
-import 'package:nourish_me/core/helpers/cache_helper.dart';
-import 'package:nourish_me/feature/questions/data/repositories/questions_answers_repo.dart';
+import '../../../../core/helpers/app_constants.dart';
+import '../../../../core/helpers/cache_helper.dart';
+import '../../data/repositories/questions_answers_repo.dart';
 
 import '../../data/models/questions_model.dart';
 

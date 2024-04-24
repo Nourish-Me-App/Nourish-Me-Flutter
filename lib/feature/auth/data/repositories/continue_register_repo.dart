@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:nourish_me/feature/auth/data/models/continue_register_model.dart';
+import '../models/continue_register_model.dart';
 
 import '../../../../core/errors/api/exceptions/api_exception.dart';
 import '../../../../core/networking/api_services.dart';

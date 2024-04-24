@@ -1,4 +1,4 @@
-import 'package:nourish_me/core/imports/verification_screen_imports.dart';
+import '../../../../core/imports/verification_screen_imports.dart';
 
 import '../../../../core/imports/login_imports.dart';
 import '../../../../core/imports/signup_screen_imports.dart';

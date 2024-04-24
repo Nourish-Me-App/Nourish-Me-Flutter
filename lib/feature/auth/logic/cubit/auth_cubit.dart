@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:nourish_me/core/imports/signup_screen_imports.dart';
-import 'package:nourish_me/feature/auth/data/repositories/continue_register_repo.dart';
+import '../../../../core/imports/signup_screen_imports.dart';
+import '../../data/repositories/continue_register_repo.dart';
 import '../../data/models/login_model.dart';
 import '../../data/repositories/login_repo.dart';
 import '../../data/repositories/signup_repo.dart';

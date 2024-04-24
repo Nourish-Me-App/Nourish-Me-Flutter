@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nourish_me/feature/questions/data/models/questions_model.dart';
-import 'package:nourish_me/feature/questions/logic/cubit/questions_cubit.dart';
+import '../../data/models/questions_model.dart';
+import '../../logic/cubit/questions_cubit.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
