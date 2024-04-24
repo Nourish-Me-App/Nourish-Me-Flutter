@@ -1,3 +1,5 @@
+import 'package:nourish_me/core/errors/api/models/continue_register/continue_register_error_model.dart';
+
 import '../models/auth/login_error_model.dart';
 import '../models/auth/signup_error_model.dart';
 import '../models/reset_password/check_code_error_model.dart';
@@ -10,6 +12,7 @@ class ApiException implements Exception {
   final ForgetPasswordErrorModel? forgetPasswordErrorModel;
   final CheckCodeErrorModel? checkCodeErrorModel;
   final ResetPasswordErrorModel? resetPasswordErrorModel;
+  final ContinueRegisterErrorModel? continueRegisterErrorModel;
 
   ApiException({
     this.signUpErrorModel,
@@ -17,5 +20,6 @@ class ApiException implements Exception {
     this.resetPasswordErrorModel,
     this.loginErrorModel,
     this.forgetPasswordErrorModel,
+    this.continueRegisterErrorModel,
   });
 }

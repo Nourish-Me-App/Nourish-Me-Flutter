@@ -9,6 +9,16 @@ class AppTextStyles {
     fontSize: 20.sp,
     fontWeight: FontWeight.bold,
   );
+  static TextStyle cairo24Boldmaincolor = GoogleFonts.cairo(
+    color: AppColors.mainColor,
+    fontSize: 24.sp,
+    fontWeight: FontWeight.bold,
+  );
+  static TextStyle cairosemibold14maincolor = GoogleFonts.cairo(
+    color: AppColors.mainColor,
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w600,
+  );
   static TextStyle cairo18BoldBlack = GoogleFonts.cairo(
     color: Colors.black,
     fontSize: 18.sp,
@@ -18,6 +28,12 @@ class AppTextStyles {
   static TextStyle cairo32BoldotpBackGround = GoogleFonts.cairo(
     color: AppColors.otpBackGround,
     fontSize: 32.sp,
+    fontWeight: FontWeight.bold,
+  );
+
+  static TextStyle cairo700BoldDataScreen = GoogleFonts.cairo(
+    color: Colors.black,
+    fontSize: 16.sp,
     fontWeight: FontWeight.bold,
   );
 
