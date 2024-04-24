@@ -36,5 +36,23 @@ class Assets {
   /// Assets for svgsVerify
   /// assets/svgs/verify.svg
   static const String svgsVerify = "assets/svgs/verify.svg";
+
+  /// Assets for onBoarding
+  /// assets/svgs/onBoardingone.svg
+  static const String onBoardingOne = "assets/svgs/onBoardingone.svg";
+
+  /// Assets for onBoarding
+  /// assets/svgs/onBoardingtwo.svg
+  static const String onBoardingTwo = "assets/svgs/onBoardingtwo.svg";
+
+  /// Assets for onBoarding
+  /// assets/svgs/onBoardingthree.svg
+  static const String onBoardingThree = "assets/svgs/onBoardingthree.svg";
+
+  /// Assets for datascreen
+  /// assets/svgs/male.svg
+  /// assets/svgs/female.svg
+  static const String male = "assets/svgs/male.svg";
+  static const String feMale = "assets/svgs/female.svg";
 }
 

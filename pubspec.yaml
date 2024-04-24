@@ -52,6 +52,9 @@ dependencies:
   dartz: ^0.10.1
   # for Loading styling
   shimmer: ^3.0.0
+  # for showing ruler with selected values
+  rulers: ^1.0.7
+
 
 
 #changing the application icon.

@@ -25,3 +25,18 @@ final class SignUpFailure extends AuthState {
   final String? error;
   SignUpFailure({this.error});
 }
+
+final class ContinueRegisterSuccess extends AuthState {}
+
+final class ContinueRegisterLoading extends AuthState {}
+
+final class ContinueRegisterFailure extends AuthState {
+  final String? error;
+  ContinueRegisterFailure({this.error});
+}
+
+final class LoadingCounter extends AuthState {}
+
+final class IncreamentCounter extends AuthState {}
+
+final class DecreamentCounter extends AuthState {}

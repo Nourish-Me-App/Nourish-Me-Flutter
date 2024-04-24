@@ -1,9 +1,4 @@
-import 'package:nourish_me/feature/questions/logic/cubit/questions_cubit.dart';
-import 'package:nourish_me/feature/questions/logic/cubit/questions_ui_cubit.dart';
-import 'package:nourish_me/feature/questions/view/screens/fake_home.dart';
 
-import '../../feature/questions/data/repositories/questions_answers_repo.dart';
-import '../../feature/questions/view/screens/questions.dart';
 import '../imports/app_routes_imports.dart';
 import '../imports/signup_screen_imports.dart';
 
@@ -13,16 +8,16 @@ class AppRoutes {
       case Routes.signUpScreen:
         return MaterialPageRoute(
           builder: (context) => BlocProvider<AuthCubit>(
-            create: (context) =>
-                AuthCubit(LoginRepo(DioHandler()), SignUpRepo(DioHandler())),
+            create: (context) => AuthCubit(LoginRepo(DioHandler()),
+                SignUpRepo(DioHandler()), ContinueRegisterRepo(DioHandler())),
             child: const SignUpScreen(),
           ),
         );
       case Routes.loginScreen:
         return MaterialPageRoute(
           builder: (context) => BlocProvider<AuthCubit>(
-            create: (context) =>
-                AuthCubit(LoginRepo(DioHandler()), SignUpRepo(DioHandler())),
+            create: (context) => AuthCubit(LoginRepo(DioHandler()),
+                SignUpRepo(DioHandler()), ContinueRegisterRepo(DioHandler())),
             child: const LoginScreen(),
           ),
         );
@@ -77,6 +72,24 @@ class AppRoutes {
               ),
             ],
             child: const Questions(),
+          ),
+        );
+      case Routes.onBoarding:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider<OnBoardingCubit>(
+            create: (context) => OnBoardingCubit(),
+            child: const OnBoardingScreen(),
+          ),
+        );
+      case Routes.continueRegisterScreen:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider<AuthCubit>(
+            create: (context) => AuthCubit(
+              LoginRepo(DioHandler()),
+              SignUpRepo(DioHandler()),
+              ContinueRegisterRepo(DioHandler()),
+            ),
+            child: const ContinueRegisterScreen(),
           ),
         );
     }

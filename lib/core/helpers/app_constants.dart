@@ -14,4 +14,5 @@ class AppConstants {
   static const String questions = "questions";
   static const String postQuestions = "users/answers";
 
+  static const String continueRegister = "users/register/continue";
 }
