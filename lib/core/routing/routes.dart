@@ -8,5 +8,6 @@ class Routes {
   static const String succesScreen = 'succesScreen';
   static const String fakeScreen = 'fakeScreen';
   static const String home = 'home';
+  static const String continueRegisterScreen = 'continueRegisterScreen';
   static const String onBoarding = 'onBoarding';
 }

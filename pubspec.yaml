@@ -50,6 +50,7 @@ dependencies:
   pinput: ^4.0.0
   # for more return types.
   dartz: ^0.10.1
+  rulers: ^1.0.7
 
 
 

@@ -1,4 +1,10 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
 part of 'check_code_model.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
 
 CheckCodeModel _$CheckCodeModelFromJson(Map<String, dynamic> json) =>
     CheckCodeModel(

@@ -52,4 +52,10 @@ class Assets {
   /// Assets for onBoarding
   /// assets/svgs/onBoardingthree.svg
   static const String onBoardingThree = "assets/svgs/onBoardingthree.svg";
+
+  /// Assets for datascreen
+  /// assets/svgs/male.svg
+  /// assets/svgs/female.svg
+  static const String male = "assets/svgs/male.svg";
+  static const String feMale = "assets/svgs/female.svg";
 }

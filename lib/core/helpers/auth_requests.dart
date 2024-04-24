@@ -1,3 +1,5 @@
+import 'package:nourish_me/feature/auth/data/models/continue_register_model.dart';
+
 import '../../feature/auth/data/models/login_model.dart';
 import '../../feature/auth/data/models/signup_model.dart';
 import '../../feature/auth/logic/cubit/auth_cubit.dart';
@@ -25,6 +27,35 @@ class AuthRequests {
           password: password,
           passwordConfirmation: passwordConfirmation,
           name: name,
+        ),
+      ),
+    );
+  }
+
+  static Future continueRegister({
+    required AuthCubit authCubit,
+    required ContinueRegisterModel continueRegisterModel,
+    required String email,
+    required String name,
+    required String age,
+    required String gender,
+    required String weight,
+    required String height,
+    required String password,
+    required String passwordConfirmation,
+  }) async {
+    await authCubit.continueRegister(
+      AppConstants.continueRegister,
+      continueRegisterModel.toJson(
+        ContinueRegisterModel(
+          email: email,
+          name: name,
+          age: age,
+          weight: weight,
+          height: height,
+          gender: gender,
+          password: password,
+          passwordConfirmation: passwordConfirmation,
         ),
       ),
     );
@@ -73,7 +104,7 @@ class AuthRequests {
       AppConstants.resetPassword,
       resetPasswordModel.toJson(ResetPasswordModel(
         email: email,
-        newPassword: newPassword,
+        newpassword: newPassword,
         newPasswordConfirmation: newPasswordConfirmation,
       )),
     );

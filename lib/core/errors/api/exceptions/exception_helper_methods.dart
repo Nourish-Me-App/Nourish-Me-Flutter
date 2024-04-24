@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:nourish_me/core/errors/api/models/continue_register/continue_register_error_model.dart';
 
 import '../models/auth/login_error_model.dart';
 import '../models/auth/signup_error_model.dart';
@@ -28,9 +29,16 @@ class ExceptionHelperMethods {
         badResponseErrorHandle(e);
       case DioExceptionType.connectionError:
         throw ApiException(
-          signUpErrorModel: SignUpErrorModel.fromJson(noInternetErrorMessage),
-          loginErrorModel: LoginErrorModel.fromJson(noInternetErrorMessage),
-        );
+            signUpErrorModel: SignUpErrorModel.fromJson(noInternetErrorMessage),
+            loginErrorModel: LoginErrorModel.fromJson(noInternetErrorMessage),
+            forgetPasswordErrorModel:
+                ForgetPasswordErrorModel.fromJson(noInternetErrorMessage),
+            checkCodeErrorModel:
+                CheckCodeErrorModel.fromjson(noInternetErrorMessage),
+            resetPasswordErrorModel:
+                ResetPasswordErrorModel.fromjson(noInternetErrorMessage),
+            continueRegisterErrorModel:
+                ContinueRegisterErrorModel.fromJson(noInternetErrorMessage));
       default:
         throwApiException();
     }
@@ -70,7 +78,9 @@ class ExceptionHelperMethods {
         checkCodeErrorModel:
             CheckCodeErrorModel.fromjson(connectionErrorMessage),
         resetPasswordErrorModel:
-            ResetPasswordErrorModel.fromjson(connectionErrorMessage));
+            ResetPasswordErrorModel.fromjson(connectionErrorMessage),
+        continueRegisterErrorModel:
+            ContinueRegisterErrorModel.fromJson(connectionErrorMessage));
   }
 
   static void badResponseExceptionThrow(DioException e) {
@@ -87,6 +97,8 @@ class ExceptionHelperMethods {
               CheckCodeErrorModel.fromjson({'message': '${e.response!.data}'}),
           resetPasswordErrorModel: ResetPasswordErrorModel.fromjson(
               {'message': '${e.response!.data}'}),
+          continueRegisterErrorModel: ContinueRegisterErrorModel.fromJson(
+              {'message': '${e.response!.data}'}),
         );
       } else if (e.response!.data is Map<String, dynamic>) {
         throw ApiException(
@@ -97,6 +109,8 @@ class ExceptionHelperMethods {
           checkCodeErrorModel: CheckCodeErrorModel.fromjson(e.response!.data),
           resetPasswordErrorModel:
               ResetPasswordErrorModel.fromjson(e.response!.data),
+          continueRegisterErrorModel:
+              ContinueRegisterErrorModel.fromJson(e.response!.data),
         );
       } else {
         throwApiException();
