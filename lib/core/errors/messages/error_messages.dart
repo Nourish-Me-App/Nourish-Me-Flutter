@@ -19,7 +19,7 @@ class ErrorMessages {
     }
     if (error ==
         'A reset code has already been sent to this email. Please check your email') {
-      return 'تم إرسال الكود بالفعل الس الايميل الخاص بك';
+      return 'تم إرسال الكود بالفعل إلي البريد الالكتروني الخاص بك';
     }
     if (error == 'The selected email is invalid.') {
       return 'البريد الإلكتروني غير صالح';
@@ -28,10 +28,10 @@ class ErrorMessages {
       return 'الكود غير صالح';
     }
     if (error == 'The token field must be 6 digits.') {
-      return 'الكود يجب ان يكون 6 ارقام';
+      return 'الكود يجب أن يكون 6 أرقام';
     }
     if (error == 'Invalid or expired token') {
-      return 'الكود غير صالح او انتهة المده الزمنيه الخاصه به';
+      return 'الكود غير صالح أو إنتهت المدة الزمنية الخاصة به';
     }
     if (error == null || error.isEmpty) {
       return 'عذرا يوجد خطأ ، حاول مرة أخري في وقت لاحق';

@@ -41,10 +41,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
         if (state is SignUpSuccess) {
           Navigator.pop(context);
           HelperMethods.showCustomSnackBarSuccess(
-              context, 'تم إنشاء حسابك بنجاح');
+              context, 'معلومات صحيحة يرجى إكمال بقية الحقول');
           Navigator.pushNamedAndRemoveUntil(
             context,
-            Routes.loginScreen,
+            Routes.continueRegisterScreen,
             (route) => false,
           );
         }
@@ -141,7 +141,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 password: authCubit.passwordController.text,
                                 passwordConfirmation: authCubit
                                     .passwordConfirmationController.text,
-                              );
+                              ).then((value) {
+                                CacheHelper().saveData(
+                                  key: 'email',
+                                  value: authCubit.emailController.text,
+                                );
+                                CacheHelper().saveData(
+                                  key: 'password',
+                                  value: authCubit.passwordController.text,
+                                );
+                                CacheHelper().saveData(
+                                  key: 'name',
+                                  value:
+                                      '${authCubit.firstNameController.text} ${authCubit.lastNameController.text}',
+                                );
+                                CacheHelper().saveData(
+                                  key: 'passwordConfirmation',
+                                  value: authCubit
+                                      .passwordConfirmationController.text,
+                                );
+                              });
                             }
                           },
                           buttonStyle: AppTextStyles.cairo16BoldWhite,

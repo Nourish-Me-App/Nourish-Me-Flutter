@@ -17,7 +17,7 @@ void main() async {
   await CacheHelper().init();
   WidgetsFlutterBinding.ensureInitialized();
   GoogleFonts.config.allowRuntimeFetching = false;
-   HelperMethods.svgPrecacheImage();
+  HelperMethods.svgPrecacheImage();
 
   LicenseRegistry.addLicense(
     () async* {

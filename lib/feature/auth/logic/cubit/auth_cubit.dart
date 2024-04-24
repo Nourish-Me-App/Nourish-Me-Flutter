@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
+import 'package:nourish_me/core/imports/signup_screen_imports.dart';
+import 'package:nourish_me/feature/auth/data/repositories/continue_register_repo.dart';
 import '../../data/models/login_model.dart';
 import '../../data/repositories/login_repo.dart';
 import '../../data/repositories/signup_repo.dart';
@@ -8,7 +9,8 @@ import '../../data/repositories/signup_repo.dart';
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  AuthCubit(this.loginRepo, this.signUpRepo) : super(AuthInitial());
+  AuthCubit(this.loginRepo, this.signUpRepo, this.continueRegisterRepo)
+      : super(AuthInitial());
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController passwordConfirmationController =
@@ -18,6 +20,7 @@ class AuthCubit extends Cubit<AuthState> {
   bool rememberMe = false;
   late LoginRepo loginRepo;
   late SignUpRepo signUpRepo;
+  late ContinueRegisterRepo continueRegisterRepo;
 
   Future<void> login(String path, dynamic data) async {
     emit(LoginLoading());
@@ -46,5 +49,72 @@ class AuthCubit extends Cubit<AuthState> {
         emit(SignUpSuccess());
       }),
     );
+  }
+
+  Future<void> continueRegister(String path, dynamic data) async {
+    emit(ContinueRegisterLoading());
+    final continueRegisterModel = await continueRegisterRepo.continueRegister(
+      path,
+      data,
+    );
+    continueRegisterModel.fold(
+      ((error) {
+        emit(ContinueRegisterFailure(error: error));
+      }),
+      ((continueRegisterModel) {
+        emit(ContinueRegisterSuccess());
+      }),
+    );
+  }
+
+  int ageCounter = 0;
+  void increamnetAge() {
+    emit(LoadingCounter());
+    ageCounter++;
+    emit(IncreamentCounter());
+  }
+
+  void decrementAge() {
+    emit(LoadingCounter());
+    ageCounter--;
+    emit(DecreamentCounter());
+  }
+
+  int weightCounter = 50;
+  void onlongPressedincreamnetWeight() {
+    emit(LoadingCounter());
+    weightCounter = weightCounter + 5;
+    emit(IncreamentCounter());
+  }
+
+  void onpreesedincreamnetWeight() {
+    emit(LoadingCounter());
+    weightCounter = weightCounter + 1;
+    emit(IncreamentCounter());
+  }
+
+  void decrementWeight() {
+    emit(LoadingCounter());
+    weightCounter--;
+    emit(DecreamentCounter());
+  }
+
+  int heightCounter = 160;
+  void onLongPressedincreamnetHeight() {
+    emit(LoadingCounter());
+    heightCounter = heightCounter + 5;
+    emit(IncreamentCounter());
+  }
+
+  void onPreesedIncreamnetHeight() {
+    emit(LoadingCounter());
+    heightCounter = heightCounter + 1;
+    emit(IncreamentCounter());
+  }
+
+  void decrementHeight() {
+    emit(LoadingCounter());
+    heightCounter--;
+    emit(DecreamentCounter());
   }
 }

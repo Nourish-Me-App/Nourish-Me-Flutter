@@ -50,8 +50,11 @@ dependencies:
   pinput: ^4.0.0
   # For more return types.
   dartz: ^0.10.1
-  # for Loading styling
+  # For Loading styling.
   shimmer: ^3.0.0
+  # For showing measurement or selection within some range.
+  rulers: ^1.0.7
+
 
 
 #changing the application icon.

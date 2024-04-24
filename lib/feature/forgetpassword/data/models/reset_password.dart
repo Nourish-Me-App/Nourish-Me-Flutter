@@ -7,7 +7,9 @@ class ResetPasswordModel {
   final String? message, status;
   final Map<String, dynamic>? data;
   final String? email;
-  final String? newPassword;
+  @JsonKey(name: 'new_password')
+  final String? newpassword;
+  @JsonKey(name: 'new_password_confirmation')
   final String? newPasswordConfirmation;
 
   ResetPasswordModel({
@@ -15,7 +17,7 @@ class ResetPasswordModel {
     this.message,
     this.status,
     this.data,
-    this.newPassword,
+    this.newpassword,
     this.newPasswordConfirmation,
   });
 

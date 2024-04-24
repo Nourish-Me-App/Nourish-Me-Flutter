@@ -108,6 +108,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                                   newPasswordConfirmation: resetPasswordCubit
                                       .confirmPasswordController.text)
                               .then((value) {
+                            CacheHelper().removeData(key: 'email');
                             log(
                               "${resetPasswordCubit.passwordController.text}////${resetPasswordCubit.confirmPasswordController.text}",
                             );

@@ -25,7 +25,7 @@ class QuestionCard extends StatelessWidget {
     this.continueQAnswerNumber,
     this.continueQanswers,
     this.continueQQuestion,
-    required this.questionsCubit, 
+    required this.questionsCubit,
   });
 
   @override

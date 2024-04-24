@@ -15,7 +15,7 @@ class NourishMe extends StatelessWidget {
       builder: (context, _) => MaterialApp(
         initialRoute:
             CacheHelper().getData(key: AppConstants.rememberMeToken) == null
-                ? Routes.signUpScreen
+                ? Routes.onBoarding
                 : CacheHelper().getData(
                             key: AppConstants.isFirstQuestionsComplete) ==
                         'no'

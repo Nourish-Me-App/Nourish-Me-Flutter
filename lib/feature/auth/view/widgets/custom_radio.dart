@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:nourish_me/core/theme/app_text_styles.dart';
 
-import '../theme/app_colors.dart';
-import '../theme/app_text_styles.dart';
+import '../../../../core/theme/app_colors.dart';
 
 class CustomRadio extends StatefulWidget {
   final int value;
+  final String gender;
+  final String imge;
   final int? groupValue;
-  final String answer;
   final void Function(int) onChanged;
   const CustomRadio({
     super.key,
     required this.value,
     required this.groupValue,
     required this.onChanged,
-    required this.answer,
+    required this.gender,
+    required this.imge,
   });
 
   @override
@@ -32,13 +35,15 @@ class _CustomRadioState extends State<CustomRadio> {
         splashFactory: NoSplash.splashFactory,
         overlayColor: const MaterialStatePropertyAll(Colors.transparent),
         onTap: () => widget.onChanged(widget.value),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
+        child: Column(
           children: [
+            SvgPicture.asset(widget.imge),
+            SizedBox(
+              height: 10.h,
+            ),
             Text(
-              widget.answer,
-              style: AppTextStyles.cairo16SemiBoldBlack
-                  .copyWith(fontWeight: FontWeight.normal),
+              widget.gender,
+              style: AppTextStyles.cairo16SemiBoldBlack,
             ),
             SizedBox(width: 10.w),
             Container(

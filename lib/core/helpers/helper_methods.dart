@@ -90,9 +90,7 @@ class HelperMethods {
             (route) => false,
           )
         : Navigator.pushNamedAndRemoveUntil(
-            context,
-            Routes.fakeHome,
-            (route) => false);
+            context, Routes.fakeHome, (route) => false);
   }
 
   static void svgPrecacheImage() {
@@ -102,6 +100,11 @@ class HelperMethods {
       Assets.svgsCongratulation,
       Assets.svgsForgotpasswoedscreen,
       Assets.svgsVerify,
+      Assets.svgsFemale,
+      Assets.svgsMale,
+      Assets.svgsOnBoarding1,
+      Assets.svgsOnBoarding2,
+      Assets.svgsOnBoarding3,
     ];
 
     for (String element in cacheSvgImages) {
