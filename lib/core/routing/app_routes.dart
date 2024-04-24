@@ -1,11 +1,11 @@
-import 'package:nourish_me/feature/questions/logic/cubit/questions_cubit.dart';
-import 'package:nourish_me/feature/questions/logic/cubit/questions_ui_cubit.dart';
-import 'package:nourish_me/feature/questions/view/screens/fake_home.dart';
+import '../../feature/questions/logic/cubit/questions_cubit.dart';
+import '../../feature/questions/logic/cubit/questions_ui_cubit.dart';
+import '../../feature/questions/view/screens/fake_home.dart';
 
 import '../../feature/questions/data/repositories/questions_answers_repo.dart';
 import '../../feature/questions/view/screens/questions.dart';
-import 'package:nourish_me/feature/auth/view/screens/data_screen.dart';
-import 'package:nourish_me/feature/onboarding/view/screens/onboarding.dart';
+import '../../feature/auth/view/screens/data_screen.dart';
+import '../../feature/onboarding/view/screens/onboarding.dart';
 
 import '../../feature/auth/data/repositories/continue_register_repo.dart';
 import '../../feature/onboarding/logic/on_boarding_cubit.dart';

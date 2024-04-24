@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nourish_me/core/imports/app_routes_imports.dart';
+import '../../../../core/imports/app_routes_imports.dart';
 
 import '../../../../core/theme/app_colors.dart';
 

@@ -1,4 +1,4 @@
-import 'package:nourish_me/feature/auth/data/models/continue_register_model.dart';
+import '../../feature/auth/data/models/continue_register_model.dart';
 
 import '../../feature/auth/data/models/login_model.dart';
 import '../../feature/auth/data/models/signup_model.dart';

@@ -1,8 +1,8 @@
-import 'package:nourish_me/core/imports/login_imports.dart';
-import 'package:nourish_me/core/imports/signup_screen_imports.dart';
-import 'package:nourish_me/feature/auth/data/models/continue_register_model.dart';
-import 'package:nourish_me/feature/auth/view/widgets/counter_age.dart';
-import 'package:nourish_me/feature/auth/view/widgets/height_counter.dart';
+import '../../../../core/imports/login_imports.dart';
+import '../../../../core/imports/signup_screen_imports.dart';
+import '../../data/models/continue_register_model.dart';
+import '../widgets/counter_age.dart';
+import '../widgets/height_counter.dart';
 
 import '../../../../core/errors/messages/error_messages.dart';
 import '../widgets/continue_register_lable.dart';

@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:nourish_me/core/networking/api_services.dart';
+import '../../../../core/networking/api_services.dart';
 
 import '../../../../core/errors/api/exceptions/api_exception.dart';
 import '../models/questions_model.dart';

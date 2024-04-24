@@ -1,6 +1,6 @@
-import 'package:nourish_me/core/imports/app_routes_imports.dart';
-import 'package:nourish_me/core/imports/verification_screen_imports.dart';
-import 'package:nourish_me/feature/onboarding/logic/on_boarding_cubit.dart';
+import '../../../../core/imports/app_routes_imports.dart';
+import '../../../../core/imports/verification_screen_imports.dart';
+import '../../logic/on_boarding_cubit.dart';
 
 class OnBoardingScreen extends StatelessWidget {
   const OnBoardingScreen({super.key});

@@ -1,6 +1,6 @@
-import 'package:nourish_me/core/imports/login_imports.dart';
-import 'package:nourish_me/core/theme/app_colors.dart';
-import 'package:nourish_me/feature/auth/logic/cubit/auth_cubit.dart';
+import '../../../../core/imports/login_imports.dart';
+import '../../../../core/theme/app_colors.dart';
+import '../../logic/cubit/auth_cubit.dart';
 
 class HeightCounter extends StatefulWidget {
   const HeightCounter({super.key});

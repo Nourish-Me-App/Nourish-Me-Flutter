@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:nourish_me/core/helpers/image_assets.dart';
-import 'package:nourish_me/core/imports/app_routes_imports.dart';
+import '../../../core/helpers/image_assets.dart';
+import '../../../core/imports/app_routes_imports.dart';
 
 import '../data/model/on_boarding_model.dart';
 
