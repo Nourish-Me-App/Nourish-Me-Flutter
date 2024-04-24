@@ -4,7 +4,7 @@ export 'package:flutter_screenutil/flutter_screenutil.dart';
 export 'package:flutter_svg/flutter_svg.dart';
 export 'package:pinput/pinput.dart';
 
-export '../../../../core/errors/messages/auth_error_messages.dart';
+export '../errors/messages/error_messages.dart';
 export '../../../../core/errors/messages/validation_error_messages.dart';
 export '../../../../core/helpers/app_images.dart';
 export '../../../../core/helpers/auth_requests.dart';

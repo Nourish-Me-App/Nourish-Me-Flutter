@@ -1,22 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nourish_me/feature/questions/data/models/questions_model.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../logic/cubit/questions_cubit.dart';
+import '../../logic/cubit/questions_ui_cubit.dart';
 import 'question_card_body.dart';
 
 class QuestionCard extends StatelessWidget {
-  final int? questionsNumber, answersNumber;
-  final QuestionsCubit questionsCubit;
+  final int? questionsNumber, answersNumber, continueQAnswerNumber;
+  final QuestionsUICubit questionsUICubit;
   final String question;
-  final Map<int, dynamic> answers;
+  final List<AnswerOptions>? continueQanswers;
+  final String? continueQQuestion;
+  final QuestionsCubit questionsCubit;
+  final List<AnswerOptions> answers;
 
   const QuestionCard({
     super.key,
     required this.questionsNumber,
-    required this.questionsCubit,
+    required this.questionsUICubit,
     required this.answersNumber,
     required this.question,
     required this.answers,
+    this.continueQAnswerNumber,
+    this.continueQanswers,
+    this.continueQQuestion,
+    required this.questionsCubit, 
   });
 
   @override
@@ -33,24 +42,22 @@ class QuestionCard extends StatelessWidget {
           children: [
             CardBody(
               questionsNumber: questionsNumber,
-              questionsCubit: questionsCubit,
+              questionsUICubit: questionsUICubit,
               answersNumber: answersNumber,
               question: question,
               answer: answers,
+              questionsCubit: questionsCubit,
             ),
-            if (questionsNumber == 0 && questionsCubit.questionOneValue == 0)
+            if (questionsNumber == 0 && questionsUICubit.questionOneValue == 0)
               Padding(
                 padding: EdgeInsets.only(top: 12.h),
                 child: CardBody(
                   questionsNumber: 5,
+                  questionsUICubit: questionsUICubit,
+                  answersNumber: continueQAnswerNumber,
+                  question: continueQQuestion!,
+                  answer: continueQanswers!,
                   questionsCubit: questionsCubit,
-                  answersNumber: 3,
-                  question: 'كم عدد الأيام التي تمارس فيها الرياضة ؟',
-                  answer: const {
-                    0: 'من 1:3 أيام في الأسبوع',
-                    1: 'من 3:5 أيام في الأسبوع',
-                    2: 'من 7:6 أيام في الأسبوع',
-                  },
                 ),
               ),
           ],

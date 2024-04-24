@@ -7,26 +7,19 @@ class Assets {
 
   /// Assets for iconsFacbookFilledBlue
   /// assets/icons/facbook_filled_blue.svg
-  static const String iconsFacbookFilledBlue =
-      "assets/icons/facbook_filled_blue.svg";
+  static const String iconsFacbookFilledBlue = "assets/icons/facbook_filled_blue.svg";
 
   /// Assets for iconsGoogle
   /// assets/icons/google.svg
   static const String iconsGoogle = "assets/icons/google.svg";
 
-  /// Assets for imagesNourishMeLogo
-  /// assets/images/nourish_me_logo.png
-  static const String imagesNourishMeLogo = "assets/images/nourish_me_logo.png";
+  /// Assets for imagesSplash
+  /// assets/images/splash.png
+  static const String imagesSplash = "assets/images/splash.png";
 
-  /// Assets for imagesSplashLogoAndroid12
-  /// assets/images/splash_logo_android12.png
-  static const String imagesSplashLogoAndroid12 =
-      "assets/images/splash_logo_android12.png";
-
-  /// Assets for imagesSplashLogoBeforeAndroid12
-  /// assets/images/splash_logo_before_android12.png
-  static const String imagesSplashLogoBeforeAndroid12 =
-      "assets/images/splash_logo_before_android12.png";
+  /// Assets for svgsAppLogo
+  /// assets/svgs/app_logo.svg
+  static const String svgsAppLogo = "assets/svgs/app_logo.svg";
 
   /// Assets for svgsCongratulation
   /// assets/svgs/congratulation.svg
@@ -34,8 +27,7 @@ class Assets {
 
   /// Assets for svgsForgotpasswoedscreen
   /// assets/svgs/forgotpasswoedscreen.svg
-  static const String svgsForgotpasswoedscreen =
-      "assets/svgs/forgotpasswoedscreen.svg";
+  static const String svgsForgotpasswoedscreen = "assets/svgs/forgotpasswoedscreen.svg";
 
   /// Assets for svgsQuestion
   /// assets/svgs/question.svg
@@ -45,3 +37,4 @@ class Assets {
   /// assets/svgs/verify.svg
   static const String svgsVerify = "assets/svgs/verify.svg";
 }
+

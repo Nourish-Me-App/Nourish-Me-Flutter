@@ -29,7 +29,7 @@ class DioHandler extends ApiServices {
     dynamic data,
     Map<String, dynamic>? queryParameters,
     bool isFormData = false,
-    Options? options,
+    dynamic options,
   }) async {
     try {
       Response response = await dio.delete(
@@ -50,7 +50,7 @@ class DioHandler extends ApiServices {
     dynamic data,
     Map<String, dynamic>? queryParameters,
     bool isFormData = false,
-    Options? options,
+    dynamic options,
   }) async {
     try {
       var response = await dio.post(
@@ -71,7 +71,7 @@ class DioHandler extends ApiServices {
     dynamic data,
     Map<String, dynamic>? queryParameters,
     bool isFormData = false,
-    Options? options,
+    dynamic options,
   }) async {
     try {
       Response response = await dio.put(
@@ -91,7 +91,7 @@ class DioHandler extends ApiServices {
     String path, {
     dynamic data,
     Map<String, dynamic>? queryParameters,
-    Options? options,
+    dynamic options,
   }) async {
     try {
       Response response = await dio.get(

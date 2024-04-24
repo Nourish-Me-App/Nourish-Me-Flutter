@@ -3,7 +3,6 @@ export 'package:flutter_bloc/flutter_bloc.dart';
 export 'package:nourish_me/feature/auth/data/repositories/login_repo.dart';
 
 export '../../feature/auth/data/repositories/signup_repo.dart';
-export '../../feature/auth/view/screens/fake_screen.dart';
 export '../../feature/auth/view/screens/login_screen.dart';
 export '../../feature/auth/view/screens/signup_screen.dart';
 export '../../feature/forgetpassword/data/repo/check_code_repo.dart';

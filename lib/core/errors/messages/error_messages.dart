@@ -1,13 +1,14 @@
-class AuthErrorMessages {
-  AuthErrorMessages._();
-  static String authErrorMessage(String? error) {
+class ErrorMessages {
+  ErrorMessages._();
+  static String errorMessage(String? error) {
     if (error == 'Invalid credentials') {
       return 'يوجد خطأ في إسم المستخدم أو كلمة المرور';
     }
     if (error == 'The email field must be a valid email address.') {
       return 'البريد الألكتروني غير صالح';
     }
-    if (error == 'The email has already been taken.') {
+    if (error == 'The email has already been taken.' ||
+        error == 'The email has already been taken. (and 2 more errors)') {
       return 'البريد الألكتروني مستخدم بالفعل';
     }
     if (error == 'لا يوجد إتصال بالإنترنت أو يوجد خطأ في السيرفر') {

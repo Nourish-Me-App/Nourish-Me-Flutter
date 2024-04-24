@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:nourish_me/feature/questions/data/models/questions_model.dart';
+import 'package:nourish_me/feature/questions/logic/cubit/questions_cubit.dart';
 import 'package:nourish_me/feature/questions/view/widgets/questions_card.dart';
 
-import '../../logic/cubit/questions_cubit.dart';
+import '../../logic/cubit/questions_ui_cubit.dart';
 
 class QuestionsView extends StatelessWidget {
+  final QuestionsUICubit questionsUICubit;
+  final QuestionAndAnswerModel questionsAndAnswersModel;
   final QuestionsCubit questionsCubit;
 
   const QuestionsView({
     super.key,
+    required this.questionsUICubit,
+    required this.questionsAndAnswersModel,
     required this.questionsCubit,
   });
 
@@ -18,19 +24,31 @@ class QuestionsView extends StatelessWidget {
       switchOutCurve: Easing.legacy,
       duration: const Duration(milliseconds: 500),
       child: returnCard(
-        questionsCubit.questionNumber.toInt(),
+        questionsUICubit.questionNumber.toInt(),
       ),
     );
   }
 
   QuestionCard returnCard(int question) {
+    int questionNumber = questionsUICubit.questionNumber.toInt();
+    List<Questions> questions = questionsAndAnswersModel.data!.questions!;
     return QuestionCard(
-      key: ValueKey<int>(questionsCubit.questionNumber.toInt()),
-      answers: questionsCubit.questions[question].answers!,
+      key: ValueKey<int>(questionNumber),
+      answers: questionNumber != 0
+          ? questions[question + 1].answerOptions!
+          : questions[question].answerOptions!,
       questionsNumber: question,
+      questionsUICubit: questionsUICubit,
+      answersNumber: questionNumber != 0
+          ? questions[question + 1].answerOptions!.length
+          : questions[question].answerOptions!.length,
+      question: questionNumber != 0
+          ? questions[question + 1].question!
+          : questions[question].question!,
+      continueQAnswerNumber: questions[question + 1].answerOptions!.length,
+      continueQQuestion: questions[question + 1].question!,
+      continueQanswers: questions[question + 1].answerOptions!,
       questionsCubit: questionsCubit,
-      answersNumber: questionsCubit.questions[question].answers!.length,
-      question: questionsCubit.questions[question].question!,
     );
   }
 }

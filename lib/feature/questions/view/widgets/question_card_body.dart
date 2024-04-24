@@ -1,26 +1,29 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nourish_me/feature/questions/data/models/questions_model.dart';
+import 'package:nourish_me/feature/questions/logic/cubit/questions_cubit.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/widgets/custom_radio.dart';
-import '../../logic/cubit/questions_cubit.dart';
+import '../../logic/cubit/questions_ui_cubit.dart';
+import 'custom_check_box.dart';
 
 class CardBody extends StatelessWidget {
   final int? questionsNumber, answersNumber;
-  final QuestionsCubit questionsCubit;
+  final QuestionsUICubit questionsUICubit;
   final String question;
-  final Map<int, dynamic> answer;
+  final List<AnswerOptions> answer;
+  final QuestionsCubit questionsCubit;
 
   const CardBody({
     super.key,
     required this.questionsNumber,
-    required this.questionsCubit,
+    required this.questionsUICubit,
     required this.answersNumber,
     required this.question,
     required this.answer,
+    required this.questionsCubit,
   });
 
   @override
@@ -48,22 +51,42 @@ class CardBody extends StatelessWidget {
         ),
         SizedBox(height: 12.h),
         Column(
-          children: List.generate(
-            answersNumber!,
-            (index) => CustomRadio(
-              answer: answer[index]!,
-              value: index,
-              groupValue: questionsCubit.cardNumber(questionsNumber!),
-              onChanged: (val) {
-                questionsCubit.onChangedRadioValue(
-                  val,
-                  questionsNumber!,
-                );
-                questionsCubit.clearValidation();
-                log('${answer[index]}');
-              },
-            ),
-          ),
+          children: questionsUICubit.questionNumber == 2
+              ? List.generate(
+                  answersNumber!,
+                  (index) => MyCheckBox(
+                    index: index,
+                    answer: answer[index].answer!,
+                    questionsUICubit: questionsUICubit,
+                    questionsCubit: questionsCubit,
+                    questionNumber: questionsNumber!,
+                    answerId: answer[index].id!,
+                  ),
+                )
+              : List.generate(
+                  answersNumber!,
+                  (index) => CustomRadio(
+                    answer: answer[index].answer!,
+                    value: index,
+                    groupValue: questionsUICubit.cardNumber(questionsNumber!),
+                    onChanged: (val) {
+                      questionsUICubit.onChangedRadioValue(
+                        value: val,
+                        questionNum: questionsNumber!,
+                      );
+                      questionsUICubit.clearValidation();
+
+                      if (questionsUICubit.questionNumber == 0 &&
+                          questionsUICubit.questionOneValue == 1) {
+                        questionsCubit.answerValue(5, null);
+                      }
+                      questionsCubit.answerValue(
+                          questionsNumber, answer[index].id!);
+
+                      questionsCubit.answersList();
+                    },
+                  ),
+                ),
         ),
       ],
     );

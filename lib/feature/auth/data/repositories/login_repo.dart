@@ -20,7 +20,7 @@ class LoginRepo {
       var result = LoginModel.fromJson(response);
       return Right(result);
     } on ApiException catch (e) {
-      return Left(e.loginErrorModel!.message!);
+      return Left(e.errorModel.message!);
     }
   }
 }

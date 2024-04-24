@@ -1,5 +1,8 @@
 import 'package:nourish_me/feature/questions/logic/cubit/questions_cubit.dart';
+import 'package:nourish_me/feature/questions/logic/cubit/questions_ui_cubit.dart';
+import 'package:nourish_me/feature/questions/view/screens/fake_home.dart';
 
+import '../../feature/questions/data/repositories/questions_answers_repo.dart';
 import '../../feature/questions/view/screens/questions.dart';
 import '../imports/app_routes_imports.dart';
 import '../imports/signup_screen_imports.dart';
@@ -57,14 +60,22 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (context) => const SuccesScreen(),
         );
-      case Routes.fakeScreen:
+      case Routes.fakeHome:
         return MaterialPageRoute(
-          builder: (context) => const FakeScreen(),
+          builder: (context) => const FakeHome(),
         );
       case Routes.questions:
         return MaterialPageRoute(
-          builder: (context) => BlocProvider<QuestionsCubit>(
-            create: (context) => QuestionsCubit(),
+          builder: (context) => MultiBlocProvider(
+            providers: [
+              BlocProvider<QuestionsUICubit>(
+                create: (context) => QuestionsUICubit(),
+              ),
+              BlocProvider<QuestionsCubit>(
+                create: (context) =>
+                    QuestionsCubit(QuestionsAndAnswersRepo(DioHandler())),
+              ),
+            ],
             child: const Questions(),
           ),
         );

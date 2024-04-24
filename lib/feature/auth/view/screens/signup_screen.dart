@@ -1,4 +1,6 @@
-import '../../../../core/errors/messages/auth_error_messages.dart';
+import 'package:flutter_svg/svg.dart';
+
+import '../../../../core/errors/messages/error_messages.dart';
 import '../../../../core/imports/login_imports.dart';
 import '../../data/models/signup_model.dart';
 import '../../../../core/imports/signup_screen_imports.dart';
@@ -38,7 +40,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
       listener: (context, state) {
         if (state is SignUpSuccess) {
           Navigator.pop(context);
-          HelperMethods.showCustomSnackBarSuccess(context, 'تم إنشاء حسابك بنجاح');
+          HelperMethods.showCustomSnackBarSuccess(
+              context, 'تم إنشاء حسابك بنجاح');
           Navigator.pushNamedAndRemoveUntil(
             context,
             Routes.loginScreen,
@@ -49,11 +52,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
           Navigator.pop(context);
           HelperMethods.showCustomSnackBarError(
             context,
-            AuthErrorMessages.authErrorMessage(state.error!),
+            ErrorMessages.errorMessage(state.error!),
           );
         }
         if (state is SignUpLoading) {
-          HelperMethods.showAlertDialog(context);
+          HelperMethods.showLoadingAlertDialog(context);
         }
       },
       child: Scaffold(
@@ -63,7 +66,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             child: Directionality(
               textDirection: TextDirection.rtl,
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24.w),
+                padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
                 child: SingleChildScrollView(
                   child: SizedBox(
                     width: double.infinity,
@@ -71,9 +74,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Padding(
-                          padding: EdgeInsets.only(left: 42.w, right: 21.w),
-                          child: Image.asset(
-                            Assets.imagesNourishMeLogo,
+                          padding: EdgeInsets.symmetric(horizontal: 102.w),
+                          child: SvgPicture.asset(
+                            height: 160.h,
+                            Assets.svgsAppLogo,
                           ),
                         ),
                         SizedBox(height: 16.h),

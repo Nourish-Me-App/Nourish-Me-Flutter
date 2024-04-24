@@ -20,7 +20,7 @@ class SignUpRepo {
       var result = SignUpModel.fromJson(response);
       return Right(result);
     } on ApiException catch (e) {
-      return Left(e.signUpErrorModel!.message!);
+      return Left(e.errorModel.message!);
     }
   }
 }

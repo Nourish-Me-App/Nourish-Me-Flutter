@@ -50,7 +50,8 @@ dependencies:
   pinput: ^4.0.0
   # For more return types.
   dartz: ^0.10.1
-
+  # for Loading styling
+  shimmer: ^3.0.0
 
 
 #changing the application icon.

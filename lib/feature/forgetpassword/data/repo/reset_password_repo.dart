@@ -22,8 +22,8 @@ class ResetPasswordRepo {
       var result = ResetPasswordModel.fromJson(response);
       return Right(result);
     } on ApiException catch (e) {
-      log(e.resetPasswordErrorModel!.message!);
-      return Left(e.resetPasswordErrorModel!.message!);
+      log(e.errorModel.message!);
+      return Left(e.errorModel.message!);
     }
   }
 }

@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import '../../../../core/errors/messages/auth_error_messages.dart';
+import '../../../../core/errors/messages/error_messages.dart';
 import '../../../../core/imports/login_imports.dart';
 import '../../../../core/widgets/custom_border_button.dart';
 import '../../data/models/reset_password.dart';
@@ -40,10 +40,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
         if (state is ResetPasswordFailure) {
           Navigator.pop(context);
           HelperMethods.showCustomSnackBarError(
-              context, AuthErrorMessages.authErrorMessage(state.error!));
+              context, ErrorMessages.errorMessage(state.error!));
         }
         if (state is ResetPasswordLoading) {
-          HelperMethods.showAlertDialog(context);
+          HelperMethods.showLoadingAlertDialog(context);
         }
         if (state is ResetPasswordSuccess) {
           HelperMethods.showCustomSnackBarSuccess(
