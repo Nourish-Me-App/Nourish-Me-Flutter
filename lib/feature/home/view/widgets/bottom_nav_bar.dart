@@ -50,8 +50,8 @@ class _BottomNavState extends State<BottomNav> {
             items: <BottomNavigationBarItem>[
                BottomNavigationBarItem(
                 icon:  selectedIndex == 0
-                    ? SvgPicture.asset(Assets.svgsTableSelected)
-                    : SvgPicture.asset(Assets.svgsTable),
+                    ? SvgPicture.asset(Assets.svgsHomeSelected)
+                    : SvgPicture.asset(Assets.svgsHome),
                 label: 'النتائج',
               ),
               BottomNavigationBarItem(

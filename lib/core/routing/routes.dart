@@ -10,4 +10,8 @@ class Routes {
   static const String fakeHome = 'fakeHome';
   static const String continueRegisterScreen = 'continueRegisterScreen';
   static const String onBoarding = 'onBoarding';
+  static const String settings = 'settings';
+  static const String workOut = 'workOut';
+  static const String meal = 'meal';
+  static const String bottomNavBar = 'BottomNavBar';
 }
