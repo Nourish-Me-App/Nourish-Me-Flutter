@@ -7,7 +7,8 @@ class Assets {
 
   /// Assets for iconsFacbookFilledBlue
   /// assets/icons/facbook_filled_blue.svg
-  static const String iconsFacbookFilledBlue = "assets/icons/facbook_filled_blue.svg";
+  static const String iconsFacbookFilledBlue =
+      "assets/icons/facbook_filled_blue.svg";
 
   /// Assets for iconsGoogle
   /// assets/icons/google.svg
@@ -35,7 +36,8 @@ class Assets {
 
   /// Assets for svgsForgotpasswoedscreen
   /// assets/svgs/forgotpasswoedscreen.svg
-  static const String svgsForgotpasswoedscreen = "assets/svgs/forgotpasswoedscreen.svg";
+  static const String svgsForgotpasswoedscreen =
+      "assets/svgs/forgotpasswoedscreen.svg";
 
   /// Assets for svgsMale
   /// assets/svgs/male.svg
@@ -60,5 +62,52 @@ class Assets {
   /// Assets for svgsVerify
   /// assets/svgs/verify.svg
   static const String svgsVerify = "assets/svgs/verify.svg";
-}
 
+  /// Assets for svgsHome
+  /// assets/svgs/home.svg
+  static const String svgsHome = "assets/svgs/homeicon.svg";
+  static const String svgsTable = "assets/svgs/table.svg";
+  static const String svgsSettings = "assets/svgs/settings.svg";
+  static const String svgsWeightLifts = "assets/svgs/weightlift.svg";
+
+  /// Assets for svgsHomeSelected
+  /// assets/svgs/home_selected.svg
+  static const String svgsHomeSelected = "assets/svgs/homeiconselected.svg";
+  static const String svgsTableSelected = "assets/svgs/table_selected.svg";
+  static const String svgsWeightLiftsSelected =
+      "assets/svgs/weight_selected.svg";
+  static const String svgsSettingsSelected =
+      "assets/svgs/settings_selected.svg";
+
+  /// Assets for svgsResultpage
+  /// assets/svgs/result_page.svg
+  static const String svgsResultpage = "assets/svgs/result_page.svg";
+
+  /// Assets for appbarlogo
+  /// assets/svgs/appbarlogo.svg
+  static const String appbarlogo = "assets/svgs/appbarlogo.svg";
+
+  /// Assets for svgsresultpage
+  /// assets/svgs/result_page.svg
+  static const String svgsresultpage = "assets/svgs/result_page.svg";
+
+  /// Assets for svgsresultpageicon
+  /// assets/svgs/cil_child.svg
+  /// assets/svgs/guidance_guest-height-limit.svg
+  /// assets/svgs/icon-park-outline_weight.svg
+  /// assets/svgs/fluent-mdl2_calories.svg
+  /// assets/svgs/fluent_spatula-spoon-16-regular.svg
+  /// assets/svgs/Vector.svg
+  /// assets/svgs/waterdrop.svg
+  static const String svgsTypetresultpageicon = "assets/svgs/cil_child.svg";
+  static const String svgsHeightresultpageicon =
+      "assets/svgs/guidance_guest-height-limit.svg";
+  static const String svgsWeightResultpageicon =
+      "assets/svgs/icon-park-outline_weight.svg";
+  static const String svgsCaloriesResultpageicon =
+      "assets/svgs/fluent-mdl2_calories.svg";
+  static const String svgsspatulaspoonResultpageicon =
+      "assets/svgs/fluent_spatula-spoon-16-regular.svg";
+  static const String svgsVectorResultpageicon = "assets/svgs/Vector.svg";
+  static const String svgsWaterdropResultpageicon = "assets/svgs/waterdrop.svg";
+}

@@ -10,11 +10,13 @@ import 'core/helpers/helper_methods.dart';
 import 'nourish_me.dart';
 
 void main() async {
-  await ScreenUtil.ensureScreenSize();
-  await GoogleFonts.pendingFonts([
-    GoogleFonts.cairo(),
+  await Future.wait<void>([
+    ScreenUtil.ensureScreenSize(),
+    CacheHelper().init(),
+    GoogleFonts.pendingFonts([
+      GoogleFonts.cairo(),
+    ]),
   ]);
-  await CacheHelper().init();
   WidgetsFlutterBinding.ensureInitialized();
   GoogleFonts.config.allowRuntimeFetching = false;
   HelperMethods.svgPrecacheImage();
