@@ -90,7 +90,10 @@ class HelperMethods {
             (route) => false,
           )
         : Navigator.pushNamedAndRemoveUntil(
-            context, Routes.fakeHome, (route) => false);
+            context,
+            Routes.bottomNavBar,
+            (route) => false,
+          );
   }
 
   static void svgPrecacheImage() {

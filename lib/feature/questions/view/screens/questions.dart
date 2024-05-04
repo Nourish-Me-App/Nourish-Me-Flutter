@@ -54,7 +54,7 @@ class _QuestionsState extends State<Questions> {
                 );
                 Navigator.pushNamedAndRemoveUntil(
                   context,
-                  Routes.fakeHome,
+                  Routes.bottomNavBar,
                   (route) => false,
                 );
               }

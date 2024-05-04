@@ -2,7 +2,6 @@ import '../../feature/home/view/screens/home_screen.dart';
 import '../../feature/home/view/widgets/bottom_nav_bar.dart';
 import '../../feature/questions/logic/cubit/questions_cubit.dart';
 import '../../feature/questions/logic/cubit/questions_ui_cubit.dart';
-import '../../feature/questions/view/screens/fake_home.dart';
 
 import '../../feature/questions/data/repositories/questions_answers_repo.dart';
 import '../../feature/questions/view/screens/questions.dart';
@@ -76,10 +75,6 @@ class AppRoutes {
       case Routes.succesScreen:
         return MaterialPageRoute(
           builder: (context) => const SuccesScreen(),
-        );
-      case Routes.fakeHome:
-        return MaterialPageRoute(
-          builder: (context) => const FakeHome(),
         );
       case Routes.questions:
         return MaterialPageRoute(

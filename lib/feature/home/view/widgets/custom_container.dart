@@ -1,14 +1,15 @@
-import 'package:nourish_me/core/imports/app_routes_imports.dart';
-import 'package:nourish_me/core/imports/login_imports.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nourish_me/core/theme/app_colors.dart';
 import 'package:nourish_me/core/theme/app_text_styles.dart';
 
 class CustomContainer extends StatelessWidget {
-  const CustomContainer(
-      {super.key,
-      required this.title,
-      required this.svgPath,
-      required this.result});
+  const CustomContainer({
+    super.key,
+    required this.title,
+    required this.svgPath,
+    required this.result,
+  });
 
   final String title;
   final Widget svgPath;
