@@ -57,26 +57,26 @@ class _BottomNavState extends State<BottomNav> {
             items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
                 icon: selectedIndex == 0
-                    ? SvgPicture.asset(Assets.svgsHomeiconselected)
-                    : SvgPicture.asset(Assets.svgsHomeicon),
+                    ? SvgPicture.asset(Assets.svgsResultsHomeiconselected)
+                    : SvgPicture.asset(Assets.svgsResultsHomeicon),
                 label: 'النتائج',
               ),
               BottomNavigationBarItem(
                 icon: selectedIndex == 1
-                    ? SvgPicture.asset(Assets.svgsTableSelected)
-                    : SvgPicture.asset(Assets.svgsTable),
+                    ? SvgPicture.asset(Assets.svgsResultsTableSelected)
+                    : SvgPicture.asset(Assets.svgsResultsTable),
                 label: 'الوجبات',
               ),
               BottomNavigationBarItem(
                 icon: selectedIndex == 2
-                    ? SvgPicture.asset(Assets.svgsWeightSelected)
-                    : SvgPicture.asset(Assets.svgsWeightlift),
+                    ? SvgPicture.asset(Assets.svgsResultsWeightSelected)
+                    : SvgPicture.asset(Assets.svgsResultsWeightlift),
                 label: 'التمارين',
               ),
               BottomNavigationBarItem(
                 icon: selectedIndex == 3
-                    ? SvgPicture.asset(Assets.svgsSettingsSelected)
-                    : SvgPicture.asset(Assets.svgsSettings),
+                    ? SvgPicture.asset(Assets.svgsResultsSettingsSelected)
+                    : SvgPicture.asset(Assets.svgsResultsSettings),
                 label: 'الاعدادات',
               ),
             ],
