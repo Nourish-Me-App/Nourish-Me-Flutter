@@ -1,8 +1,15 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../imports/login_imports.dart';
-import '../imports/signup_screen_imports.dart';
+import '../../feature/auth/data/models/login_model.dart';
+import '../../feature/auth/logic/cubit/auth_cubit.dart';
+import '../routing/routes.dart';
 import '../theme/app_colors.dart';
+import '../theme/app_text_styles.dart';
+import 'app_constants.dart';
+import 'app_images.dart';
+import 'cache_helper.dart';
 
 class HelperMethods {
   HelperMethods._();
@@ -108,6 +115,26 @@ class HelperMethods {
       Assets.svgsOnBoarding1,
       Assets.svgsOnBoarding2,
       Assets.svgsOnBoarding3,
+      Assets.iconsFacbookFilledBlue,
+      Assets.iconsGoogle,
+      Assets.svgsAppbarlogo,
+      Assets.svgsCilChild,
+      Assets.svgsFluentSpatulaSpoon16Regular,
+      Assets.svgsFluentMdl2Calories,
+      Assets.svgsGuidanceGuestHeightLimit,
+      Assets.svgsHomeicon,
+      Assets.svgsHomeiconselected,
+      Assets.svgsIconParkOutlineWeight,
+      Assets.svgsSettings,
+      Assets.svgsResultPage,
+      Assets.svgsSettingsSelected,
+      Assets.svgsTable,
+      Assets.svgsTableSelected,
+      Assets.svgsType,
+      Assets.svgsVector,
+      Assets.svgsWaterdrop,
+      Assets.svgsWeightSelected,
+      Assets.svgsWeightlift,
     ];
 
     for (String element in cacheSvgImages) {

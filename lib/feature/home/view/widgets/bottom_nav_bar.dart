@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:nourish_me/core/theme/app_text_styles.dart';
+import '../../../../core/theme/app_text_styles.dart';
 
 import '../../../../core/helpers/app_images.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -57,8 +57,8 @@ class _BottomNavState extends State<BottomNav> {
             items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
                 icon: selectedIndex == 0
-                    ? SvgPicture.asset(Assets.svgsHomeSelected)
-                    : SvgPicture.asset(Assets.svgsHome),
+                    ? SvgPicture.asset(Assets.svgsHomeiconselected)
+                    : SvgPicture.asset(Assets.svgsHomeicon),
                 label: 'النتائج',
               ),
               BottomNavigationBarItem(
@@ -69,8 +69,8 @@ class _BottomNavState extends State<BottomNav> {
               ),
               BottomNavigationBarItem(
                 icon: selectedIndex == 2
-                    ? SvgPicture.asset(Assets.svgsWeightLiftsSelected)
-                    : SvgPicture.asset(Assets.svgsWeightLifts),
+                    ? SvgPicture.asset(Assets.svgsWeightSelected)
+                    : SvgPicture.asset(Assets.svgsWeightlift),
                 label: 'التمارين',
               ),
               BottomNavigationBarItem(

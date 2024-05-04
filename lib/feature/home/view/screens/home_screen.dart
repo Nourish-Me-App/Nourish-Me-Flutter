@@ -1,5 +1,5 @@
-import 'package:nourish_me/core/imports/questions_screen_imports.dart';
-import 'package:nourish_me/feature/home/view/widgets/custom_container.dart';
+import '../../../../core/imports/questions_screen_imports.dart';
+import '../widgets/custom_container.dart';
 
 import '../widgets/custom_container_user_personal_info.dart';
 import '../widgets/custom_user_mass.dart';
@@ -32,28 +32,28 @@ class HomeScreen extends StatelessWidget {
           children: [
             Column(
               children: [
-                SvgPicture.asset(Assets.svgsresultpage),
+                SvgPicture.asset(Assets.svgsResultPage),
                 CustomContainerUserInfo(
                   titleOne: '25 Years',
                   titleTwo: '180 cm',
                   titleThree: '70 kg',
-                  svgPathOne: SvgPicture.asset(Assets.svgsVectorResultpageicon),
-                  svgPathTwo: SvgPicture.asset(Assets.svgsHeightresultpageicon),
-                  svgPathThree: SvgPicture.asset(Assets.svgsWeightResultpageicon),
+                  svgPathOne: SvgPicture.asset(Assets.svgsCilChild),
+                  svgPathTwo: SvgPicture.asset(Assets.svgsGuidanceGuestHeightLimit),
+                  svgPathThree: SvgPicture.asset(Assets.svgsIconParkOutlineWeight),
                 ),
                 SizedBox(
                   height: 15.h,
                 ),
                 CustomContainer(
                     title: 'السعرات الحراريه',
-                    svgPath: SvgPicture.asset(Assets.svgsCaloriesResultpageicon),
+                    svgPath: SvgPicture.asset(Assets.svgsFluentMdl2Calories),
                     result: '2500 cal'),
                 SizedBox(
                   height: 15.h,
                 ),
                 CustomUserMass(
-                  title: 'نوع النظام',
-                  svgPath: SvgPicture.asset(Assets.svgsVectorResultpageicon),
+                  title: 'مؤشر كتلة الجسم ',
+                  svgPath: SvgPicture.asset(Assets.svgsVector),
                   resultOne: '33',
                   resultTwo: 'سمنه مرحله اولى',
                 ),
@@ -63,7 +63,7 @@ class HomeScreen extends StatelessWidget {
                 CustomContainer(
                   result: 'low carb high protein',
                   svgPath:
-                  SvgPicture.asset(Assets.svgsspatulaspoonResultpageicon),
+                  SvgPicture.asset(Assets.svgsFluentSpatulaSpoon16Regular),
                   title: 'نوع النظام ',
                 ),
                 SizedBox(
@@ -71,7 +71,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 CustomContainer(
                   result: '2 liter',
-                  svgPath: SvgPicture.asset(Assets.svgsVectorResultpageicon),
+                  svgPath: SvgPicture.asset(Assets.svgsWaterdrop),
                   title: 'الماء',
                 )
               ],
