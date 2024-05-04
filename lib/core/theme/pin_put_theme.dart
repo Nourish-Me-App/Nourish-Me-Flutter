@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pinput/pinput.dart';
 
-import '../theme/app_colors.dart';
+import 'app_colors.dart';
 
 final defaultPinTheme = PinTheme(
   width: 58.w,

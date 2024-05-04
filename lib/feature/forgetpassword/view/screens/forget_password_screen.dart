@@ -16,6 +16,11 @@ class ForgetPasswordScreen extends StatefulWidget {
 
 class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   late ForgetPasswordCubit forgetPasswordCubit;
+  @override
+  void initState() {
+     forgetPasswordCubit = context.read<ForgetPasswordCubit>();
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -29,7 +34,6 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final forgetPasswordCubit = context.read<ForgetPasswordCubit>();
     ForgetPasswordModel forgetPasswordModel = ForgetPasswordModel();
 
     return BlocListener<ForgetPasswordCubit, ForgetPasswordState>(
