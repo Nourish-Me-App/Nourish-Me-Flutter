@@ -1,3 +1,5 @@
+import '../../feature/home/view/screens/home_screen.dart';
+import '../../feature/home/view/widgets/bottom_nav_bar.dart';
 import '../../feature/questions/logic/cubit/questions_cubit.dart';
 import '../../feature/questions/logic/cubit/questions_ui_cubit.dart';
 import '../../feature/questions/view/screens/fake_home.dart';
@@ -112,6 +114,14 @@ class AppRoutes {
             ),
             child: const ContinueRegisterScreen(),
           ),
+        );
+      case Routes.home:
+        return MaterialPageRoute(
+          builder: (context) => const HomeScreen(),
+        );
+      case Routes.bottomNavBar:
+        return MaterialPageRoute(
+          builder: (context) => const BottomNav(),
         );
     }
     return null;
