@@ -82,6 +82,7 @@ class _BottomNavState extends State<BottomNav> {
             ],
             currentIndex: selectedIndex,
             selectedItemColor: AppColors.mainColor,
+            unselectedItemColor: Colors.black,
             unselectedLabelStyle:
                 AppTextStyles.cairosemibold14maincolor.copyWith(
               fontWeight: FontWeight.w400,

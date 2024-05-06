@@ -208,7 +208,7 @@ class Assets {
 
   /// Assets for imagesMealsRicce
   /// assets/images/meals/ricce.png
-  static const String imagesMealsRice = "assets/images/meals/ricce.png";
+  static const String imagesMealsRice = "assets/images/meals/rice.png";
 
   /// Assets for imagesMealsSalad
   /// assets/images/meals/salad.png
@@ -295,38 +295,46 @@ class Assets {
   /// assets/svgs/appbarlogo.svg
   static const String svgsAppbarlogo = "assets/svgs/appbarlogo.svg";
 
-  /// Assets for svgsCongratulation
-  /// assets/svgs/congratulation.svg
-  static const String svgsCongratulation = "assets/svgs/congratulation.svg";
+  /// Assets for svgsAuthCongratulation
+  /// assets/svgs/auth/congratulation.svg
+  static const String svgsAuthCongratulation =
+      "assets/svgs/auth/congratulation.svg";
 
-  /// Assets for svgsFemale
-  /// assets/svgs/female.svg
-  static const String svgsFemale = "assets/svgs/female.svg";
+  /// Assets for svgsAuthFemale
+  /// assets/svgs/auth/female.svg
+  static const String svgsAuthFemale = "assets/svgs/auth/female.svg";
 
-  /// Assets for svgsForgotpasswoedscreen
-  /// assets/svgs/forgotpasswoedscreen.svg
-  static const String svgsForgotpasswoedscreen =
-      "assets/svgs/forgotpasswoedscreen.svg";
+  /// Assets for svgsAuthForgotpasswoedscreen
+  /// assets/svgs/auth/forgotpasswoedscreen.svg
+  static const String svgsAuthForgotpasswoedscreen =
+      "assets/svgs/auth/forgotpasswoedscreen.svg";
 
-  /// Assets for svgsMale
-  /// assets/svgs/male.svg
-  static const String svgsMale = "assets/svgs/male.svg";
+  /// Assets for svgsAuthMale
+  /// assets/svgs/auth/male.svg
+  static const String svgsAuthMale = "assets/svgs/auth/male.svg";
 
-  /// Assets for svgsOnBoarding1
-  /// assets/svgs/onBoarding1.svg
-  static const String svgsOnBoarding1 = "assets/svgs/onBoarding1.svg";
+  /// Assets for svgsAuthQuestion
+  /// assets/svgs/auth/question.svg
+  static const String svgsAuthQuestion = "assets/svgs/auth/question.svg";
 
-  /// Assets for svgsOnBoarding2
-  /// assets/svgs/onBoarding2.svg
-  static const String svgsOnBoarding2 = "assets/svgs/onBoarding2.svg";
+  /// Assets for svgsAuthVerify
+  /// assets/svgs/auth/verify.svg
+  static const String svgsAuthVerify = "assets/svgs/auth/verify.svg";
 
-  /// Assets for svgsOnBoarding3
-  /// assets/svgs/onBoarding3.svg
-  static const String svgsOnBoarding3 = "assets/svgs/onBoarding3.svg";
+  /// Assets for svgsOnBoardingOnBoarding1
+  /// assets/svgs/on_boarding/onBoarding1.svg
+  static const String svgsOnBoardingOnBoarding1 =
+      "assets/svgs/on_boarding/onBoarding1.svg";
 
-  /// Assets for svgsQuestion
-  /// assets/svgs/question.svg
-  static const String svgsQuestion = "assets/svgs/question.svg";
+  /// Assets for svgsOnBoardingOnBoarding2
+  /// assets/svgs/on_boarding/onBoarding2.svg
+  static const String svgsOnBoardingOnBoarding2 =
+      "assets/svgs/on_boarding/onBoarding2.svg";
+
+  /// Assets for svgsOnBoardingOnBoarding3
+  /// assets/svgs/on_boarding/onBoarding3.svg
+  static const String svgsOnBoardingOnBoarding3 =
+      "assets/svgs/on_boarding/onBoarding3.svg";
 
   /// Assets for svgsResultsCilChild
   /// assets/svgs/results/cil_child.svg
@@ -406,7 +414,21 @@ class Assets {
   static const String svgsResultsWeightlift =
       "assets/svgs/results/weightlift.svg";
 
-  /// Assets for svgsVerify
-  /// assets/svgs/verify.svg
-  static const String svgsVerify = "assets/svgs/verify.svg";
+  /// Assets for svgsSettingsEmailChange
+  /// assets/svgs/settings/email_change.svg
+  static const String svgsSettingsEmailChange =
+      "assets/svgs/settings/email_change.svg";
+
+  /// Assets for svgsSettingsLogout
+  /// assets/svgs/settings/logout.svg
+  static const String svgsSettingsLogout = "assets/svgs/settings/logout.svg";
+
+  /// Assets for svgsSettingsPassChange
+  /// assets/svgs/settings/pass_change.svg
+  static const String svgsSettingsPassChange =
+      "assets/svgs/settings/pass_change.svg";
+
+  /// Assets for svgsSettingsRate
+  /// assets/svgs/settings/rate.svg
+  static const String svgsSettingsRate = "assets/svgs/settings/rate.svg";
 }

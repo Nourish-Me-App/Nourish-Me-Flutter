@@ -77,7 +77,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                             textAlign: TextAlign.center,
                             style: AppTextStyles.cairo12RegularBlack),
                         SizedBox(height: 22.h),
-                        SvgPicture.asset(Assets.svgsForgotpasswoedscreen),
+                        SvgPicture.asset(Assets.svgsAuthForgotpasswoedscreen),
                         SizedBox(height: 28.h),
                         const TFFLabel(label: 'البريد الإلكتروني'),
                         SizedBox(height: 8.h),

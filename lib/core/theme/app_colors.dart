@@ -17,5 +17,6 @@ class AppColors {
   static const Color dietContainerColor = Color(0xffF4F4F4);
   static const Color backGroundColorofNavBar = Color(0xffF4F4F4);
   static const Color dividerColor = Color(0xffE2DEDE);
+  static const Color settingsContainerIconColor = Color(0xff999999);
   static Color tFFFilledColor = const Color(0xffB5C5BA).withOpacity(0.5);
 }

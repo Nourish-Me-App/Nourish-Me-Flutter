@@ -105,16 +105,16 @@ class HelperMethods {
 
   static void svgPrecacheImage() {
     const cacheSvgImages = [
-      Assets.svgsQuestion,
+      Assets.svgsAuthQuestion,
       Assets.svgsAppLogo,
-      Assets.svgsCongratulation,
-      Assets.svgsForgotpasswoedscreen,
-      Assets.svgsVerify,
-      Assets.svgsFemale,
-      Assets.svgsMale,
-      Assets.svgsOnBoarding1,
-      Assets.svgsOnBoarding2,
-      Assets.svgsOnBoarding3,
+      Assets.svgsAuthCongratulation,
+      Assets.svgsAuthForgotpasswoedscreen,
+      Assets.svgsAuthVerify,
+      Assets.svgsAuthFemale,
+      Assets.svgsAuthMale,
+      Assets.svgsOnBoardingOnBoarding1,
+      Assets.svgsOnBoardingOnBoarding2,
+      Assets.svgsOnBoardingOnBoarding3,
       Assets.iconsFacbookFilledBlue,
       Assets.iconsGoogle,
       Assets.svgsAppbarlogo,
@@ -135,6 +135,10 @@ class HelperMethods {
       Assets.svgsResultsWaterdrop,
       Assets.svgsResultsWeightSelected,
       Assets.svgsResultsWeightlift,
+      Assets.svgsSettingsLogout,
+      Assets.svgsSettingsEmailChange,
+      Assets.svgsSettingsPassChange,
+      Assets.svgsSettingsRate,
     ];
 
     for (String element in cacheSvgImages) {
