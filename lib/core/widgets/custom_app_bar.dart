@@ -18,7 +18,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Padding(
-        padding: EdgeInsets.only(top: 16.h),
+        padding: EdgeInsets.only(top: 8.h),
         child: AppBar(
           bottom: bottom,
           leadingWidth: !title.contains('نظام') ? 80.w : null,
@@ -51,5 +51,5 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize => Size.fromHeight(
-      !title.contains('نظام') ? kToolbarHeight + 24.h : kToolbarHeight + 70.h);
+      !title.contains('نظام') ? kToolbarHeight + 8.h : kToolbarHeight + 70.h);
 }

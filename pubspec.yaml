@@ -82,7 +82,7 @@ flutter:
   assets:
     - assets/images/
     - assets/svgs/
-    - assets/svgs/meals/
+    - assets/images/meals/
     - assets/svgs/results/
     - assets/icons/
     - assets/fonts/cairo/
