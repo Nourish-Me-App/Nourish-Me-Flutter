@@ -36,8 +36,7 @@ class _CustomTFFState extends State<CustomTFF> {
       autovalidateMode: AutovalidateMode.onUserInteraction,
       keyboardType: widget.kbType,
       validator: widget.validate,
-      obscureText: widget.hintText == 'أدخل كلمة المرور' ||
-              widget.hintText == 'تأكيد كلمة المرور'
+      obscureText: widget.hintText.contains('كلمة المرور')
           ? showPassword
               ? false
               : true
@@ -89,8 +88,7 @@ class _CustomTFFState extends State<CustomTFF> {
   }
 
   Widget? tFFIconPosition() {
-    return widget.hintText == 'أدخل كلمة المرور' ||
-            widget.hintText == 'تأكيد كلمة المرور'
+    return widget.hintText.contains('كلمة المرور')
         ? IconButton(
             style: const ButtonStyle(
               splashFactory: NoSplash.splashFactory,

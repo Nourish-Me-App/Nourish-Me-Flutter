@@ -295,6 +295,10 @@ class Assets {
   /// assets/svgs/appbarlogo.svg
   static const String svgsAppbarlogo = "assets/svgs/appbarlogo.svg";
 
+  /// Assets for svgsLogoutWarning
+  /// assets/svgs/logout_warning.svg
+  static const String svgsLogoutWarning = "assets/svgs/logout_warning.svg";
+
   /// Assets for svgsAuthCongratulation
   /// assets/svgs/auth/congratulation.svg
   static const String svgsAuthCongratulation =

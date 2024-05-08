@@ -9,7 +9,7 @@ part of 'signup_model.dart';
 SignUpModel _$SignUpModelFromJson(Map<String, dynamic> json) => SignUpModel(
       message: json['message'] as String?,
       status: json['status'] as String?,
-      statusCode: json['status_code'] as int?,
+      statusCode: (json['status_code'] as num?)?.toInt(),
       name: json['name'] as String?,
       email: json['email'] as String?,
       password: json['password'] as String?,

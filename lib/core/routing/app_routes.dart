@@ -1,3 +1,5 @@
+import '../../feature/settings/view/screens/new_password.dart';
+
 import '../../feature/auth/data/repositories/continue_register_repo.dart';
 import '../../feature/auth/logic/cubit/auth_cubit.dart';
 import '../../feature/auth/view/screens/data_screen.dart';
@@ -111,6 +113,10 @@ class AppRoutes {
       case Routes.home:
         return MaterialPageRoute(
           builder: (context) => const HomeScreen(),
+        );
+      case Routes.newPassword:
+        return MaterialPageRoute(
+          builder: (context) => const NewPassword(),
         );
       case Routes.bottomNavBar:
         return MaterialPageRoute(

@@ -14,7 +14,7 @@ ContinueRegisterModel _$ContinueRegisterModelFromJson(
       password: json['password'] as String?,
       passwordConfirmation: json['password_confirmation'] as String?,
       status: json['status'] as String?,
-      statusCode: json['status_code'] as int?,
+      statusCode: (json['status_code'] as num?)?.toInt(),
       message: json['message'] as String?,
       gender: json['gender'] as String?,
       age: json['age'] as String?,

@@ -13,13 +13,43 @@ class SettingHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        CircleAvatar(
-          backgroundColor: AppColors.dietContainerColor,
-          radius: 24.r,
-          child: const Center(
-            child: Icon(
-              Icons.person,
-              color: AppColors.mainColor,
+        SizedBox(
+          height: 80.h,
+          width: 52.w,
+          child: InkWell(
+            highlightColor: Colors.transparent,
+            splashColor: Colors.transparent,
+            overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+            onTap: () {},
+            child: Stack(
+              alignment: Alignment.centerLeft,
+              children: [
+                CircleAvatar(
+                  backgroundColor: AppColors.dietContainerColor,
+                  radius: 30.r,
+                  child: const Center(
+                    child: Icon(
+                      Icons.person,
+                      color: AppColors.mainColor,
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top: 52.h,
+                  left: 26.w,
+                  child: CircleAvatar(
+                    backgroundColor: AppColors.mainColor,
+                    radius: 13.r,
+                    child: Center(
+                      child: Icon(
+                        Icons.camera_alt_outlined,
+                        color: Colors.white,
+                        size: 13.r,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ),

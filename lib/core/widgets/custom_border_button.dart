@@ -10,12 +10,13 @@ class CustomBorderButton extends StatelessWidget {
     required this.buttonStyle,
     this.height,
     this.width,
+    this.borderRadius,
   });
 
   final String buttonText;
   final TextStyle buttonStyle;
   final Function() buttonAction;
-  final double? width, height;
+  final double? width, height, borderRadius;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class CustomBorderButton extends StatelessWidget {
         padding: EdgeInsets.zero,
         color: AppColors.white,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.r),
+          borderRadius: BorderRadius.circular(borderRadius ?? 10.r),
           side: BorderSide(
             color: AppColors.mainColor,
             width: 1.w,

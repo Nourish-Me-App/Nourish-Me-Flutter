@@ -12,5 +12,6 @@ class Routes {
   static const String settings = 'settings';
   static const String workOut = 'workOut';
   static const String diets = 'diets';
+  static const String newPassword = 'newPassword';
   static const String bottomNavBar = 'BottomNavBar';
 }

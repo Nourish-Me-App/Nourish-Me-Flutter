@@ -7,6 +7,8 @@ import '../../feature/auth/logic/cubit/auth_cubit.dart';
 import '../routing/routes.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
+import '../widgets/custom_border_button.dart';
+import '../widgets/custom_button.dart';
 import 'app_constants.dart';
 import 'app_images.dart';
 import 'cache_helper.dart';
@@ -45,7 +47,7 @@ class HelperMethods {
     );
   }
 
-  static showLoadingAlertDialog(context) {
+  static Future<Widget?> showLoadingAlertDialog(context) {
     return showDialog(
       barrierDismissible: false,
       context: context,
@@ -375,5 +377,62 @@ class HelperMethods {
     } else {
       return Assets.iconsAppIcon;
     }
+  }
+
+  static Future<Widget?> showLogoutAlertDialog(context,Function() buttonAction) {
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        surfaceTintColor: Colors.white,
+        backgroundColor: Colors.white,
+        content: SizedBox(
+          height: 277.h,
+          width: 325.w,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
+            child: Column(
+              children: [
+                SvgPicture.asset(Assets.svgsLogoutWarning),
+                SizedBox(height: 16.h),
+                Text(
+                  'هل تريد تسجيل الخروج من حسابك ؟',
+                  textDirection: TextDirection.rtl,
+                  style: AppTextStyles.cairo16SemiBoldBlack
+                      .copyWith(fontSize: 14.sp),
+                ),
+                SizedBox(height: 32.h),
+                Row(
+                  children: [
+                    Expanded(
+                      child: CustomButton(
+                        buttonText: 'تسجيل الخروج',
+                        buttonAction: buttonAction,
+                        height: 35.h,
+                        buttonStyle: AppTextStyles.cairo14SemiBoldWhite,
+                        borderRadius: 20.r,
+                        color: AppColors.tFFErrorColor,
+                      ),
+                    ),
+                    SizedBox(width: 16.w),
+                    Expanded(
+                      child: CustomBorderButton(
+                        buttonText: 'إلغاء',
+                        buttonAction: () {
+                          Navigator.pop(context);
+                        },
+                        height: 30.h,
+                        buttonStyle: AppTextStyles.cairo14SemiBoldWhite
+                            .copyWith(color: AppColors.mainColor),
+                        borderRadius: 20.r,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
