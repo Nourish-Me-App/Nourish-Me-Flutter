@@ -1,5 +1,7 @@
-import 'package:nourish_me/core/imports/questions_screen_imports.dart';
-import 'package:nourish_me/feature/home/view/widgets/custom_container.dart';
+import '../../../../core/widgets/custom_app_bar.dart';
+
+import '../../../../core/imports/questions_screen_imports.dart';
+import '../widgets/custom_container.dart';
 
 import '../widgets/custom_container_user_personal_info.dart';
 import '../widgets/custom_user_mass.dart';
@@ -10,50 +12,40 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'النتائج',
-          style: AppTextStyles.cairo12ExtraBoldTFFContentColor.copyWith(
-              fontSize: 17.sp,
-              fontWeight: FontWeight.bold,
-              color: Colors.black),
-        ),
-        leading: Padding(
-          padding: EdgeInsets.only(left: 10.0.w, bottom: 10.0.w, right: 10.0.h),
-          child: SvgPicture.asset(
-            "assets/svgs/app_logo.svg",
-          ),
-        ),
-        centerTitle: true,
-      ),
-      body: Padding(
-        padding: EdgeInsets.only(left: 20.0.w, right: 20.0.w),
-        child: ListView(
-          children: [
-            Column(
+      appBar: const MyAppBar(title: 'النتائج'),
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.0.w),
+          child: SingleChildScrollView(
+            child: Column(
               children: [
-                SvgPicture.asset(Assets.svgsresultpage),
+                SvgPicture.asset(Assets.svgsResultsResults),
+                SizedBox(height: 32.h),
                 CustomContainerUserInfo(
                   titleOne: '25 Years',
                   titleTwo: '180 cm',
                   titleThree: '70 kg',
-                  svgPathOne: SvgPicture.asset(Assets.svgsVectorResultpageicon),
-                  svgPathTwo: SvgPicture.asset(Assets.svgsHeightresultpageicon),
-                  svgPathThree: SvgPicture.asset(Assets.svgsWeightResultpageicon),
+                  svgPathOne: SvgPicture.asset(Assets.svgsResultsCilChild),
+                  svgPathTwo: SvgPicture.asset(
+                      Assets.svgsResultsGuidanceGuestHeightLimit),
+                  svgPathThree:
+                      SvgPicture.asset(Assets.svgsResultsIconParkOutlineWeight),
                 ),
                 SizedBox(
                   height: 15.h,
                 ),
                 CustomContainer(
-                    title: 'السعرات الحراريه',
-                    svgPath: SvgPicture.asset(Assets.svgsCaloriesResultpageicon),
-                    result: '2500 cal'),
+                  title: 'السعرات الحرارية',
+                  svgPath:
+                      SvgPicture.asset(Assets.svgsResultsFluentMdl2Calories),
+                  result: '2500 cal',
+                ),
                 SizedBox(
                   height: 15.h,
                 ),
                 CustomUserMass(
-                  title: 'نوع النظام',
-                  svgPath: SvgPicture.asset(Assets.svgsVectorResultpageicon),
+                  title: 'مؤشر كتلة الجسم ',
+                  svgPath: SvgPicture.asset(Assets.svgsResultsVector),
                   resultOne: '33',
                   resultTwo: 'سمنه مرحله اولى',
                 ),
@@ -62,8 +54,8 @@ class HomeScreen extends StatelessWidget {
                 ),
                 CustomContainer(
                   result: 'low carb high protein',
-                  svgPath:
-                  SvgPicture.asset(Assets.svgsspatulaspoonResultpageicon),
+                  svgPath: SvgPicture.asset(
+                      Assets.svgsResultsFluentSpatulaSpoon16Regular),
                   title: 'نوع النظام ',
                 ),
                 SizedBox(
@@ -71,13 +63,13 @@ class HomeScreen extends StatelessWidget {
                 ),
                 CustomContainer(
                   result: '2 liter',
-                  svgPath: SvgPicture.asset(Assets.svgsVectorResultpageicon),
+                  svgPath: SvgPicture.asset(Assets.svgsResultsWaterdrop),
                   title: 'الماء',
-                )
+                ),
+                SizedBox(height: 8.h),
               ],
             ),
-          ],
-
+          ),
         ),
       ),
     );

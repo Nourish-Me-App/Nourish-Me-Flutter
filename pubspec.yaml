@@ -54,7 +54,7 @@ dependencies:
   shimmer: ^3.0.0
   # For showing measurement or selection within some range.
   rulers: ^1.0.7
-  # for navigation bar.
+  # For navigation bar.
   google_nav_bar: ^5.0.6
 
 
@@ -82,5 +82,10 @@ flutter:
   assets:
     - assets/images/
     - assets/svgs/
+    - assets/svgs/auth/
+    - assets/svgs/settings/
+    - assets/svgs/on_boarding/
+    - assets/images/meals/
+    - assets/svgs/results/
     - assets/icons/
     - assets/fonts/cairo/

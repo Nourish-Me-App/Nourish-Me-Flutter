@@ -1,18 +1,17 @@
-import '../../feature/home/view/screens/home_screen.dart';
-import '../../feature/home/view/widgets/bottom_nav_bar.dart';
-import '../../feature/questions/logic/cubit/questions_cubit.dart';
-import '../../feature/questions/logic/cubit/questions_ui_cubit.dart';
-import '../../feature/questions/view/screens/fake_home.dart';
-
-import '../../feature/questions/data/repositories/questions_answers_repo.dart';
-import '../../feature/questions/view/screens/questions.dart';
-import '../../feature/auth/view/screens/data_screen.dart';
-import '../../feature/onboarding/view/screens/onboarding.dart';
+import '../../feature/settings/view/screens/new_password.dart';
 
 import '../../feature/auth/data/repositories/continue_register_repo.dart';
+import '../../feature/auth/logic/cubit/auth_cubit.dart';
+import '../../feature/auth/view/screens/data_screen.dart';
+import '../../feature/home/view/screens/home_screen.dart';
+import '../../feature/home/view/widgets/bottom_nav_bar.dart';
 import '../../feature/onboarding/logic/on_boarding_cubit.dart';
+import '../../feature/onboarding/view/screens/onboarding.dart';
+import '../../feature/questions/data/repositories/questions_answers_repo.dart';
+import '../../feature/questions/logic/cubit/questions_cubit.dart';
+import '../../feature/questions/logic/cubit/questions_ui_cubit.dart';
+import '../../feature/questions/view/screens/questions.dart';
 import '../imports/app_routes_imports.dart';
-import '../imports/signup_screen_imports.dart';
 
 class AppRoutes {
   Route? generateRoute(RouteSettings routeSettings) {
@@ -77,10 +76,6 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (context) => const SuccesScreen(),
         );
-      case Routes.fakeHome:
-        return MaterialPageRoute(
-          builder: (context) => const FakeHome(),
-        );
       case Routes.questions:
         return MaterialPageRoute(
           builder: (context) => MultiBlocProvider(
@@ -118,6 +113,10 @@ class AppRoutes {
       case Routes.home:
         return MaterialPageRoute(
           builder: (context) => const HomeScreen(),
+        );
+      case Routes.newPassword:
+        return MaterialPageRoute(
+          builder: (context) => const NewPassword(),
         );
       case Routes.bottomNavBar:
         return MaterialPageRoute(

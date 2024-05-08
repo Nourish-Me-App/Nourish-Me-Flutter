@@ -84,7 +84,7 @@ class _DataScreenState extends State<ContinueRegisterScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         CustomRadio(
-                          imge: Assets.svgsMale,
+                          imge: Assets.svgsAuthMale,
                           gender: 'ذكر',
                           value: 1,
                           groupValue: selectedValue,
@@ -95,7 +95,7 @@ class _DataScreenState extends State<ContinueRegisterScreen> {
                           },
                         ),
                         CustomRadio(
-                          imge: Assets.svgsFemale,
+                          imge: Assets.svgsAuthFemale,
                           gender: 'أنثى',
                           value: 2,
                           groupValue: selectedValue,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nourish_me/feature/questions/data/models/questions_model.dart';
+import '../../data/models/questions_model.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../logic/cubit/questions_cubit.dart';
 import '../../logic/cubit/questions_ui_cubit.dart';

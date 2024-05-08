@@ -1,17 +1,23 @@
-import 'package:flutter_svg/svg.dart';
-
-import '../../../../core/imports/signup_screen_imports.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/theme/app_colors.dart';
 
 class CustomContainerUserInfo extends StatelessWidget {
-  const CustomContainerUserInfo({super.key, required this.titleOne, required this.titleTwo, required this.titleThree, required this.svgPathOne, required this.svgPathTwo, required this.svgPathThree});
+  const CustomContainerUserInfo(
+      {super.key,
+      required this.titleOne,
+      required this.titleTwo,
+      required this.titleThree,
+      required this.svgPathOne,
+      required this.svgPathTwo,
+      required this.svgPathThree});
   final String titleOne;
   final String titleTwo;
   final String titleThree;
   final Widget svgPathOne;
   final Widget svgPathTwo;
   final Widget svgPathThree;
-
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +35,7 @@ class CustomContainerUserInfo extends StatelessWidget {
             CircleAvatar(
               radius: 12.r,
               backgroundColor: Colors.white,
-              child:
-             svgPathThree,
+              child: svgPathThree,
             ),
             Text(
               titleThree,
@@ -43,8 +48,7 @@ class CustomContainerUserInfo extends StatelessWidget {
             CircleAvatar(
               radius: 12.r,
               backgroundColor: Colors.white,
-              child:
-              svgPathTwo,
+              child: svgPathTwo,
             ),
             Text(
               titleTwo,
@@ -60,7 +64,7 @@ class CustomContainerUserInfo extends StatelessWidget {
               child: svgPathThree,
             ),
             Text(
-             titleOne,
+              titleOne,
               style: AppTextStyles.cairo16BoldMainColor.copyWith(
                 fontSize: 12.sp,
                 fontWeight: FontWeight.w600,

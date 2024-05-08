@@ -9,7 +9,7 @@ part of 'login_model.dart';
 LoginModel _$LoginModelFromJson(Map<String, dynamic> json) => LoginModel(
       message: json['message'] as String?,
       status: json['status'] as String?,
-      statusCode: json['status_code'] as int?,
+      statusCode: (json['status_code'] as num?)?.toInt(),
       data: json['data'] as Map<String, dynamic>?,
       email: json['email'] as String?,
       password: json['password'] as String?,

@@ -78,7 +78,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                         '${CacheHelper().getData(key: 'email')}',
                         style: AppTextStyles.cairo12BoldMainColor,
                       ),
-                      SvgPicture.asset(Assets.svgsVerify),
+                      SvgPicture.asset(Assets.svgsAuthVerify),
                       Form(
                         key: checkCode.formKeyCode,
                         child: Directionality(
