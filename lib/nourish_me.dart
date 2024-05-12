@@ -1,4 +1,3 @@
-
 import 'core/imports/login_imports.dart';
 import 'core/routing/app_routes.dart';
 import 'core/theme/app_colors.dart';
@@ -14,16 +13,15 @@ class NourishMe extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, _) => MaterialApp(
-        initialRoute: Routes.bottomNavBar,
-        // CacheHelper().getData(key: AppConstants.rememberMeToken) == null
-        //     ? Routes.onBoarding
-        //     : CacheHelper().getData(
-        //                 key: AppConstants.isFirstQuestionsComplete) ==
-        //             'no'
-        //         ? Routes.questions
-        //         : Routes.fakeHome,
+        initialRoute:
+            CacheHelper().getData(key: AppConstants.rememberMeToken) == null
+                ? Routes.onBoarding
+                : CacheHelper().getData(
+                            key: AppConstants.isFirstQuestionsComplete) ==
+                        'no'
+                    ? Routes.questions
+                    : Routes.fakeHome,
         onGenerateRoute: AppRoutes().generateRoute,
-        
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           appBarTheme: AppBarTheme(
