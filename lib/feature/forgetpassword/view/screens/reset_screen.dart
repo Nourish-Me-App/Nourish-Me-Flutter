@@ -62,10 +62,12 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 key: resetPasswordCubit.formKeyResetPassword,
                 child: Column(
                   children: [
-                    Text('إعادة تعييد كلمه المرور ',
-                        textDirection: TextDirection.rtl,
-                        textAlign: TextAlign.center,
-                        style: AppTextStyles.cairo18BoldBlack),
+                    Text(
+                      'إعادة تعييد كلمه المرور ',
+                      textDirection: TextDirection.rtl,
+                      textAlign: TextAlign.center,
+                      style: AppTextStyles.cairo18BoldBlack,
+                    ),
                     SizedBox(height: 40.h),
                     const TFFLabel(label: 'كلمة مرور جديدة'),
                     SizedBox(height: 8.h),
@@ -93,37 +95,44 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                       controller: resetPasswordCubit.confirmPasswordController,
                     ),
                     SizedBox(height: 28.h),
-                    CustomButton(
-                      buttonText: 'تعيين',
-                      buttonAction: () async {
-                        if (resetPasswordCubit
-                            .formKeyResetPassword.currentState!
-                            .validate()) {
-                          await AuthRequests.resetPassword(
-                                  forgetPasswordCubit: resetPasswordCubit,
-                                  resetPasswordModel: resetPasswordModel,
-                                  email: CacheHelper().getData(key: 'email'),
-                                  newPassword: resetPasswordCubit
-                                      .passwordController.text,
-                                  newPasswordConfirmation: resetPasswordCubit
-                                      .confirmPasswordController.text)
-                              .then((value) {
-                            CacheHelper().removeData(key: 'email');
-                            log(
-                              "${resetPasswordCubit.passwordController.text}////${resetPasswordCubit.confirmPasswordController.text}",
-                            );
-                          });
-                        }
-                      },
-                      buttonStyle: AppTextStyles.cairo16BoldWhite,
+                    Hero(
+                      tag: 'resetButton',
+                      child: CustomButton(
+                        buttonText: 'تعيين',
+                        buttonAction: () async {
+                          if (resetPasswordCubit
+                              .formKeyResetPassword.currentState!
+                              .validate()) {
+                            await AuthRequests.resetPassword(
+                              forgetPasswordCubit: resetPasswordCubit,
+                              resetPasswordModel: resetPasswordModel,
+                              email: CacheHelper().getData(key: 'email'),
+                              newPassword:
+                                  resetPasswordCubit.passwordController.text,
+                              newPasswordConfirmation: resetPasswordCubit
+                                  .confirmPasswordController.text,
+                            ).then((value) {
+                              CacheHelper().removeData(key: 'email');
+                              log(
+                                "${resetPasswordCubit.passwordController.text}////${resetPasswordCubit.confirmPasswordController.text}",
+                              );
+                            });
+                          }
+                        },
+                        buttonStyle: AppTextStyles.cairo16BoldWhite,
+                      ),
                     ),
                     SizedBox(height: 16.h),
-                    CustomBorderButton(
+                    Hero(
+                      tag: 'cancelButton',
+                      child: CustomBorderButton(
                         buttonText: 'إلغاء',
                         buttonAction: () {
                           Navigator.pushNamed(context, Routes.loginScreen);
                         },
-                        buttonStyle: AppTextStyles.cairo16BoldMainColor)
+                        buttonStyle: AppTextStyles.cairo16BoldMainColor,
+                      ),
+                    ),
                   ],
                 ),
               ),

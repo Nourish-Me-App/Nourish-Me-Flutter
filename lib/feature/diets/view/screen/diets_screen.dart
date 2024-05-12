@@ -31,6 +31,7 @@ class DietsScreen extends StatelessWidget {
           body: Padding(
             padding: EdgeInsets.only(right: 24.w, left: 30.w),
             child: TabBarView(
+              physics: const NeverScrollableScrollPhysics(),
               children: List.generate(
                 7,
                 (index) => ListView.separated(
@@ -62,12 +63,12 @@ class DietsScreen extends StatelessWidget {
                   },
                   separatorBuilder: (context, itemIndex) {
                     if (itemIndex == 0) {
-                      return const SizedBox(); 
+                      return const SizedBox();
                     } else {
                       return DietsSeparator(whatToEat: whatToEat[itemIndex]);
                     }
                   },
-                  itemCount: 6, 
+                  itemCount: 6,
                 ),
               ),
             ),

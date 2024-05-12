@@ -18,7 +18,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   late ForgetPasswordCubit forgetPasswordCubit;
   @override
   void initState() {
-     forgetPasswordCubit = context.read<ForgetPasswordCubit>();
+    forgetPasswordCubit = context.read<ForgetPasswordCubit>();
     super.initState();
   }
 
@@ -79,7 +79,12 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                         SizedBox(height: 22.h),
                         SvgPicture.asset(Assets.svgsAuthForgotpasswoedscreen),
                         SizedBox(height: 28.h),
-                        const TFFLabel(label: 'البريد الإلكتروني'),
+                        const Hero(
+                          tag: 'emailLabel',
+                          child: Material(
+                            child: TFFLabel(label: 'البريد الإلكتروني'),
+                          ),
+                        ),
                         SizedBox(height: 8.h),
                         CustomTFF(
                           hintText: 'ادخل البريد الإلكتروني',

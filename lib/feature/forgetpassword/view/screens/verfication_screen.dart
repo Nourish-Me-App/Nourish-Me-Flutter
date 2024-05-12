@@ -63,10 +63,12 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text('رمز التحقق ',
-                          textDirection: TextDirection.rtl,
-                          textAlign: TextAlign.center,
-                          style: AppTextStyles.cairo18BoldBlack),
+                      Text(
+                        'رمز التحقق ',
+                        textDirection: TextDirection.rtl,
+                        textAlign: TextAlign.center,
+                        style: AppTextStyles.cairo18BoldBlack,
+                      ),
                       SizedBox(height: 5.h),
                       Text(
                           'من فضلك ادخل الكود الذي تم ارساله اليك علي البريد الالكتروني ',
@@ -111,36 +113,46 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                             onCompleted: (pin) async {
                               log('Completed: $pin');
                               await AuthRequests.checkCode(
-                                  forgetPasswordCubit: checkCode,
-                                  checkCodeModel: checkCodeModel,
-                                  email: CacheHelper().getData(key: 'email'),
-                                  token: checkCode.codeController.text);
+                                forgetPasswordCubit: checkCode,
+                                checkCodeModel: checkCodeModel,
+                                email: CacheHelper().getData(key: 'email'),
+                                token: checkCode.codeController.text,
+                              );
                             },
                           ),
                         ),
                       ),
                       const TimerCode(),
                       SizedBox(height: 28.h),
-                      CustomButton(
-                        buttonText: 'تحقق',
-                        buttonAction: () async {
-                          if (checkCode.formKeyCode.currentState!.validate()) {
-                            await AuthRequests.checkCode(
+                      Hero(
+                        tag: 'resetButton',
+                        child: CustomButton(
+                          buttonText: 'تحقق',
+                          buttonAction: () async {
+                            if (checkCode.formKeyCode.currentState!
+                                .validate()) {
+                              await AuthRequests.checkCode(
                                 forgetPasswordCubit: checkCode,
                                 checkCodeModel: checkCodeModel,
                                 email: CacheHelper().getData(key: 'email'),
-                                token: checkCode.codeController.text);
-                          }
-                        },
-                        buttonStyle: AppTextStyles.cairo16BoldWhite,
+                                token: checkCode.codeController.text,
+                              );
+                            }
+                          },
+                          buttonStyle: AppTextStyles.cairo16BoldWhite,
+                        ),
                       ),
                       SizedBox(height: 16.h),
-                      CustomBorderButton(
+                      Hero(
+                        tag: 'cancelButton',
+                        child: CustomBorderButton(
                           buttonText: 'إلغاء',
                           buttonAction: () {
                             Navigator.pushNamed(context, Routes.loginScreen);
                           },
-                          buttonStyle: AppTextStyles.cairo16BoldMainColor)
+                          buttonStyle: AppTextStyles.cairo16BoldMainColor,
+                        ),
+                      ),
                     ],
                   ),
                 ),
