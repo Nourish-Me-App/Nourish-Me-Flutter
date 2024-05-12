@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
-import '../../../core/helpers/image_assets.dart';
-import '../../../core/imports/app_routes_imports.dart';
+import '../../../core/helpers/app_images.dart';
 
 import '../data/model/on_boarding_model.dart';
 
@@ -14,15 +14,15 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
     OnBoardingModel(
         description:
             'اهلا بك في تطبيقنا نحن نهدف الي حساب سعراتك الحرارية وتوفير خطة غذائية متوازنه و فعاله مخصصة لك  ',
-        image: 'onBoarding1'.getSvgAsset),
+        image: Assets.svgsOnBoardingOnBoarding1),
     OnBoardingModel(
         description:
             'دليل مخصص لتحديد التمارين التي تناسب احتياجاتك ومستوى لياقتك البدنية لتوفير تجربة مميزة لتحسين صحتك الشخصية ونمط حياتك اليومية ',
-        image: 'onBoarding2'.getSvgAsset),
+        image: Assets.svgsOnBoardingOnBoarding2),
     OnBoardingModel(
         description:
             'يستهدف تطبيقنا جميع الفئات  لذلك قمنا بتوفير خطط نظام غذائي مخصصه لمرضى السكر وضغط \n الدم ',
-        image: 'onBoarding3'.getSvgAsset),
+        image: Assets.svgsOnBoardingOnBoarding3),
   ];
 
   PageController pageController = PageController(initialPage: 0);

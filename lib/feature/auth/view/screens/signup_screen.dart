@@ -128,42 +128,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           },
                         ),
                         SizedBox(height: 24.h),
-                        CustomButton(
-                          buttonText: 'أنشئ حساب',
-                          buttonAction: () async {
-                            if (formKey.currentState!.validate()) {
-                              await AuthRequests.signUp(
-                                authCubit: authCubit,
-                                signUpModel: signUpModel,
-                                name:
-                                    '${authCubit.firstNameController.text} ${authCubit.lastNameController.text}',
-                                email: authCubit.emailController.text,
-                                password: authCubit.passwordController.text,
-                                passwordConfirmation: authCubit
-                                    .passwordConfirmationController.text,
-                              ).then((value) {
-                                CacheHelper().saveData(
-                                  key: 'email',
-                                  value: authCubit.emailController.text,
-                                );
-                                CacheHelper().saveData(
-                                  key: 'password',
-                                  value: authCubit.passwordController.text,
-                                );
-                                CacheHelper().saveData(
-                                  key: 'name',
-                                  value:
+                        Hero(
+                          tag: 'authButton',
+                          child: CustomButton(
+                            buttonText: 'أنشئ حساب',
+                            buttonAction: () async {
+                              if (formKey.currentState!.validate()) {
+                                await AuthRequests.signUp(
+                                  authCubit: authCubit,
+                                  signUpModel: signUpModel,
+                                  name:
                                       '${authCubit.firstNameController.text} ${authCubit.lastNameController.text}',
-                                );
-                                CacheHelper().saveData(
-                                  key: 'passwordConfirmation',
-                                  value: authCubit
+                                  email: authCubit.emailController.text,
+                                  password: authCubit.passwordController.text,
+                                  passwordConfirmation: authCubit
                                       .passwordConfirmationController.text,
                                 );
-                              });
-                            }
-                          },
-                          buttonStyle: AppTextStyles.cairo16BoldWhite,
+                              }
+                            },
+                            buttonStyle: AppTextStyles.cairo16BoldWhite,
+                          ),
                         ),
                         SizedBox(height: 8.h),
                         const AuthContinueQuestion(

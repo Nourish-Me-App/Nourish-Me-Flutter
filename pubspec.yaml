@@ -86,6 +86,7 @@ flutter:
     - assets/svgs/settings/
     - assets/svgs/on_boarding/
     - assets/images/meals/
+    - assets/images/splash/
     - assets/svgs/results/
     - assets/icons/
     - assets/fonts/cairo/

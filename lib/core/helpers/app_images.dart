@@ -206,8 +206,8 @@ class Assets {
   /// assets/images/meals/potato.png
   static const String imagesMealsPotato = "assets/images/meals/potato.png";
 
-  /// Assets for imagesMealsRicce
-  /// assets/images/meals/ricce.png
+  /// Assets for imagesMealsRice
+  /// assets/images/meals/rice.png
   static const String imagesMealsRice = "assets/images/meals/rice.png";
 
   /// Assets for imagesMealsSalad
@@ -279,13 +279,15 @@ class Assets {
   /// assets/images/meals/yogurt.png
   static const String imagesMealsYogurt = "assets/images/meals/yogurt.png";
 
-  /// Assets for imagesSplash
-  /// assets/images/splash.png
-  static const String imagesSplash = "assets/images/splash.png";
+  /// Assets for imagesSplashSplashLogoBody
+  /// assets/images/splash/splash_logo_body.png
+  static const String imagesSplashSplashLogoBody =
+      "assets/images/splash/splash_logo_body.png";
 
-  /// Assets for imagesSplash12
-  /// assets/images/splash_12.png
-  static const String imagesSplash12 = "assets/images/splash_12.png";
+  /// Assets for imagesSplashSplashLogoTitle
+  /// assets/images/splash/splash_logo_title.png
+  static const String imagesSplashSplashLogoTitle =
+      "assets/images/splash/splash_logo_title.png";
 
   /// Assets for svgsAppLogo
   /// assets/svgs/app_logo.svg
@@ -294,10 +296,6 @@ class Assets {
   /// Assets for svgsAppbarlogo
   /// assets/svgs/appbarlogo.svg
   static const String svgsAppbarlogo = "assets/svgs/appbarlogo.svg";
-
-  /// Assets for svgsLogoutWarning
-  /// assets/svgs/logout_warning.svg
-  static const String svgsLogoutWarning = "assets/svgs/logout_warning.svg";
 
   /// Assets for svgsAuthCongratulation
   /// assets/svgs/auth/congratulation.svg
@@ -324,6 +322,10 @@ class Assets {
   /// Assets for svgsAuthVerify
   /// assets/svgs/auth/verify.svg
   static const String svgsAuthVerify = "assets/svgs/auth/verify.svg";
+
+  /// Assets for svgsLogoutWarning
+  /// assets/svgs/logout_warning.svg
+  static const String svgsLogoutWarning = "assets/svgs/logout_warning.svg";
 
   /// Assets for svgsOnBoardingOnBoarding1
   /// assets/svgs/on_boarding/onBoarding1.svg
