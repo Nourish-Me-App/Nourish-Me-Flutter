@@ -5,7 +5,7 @@ import '../../logic/cubit/auth_cubit.dart';
 
 import '../../../../core/errors/messages/validation_error_messages.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
-import 'tff_label.dart';
+import '../../../../core/widgets/tff_label.dart';
 
 class NameRow extends StatelessWidget {
   const NameRow({

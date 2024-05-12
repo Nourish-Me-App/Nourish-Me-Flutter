@@ -1,4 +1,4 @@
-import 'package:nourish_me/core/imports/app_routes_imports.dart';
+import '../../../../core/imports/app_routes_imports.dart';
 
 class WorkOutScreen extends StatelessWidget {
   const WorkOutScreen({super.key});

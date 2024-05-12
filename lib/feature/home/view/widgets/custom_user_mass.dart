@@ -1,14 +1,17 @@
-import 'package:nourish_me/core/imports/app_routes_imports.dart';
-import 'package:nourish_me/core/imports/login_imports.dart';
-import 'package:nourish_me/core/theme/app_colors.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../core/theme/app_colors.dart';
+
+import '../../../../core/theme/app_text_styles.dart';
 
 class CustomUserMass extends StatelessWidget {
-  const CustomUserMass(
-      {super.key,
-      required this.title,
-      required this.svgPath,
-      required this.resultOne,
-      required this.resultTwo});
+  const CustomUserMass({
+    super.key,
+    required this.title,
+    required this.svgPath,
+    required this.resultOne,
+    required this.resultTwo,
+  });
   final String title;
   final Widget svgPath;
   final String resultOne;
@@ -31,16 +34,20 @@ class CustomUserMass extends StatelessWidget {
               padding: EdgeInsets.only(top: 8.0.h, bottom: .0.w),
               child: Column(
                 children: [
-                  Text(resultOne,
-                      style: AppTextStyles.cairosemibold14maincolor.copyWith(
-                        fontSize: 13.sp,
-                        fontWeight: FontWeight.w700,
-                      )),
-                  Text(resultTwo,
-                      style: AppTextStyles.cairosemibold14maincolor.copyWith(
-                        fontSize: 10.sp,
-                        fontWeight: FontWeight.w700,
-                      ))
+                  Text(
+                    resultOne,
+                    style: AppTextStyles.cairosemibold14maincolor.copyWith(
+                      fontSize: 13.sp,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  Text(
+                    resultTwo,
+                    style: AppTextStyles.cairosemibold14maincolor.copyWith(
+                      fontSize: 10.sp,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
                 ],
               ),
             ),

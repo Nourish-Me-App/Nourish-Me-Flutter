@@ -16,7 +16,7 @@ class SuccesScreen extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 24.h, vertical: 100.w),
           child: Column(
             children: [
-              Center(child: SvgPicture.asset(Assets.svgsCongratulation)),
+              Center(child: SvgPicture.asset(Assets.svgsAuthCongratulation)),
               SizedBox(height: 16.h),
               Text(
                   'لقد تم اعاده تعيين كلمه المرور بنجاح يمكنك الان اعاده تسجيل الدخول',

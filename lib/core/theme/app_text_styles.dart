@@ -59,6 +59,11 @@ class AppTextStyles {
     fontSize: 16.sp,
     fontWeight: FontWeight.bold,
   );
+  static TextStyle cairo14SemiBoldWhite = GoogleFonts.cairo(
+    color: Colors.white,
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w600,
+  );
 
   static TextStyle cairo16BoldMainColor = GoogleFonts.cairo(
     color: AppColors.mainColor,

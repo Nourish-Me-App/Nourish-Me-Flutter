@@ -66,7 +66,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             child: Directionality(
               textDirection: TextDirection.rtl,
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
+                padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
                 child: SingleChildScrollView(
                   child: SizedBox(
                     width: double.infinity,

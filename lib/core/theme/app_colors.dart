@@ -14,6 +14,9 @@ class AppColors {
   static const Color radioBorderColor = Color(0xffCFCBCB);
   static const Color swipColor = Color(0xffE8E0D0);
   static const Color counterColor = Color(0xffF4F4F4);
+  static const Color dietContainerColor = Color(0xffF4F4F4);
   static const Color backGroundColorofNavBar = Color(0xffF4F4F4);
+  static const Color dividerColor = Color(0xffE2DEDE);
+  static const Color settingsContainerIconColor = Color(0xff999999);
   static Color tFFFilledColor = const Color(0xffB5C5BA).withOpacity(0.5);
 }

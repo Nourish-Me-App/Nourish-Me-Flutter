@@ -54,7 +54,7 @@ class _QuestionsState extends State<Questions> {
                 );
                 Navigator.pushNamedAndRemoveUntil(
                   context,
-                  Routes.fakeHome,
+                  Routes.bottomNavBar,
                   (route) => false,
                 );
               }
@@ -85,7 +85,7 @@ class _QuestionsState extends State<Questions> {
                         ),
                         SizedBox(height: 28.h),
                         Center(
-                          child: SvgPicture.asset(Assets.svgsQuestion),
+                          child: SvgPicture.asset(Assets.svgsAuthQuestion),
                         ),
                         SizedBox(height: 20.h),
                         QuestionsView(
