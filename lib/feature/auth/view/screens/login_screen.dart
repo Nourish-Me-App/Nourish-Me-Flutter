@@ -71,14 +71,24 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                         SizedBox(height: 16.h),
-                        Text(
-                          'تسجيل الدخول',
-                          textDirection: TextDirection.rtl,
-                          textAlign: TextAlign.center,
-                          style: AppTextStyles.cairo20BoldBlack,
+                        Hero(
+                          tag: 'login',
+                          child: Material(
+                            child: Text(
+                              'تسجيل الدخول',
+                              textDirection: TextDirection.rtl,
+                              textAlign: TextAlign.center,
+                              style: AppTextStyles.cairo20BoldBlack,
+                            ),
+                          ),
                         ),
                         SizedBox(height: 32.h),
-                        const TFFLabel(label: 'البريد الإلكتروني'),
+                        const Hero(
+                          tag: 'emailLabel',
+                          child: Material(
+                            child: TFFLabel(label: 'البريد الإلكتروني'),
+                          ),
+                        ),
                         SizedBox(height: 8.h),
                         CustomTFF(
                           hintText: 'أدخل البريد الإلكتروني',
@@ -104,20 +114,23 @@ class _LoginScreenState extends State<LoginScreen> {
                         SizedBox(height: 8.h),
                         const ForgotAndRememberMeRow(),
                         SizedBox(height: 24.h),
-                        CustomButton(
-                          buttonText: 'تسجيل الدخول',
-                          buttonAction: () async {
-                            if (formKey.currentState!.validate()) {
-                              await AuthRequests.login(
-                                authCubit: authCubit,
-                                loginModel: loginModel,
-                                email: authCubit.emailController.text,
-                                password: authCubit.passwordController.text,
-                                rememberMe: authCubit.rememberMe,
-                              );
-                            }
-                          },
-                          buttonStyle: AppTextStyles.cairo16BoldWhite,
+                        Hero(
+                          tag: 'authButton',
+                          child: CustomButton(
+                            buttonText: 'تسجيل الدخول',
+                            buttonAction: () async {
+                              if (formKey.currentState!.validate()) {
+                                await AuthRequests.login(
+                                  authCubit: authCubit,
+                                  loginModel: loginModel,
+                                  email: authCubit.emailController.text,
+                                  password: authCubit.passwordController.text,
+                                  rememberMe: authCubit.rememberMe,
+                                );
+                              }
+                            },
+                            buttonStyle: AppTextStyles.cairo16BoldWhite,
+                          ),
                         ),
                         SizedBox(height: 16.h),
                         const AuthContinueQuestion(

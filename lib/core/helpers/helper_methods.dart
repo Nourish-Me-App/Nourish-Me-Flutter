@@ -141,6 +141,7 @@ class HelperMethods {
       Assets.svgsSettingsEmailChange,
       Assets.svgsSettingsPassChange,
       Assets.svgsSettingsRate,
+      Assets.svgsLogoutWarning,
     ];
 
     for (String element in cacheSvgImages) {

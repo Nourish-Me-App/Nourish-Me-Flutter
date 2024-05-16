@@ -26,12 +26,19 @@ class SuccesScreen extends StatelessWidget {
               SizedBox(
                 height: 32.h,
               ),
-              CustomButton(
-                buttonText: 'تسجيل الدخول',
-                buttonAction: () {
-                  Navigator.pushNamed(context, Routes.loginScreen);
-                },
-                buttonStyle: AppTextStyles.cairo16BoldWhite,
+              Hero(
+                tag: 'login',
+                child: CustomButton(
+                  buttonText: 'تسجيل الدخول',
+                  buttonAction: () {
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      Routes.loginScreen,
+                      (route) => false,
+                    );
+                  },
+                  buttonStyle: AppTextStyles.cairo16BoldWhite,
+                ),
               ),
             ],
           ),

@@ -8,6 +8,7 @@ import '../../feature/forgetpassword/data/models/forget_password_model.dart';
 import '../../feature/forgetpassword/data/models/reset_password.dart';
 import '../../feature/forgetpassword/logic/forget_password_cubit.dart';
 import 'app_constants.dart';
+import 'cache_helper.dart';
 
 class AuthRequests {
   AuthRequests._();
@@ -19,7 +20,8 @@ class AuthRequests {
     required String passwordConfirmation,
     required String name,
   }) async {
-    await authCubit.signUp(
+    await authCubit
+        .signUp(
       AppConstants.register,
       signUpModel.toJson(
         SignUpModel(
@@ -29,7 +31,26 @@ class AuthRequests {
           name: name,
         ),
       ),
-    );
+    )
+        .then((value) {
+      CacheHelper cacheHelper = CacheHelper();
+      cacheHelper.saveData(
+        key: 'email',
+        value: email,
+      );
+      cacheHelper.saveData(
+        key: 'password',
+        value: password,
+      );
+      cacheHelper.saveData(
+        key: 'name',
+        value: name,
+      );
+      cacheHelper.saveData(
+        key: 'passwordConfirmation',
+        value: passwordConfirmation,
+      );
+    });
   }
 
   static Future continueRegister({
