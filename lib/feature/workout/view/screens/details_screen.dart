@@ -16,7 +16,7 @@ class DetailsScreen extends StatefulWidget {
 }
 
 class _DetailsScreenState extends State<DetailsScreen> {
-  static const int countdownDuration = 5;
+  static const int countdownDuration = 90;
   int remainingTime = countdownDuration;
   Timer? _timer;
   bool isRunning = false;

@@ -107,6 +107,10 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                                 color: AppColors.otpBackGround,
                               ),
                             ),
+                            errorText:
+                                "                                                                                       برجاء ادخال الكود",
+                            errorTextStyle:
+                                AppTextStyles.cairo12RegularTFFErrorColor,
                             pinputAutovalidateMode:
                                 PinputAutovalidateMode.onSubmit,
                             showCursor: true,

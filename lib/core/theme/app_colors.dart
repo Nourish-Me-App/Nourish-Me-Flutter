@@ -11,6 +11,7 @@ class AppColors {
   static const Color white = Color(0xffffffff);
   static const Color tFFErrorColor = Color(0xffF14E2E);
   static const Color currentQuestionColor = Color(0xfff4f4f4);
+  static const Color workOutCardbackGroundColor = Color(0xffF4F4F4);
   static const Color radioBorderColor = Color(0xffCFCBCB);
   static const Color swipColor = Color(0xffE8E0D0);
   static const Color counterColor = Color(0xffF4F4F4);
@@ -18,5 +19,6 @@ class AppColors {
   static const Color backGroundColorofNavBar = Color(0xffF4F4F4);
   static const Color dividerColor = Color(0xffE2DEDE);
   static const Color settingsContainerIconColor = Color(0xff999999);
+  static const Color skipButtonColor = Color(0xff434746);
   static Color tFFFilledColor = const Color(0xffB5C5BA).withOpacity(0.5);
 }

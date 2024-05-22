@@ -1,15 +1,18 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
-import 'package:flutter/material.dart';
+import 'package:nourish_me/core/imports/app_routes_imports.dart';
 import 'package:nourish_me/core/imports/login_imports.dart';
 import 'package:nourish_me/core/theme/app_colors.dart';
 import 'package:nourish_me/feature/workout/data/item_model.dart';
 import 'package:nourish_me/feature/workout/view/screens/details_screen.dart';
+import 'package:nourish_me/feature/workout/view/screens/work_out.dart';
 
 class TimesUpScreen extends StatefulWidget {
   const TimesUpScreen({
-    super.key, required this.currentIndex, required this.item,
+    super.key,
+    required this.currentIndex,
+    required this.item,
   });
-    final int currentIndex;
+  final int currentIndex;
   final List<ItemModel> item;
 
   @override
@@ -55,15 +58,24 @@ class _TimesUpScreenState extends State<TimesUpScreen> {
               controller: CountDownController(),
               isReverse: false,
               onComplete: () {
-                Navigator.push(
+                if (widget.currentIndex < widget.item.length - 1) {
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (context) => DetailsScreen(
                         currentIndex: widget.currentIndex + 1,
-                        item: item,
+                        item: widget.item,
                       ),
                     ),
                   );
+                } else {
+                  Navigator.pop(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const BottomNav(),
+                    ),
+                  );
+                }
               },
             )
           ],

@@ -1,3 +1,6 @@
+
+import 'package:nourish_me/core/imports/app_routes_imports.dart';
+
 import '../../../../core/imports/login_imports.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../logic/cubit/auth_cubit.dart';
@@ -12,8 +15,11 @@ class WeightCounter extends StatefulWidget {
 late AuthCubit authCubit;
 
 class _WeightCounterState extends State<WeightCounter> {
+ 
+
   @override
   void initState() {
+    
     authCubit = BlocProvider.of<AuthCubit>(context);
     super.initState();
   }
@@ -32,12 +38,13 @@ class _WeightCounterState extends State<WeightCounter> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              InkWell(
-                onLongPress: () {
-                  authCubit.onlongPressedincreamnetWeight();
+              GestureDetector(
+                onLongPressStart: (_) {
+                  authCubit.startTimerIncreaseWeight();
                 },
+                onLongPressEnd: (_) => authCubit.stopTimer(),
                 onTap: () {
-                  authCubit.onpreesedincreamnetWeight();
+                  authCubit.onlongPressedincreamnetWeight();
                 },
                 child: const CircleAvatar(
                   backgroundColor: Colors.white,
@@ -53,8 +60,9 @@ class _WeightCounterState extends State<WeightCounter> {
                 '${authCubit.weightCounter}',
                 style: AppTextStyles.cairo24Boldmaincolor,
               ),
-              InkWell(
-                onLongPress: () => authCubit.decrementWeight(),
+              GestureDetector(
+                onLongPressStart: (_) => authCubit.startTimerDecreaseWeight(),
+                onLongPressEnd: (_) => authCubit.stopTimer(),
                 onTap: () => authCubit.decrementWeight(),
                 child: const CircleAvatar(
                   backgroundColor: Colors.white,

@@ -1,5 +1,9 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:nourish_me/feature/auth/view/widgets/height_counter.dart';
+import 'package:nourish_me/feature/auth/view/widgets/weightcounters.dart';
 
 import '../../data/models/login_model.dart';
 import '../../data/repositories/continue_register_repo.dart';
@@ -67,7 +71,7 @@ class AuthCubit extends Cubit<AuthState> {
     );
   }
 
-  int ageCounter = 0;
+  int ageCounter = 18;
   void increamnetAge() {
     emit(LoadingCounter());
     ageCounter++;
@@ -116,5 +120,60 @@ class AuthCubit extends Cubit<AuthState> {
     emit(LoadingCounter());
     heightCounter--;
     emit(DecreamentCounter());
+  }
+
+  Timer? _timerAge;
+  Timer? _timerHeight;
+  Timer? _timerWeight;
+
+  void startTimerIncreaseAge() {
+    _timerAge = Timer.periodic(const Duration(milliseconds: 100), (timer) {
+      ageCounter++;
+      emit(IncreamentCounter());
+    });
+  }
+
+  
+  void startTimerIncreaseHeight() {
+    _timerHeight = Timer.periodic(const Duration(milliseconds: 100), (timer) {
+      heightCounter++;
+      emit(IncreamentCounter());
+    });
+  }
+
+  
+  void startTimerIncreaseWeight() {
+    _timerWeight = Timer.periodic(const Duration(milliseconds: 100), (timer) {
+      weightCounter++;
+      emit(IncreamentCounter());
+    });
+  }
+
+  void startTimerDecreaseAge() {
+    _timerAge = Timer.periodic(const Duration(milliseconds: 100), (timer) {
+      ageCounter--;
+      emit(DecreamentCounter());
+    });
+  }
+
+  void startTimerDecreaseHeight() {
+    _timerHeight = Timer.periodic(const Duration(milliseconds: 100), (timer) {
+      heightCounter--;
+      emit(IncreamentCounter());
+    });
+  }
+
+  
+  void startTimerDecreaseWeight() {
+    _timerWeight = Timer.periodic(const Duration(milliseconds: 100), (timer) {
+      weightCounter--;
+      emit(IncreamentCounter());
+    });
+  }
+
+  void stopTimer() {
+    _timerAge?.cancel();
+    _timerWeight?.cancel();
+    _timerHeight?.cancel();
   }
 }

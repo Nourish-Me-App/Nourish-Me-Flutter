@@ -114,7 +114,7 @@ class AppRoutes {
         );
       case Routes.continueRegisterScreen:
         return MaterialPageRoute(
-          builder: (context) => BlocProvider<AuthCubit>(
+          builder: (context) => BlocProvider(
             create: (context) => AuthCubit(
               LoginRepo(dioHandler),
               SignUpRepo(dioHandler),

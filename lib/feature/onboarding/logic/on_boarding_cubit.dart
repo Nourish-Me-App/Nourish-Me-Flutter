@@ -14,15 +14,15 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
     OnBoardingModel(
         description:
             'اهلا بك في تطبيقنا نحن نهدف الي حساب سعراتك الحرارية وتوفير خطة غذائية متوازنه و فعاله \n مخصصة لك  ',
-        image: 'onBoarding1'.getSvgAsset),
+        image: Assets.svgsOnBoardingOnBoarding1),
     OnBoardingModel(
         description:
             'دليل مخصص لتحديد التمارين التي تناسب احتياجاتك ومستوى لياقتك البدنية لتوفير تجربة مميزة لتحسين صحتك الشخصية ونمط حياتك اليومية ',
         image: Assets.svgsOnBoardingOnBoarding2),
     OnBoardingModel(
         description:
-            'يستهدف تطبيقنا جميع الفئات  لذلك قمنا بتوفير خطط نظام غذائي مخصصه لمرضى السكر وضغط  الدم ',
-        image: 'onBoarding3'.getSvgAsset),
+            'يستهدف تطبيقنا جميع الفئات  لذلك قمنا بتوفير خطط نظام غذائي مخصصه لمرضى السكر وضغط \n الدم ',
+        image: Assets.svgsOnBoardingOnBoarding3),
   ];
 
   PageController pageController = PageController(initialPage: 0);
