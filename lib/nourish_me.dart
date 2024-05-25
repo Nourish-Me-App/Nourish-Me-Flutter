@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import 'core/helpers/app_constants.dart';
-import 'core/helpers/cache_helper.dart';
 import 'core/routing/app_routes.dart';
 import 'core/routing/routes.dart';
 import 'core/theme/app_colors.dart';

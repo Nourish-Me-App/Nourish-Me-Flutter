@@ -4,7 +4,6 @@ import 'package:nourish_me/core/imports/login_imports.dart';
 import 'package:nourish_me/core/theme/app_colors.dart';
 import 'package:nourish_me/feature/workout/data/item_model.dart';
 import 'package:nourish_me/feature/workout/view/screens/details_screen.dart';
-import 'package:nourish_me/feature/workout/view/screens/work_out.dart';
 
 class TimesUpScreen extends StatefulWidget {
   const TimesUpScreen({
@@ -39,7 +38,8 @@ class _TimesUpScreenState extends State<TimesUpScreen> {
               ),
             ),
             Text(
-              'سيبدأ التمرين التالي في غضون لحظات قليلة',
+              'استرح الان وسيبدء التمرين التالي في غضون بضع ثواني ',
+              textAlign: TextAlign.center,
               style: AppTextStyles.cairo18BoldBlack.copyWith(
                 fontSize: 16.sp,
                 fontWeight: FontWeight.w600,
@@ -57,6 +57,10 @@ class _TimesUpScreenState extends State<TimesUpScreen> {
               autoStart: true,
               controller: CountDownController(),
               isReverse: false,
+              textStyle: AppTextStyles.cairo18BoldBlack.copyWith(
+                fontSize: 20.sp,
+                fontWeight: FontWeight.w600,
+              ),
               onComplete: () {
                 if (widget.currentIndex < widget.item.length - 1) {
                   Navigator.pushReplacement(
