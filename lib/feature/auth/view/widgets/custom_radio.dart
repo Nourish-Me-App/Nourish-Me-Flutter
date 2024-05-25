@@ -6,11 +6,11 @@ import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/theme/app_colors.dart';
 
 class CustomRadio extends StatefulWidget {
-  final int value;
+  final String value;
   final String gender;
   final String imge;
-  final int? groupValue;
-  final void Function(int) onChanged;
+  final String? groupValue;
+  final ValueChanged<String?> onChanged;
   const CustomRadio({
     super.key,
     required this.value,

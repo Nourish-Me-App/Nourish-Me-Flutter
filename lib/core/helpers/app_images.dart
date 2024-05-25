@@ -437,4 +437,9 @@ class Assets {
   /// Assets for svgsSettingsRate
   /// assets/svgs/settings/rate.svg
   static const String svgsSettingsRate = "assets/svgs/settings/rate.svg";
+
+  /// Assets for svgsWorkoutAbs
+  /// assets/svgs/workout/mountainclimbers.svg
+  static const String svgsWorkoutMountainclimb =
+      "assets/svgs/workout/mountainclimbers.svg";
 }

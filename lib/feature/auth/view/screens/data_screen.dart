@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import '../../../../core/imports/login_imports.dart';
 import '../../../../core/imports/signup_screen_imports.dart';
 import '../../data/models/continue_register_model.dart';
@@ -18,20 +20,12 @@ class ContinueRegisterScreen extends StatefulWidget {
 
 class _DataScreenState extends State<ContinueRegisterScreen> {
   String? type;
-  int? selectedValue;
+  String? selectedValue;
   late AuthCubit authCubit;
   @override
   void initState() {
     authCubit = BlocProvider.of<AuthCubit>(context);
     super.initState();
-  }
-
-  void setType() {
-    if (selectedValue == 1) {
-      type = "ذكر";
-    } else {
-      type = "أنثى";
-    }
   }
 
   @override
@@ -86,23 +80,26 @@ class _DataScreenState extends State<ContinueRegisterScreen> {
                         CustomRadio(
                           imge: Assets.svgsAuthMale,
                           gender: 'ذكر',
-                          value: 1,
+                          value: 'ذكر',
                           groupValue: selectedValue,
                           onChanged: (value) {
                             setState(() {
                               selectedValue = value;
                             });
+
+                            log(value.toString());
                           },
                         ),
                         CustomRadio(
                           imge: Assets.svgsAuthFemale,
                           gender: 'أنثى',
-                          value: 2,
+                          value: 'أنثى',
                           groupValue: selectedValue,
                           onChanged: (value) {
                             setState(() {
                               selectedValue = value;
                             });
+                            log(value!.toString());
                           },
                         ),
                       ],
@@ -144,7 +141,6 @@ class _DataScreenState extends State<ContinueRegisterScreen> {
                       buttonText: 'متابعه',
                       buttonStyle: AppTextStyles.cairo16BoldWhite,
                       buttonAction: () async {
-                        setType();
                         if (selectedValue == null) {
                           HelperMethods.showCustomSnackBarError(
                               context, 'من فضلك قم بتحدد النوع');

@@ -1,3 +1,6 @@
+import 'package:nourish_me/core/imports/app_routes_imports.dart';
+import 'package:nourish_me/core/imports/questions_screen_imports.dart';
+
 import '../../../../core/imports/login_imports.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../logic/cubit/auth_cubit.dart';
@@ -32,8 +35,9 @@ class _HeightCounterState extends State<HeightCounter> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              InkWell(
-                onLongPress: () => authCubit.onLongPressedincreamnetHeight(),
+              GestureDetector(
+                onLongPressStart: (_) => authCubit.startTimerIncreaseHeight(),
+                onLongPressEnd: (_) => authCubit.stopTimer(),
                 onTap: () => authCubit.onPreesedIncreamnetHeight(),
                 child: const CircleAvatar(
                   backgroundColor: Colors.white,
@@ -49,8 +53,9 @@ class _HeightCounterState extends State<HeightCounter> {
                 '${authCubit.heightCounter}',
                 style: AppTextStyles.cairo24Boldmaincolor,
               ),
-              InkWell(
-                onLongPress: () => authCubit.decrementHeight(),
+              GestureDetector(
+                onLongPressStart: (_) => authCubit.startTimerDecreaseHeight(),
+                onLongPressEnd: (_) => authCubit.stopTimer(),
                 onTap: () => authCubit.decrementHeight(),
                 child: const CircleAvatar(
                   backgroundColor: Colors.white,

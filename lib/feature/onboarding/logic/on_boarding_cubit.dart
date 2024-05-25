@@ -13,7 +13,7 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
   List<OnBoardingModel> onBoardingList = <OnBoardingModel>[
     OnBoardingModel(
         description:
-            'اهلا بك في تطبيقنا نحن نهدف الي حساب سعراتك الحرارية وتوفير خطة غذائية متوازنه و فعاله مخصصة لك  ',
+            'اهلا بك في تطبيقنا نحن نهدف الي حساب سعراتك الحرارية وتوفير خطة غذائية متوازنه و فعاله \n مخصصة لك  ',
         image: Assets.svgsOnBoardingOnBoarding1),
     OnBoardingModel(
         description:

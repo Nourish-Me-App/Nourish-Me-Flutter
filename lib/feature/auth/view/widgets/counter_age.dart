@@ -1,3 +1,5 @@
+import 'package:nourish_me/core/imports/app_routes_imports.dart';
+
 import '../../../../core/imports/login_imports.dart';
 import '../../../../core/theme/app_colors.dart';
 
@@ -33,7 +35,9 @@ class _CounterAgeState extends State<CounterAge> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                InkWell(
+                GestureDetector(
+                  onLongPressStart: (_) => authCubit.startTimerIncreaseAge(),
+                  onLongPressEnd: (_) => authCubit.stopTimer(),
                   onTap: () {
                     authCubit.increamnetAge();
                   },
@@ -51,7 +55,9 @@ class _CounterAgeState extends State<CounterAge> {
                   '${authCubit.ageCounter}',
                   style: AppTextStyles.cairo24Boldmaincolor,
                 ),
-                InkWell(
+                GestureDetector(
+                  onLongPressStart: (_) => authCubit.startTimerDecreaseAge(),
+                  onLongPressEnd: (_) => authCubit.stopTimer(),
                   onTap: () => authCubit.decrementAge(),
                   child: const CircleAvatar(
                     backgroundColor: Colors.white,

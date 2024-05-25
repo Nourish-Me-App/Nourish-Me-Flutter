@@ -56,6 +56,10 @@ dependencies:
   rulers: ^1.0.7
   # For navigation bar.
   google_nav_bar: ^5.0.6
+  # for navigation in onBoarding.
+  smooth_page_indicator: ^1.1.0
+  # for timeUp screen 
+  circular_countdown_timer: ^0.2.3
 
 
 

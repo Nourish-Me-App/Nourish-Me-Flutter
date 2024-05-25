@@ -19,10 +19,28 @@ class AppTextStyles {
     fontSize: 14.sp,
     fontWeight: FontWeight.w600,
   );
+
+  static TextStyle cairosemibold16black = GoogleFonts.cairo(
+    color: Colors.black,
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w600,
+  );
+
+  static TextStyle cairosemibold16white = GoogleFonts.cairo(
+    color: Colors.white,
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w600,
+  );
   static TextStyle cairo18BoldBlack = GoogleFonts.cairo(
     color: Colors.black,
     fontSize: 18.sp,
     fontWeight: FontWeight.bold,
+  );
+
+  static TextStyle cairo16BoldBlack = GoogleFonts.cairo(
+    color: Colors.black,
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w500,
   );
 
   static TextStyle cairo32BoldotpBackGround = GoogleFonts.cairo(
@@ -59,6 +77,13 @@ class AppTextStyles {
     fontSize: 16.sp,
     fontWeight: FontWeight.bold,
   );
+
+  static TextStyle cairo16Boldskip = GoogleFonts.cairo(
+    color: AppColors.skipButtonColor,
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w600,
+  );
+
   static TextStyle cairo14SemiBoldWhite = GoogleFonts.cairo(
     color: Colors.white,
     fontSize: 14.sp,
