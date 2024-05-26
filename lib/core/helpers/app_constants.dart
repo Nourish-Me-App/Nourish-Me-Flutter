@@ -1,6 +1,6 @@
 class AppConstants {
   static const String baseUrl =
-      "https://17d9-197-43-132-92.ngrok-free.app/api/v1/";
+      "https://nourish-me.up.railway.app/api/v1/";
 
   static const String login = "users/login";
   static const String logout = "users/logout";
@@ -13,5 +13,6 @@ class AppConstants {
   static const String questions = "questions";
   static const String rememberMeToken = "rememberMeToken";
   static const String token = "token";
+  static const String home = "home";
   static const String isFirstQuestionsComplete = "is_first_questions_complete";
 }

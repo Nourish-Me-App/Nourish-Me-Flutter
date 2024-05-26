@@ -1,4 +1,3 @@
-
 import 'package:nourish_me/core/imports/app_routes_imports.dart';
 
 import '../../../../core/imports/login_imports.dart';
@@ -15,11 +14,8 @@ class WeightCounter extends StatefulWidget {
 late AuthCubit authCubit;
 
 class _WeightCounterState extends State<WeightCounter> {
- 
-
   @override
   void initState() {
-    
     authCubit = BlocProvider.of<AuthCubit>(context);
     super.initState();
   }
@@ -44,7 +40,7 @@ class _WeightCounterState extends State<WeightCounter> {
                 },
                 onLongPressEnd: (_) => authCubit.stopTimer(),
                 onTap: () {
-                  authCubit.onlongPressedincreamnetWeight();
+                  authCubit.onpreesedincreamnetWeight();
                 },
                 child: const CircleAvatar(
                   backgroundColor: Colors.white,
