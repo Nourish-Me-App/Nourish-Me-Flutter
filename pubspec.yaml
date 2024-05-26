@@ -60,6 +60,8 @@ dependencies:
   smooth_page_indicator: ^1.1.0
   # for timeUp screen 
   circular_countdown_timer: ^0.2.3
+  # for internet connection.
+  flutter_offline: "^3.0.1"
 
 
 

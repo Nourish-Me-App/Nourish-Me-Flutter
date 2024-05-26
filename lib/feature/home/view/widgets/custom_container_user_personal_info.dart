@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nourish_me/feature/home/logic/cubit/home_cubit.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/theme/app_colors.dart';
 
 class CustomContainerUserInfo extends StatelessWidget {
-  const CustomContainerUserInfo(
-      {super.key,
-      required this.titleOne,
-      required this.titleTwo,
-      required this.titleThree,
-      required this.svgPathOne,
-      required this.svgPathTwo,
-      required this.svgPathThree});
+  const CustomContainerUserInfo({
+    super.key,
+    required this.titleOne,
+    required this.titleTwo,
+    required this.titleThree,
+    required this.svgPathOne,
+    required this.svgPathTwo,
+    required this.svgPathThree,
+  });
   final String titleOne;
   final String titleTwo;
   final String titleThree;
@@ -37,6 +39,7 @@ class CustomContainerUserInfo extends StatelessWidget {
               backgroundColor: Colors.white,
               child: svgPathThree,
             ),
+            SizedBox(width: 5.w),
             Text(
               titleThree,
               style: AppTextStyles.cairo18BoldBlack.copyWith(
@@ -50,6 +53,7 @@ class CustomContainerUserInfo extends StatelessWidget {
               backgroundColor: Colors.white,
               child: svgPathTwo,
             ),
+            SizedBox(width: 5.w),
             Text(
               titleTwo,
               style: AppTextStyles.cairo16BoldMainColor.copyWith(
@@ -63,6 +67,7 @@ class CustomContainerUserInfo extends StatelessWidget {
               backgroundColor: Colors.white,
               child: svgPathThree,
             ),
+            SizedBox(width: 5.w),
             Text(
               titleOne,
               style: AppTextStyles.cairo16BoldMainColor.copyWith(

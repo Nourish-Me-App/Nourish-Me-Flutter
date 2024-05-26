@@ -90,6 +90,7 @@ class AuthCubit extends Cubit<AuthState> {
     weightCounter = weightCounter + 5;
     emit(IncreamentCounter());
   }
+  
 
   void onpreesedincreamnetWeight() {
     emit(LoadingCounter());
