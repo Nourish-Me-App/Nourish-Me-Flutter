@@ -330,17 +330,19 @@ class Assets {
   /// Assets for svgsOnBoardingOnBoarding1
   /// assets/svgs/on_boarding/onBoarding1.svg
   static const String svgsOnBoardingOnBoarding1 =
-      "assets/svgs/on_boarding/onBoarding1.svg";
+      "assets/images/Healthy lifestyle-rafiki 3.png";
+  // "assets/svgs/on_boarding/onBoarding1.svg";
 
   /// Assets for svgsOnBoardingOnBoarding2
   /// assets/svgs/on_boarding/onBoarding2.svg
   static const String svgsOnBoardingOnBoarding2 =
-      "assets/svgs/on_boarding/onBoarding2.svg";
+      "assets/images/Dumbbell exercise-rafiki 1.png";
+  // "assets/svgs/on_boarding/onBoarding2.svg";
 
   /// Assets for svgsOnBoardingOnBoarding3
   /// assets/svgs/on_boarding/onBoarding3.svg
-  static const String svgsOnBoardingOnBoarding3 =
-      "assets/svgs/on_boarding/onBoarding3.svg";
+  static const String svgsOnBoardingOnBoarding3 = "assets/images/Group 246.png";
+  // "assets/svgs/on_boarding/onBoarding3.svg";
 
   /// Assets for svgsResultsCilChild
   /// assets/svgs/results/cil_child.svg

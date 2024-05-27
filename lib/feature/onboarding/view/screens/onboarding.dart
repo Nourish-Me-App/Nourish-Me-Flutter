@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:nourish_me/core/imports/app_routes_imports.dart';
 import 'package:nourish_me/core/imports/login_imports.dart';
 import 'package:nourish_me/core/imports/questions_screen_imports.dart';
 import 'package:nourish_me/core/routing/routes.dart';
 import 'package:nourish_me/core/theme/app_colors.dart';
 import 'package:nourish_me/core/theme/app_text_styles.dart';
+import 'package:nourish_me/core/widgets/custom_border_button.dart';
 import 'package:nourish_me/core/widgets/custom_button.dart';
 import 'package:nourish_me/feature/onboarding/logic/on_boarding_cubit.dart';
 import 'package:nourish_me/feature/onboarding/view/widgets/text.dart';
 
 class OnBoardingScreen extends StatelessWidget {
-  const OnBoardingScreen({Key? key}) : super(key: key);
+  const OnBoardingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,19 +31,8 @@ class OnBoardingScreen extends StatelessWidget {
             final onBoarding = context.watch<OnBoardingCubit>();
             return Scaffold(
               appBar: AppBar(
-                elevation: 0,
-                actions: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context)
-                          .pushReplacementNamed(Routes.signUpScreen);
-                    },
-                    child: Text(
-                      'تخطي',
-                      style: AppTextStyles.cairo16BoldMainColor,
-                    ),
-                  ),
-                ],
+               
+                
               ),
               body: SafeArea(
                 child: Stack(
@@ -65,10 +54,10 @@ class OnBoardingScreen extends StatelessWidget {
                                     child: Column(
                                       children: [
                                         Expanded(
-                                          child: SvgPicture.asset(
-                                            onBoarding.onBoardingList[i].image,
-                                          ),
-                                        ),
+                                            child: Image.asset(
+                                          onBoarding.onBoardingList[i].image,
+                                          fit: BoxFit.cover,
+                                        )),
                                         TextWidget(
                                           onBoarding
                                               .onBoardingList[i].description,
@@ -107,15 +96,47 @@ class OnBoardingScreen extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(
-                              left: 30.w, right: 30.w, bottom: 15.h, top: 22.h),
+                          padding: const EdgeInsets.only(
+                              left: 30, right: 30, bottom: 15, top: 22),
                           child: CustomButton(
                             buttonStyle: AppTextStyles.cairo16BoldWhite,
-                            buttonText: 'ابدأ',
-                            buttonAction: () =>
-                                context.read<OnBoardingCubit>().transition(),
+                            color: AppColors.mainColor,
+                            buttonText: onBoarding.currentIndex ==
+                                    onBoarding.onBoardingList.length - 1
+                                ? 'أبدأ'
+                                : 'التالى',
+                            buttonAction: () {
+                              context.read<OnBoardingCubit>().transition();
+                            },
                           ),
                         ),
+                        onBoarding.currentIndex ==
+                                onBoarding.onBoardingList.length - 1
+                            ? Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 30, right: 30, bottom: 35),
+                                child: SizedBox(
+                                  width: double.infinity,
+                                  height: 35.h,
+                                ),
+                              )
+                            : Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 30, right: 30, bottom: 35),
+                                child: CustomBorderButton(
+                                  buttonText: 'أبدأ',
+                                  buttonStyle:
+                                      AppTextStyles.cairo16BoldMainColor,
+                                  buttonAction: () {
+                                    WidgetsBinding.instance
+                                        .addPostFrameCallback((timeStamp) {
+                                      Navigator.of(context)
+                                          .pushReplacementNamed(
+                                              Routes.signUpScreen);
+                                    });
+                                  },
+                                ),
+                              )
                       ],
                     ),
                   ],
