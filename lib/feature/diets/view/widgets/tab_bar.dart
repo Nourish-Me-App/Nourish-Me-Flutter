@@ -40,7 +40,7 @@ class _MyTabBarState extends State<MyTabBar> {
       },
       isScrollable: true,
       splashFactory: NoSplash.splashFactory,
-      overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+      overlayColor: const WidgetStatePropertyAll(Colors.transparent),
       tabs: List.generate(
         7,
         (index) => Tab(

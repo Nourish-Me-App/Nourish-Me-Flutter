@@ -22,10 +22,10 @@ class ForgotAndRememberMeRow extends StatelessWidget {
         TextButton(
           style: const ButtonStyle(
             splashFactory: NoSplash.splashFactory,
-            overlayColor: MaterialStatePropertyAll(
+            overlayColor: WidgetStatePropertyAll(
               Colors.transparent,
             ),
-            surfaceTintColor: MaterialStatePropertyAll(
+            surfaceTintColor: WidgetStatePropertyAll(
               Colors.transparent,
             ),
           ),

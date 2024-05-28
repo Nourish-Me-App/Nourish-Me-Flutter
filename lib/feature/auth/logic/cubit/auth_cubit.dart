@@ -2,8 +2,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:nourish_me/feature/auth/view/widgets/height_counter.dart';
-import 'package:nourish_me/feature/auth/view/widgets/weightcounters.dart';
 
 import '../../data/models/login_model.dart';
 import '../../data/repositories/continue_register_repo.dart';
@@ -22,6 +20,12 @@ class AuthCubit extends Cubit<AuthState> {
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   bool rememberMe = false;
+  int ageCounter = 18;
+  int weightCounter = 50;
+  int heightCounter = 160;
+  Timer? _timerAge;
+  Timer? _timerHeight;
+  Timer? _timerWeight;
   late LoginRepo loginRepo;
   late SignUpRepo signUpRepo;
   late ContinueRegisterRepo continueRegisterRepo;
@@ -71,7 +75,6 @@ class AuthCubit extends Cubit<AuthState> {
     );
   }
 
-  int ageCounter = 18;
   void increamnetAge() {
     emit(LoadingCounter());
     ageCounter++;
@@ -84,13 +87,11 @@ class AuthCubit extends Cubit<AuthState> {
     emit(DecreamentCounter());
   }
 
-  int weightCounter = 50;
   void onlongPressedincreamnetWeight() {
     emit(LoadingCounter());
     weightCounter = weightCounter + 5;
     emit(IncreamentCounter());
   }
-  
 
   void onpreesedincreamnetWeight() {
     emit(LoadingCounter());
@@ -104,7 +105,6 @@ class AuthCubit extends Cubit<AuthState> {
     emit(DecreamentCounter());
   }
 
-  int heightCounter = 160;
   void onLongPressedincreamnetHeight() {
     emit(LoadingCounter());
     heightCounter = heightCounter + 5;
@@ -123,10 +123,6 @@ class AuthCubit extends Cubit<AuthState> {
     emit(DecreamentCounter());
   }
 
-  Timer? _timerAge;
-  Timer? _timerHeight;
-  Timer? _timerWeight;
-
   void startTimerIncreaseAge() {
     _timerAge = Timer.periodic(const Duration(milliseconds: 100), (timer) {
       ageCounter++;
@@ -134,7 +130,6 @@ class AuthCubit extends Cubit<AuthState> {
     });
   }
 
-  
   void startTimerIncreaseHeight() {
     _timerHeight = Timer.periodic(const Duration(milliseconds: 100), (timer) {
       heightCounter++;
@@ -142,7 +137,6 @@ class AuthCubit extends Cubit<AuthState> {
     });
   }
 
-  
   void startTimerIncreaseWeight() {
     _timerWeight = Timer.periodic(const Duration(milliseconds: 100), (timer) {
       weightCounter++;
@@ -164,7 +158,6 @@ class AuthCubit extends Cubit<AuthState> {
     });
   }
 
-  
   void startTimerDecreaseWeight() {
     _timerWeight = Timer.periodic(const Duration(milliseconds: 100), (timer) {
       weightCounter--;
