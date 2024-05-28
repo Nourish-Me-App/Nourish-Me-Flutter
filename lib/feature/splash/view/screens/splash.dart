@@ -3,7 +3,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nourish_me/core/helpers/app_images.dart';
+import 'package:nourish_me/core/helpers/cache_helper.dart';
+import 'package:nourish_me/main.dart';
 
+import '../../../../core/helpers/app_constants.dart';
 import '../../../../core/routing/routes.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -29,7 +32,15 @@ class _SplashScreenState extends State<SplashScreen>
     mySecondFadeAnimation();
     timer = Timer(const Duration(milliseconds: 5000), () {
       Navigator.of(context).pushNamedAndRemoveUntil(
-        Routes.onBoarding,
+        showOnBoarding == null
+            ? Routes.onBoarding
+            : CacheHelper().getData(key: AppConstants.rememberMeToken) == null
+                ? Routes.signUpScreen
+                : CacheHelper().getData(
+                            key: AppConstants.isFirstQuestionsComplete) ==
+                        'no'
+                    ? Routes.questions
+                    : Routes.bottomNavBar,
         (route) => false,
       );
     });

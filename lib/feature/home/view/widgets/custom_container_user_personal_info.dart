@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nourish_me/feature/home/logic/cubit/home_cubit.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/theme/app_colors.dart';
 
@@ -43,9 +42,10 @@ class CustomContainerUserInfo extends StatelessWidget {
             Text(
               titleThree,
               style: AppTextStyles.cairo18BoldBlack.copyWith(
-                  fontSize: 12.sp,
-                  fontWeight: FontWeight.w600,
-                  color: const Color(0xff7A7C7B)),
+                fontSize: 12.sp,
+                fontWeight: FontWeight.w600,
+                color: AppColors.mainColor,
+              ),
             ),
             const Spacer(),
             CircleAvatar(
@@ -65,7 +65,7 @@ class CustomContainerUserInfo extends StatelessWidget {
             CircleAvatar(
               radius: 12.r,
               backgroundColor: Colors.white,
-              child: svgPathThree,
+              child: svgPathOne,
             ),
             SizedBox(width: 5.w),
             Text(

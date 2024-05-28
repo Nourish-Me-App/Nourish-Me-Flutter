@@ -56,11 +56,11 @@ dependencies:
   rulers: ^1.0.7
   # For navigation bar.
   google_nav_bar: ^5.0.6
-  # for navigation in onBoarding.
+  # For navigation in onBoarding.
   smooth_page_indicator: ^1.1.0
-  # for timeUp screen 
+  # For timeUp screen 
   circular_countdown_timer: ^0.2.3
-  # for internet connection.
+  # For internet connection.
   flutter_offline: "^3.0.1"
 
 
@@ -90,7 +90,7 @@ flutter:
     - assets/svgs/
     - assets/svgs/auth/
     - assets/svgs/settings/
-    - assets/svgs/on_boarding/
+    - assets/images/on_boarding/
     - assets/images/meals/
     - assets/images/splash/
     - assets/svgs/results/

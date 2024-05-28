@@ -25,8 +25,9 @@ class _TimesUpScreenState extends State<TimesUpScreen> {
       appBar: AppBar(),
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('assets/images/Group 428.png'),
+            Image.asset(Assets.imagesTimeOver),
             SizedBox(
               height: 10.h,
             ),
@@ -37,20 +38,24 @@ class _TimesUpScreenState extends State<TimesUpScreen> {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            Text(
-              'استرح الان وسيبدء التمرين التالي في غضون بضع ثواني ',
-              textAlign: TextAlign.center,
-              style: AppTextStyles.cairo18BoldBlack.copyWith(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w600,
+            SizedBox(height: 32.h),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 32.w),
+              child: Text(
+                'استرح الان وسيبدء التمرين التالي في غضون بضع ثواني ',
+                textAlign: TextAlign.center,
+                style: AppTextStyles.cairo18BoldBlack.copyWith(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
             SizedBox(
               height: 28.h,
             ),
             CircularCountDownTimer(
-              width: 100.w,
-              height: 100.h,
+              width: 75.w,
+              height: 75.h,
               duration: 10,
               fillColor: AppColors.mainColor,
               ringColor: AppColors.skipButtonColor,

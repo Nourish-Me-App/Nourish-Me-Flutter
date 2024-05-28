@@ -77,7 +77,7 @@ class PlatformCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       splashFactory: NoSplash.splashFactory,
-      overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+      overlayColor: const WidgetStatePropertyAll(Colors.transparent),
       onTap: integrateWith,
       child: SizedBox(
         height: 60.h,

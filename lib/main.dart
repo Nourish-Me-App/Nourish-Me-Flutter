@@ -9,6 +9,7 @@ import 'core/helpers/cache_helper.dart';
 import 'core/helpers/helper_methods.dart';
 import 'nourish_me.dart';
 
+bool? showOnBoarding;
 void main() async {
   await Future.wait<void>([
     ScreenUtil.ensureScreenSize(),
@@ -19,8 +20,9 @@ void main() async {
   ]);
   WidgetsFlutterBinding.ensureInitialized();
   GoogleFonts.config.allowRuntimeFetching = false;
+  showOnBoarding = CacheHelper().getData(key: 'first_time_run');
   HelperMethods.svgPrecacheImage();
-
+  CacheHelper().saveData(key: 'first_time_run', value: true);
   LicenseRegistry.addLicense(
     () async* {
       final license = await rootBundle.loadString('assets/fonts/cairo/OFL.txt');

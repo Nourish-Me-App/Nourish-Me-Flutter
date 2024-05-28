@@ -26,9 +26,9 @@ class AuthContinueQuestion extends StatelessWidget {
           ),
           TextButton(
             style: const ButtonStyle(
-              padding: MaterialStatePropertyAll(EdgeInsets.zero),
-              overlayColor: MaterialStatePropertyAll(Colors.transparent),
-              surfaceTintColor: MaterialStatePropertyAll(Colors.transparent),
+              padding: WidgetStatePropertyAll(EdgeInsets.zero),
+              overlayColor: WidgetStatePropertyAll(Colors.transparent),
+              surfaceTintColor: WidgetStatePropertyAll(Colors.transparent),
               splashFactory: NoSplash.splashFactory,
             ),
             onPressed: () => route == Routes.loginScreen

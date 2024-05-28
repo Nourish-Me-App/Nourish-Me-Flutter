@@ -1,16 +1,17 @@
-
-
-
-
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:nourish_me/core/imports/login_imports.dart';
-import 'package:nourish_me/core/imports/questions_screen_imports.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nourish_me/core/helpers/app_images.dart';
 import 'package:nourish_me/feature/workout/data/item_model.dart';
 import 'package:nourish_me/feature/workout/view/screens/times_up_screen.dart';
 
+import '../../../../core/helpers/helper_methods.dart';
+import '../../../../core/theme/app_colors.dart';
+import '../../../../core/theme/app_text_styles.dart';
+
 class DetailsScreen extends StatefulWidget {
-  const DetailsScreen({super.key, required this.currentIndex, required this.item});
+  const DetailsScreen(
+      {super.key, required this.currentIndex, required this.item});
   final int currentIndex;
   final List<ItemModel> item;
 
@@ -75,7 +76,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          Text('${widget.currentIndex + 1}/8'),
+          Padding(
+            padding: EdgeInsets.only(right: 8.w),
+            child: Text('${widget.currentIndex + 1}/8'),
+          ),
         ],
       ),
       body: AnimatedSwitcher(
@@ -94,14 +98,17 @@ class _DetailsScreenState extends State<DetailsScreen> {
       key: ValueKey<int>(index),
       child: Column(
         children: [
-          Image.asset(item.image!),
+          Image.asset(
+            item.image!,
+            height: 265.h,
+          ),
           SizedBox(
             height: 26.h,
           ),
           Text(
             item.name!,
-            style: AppTextStyles.cairo18BoldBlack.copyWith(
-                fontSize: 20.sp, fontWeight: FontWeight.w500),
+            style: AppTextStyles.cairo18BoldBlack
+                .copyWith(fontSize: 20.sp, fontWeight: FontWeight.w500),
           ),
           SizedBox(
             height: 26.h,
@@ -122,13 +129,13 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 onPressed: _onButtonPressed,
                 style: ButtonStyle(
                   backgroundColor:
-                      MaterialStateProperty.all(AppColors.mainColor),
-                  shape: MaterialStateProperty.all(
+                      const WidgetStatePropertyAll(AppColors.mainColor),
+                  shape: WidgetStatePropertyAll(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.r),
                     ),
                   ),
-                  elevation: MaterialStateProperty.all(0),
+                  elevation: WidgetStateProperty.all(0),
                 ),
                 child: Text(
                     isRunning ? (isPaused ? 'استمرار' : 'توقف') : 'أبدا',
@@ -152,7 +159,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         Navigator.pushReplacement(
                           context,
                           PageRouteBuilder(
-                            pageBuilder: (context, animation1, animation2) => DetailsScreen(
+                            pageBuilder: (context, animation1, animation2) =>
+                                DetailsScreen(
                               currentIndex: index - 1,
                               item: widget.item,
                             ),
@@ -160,7 +168,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           ),
                         );
                       },
-                      icon: Image.asset('assets/images/icon-park-outline_prev.png'),
+                      icon: Image.asset(Assets.imagesArrowNext),
                       label: Text(
                         'السابق',
                         style: AppTextStyles.cairo16Boldskip,
@@ -180,7 +188,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         Navigator.pushReplacement(
                           context,
                           PageRouteBuilder(
-                            pageBuilder: (context, animation1, animation2) => DetailsScreen(
+                            pageBuilder: (context, animation1, animation2) =>
+                                DetailsScreen(
                               currentIndex: index + 1,
                               item: widget.item,
                             ),
@@ -192,7 +201,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             context, 'تم الانتهاء من التمرين');
                       }
                     },
-                    icon: Image.asset('assets/images/icon-park-outline_next.png'),
+                    icon: Image.asset(Assets.imagesArrowNext),
                     label: Text(
                       'تخطي',
                       style: AppTextStyles.cairo16Boldskip,
