@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:nourish_me/feature/home/data/model/home_model.dart';
 
 import '../../feature/auth/data/models/login_model.dart';
 import '../../feature/auth/logic/cubit/auth_cubit.dart';
@@ -380,7 +381,8 @@ class HelperMethods {
     }
   }
 
-  static Future<Widget?> showLogoutAlertDialog(context,Function() buttonAction) {
+  static Future<Widget?> showLogoutAlertDialog(
+      context, Function() buttonAction) {
     return showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -435,5 +437,39 @@ class HelperMethods {
         ),
       ),
     );
+  }
+
+  static String calculateBMI(String? massIndex) {
+    double bmi = double.parse(massIndex!);
+    String bmiCategory;
+
+    switch (bmiCategory = bmi <= 18.5
+        ? 'نقص وزن'
+        : bmi >= 18.5 && bmi <= 24.9
+            ? 'وزن طبيعي'
+            : bmi >= 25 && bmi <= 29.9
+                ? 'زيادة وزن'
+                : bmi >= 30 && bmi <= 34.9
+                    ? 'سمنة درجة اولى'
+                    : bmi >= 35 && bmi <= 39.9
+                        ? 'سمنة درجة ثانية'
+                        : bmi >= 40
+                            ? 'سمنة مفرطة'
+                            : 'غير معروف') {
+      case 'نقص وزن':
+        return 'نقص وزن';
+      case 'وزن طبيعي':
+        return 'وزن طبيعي';
+      case 'زيادة وزن':
+        return 'زيادة وزن';
+      case 'سمنة درجة اولى':
+        return 'سمنة درجة اولى';
+      case 'سمنة درجة ثانية':
+        return 'سمنة درجة ثانية';
+      case 'سمنة مفرطة':
+        return 'سمنة مفرطة';
+      default:
+        return 'غير معروف';
+    }
   }
 }

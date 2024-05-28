@@ -11,6 +11,7 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit(this.homeRepo) : super(HomeInitial());
   late HomeRepo homeRepo;
 
+
   Future<void> fetchHomeData(String path) async {
     emit(HomeLoadingState());
     try {
@@ -23,4 +24,5 @@ class HomeCubit extends Cubit<HomeState> {
       emit(HomeFailureState(error: e.toString()));
     }
   }
+
 }

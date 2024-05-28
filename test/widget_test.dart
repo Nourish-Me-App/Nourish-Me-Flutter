@@ -13,7 +13,7 @@ import 'package:nourish_me/nourish_me.dart';
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const NourishMe());
+    await tester.pumpWidget( NourishMe());
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

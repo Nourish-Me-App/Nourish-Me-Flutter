@@ -108,7 +108,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           title: 'مؤشر كتلة الجسم ',
                           svgPath: SvgPicture.asset(Assets.svgsResultsVector),
                           resultOne: '${homeModel.data!.massIndex}',
-                          resultTwo: '${homeModel.data!.massIndex}',
+                          resultTwo: HelperMethods.calculateBMI(
+                              homeModel.data!.massIndex),
                         ),
                         SizedBox(height: 15.h),
                         CustomContainer(
