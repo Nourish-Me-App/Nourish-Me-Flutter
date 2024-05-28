@@ -10,15 +10,8 @@ import 'core/helpers/cache_helper.dart';
 import 'core/helpers/helper_methods.dart';
 import 'nourish_me.dart';
 
-import 'package:path_provider/path_provider.dart';
-
+bool? showOnBoarding;
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  final storage = await HydratedStorage.build(
-    storageDirectory: await getApplicationDocumentsDirectory(),
-  );
-
   await Future.wait<void>([
     ScreenUtil.ensureScreenSize(),
     CacheHelper().init(),
@@ -28,8 +21,9 @@ void main() async {
   ]);
 
   GoogleFonts.config.allowRuntimeFetching = false;
+  showOnBoarding = CacheHelper().getData(key: 'first_time_run');
   HelperMethods.svgPrecacheImage();
-
+  CacheHelper().saveData(key: 'first_time_run', value: true);
   LicenseRegistry.addLicense(
     () async* {
       final license = await rootBundle.loadString('assets/fonts/cairo/OFL.txt');
@@ -38,11 +32,6 @@ void main() async {
         license,
       );
     },
-  );
-  HydratedBloc.storage = await HydratedStorage.build(
-    storageDirectory: kIsWeb
-        ? HydratedStorage.webStorageDirectory
-        : await getApplicationDocumentsDirectory(),
   );
 
   runApp(const NourishMe());

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:nourish_me/core/imports/app_routes_imports.dart';
-import 'package:nourish_me/core/imports/login_imports.dart';
+
+import '../../../../core/theme/app_text_styles.dart';
 
 class TextWidget extends StatelessWidget {
   const TextWidget(
     this.text, {
-    Key? key,
+    super.key,
     this.color,
     this.overflow,
     this.textDirection,
@@ -14,7 +14,7 @@ class TextWidget extends StatelessWidget {
     this.fontWeight,
     this.shadows,
     this.maxLines,
-  }) : super(key: key);
+  });
   final String text;
   final Color? color;
   final TextOverflow? overflow;
@@ -27,7 +27,7 @@ class TextWidget extends StatelessWidget {
 
   const TextWidget.bigTitle(
     this.text, {
-    Key? key,
+    super.key,
     this.color = Colors.black,
     this.overflow,
     this.textDirection,
@@ -36,15 +36,17 @@ class TextWidget extends StatelessWidget {
     this.fontWeight = FontWeight.w700,
     this.shadows,
     this.maxLines,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Text(text,
-        overflow: overflow ?? TextOverflow.ellipsis,
-        textDirection: textDirection,
-        textAlign: textAlign,
-        maxLines: maxLines,
-        style: AppTextStyles.cairo15normaltextcolorOnboarding);
+    return Text(
+      text,
+      overflow: overflow ?? TextOverflow.ellipsis,
+      textDirection: textDirection,
+      textAlign: textAlign,
+      maxLines: maxLines,
+      style: AppTextStyles.cairo15normaltextcolorOnboarding,
+    );
   }
 }

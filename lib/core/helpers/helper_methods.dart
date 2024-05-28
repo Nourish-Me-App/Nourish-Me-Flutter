@@ -115,9 +115,6 @@ class HelperMethods {
       Assets.svgsAuthVerify,
       Assets.svgsAuthFemale,
       Assets.svgsAuthMale,
-      Assets.svgsOnBoardingOnBoarding1,
-      Assets.svgsOnBoardingOnBoarding2,
-      Assets.svgsOnBoardingOnBoarding3,
       Assets.iconsFacbookFilledBlue,
       Assets.iconsGoogle,
       Assets.svgsAppbarlogo,
@@ -142,7 +139,6 @@ class HelperMethods {
       Assets.svgsSettingsEmailChange,
       Assets.svgsSettingsPassChange,
       Assets.svgsSettingsRate,
-      Assets.svgsLogoutWarning,
     ];
 
     for (String element in cacheSvgImages) {
@@ -395,7 +391,11 @@ class HelperMethods {
             padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
             child: Column(
               children: [
-                SvgPicture.asset(Assets.svgsLogoutWarning),
+                Image.asset(
+                  Assets.imagesLogoutWarning,
+                  height: 120.h,
+                  width: 120.w,
+                ),
                 SizedBox(height: 16.h),
                 Text(
                   'هل تريد تسجيل الخروج من حسابك ؟',

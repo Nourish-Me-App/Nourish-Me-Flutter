@@ -1,7 +1,9 @@
-import 'package:nourish_me/core/imports/app_routes_imports.dart';
-import 'package:nourish_me/core/imports/login_imports.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nourish_me/core/helpers/app_images.dart';
 import 'package:nourish_me/core/theme/app_colors.dart';
 import 'package:nourish_me/core/theme/app_text_styles.dart';
+
+import '../../../../core/imports/app_routes_imports.dart';
 
 class ItemCard extends StatelessWidget {
   const ItemCard(
@@ -55,7 +57,7 @@ class ItemCard extends StatelessWidget {
                 ),
                 const Spacer(),
                 IconButton(
-                  icon: Image.asset('assets/images/ep_arrow-up-bold.png'),
+                  icon: Image.asset(Assets.imagesArrowRight),
                   onPressed: onTap,
                 ),
               ],

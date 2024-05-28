@@ -4,7 +4,6 @@ import 'package:flutter_offline/flutter_offline.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:nourish_me/core/helpers/app_images.dart';
-import 'package:nourish_me/core/imports/questions_screen_imports.dart';
 import 'package:nourish_me/core/widgets/custom_app_bar.dart';
 import 'package:nourish_me/feature/home/data/model/home_model.dart';
 import 'package:nourish_me/feature/home/logic/cubit/home_cubit.dart';
@@ -12,6 +11,9 @@ import 'package:nourish_me/feature/home/view/widgets/custom_container.dart';
 import 'package:nourish_me/feature/home/view/widgets/custom_container_user_personal_info.dart';
 import 'package:nourish_me/feature/home/view/widgets/custom_user_mass.dart';
 import 'package:nourish_me/feature/home/view/widgets/shimmer_home.dart';
+
+import '../../../../core/helpers/app_constants.dart';
+import '../../../../core/theme/app_colors.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -59,10 +61,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     Text(
                       'لا يوجد اتصال بالإنترنت',
                       style: TextStyle(
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Cairo',
-                          color: AppColors.mainColor),
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Cairo',
+                        color: AppColors.mainColor,
+                      ),
                     ),
                   ],
                 ),
@@ -86,11 +89,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         SvgPicture.asset(Assets.svgsResultsResults),
                         SizedBox(height: 32.h),
                         CustomContainerUserInfo(
-                          titleOne: '${homeModel.data!.ageInYears}',
+                          titleOne: '${homeModel.data!.ageInYears} years',
                           titleTwo: '${homeModel.data!.heightInCM} cm',
                           titleThree: '${homeModel.data!.weightInKG} kg',
-                          svgPathOne:
-                              SvgPicture.asset(Assets.svgsResultsCilChild),
+                          svgPathOne: SvgPicture.asset(Assets.svgsResultsType),
                           svgPathTwo: SvgPicture.asset(
                               Assets.svgsResultsGuidanceGuestHeightLimit),
                           svgPathThree: SvgPicture.asset(

@@ -19,7 +19,7 @@ class SettingHeader extends StatelessWidget {
           child: InkWell(
             highlightColor: Colors.transparent,
             splashColor: Colors.transparent,
-            overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+            overlayColor: const WidgetStatePropertyAll(Colors.transparent),
             onTap: () {},
             child: Stack(
               alignment: Alignment.centerLeft,

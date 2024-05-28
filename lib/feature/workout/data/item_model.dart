@@ -1,3 +1,5 @@
+import 'package:nourish_me/core/helpers/app_images.dart';
+
 class ItemModel {
   String? name;
   String? image;
@@ -8,32 +10,34 @@ class ItemModel {
 List<ItemModel> item = [
   ItemModel(
       name: 'Mountain Climbers',
-      image: 'assets/images/mountainclimbers.png',
+      image: Assets.imagesOnBoardingOnBoarding2,
       time: '60:30 sec'),
   ItemModel(
       name: 'Jumping Jacks',
-      image: 'assets/images/High Knees.png',
+      image: Assets.imagesOnBoardingOnBoarding2,
       time: '60:30 sec'),
   ItemModel(
-      name: 'Burpees', image: 'assets/images/Burpees.png', time: '60:30 sec'),
+      name: 'Burpees',
+      image: Assets.imagesOnBoardingOnBoarding2,
+      time: '60:30 sec'),
   ItemModel(
       name: 'Squat jumps',
-      image: 'assets/images/Butt kicks.png',
+      image: Assets.imagesOnBoardingOnBoarding2,
       time: '60:30 sec'),
   ItemModel(
       name: 'High Knees',
-      image: 'assets/images/High Knees.png',
+      image: Assets.imagesOnBoardingOnBoarding2,
       time: '60:30 sec'),
   ItemModel(
       name: 'Butt kicks',
-      image: 'assets/images/Jumping jacks.png',
+      image: Assets.imagesOnBoardingOnBoarding2,
       time: '60:30 sec'),
   ItemModel(
       name: 'Trunk rotation',
-      image: 'assets/images/Squat jumps.png',
+      image: Assets.imagesOnBoardingOnBoarding2,
       time: '60:30 sec'),
   ItemModel(
       name: 'Jumping jacks',
-      image: 'assets/images/Trunk rotation.png',
+      image: Assets.imagesOnBoardingOnBoarding2,
       time: '60:30 sec'),
 ];
