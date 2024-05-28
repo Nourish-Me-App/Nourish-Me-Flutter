@@ -4,6 +4,7 @@ import 'package:flutter_offline/flutter_offline.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:nourish_me/core/helpers/app_images.dart';
+import 'package:nourish_me/core/helpers/helper_methods.dart';
 import 'package:nourish_me/core/widgets/custom_app_bar.dart';
 import 'package:nourish_me/feature/home/data/model/home_model.dart';
 import 'package:nourish_me/feature/home/logic/cubit/home_cubit.dart';
