@@ -15,7 +15,7 @@ class NourishMe extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, _) => MaterialApp(
-        initialRoute: Routes.continueRegisterScreen,
+        initialRoute: Routes.bottomNavBar,
         onGenerateRoute: AppRoutes().generateRoute,
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
