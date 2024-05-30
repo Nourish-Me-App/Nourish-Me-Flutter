@@ -15,30 +15,9 @@ import 'package:nourish_me/feature/home/view/widgets/custom_user_mass.dart';
 import 'package:nourish_me/feature/home/view/widgets/no_internet_connection.dart';
 import 'package:nourish_me/feature/home/view/widgets/shimmer_home.dart';
 
-import '../../../../core/helpers/app_constants.dart';
-import '../../../../core/theme/app_colors.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  late HomeCubit homeCubit;
-  @override
-  void initState() {
-    homeCubit = BlocProvider.of<HomeCubit>(context);
-    homeCubit.fetchHomeData(AppConstants.home);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    homeCubit.close();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
