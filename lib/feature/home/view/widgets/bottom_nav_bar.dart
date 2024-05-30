@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:nourish_me/core/helpers/app_constants.dart';
 import 'package:nourish_me/feature/home/data/repository/home_repository.dart';
 import 'package:nourish_me/feature/home/logic/cubit/home_cubit.dart';
 import '../../../../core/networking/dio_handler.dart';
@@ -29,7 +28,7 @@ List pages = [
   BlocProvider(
     create: (context) => HomeCubit(
       HomeRepo(DioHandler()),
-    )..fetchHomeData(AppConstants.home),
+    ),
     child: const HomeScreen(),
   ),
   const DietsScreen(),

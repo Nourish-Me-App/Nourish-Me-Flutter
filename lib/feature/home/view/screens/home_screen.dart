@@ -16,7 +16,6 @@ import 'package:nourish_me/feature/home/view/widgets/no_internet_connection.dart
 import 'package:nourish_me/feature/home/view/widgets/shimmer_home.dart';
 
 import '../../../../core/helpers/app_constants.dart';
-import '../../../../core/theme/app_colors.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -26,7 +25,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  HomeModel homeModel = HomeModel();
   late HomeCubit homeCubit;
+
   @override
   void initState() {
     homeCubit = BlocProvider.of<HomeCubit>(context);
@@ -60,15 +61,25 @@ class _HomeScreenState extends State<HomeScreen> {
           },
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.0.w),
-            child: BlocBuilder<HomeCubit, HomeState>(
+            child: BlocConsumer<HomeCubit, HomeState>(
+              listener: (context, state) {
+                if (state is HomeFailureState) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Failed to load data: ${state.error}'),
+                    ),
+                  );
+                }
+              },
               builder: (context, state) {
                 if (state is HomeLoadingState) {
                   return const ShimmerLoadingHome();
                 } else if (state is HomeFailureState) {
                   return Center(
-                      child: Text('Failed to load data: ${state.error}'));
+                    child: Text('Failed to load data: ${state.error}'),
+                  );
                 } else if (state is HomeSuccessState) {
-                  HomeModel homeModel = state.homeModel;
+                  homeModel = state.homeModel;
                   return SingleChildScrollView(
                     child: Column(
                       children: [

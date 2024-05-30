@@ -9,20 +9,33 @@ part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit(this.homeRepo) : super(HomeInitial());
-  late HomeRepo homeRepo;
+  final HomeRepo homeRepo;
 
+  bool isReceived = false;
+
+  HomeModel? cachedData;
 
   Future<void> fetchHomeData(String path) async {
-    emit(HomeLoadingState());
-    try {
-      var result = await homeRepo.getHomeData(path,CacheHelper().getData(key: AppConstants.token));
-      result.fold(
-        (error) => emit(HomeFailureState(error: error)),
-        (homeModel) => emit(HomeSuccessState(homeModel: homeModel)),
-      );
-    } catch (e) {
-      emit(HomeFailureState(error: e.toString()));
+    if (!isReceived || cachedData == null) {
+      emit(HomeLoadingState());
+      try {
+        var result = await homeRepo.getHomeData(
+          path,
+          CacheHelper().getData(key: AppConstants.token),
+        );
+        result.fold(
+          (error) => emit(HomeFailureState(error: error)),
+          (homeModel) {
+            cachedData = homeModel;
+            isReceived = true;
+            emit(HomeSuccessState(homeModel: homeModel));
+          },
+        );
+      } catch (e) {
+        emit(HomeFailureState(error: e.toString()));
+      }
+    } else {
+      emit(HomeSuccessState(homeModel: cachedData!));
     }
   }
-
 }

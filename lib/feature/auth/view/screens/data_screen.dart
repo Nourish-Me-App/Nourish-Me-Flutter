@@ -158,15 +158,6 @@ class _DataScreenState extends State<ContinueRegisterScreen> {
                             passwordConfirmation: CacheHelper()
                                 .getData(key: 'passwordConfirmation'),
                           ).then((value) {
-                            CacheHelper().saveData(
-                                key: 'age',
-                                value: authCubit.ageCounter.toString());
-                            CacheHelper().saveData(
-                                key: 'weigth',
-                                value: authCubit.weightCounter.toString());
-                            CacheHelper().saveData(
-                                key: 'height',
-                                value: authCubit.heightCounter.toString());
                             CacheHelper().removeData(key: 'email');
                             CacheHelper().removeData(key: 'name');
                             CacheHelper().removeData(key: 'password');
