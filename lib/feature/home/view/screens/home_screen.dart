@@ -5,12 +5,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:nourish_me/core/helpers/app_images.dart';
 import 'package:nourish_me/core/helpers/helper_methods.dart';
+import 'package:nourish_me/core/imports/verification_screen_imports.dart';
 import 'package:nourish_me/core/widgets/custom_app_bar.dart';
 import 'package:nourish_me/feature/home/data/model/home_model.dart';
 import 'package:nourish_me/feature/home/logic/cubit/home_cubit.dart';
 import 'package:nourish_me/feature/home/view/widgets/custom_container.dart';
 import 'package:nourish_me/feature/home/view/widgets/custom_container_user_personal_info.dart';
 import 'package:nourish_me/feature/home/view/widgets/custom_user_mass.dart';
+import 'package:nourish_me/feature/home/view/widgets/no_internet_connection.dart';
 import 'package:nourish_me/feature/home/view/widgets/shimmer_home.dart';
 
 import '../../../../core/helpers/app_constants.dart';
@@ -53,24 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
             if (connected) {
               return child;
             } else {
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    const Icon(Icons.signal_wifi_off, size: 80),
-                    const SizedBox(height: 20),
-                    Text(
-                      'لا يوجد اتصال بالإنترنت',
-                      style: TextStyle(
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Cairo',
-                        color: AppColors.mainColor,
-                      ),
-                    ),
-                  ],
-                ),
-              );
+              return const NoInternetConnection();
             }
           },
           child: Padding(

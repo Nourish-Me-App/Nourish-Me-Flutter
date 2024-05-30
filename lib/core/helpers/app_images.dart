@@ -458,4 +458,7 @@ class Assets {
   /// Assets for svgsSettingsRate
   /// assets/svgs/settings/rate.svg
   static const String svgsSettingsRate = "assets/svgs/settings/rate.svg";
+  /// Assets for noInternetConnection
+  /// assets/svgs/results/noConnection.svg
+  static const String noInternetConnection = "assets/svgs/results/noConnection.svg";
 }
