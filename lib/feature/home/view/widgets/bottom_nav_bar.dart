@@ -26,7 +26,9 @@ class BottomNav extends StatefulWidget {
 int selectedIndex = 0;
 List pages = [
   BlocProvider(
-    create: (context) => HomeCubit(HomeRepo(DioHandler())),
+    create: (context) => HomeCubit(
+      HomeRepo(DioHandler()),
+    ),
     child: const HomeScreen(),
   ),
   const DietsScreen(),

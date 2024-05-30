@@ -19,7 +19,7 @@ class HomeRepo {
         options: Options(headers: {'Authorization': 'Bearer $token'}),
       );
       var result = HomeModel.fromJson(response);
-      log(result.toString());
+      log(response.toString());
       return Right(result);
     } on ApiException catch (e) {
       return Left(e.errorModel.message!);
