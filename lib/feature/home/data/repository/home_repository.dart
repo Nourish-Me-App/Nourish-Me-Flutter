@@ -1,10 +1,8 @@
-import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:nourish_me/core/errors/api/exceptions/api_exception.dart';
-import 'package:nourish_me/core/networking/api_services.dart';
-import 'package:nourish_me/feature/home/data/model/home_model.dart';
+import '../../../../core/errors/api/exceptions/api_exception.dart';
+import '../../../../core/networking/api_services.dart';
+import '../model/home_model.dart';
 
 class HomeRepo {
   late ApiServices apiServices;
@@ -19,7 +17,6 @@ class HomeRepo {
         options: Options(headers: {'Authorization': 'Bearer $token'}),
       );
       var result = HomeModel.fromJson(response);
-      log(response.toString());
       return Right(result);
     } on ApiException catch (e) {
       return Left(e.errorModel.message!);

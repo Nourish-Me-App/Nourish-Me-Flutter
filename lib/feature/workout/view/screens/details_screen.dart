@@ -1,13 +1,14 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nourish_me/core/helpers/app_images.dart';
-import 'package:nourish_me/feature/workout/data/item_model.dart';
-import 'package:nourish_me/feature/workout/view/screens/times_up_screen.dart';
 
+import '../../../../core/helpers/app_images.dart';
 import '../../../../core/helpers/helper_methods.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
+import '../../data/item_model.dart';
+import 'times_up_screen.dart';
 
 class DetailsScreen extends StatefulWidget {
   const DetailsScreen(

@@ -1,4 +1,4 @@
-import 'package:nourish_me/core/helpers/app_images.dart';
+import '../../../core/helpers/app_images.dart';
 
 class ItemModel {
   String? name;

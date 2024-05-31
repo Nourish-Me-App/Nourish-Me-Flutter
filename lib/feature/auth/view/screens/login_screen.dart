@@ -74,6 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Hero(
                           tag: 'login',
                           child: Material(
+                            color: Colors.transparent,
                             child: Text(
                               'تسجيل الدخول',
                               textDirection: TextDirection.rtl,
@@ -86,6 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         const Hero(
                           tag: 'emailLabel',
                           child: Material(
+                            color: Colors.transparent,
                             child: TFFLabel(label: 'البريد الإلكتروني'),
                           ),
                         ),

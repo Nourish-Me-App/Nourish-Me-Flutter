@@ -133,7 +133,21 @@ class AppRoutes {
         );
       case Routes.bottomNavBar:
         return MaterialPageRoute(
-          builder: (context) => const BottomNav(),
+          builder: (context) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => HomeCubit(
+                  HomeRepo(DioHandler()),
+                )..fetchHomeData(AppConstants.home),
+              ),
+              BlocProvider(
+                create: (context) => SettingsCubit(
+                  LogoutRepo(DioHandler()),
+                ),
+              ),
+            ],
+            child: const BottomNav(),
+          ),
         );
     }
     return null;

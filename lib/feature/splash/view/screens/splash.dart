@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nourish_me/core/helpers/app_images.dart';
-import 'package:nourish_me/core/helpers/cache_helper.dart';
-import 'package:nourish_me/main.dart';
+import '../../../../core/helpers/app_images.dart';
+import '../../../../core/helpers/cache_helper.dart';
+import '../../../../main.dart';
 
 import '../../../../core/helpers/app_constants.dart';
 import '../../../../core/routing/routes.dart';

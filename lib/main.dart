@@ -18,7 +18,7 @@ void main() async {
       GoogleFonts.cairo(),
     ]),
   ]);
-
+  WidgetsFlutterBinding.ensureInitialized();
   GoogleFonts.config.allowRuntimeFetching = false;
   showOnBoarding = CacheHelper().getData(key: 'first_time_run');
   HelperMethods.svgPrecacheImage();

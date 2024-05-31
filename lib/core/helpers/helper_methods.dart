@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:nourish_me/core/imports/login_imports.dart';
-import 'package:nourish_me/feature/home/data/model/home_model.dart';
 
 import '../../feature/auth/data/models/login_model.dart';
 import '../../feature/auth/logic/cubit/auth_cubit.dart';
@@ -109,7 +107,7 @@ class HelperMethods {
 
   static void svgPrecacheImage() {
     const cacheSvgImages = [
-      Assets.noInternetConnection,
+      Assets.svgsResultsNoConnection,
       Assets.svgsAuthQuestion,
       Assets.svgsAppLogo,
       Assets.svgsAuthCongratulation,
@@ -120,7 +118,7 @@ class HelperMethods {
       Assets.iconsFacbookFilledBlue,
       Assets.iconsGoogle,
       Assets.svgsAppbarlogo,
-      Assets.svgsResultsCilChild,
+      Assets.svgsResultsAge,
       Assets.svgsResultsFluentSpatulaSpoon16Regular,
       Assets.svgsResultsFluentMdl2Calories,
       Assets.svgsResultsGuidanceGuestHeightLimit,
@@ -132,7 +130,6 @@ class HelperMethods {
       Assets.svgsResultsSettingsSelected,
       Assets.svgsResultsTable,
       Assets.svgsResultsTableSelected,
-      Assets.svgsResultsType,
       Assets.svgsResultsVector,
       Assets.svgsResultsWaterdrop,
       Assets.svgsResultsWeightSelected,
@@ -443,6 +440,7 @@ class HelperMethods {
 
   static String calculateBMI(String? massIndex) {
     double bmi = double.parse(massIndex!);
+    // ignore: unused_local_variable
     String bmiCategory;
 
     switch (bmiCategory = bmi <= 18.5

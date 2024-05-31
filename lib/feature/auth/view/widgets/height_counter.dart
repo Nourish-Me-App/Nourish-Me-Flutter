@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,9 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../logic/cubit/auth_cubit.dart';
-
-import 'package:nourish_me/core/imports/app_routes_imports.dart';
-import '../../../../core/imports/login_imports.dart';
 
 class HeightCounter extends StatefulWidget {
   const HeightCounter({super.key});
@@ -25,7 +21,8 @@ class _HeightCounterState extends State<HeightCounter> {
   void initState() {
     super.initState();
     authCubit = BlocProvider.of<AuthCubit>(context);
-    _heightController = TextEditingController(text: authCubit.heightCounter.toString());
+    _heightController =
+        TextEditingController(text: authCubit.heightCounter.toString());
     _heightController.addListener(() {
       int? newValue = int.tryParse(_heightController.text);
       if (newValue != null && newValue >= 0) {
@@ -83,7 +80,7 @@ class _HeightCounterState extends State<HeightCounter> {
                   textAlign: TextAlign.center,
                   keyboardType: TextInputType.number,
                   style: AppTextStyles.cairo24Boldmaincolor,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: InputBorder.none,
                   ),
                   onSubmitted: (value) {
@@ -91,7 +88,8 @@ class _HeightCounterState extends State<HeightCounter> {
                     if (newValue != null && newValue >= 0) {
                       authCubit.updateHeight(newValue);
                     } else {
-                      _heightController.text = authCubit.heightCounter.toString();
+                      _heightController.text =
+                          authCubit.heightCounter.toString();
                     }
                   },
                 ),

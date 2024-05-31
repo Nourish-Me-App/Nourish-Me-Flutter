@@ -1,9 +1,9 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
-import 'package:nourish_me/core/imports/app_routes_imports.dart';
-import 'package:nourish_me/core/imports/login_imports.dart';
-import 'package:nourish_me/core/theme/app_colors.dart';
-import 'package:nourish_me/feature/workout/data/item_model.dart';
-import 'package:nourish_me/feature/workout/view/screens/details_screen.dart';
+import '../../../../core/imports/app_routes_imports.dart';
+import '../../../../core/imports/login_imports.dart';
+import '../../../../core/theme/app_colors.dart';
+import '../../data/item_model.dart';
+import 'details_screen.dart';
 
 class TimesUpScreen extends StatefulWidget {
   const TimesUpScreen({

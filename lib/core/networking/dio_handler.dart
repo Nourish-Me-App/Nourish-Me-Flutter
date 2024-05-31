@@ -21,6 +21,14 @@ class DioHandler extends ApiServices {
       },
     );
     dio = Dio(baseOptions);
+    dio.interceptors.add(LogInterceptor(
+      request: true,
+      requestHeader: true,
+      requestBody: true,
+      responseHeader: true,
+      responseBody: true,
+      error: true,
+    ));
   }
 
   @override

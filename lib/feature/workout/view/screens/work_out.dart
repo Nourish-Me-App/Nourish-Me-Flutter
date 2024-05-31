@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:nourish_me/feature/diets/view/widgets/tab_bar.dart';
-import 'package:nourish_me/feature/workout/data/item_model.dart';
-import 'package:nourish_me/feature/workout/view/screens/details_screen.dart';
-import 'package:nourish_me/feature/workout/view/widgets/item_card.dart';
-import 'package:nourish_me/feature/workout/view/widgets/workout_app_bar.dart';
+import '../../../diets/view/widgets/tab_bar.dart';
+import '../../data/item_model.dart';
+import 'details_screen.dart';
+import '../widgets/item_card.dart';
+import '../widgets/workout_app_bar.dart';
 
 class WorkOutScreen extends StatelessWidget {
   const WorkOutScreen({super.key});
