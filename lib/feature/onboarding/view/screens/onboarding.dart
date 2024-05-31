@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nourish_me/core/routing/routes.dart';
-import 'package:nourish_me/core/theme/app_colors.dart';
-import 'package:nourish_me/core/theme/app_text_styles.dart';
-import 'package:nourish_me/core/widgets/custom_border_button.dart';
-import 'package:nourish_me/core/widgets/custom_button.dart';
-import 'package:nourish_me/feature/onboarding/logic/on_boarding_cubit.dart';
-import 'package:nourish_me/feature/onboarding/view/widgets/text.dart';
+import '../../../../core/routing/routes.dart';
+import '../../../../core/theme/app_colors.dart';
+import '../../../../core/theme/app_text_styles.dart';
+import '../../../../core/widgets/custom_border_button.dart';
+import '../../../../core/widgets/custom_button.dart';
+import '../../logic/on_boarding_cubit.dart';
+import '../widgets/text.dart';
 
 class OnBoardingScreen extends StatelessWidget {
   const OnBoardingScreen({super.key});

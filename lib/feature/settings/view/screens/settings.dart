@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nourish_me/core/helpers/cache_helper.dart';
+import '../../../../core/helpers/cache_helper.dart';
 import '../../../../core/errors/messages/error_messages.dart';
 import '../../../../core/helpers/app_constants.dart';
 import '../../../../core/helpers/app_images.dart';

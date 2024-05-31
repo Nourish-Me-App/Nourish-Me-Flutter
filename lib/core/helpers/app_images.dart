@@ -363,9 +363,9 @@ class Assets {
   /// assets/svgs/auth/verify.svg
   static const String svgsAuthVerify = "assets/svgs/auth/verify.svg";
 
-  /// Assets for svgsResultsCilChild
-  /// assets/svgs/results/cil_child.svg
-  static const String svgsResultsCilChild = "assets/svgs/results/cil_child.svg";
+  /// Assets for svgsResultsAge
+  /// assets/svgs/results/age.svg
+  static const String svgsResultsAge = "assets/svgs/results/age.svg";
 
   /// Assets for svgsResultsFluentMdl2Calories
   /// assets/svgs/results/fluent-mdl2_calories.svg
@@ -396,6 +396,11 @@ class Assets {
   static const String svgsResultsIconParkOutlineWeight =
       "assets/svgs/results/icon-park-outline_weight.svg";
 
+  /// Assets for svgsResultsNoConnection
+  /// assets/svgs/results/noConnection.svg
+  static const String svgsResultsNoConnection =
+      "assets/svgs/results/noConnection.svg";
+
   /// Assets for svgsResultsResults
   /// assets/svgs/results/results.svg
   static const String svgsResultsResults = "assets/svgs/results/results.svg";
@@ -417,10 +422,6 @@ class Assets {
   /// assets/svgs/results/table_selected.svg
   static const String svgsResultsTableSelected =
       "assets/svgs/results/table_selected.svg";
-
-  /// Assets for svgsResultsType
-  /// "assets/svgs/results/age.svg"
-  static const String svgsResultsType = "assets/svgs/results/age.svg";
 
   /// Assets for svgsResultsVector
   /// assets/svgs/results/Vector.svg
@@ -458,7 +459,4 @@ class Assets {
   /// Assets for svgsSettingsRate
   /// assets/svgs/settings/rate.svg
   static const String svgsSettingsRate = "assets/svgs/settings/rate.svg";
-  /// Assets for noInternetConnection
-  /// assets/svgs/results/noConnection.svg
-  static const String noInternetConnection = "assets/svgs/results/noConnection.svg";
 }

@@ -12,6 +12,8 @@ class HomeModel {
     statusCode = json['status_code'];
     data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
+
+
 }
 
 class Data {
@@ -41,4 +43,7 @@ class Data {
     dietType = json['diet_type'];
     waterAmount = json['water_amount'];
   }
+
+ 
 }
+

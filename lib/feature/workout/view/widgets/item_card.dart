@@ -1,6 +1,6 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nourish_me/core/helpers/app_images.dart';
-import 'package:nourish_me/core/theme/app_colors.dart';
+import '../../../../core/helpers/app_images.dart';
+import '../../../../core/theme/app_colors.dart';
 import 'package:nourish_me/core/theme/app_text_styles.dart';
 
 import '../../../../core/imports/app_routes_imports.dart';

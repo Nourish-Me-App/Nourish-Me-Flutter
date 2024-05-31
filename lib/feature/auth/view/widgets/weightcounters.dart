@@ -1,5 +1,4 @@
-import 'package:nourish_me/core/imports/app_routes_imports.dart';
-
+import '../../../../core/imports/app_routes_imports.dart';
 import '../../../../core/imports/login_imports.dart';
 import '../../../../core/theme/app_colors.dart';
 
@@ -18,7 +17,8 @@ class _WeightCounterState extends State<WeightCounter> {
   void initState() {
     super.initState();
     authCubit = BlocProvider.of<AuthCubit>(context);
-    _weightController = TextEditingController(text: authCubit.weightCounter.toString());
+    _weightController =
+        TextEditingController(text: authCubit.weightCounter.toString());
     _weightController.addListener(() {
       int? newValue = int.tryParse(_weightController.text);
       if (newValue != null && newValue >= 0) {
@@ -84,7 +84,8 @@ class _WeightCounterState extends State<WeightCounter> {
                     if (newValue != null && newValue >= 0) {
                       authCubit.updateWeight(newValue);
                     } else {
-                      _weightController.text = authCubit.weightCounter.toString();
+                      _weightController.text =
+                          authCubit.weightCounter.toString();
                     }
                   },
                 ),
