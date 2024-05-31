@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:nourish_me/feature/home/data/repository/home_repository.dart';
-import 'package:nourish_me/feature/home/logic/cubit/home_cubit.dart';
-import '../../../../core/networking/dio_handler.dart';
-import '../../../../core/theme/app_text_styles.dart';
 
 import '../../../../core/helpers/app_images.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/theme/app_text_styles.dart';
 import '../../../diets/view/screen/diets_screen.dart';
-import '../../../settings/data/repositories/logout_repo.dart';
-import '../../../settings/logic/cubit/settings_cubit.dart';
 import '../../../settings/view/screens/settings.dart';
 import '../../../workout/view/screens/work_out.dart';
 import '../screens/home_screen.dart';
@@ -25,16 +19,10 @@ class BottomNav extends StatefulWidget {
 
 int selectedIndex = 0;
 List pages = [
-  BlocProvider(
-    create: (context) => HomeCubit(HomeRepo(DioHandler())),
-    child: const HomeScreen(),
-  ),
+  const HomeScreen(),
   const DietsScreen(),
   const WorkOutScreen(),
-  BlocProvider<SettingsCubit>(
-    create: (context) => SettingsCubit(LogoutRepo(DioHandler())),
-    child: const SettingsScreen(),
-  ),
+  const SettingsScreen(),
 ];
 
 class _BottomNavState extends State<BottomNav> {

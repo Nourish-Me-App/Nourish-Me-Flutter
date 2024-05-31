@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:nourish_me/core/errors/api/exceptions/api_exception.dart';
@@ -19,7 +17,6 @@ class HomeRepo {
         options: Options(headers: {'Authorization': 'Bearer $token'}),
       );
       var result = HomeModel.fromJson(response);
-      log(result.toString());
       return Right(result);
     } on ApiException catch (e) {
       return Left(e.errorModel.message!);

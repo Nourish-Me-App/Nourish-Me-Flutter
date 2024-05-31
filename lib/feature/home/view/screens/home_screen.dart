@@ -3,17 +3,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_offline/flutter_offline.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:nourish_me/core/helpers/app_images.dart';
-import 'package:nourish_me/core/widgets/custom_app_bar.dart';
-import 'package:nourish_me/feature/home/data/model/home_model.dart';
-import 'package:nourish_me/feature/home/logic/cubit/home_cubit.dart';
-import 'package:nourish_me/feature/home/view/widgets/custom_container.dart';
-import 'package:nourish_me/feature/home/view/widgets/custom_container_user_personal_info.dart';
-import 'package:nourish_me/feature/home/view/widgets/custom_user_mass.dart';
-import 'package:nourish_me/feature/home/view/widgets/shimmer_home.dart';
 
-import '../../../../core/helpers/app_constants.dart';
+import '../../../../core/helpers/app_images.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/widgets/custom_app_bar.dart';
+import '../../data/model/home_model.dart';
+import '../../logic/cubit/home_cubit.dart';
+import '../widgets/custom_container.dart';
+import '../widgets/custom_container_user_personal_info.dart';
+import '../widgets/custom_user_mass.dart';
+import '../widgets/shimmer_home.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -23,20 +22,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late HomeCubit homeCubit;
-  @override
-  void initState() {
-    homeCubit = BlocProvider.of<HomeCubit>(context);
-    homeCubit.fetchHomeData(AppConstants.home);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    homeCubit.close();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -84,6 +84,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                         const Hero(
                           tag: 'emailLabel',
                           child: Material(
+                            color: Colors.transparent,
                             child: TFFLabel(label: 'البريد الإلكتروني'),
                           ),
                         ),
