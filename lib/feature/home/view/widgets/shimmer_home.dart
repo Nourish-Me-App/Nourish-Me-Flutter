@@ -10,62 +10,65 @@ class ShimmerLoadingHome extends StatelessWidget {
     return Shimmer.fromColors(
       baseColor: Colors.grey[300]!,
       highlightColor: Colors.grey[100]!,
-      child: Column(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.r),
-              color: Colors.white,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 24.0),
+        child: Column(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.r),
+                color: Colors.white,
+              ),
+              width: double.infinity,
+              height: 282.0.h,
             ),
-            width: double.infinity,
-            height: 282.0.h,
-          ),
-          SizedBox(height: 15.0.h),
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.r),
-              color: Colors.white,
+            SizedBox(height: 15.0.h),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.r),
+                color: Colors.white,
+              ),
+              width: double.infinity,
+              height: 50.0.h,
             ),
-            width: double.infinity,
-            height: 50.0.h,
-          ),
-          SizedBox(height: 15.0.h),
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.r),
-              color: Colors.white,
+            SizedBox(height: 15.0.h),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.r),
+                color: Colors.white,
+              ),
+              width: double.infinity,
+              height: 50.0.h,
             ),
-            width: double.infinity,
-            height: 50.0.h,
-          ),
-          SizedBox(height: 15.0.h),
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.r),
-              color: Colors.white,
+            SizedBox(height: 15.0.h),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.r),
+                color: Colors.white,
+              ),
+              width: double.infinity,
+              height: 50.0.h,
             ),
-            width: double.infinity,
-            height: 50.0.h,
-          ),
-          SizedBox(height: 15.0.h),
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.r),
-              color: Colors.white,
+            SizedBox(height: 15.0.h),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.r),
+                color: Colors.white,
+              ),
+              width: double.infinity,
+              height: 50.0.h,
             ),
-            width: double.infinity,
-            height: 50.0.h,
-          ),
-          SizedBox(height: 15.0.h),
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.r),
-              color: Colors.white,
+            SizedBox(height: 15.0.h),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.r),
+                color: Colors.white,
+              ),
+              width: double.infinity,
+              height: 50.0.h,
             ),
-            width: double.infinity,
-            height: 50.0.h,
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
