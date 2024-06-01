@@ -101,7 +101,7 @@ class _WeightCounterState extends State<WeightCounter> {
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return "Please enter a weight";
+                      return "برجاء ادخال الوزن";
                     }
                     int? newValue = int.tryParse(value);
                     if (newValue == null || newValue < 50) {
@@ -110,7 +110,7 @@ class _WeightCounterState extends State<WeightCounter> {
                     return null;
                   },
                   onFieldSubmitted: (value) {
-                    if (Form.of(context)?.validate() ?? false) {
+                    if (Form.of(context).validate()) {
                       _showSnackBar("الوزن يجب ان يكون اكبر من او يساوي 50 kg");
                       _weightController.text =
                           authCubit.weightCounter.toString();

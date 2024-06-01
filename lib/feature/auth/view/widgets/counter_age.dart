@@ -110,7 +110,7 @@ class _CounterAgeState extends State<CounterAge> {
                     return null;
                   },
                   onFieldSubmitted: (value) {
-                    if (Form.of(context)?.validate() ?? false) {
+                    if (Form.of(context).validate() ) {
                       _showSnackBar("العمر يجب ان يكون اكبر من او يساوي 18 ");
                       _ageController.text = authCubit.ageCounter.toString();
                     } else {

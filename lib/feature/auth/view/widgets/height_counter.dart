@@ -110,7 +110,7 @@ class _HeightCounterState extends State<HeightCounter> {
                     return null;
                   },
                   onFieldSubmitted: (value) {
-                    if (Form.of(context)?.validate() ?? false) {
+                    if (Form.of(context).validate()) {
                       _showSnackBar("الطول يجب ان يكون اكبر من او يساوي 160 cm");
                       _heightController.text =
                           authCubit.heightCounter.toString();
