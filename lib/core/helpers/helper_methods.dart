@@ -150,6 +150,7 @@ class HelperMethods {
   static String getMealImage(String meal) {
     {
       if (meal.contains('رغيف') ||
+          meal.contains('خبز') ||
           (meal.contains('توست') && meal.contains('رغيف'))) {
         return Assets.imagesMealsBread;
       } else if (meal.contains('توست')) {
@@ -176,7 +177,11 @@ class HelperMethods {
     if (meal.contains('الفشار') || meal.contains('فشار')) {
       return Assets.imagesMealsPopcorn;
     }
-    if (meal.contains('بيضة') || meal.contains('بيضه')) {
+    if (meal.contains('بيضة') ||
+        meal.contains('بيضه') ||
+        meal.contains('بيضات') ||
+        meal.contains('بيضتين') ||
+        meal.contains('بيض')) {
       return Assets.imagesMealsSingleEgg;
     }
     if (meal.contains('سلطة') ||
@@ -184,7 +189,7 @@ class HelperMethods {
         meal.contains('السلطة')) {
       return Assets.imagesMealsSalad;
     }
-    if (meal.contains('أرز')) {
+    if (meal.contains('أرز') || meal.contains('ارز') || meal.contains('رز')) {
       return Assets.imagesMealsRice;
     }
     if (meal == 'بيضة اومليت' ||
@@ -196,6 +201,9 @@ class HelperMethods {
     }
     if (meal == 'معلقه صغيره زيت') {
       return Assets.imagesMealsOliveOil;
+    }
+    if (meal == ' خس' || meal == 'خس ' || meal == 'خس') {
+      return Assets.imagesMealsLettuce;
     }
     if (meal.contains('زبدة فول سوداني') ||
         meal.contains('زبدة الفول السوداني')) {
@@ -225,13 +233,17 @@ class HelperMethods {
         meal.contains('قطعة دجاج')) {
       return Assets.imagesMealsChicken;
     }
-    if (meal.contains('معكرونة') || meal.contains('معكرونه')) {
+    if (meal.contains('معكرونة') ||
+        meal.contains('معكرونه') ||
+        meal.contains('مكرونه') ||
+        meal.contains('مكرونة')) {
       return Assets.imagesMealsSpaghetti;
     }
     if (meal.contains('جبنة بالطماطم') ||
         meal.contains('جبنه بالطماطم') ||
         meal.contains('قطعه جبن متوسطه الحجم مع الطماطم') ||
         meal.contains('جبن ابيض منزوع الدسم') ||
+        meal.contains('جبن منزوع الدسم') ||
         meal.contains('جبنة قليلة الدسم') ||
         meal.contains('جبنه قليلة الدسم')) {
       return Assets.imagesMealsLowFatCheese;
@@ -242,7 +254,7 @@ class HelperMethods {
     if (meal.contains('جبن مع الخضراوات')) {
       return Assets.imagesMealsVegetableCheese;
     }
-    if (meal.contains('خضار مطهي')) {
+    if (meal.contains('خضار مطهي') || meal.contains('خضار مطبوخ')) {
       return Assets.imagesMealsCookedVege;
     }
     if (meal.contains('دجاج فيليه') ||
@@ -255,6 +267,7 @@ class HelperMethods {
     }
     if (meal.contains('خضار متقطع') ||
         meal.contains('خضار مقطع') ||
+        meal.contains('خضروات') ||
         meal.contains('شرائح طماطم وخضار') ||
         meal == 'خضار') {
       return Assets.imagesMealsVegetable;
@@ -278,7 +291,7 @@ class HelperMethods {
       return Assets.imagesMealsAlmonds;
     }
 
-    if (meal.contains('كيك بجوز الهند')) {
+    if (meal.contains('كيك بجوز الهند') || meal.contains('كعك بجوز الهند')) {
       return Assets.imagesMealsCoconutCake;
     }
     {
@@ -286,6 +299,10 @@ class HelperMethods {
         return Assets.imagesMealsOatMilk;
       } else if (meal.contains('كوب حليب')) {
         return Assets.imagesMealsMilk;
+      }
+      if (meal.contains('بسكويت') ||
+          meal.contains('بسكوت') && meal.contains('شوفان')) {
+        return Assets.imagesMealsBiscuit;
       }
     }
     if (meal.contains('شوفان') || meal.contains('الشوفان')) {
@@ -372,7 +389,7 @@ class HelperMethods {
         meal.contains('التونة')) {
       return Assets.imagesMealsTuna;
     } else {
-      return Assets.iconsAppIcon;
+      return Assets.imagesMealsDefaultFood;
     }
   }
 
@@ -457,11 +474,11 @@ class HelperMethods {
                             ? 'سمنة مفرطة'
                             : 'غير معروف') {
       case 'نقص وزن':
-        return 'نقص وزن';
+        return 'نحيف';
       case 'وزن طبيعي':
         return 'وزن طبيعي';
       case 'زيادة وزن':
-        return 'زيادة وزن';
+        return 'سمين';
       case 'سمنة درجة اولى':
         return 'سمنة درجة اولى';
       case 'سمنة درجة ثانية':

@@ -1,3 +1,5 @@
+import '../../feature/diets/data/repositories/diets_repo.dart';
+import '../../feature/diets/logic/cubit/diets_cubit.dart';
 import '../imports/app_routes_imports.dart';
 
 class CustomPageRoute extends MaterialPageRoute {
@@ -135,12 +137,17 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (context) => MultiBlocProvider(
             providers: [
-              BlocProvider(
+              BlocProvider<HomeCubit>(
                 create: (context) => HomeCubit(
                   HomeRepo(DioHandler()),
                 )..fetchHomeData(AppConstants.home),
               ),
-              BlocProvider(
+              BlocProvider<DietsCubit>(
+                create: (context) => DietsCubit(
+                  DietsRepo(DioHandler()),
+                )..fetchDietMeals(AppConstants.diet),
+              ),
+              BlocProvider<SettingsCubit>(
                 create: (context) => SettingsCubit(
                   LogoutRepo(DioHandler()),
                 ),

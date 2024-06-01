@@ -6,13 +6,12 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 
 class DietsCard extends StatelessWidget {
-  final int index, numberOfFood;
-  final String title;
+  final int index;
+  final List<List<String>?> meals;
   const DietsCard({
     super.key,
     required this.index,
-    required this.title,
-    required this.numberOfFood,
+    required this.meals,
   });
 
   @override
@@ -34,39 +33,44 @@ class DietsCard extends StatelessWidget {
         ),
         child: Column(
           children: List.generate(
-            numberOfFood,
-            (index) => Row(
-              children: [
-                SizedBox(
-                  width: 35.w,
-                  height: 35.h,
-                  child: Card(
-                    elevation: 0,
-                    surfaceTintColor: Colors.white,
-                    color: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.r),
-                    ),
-                    child: Center(
-                      child: Image.asset(
-                        HelperMethods.getMealImage(title),
-                        height: 20.h,
-                        width: 20.w,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(width: 8.w),
-                Expanded(
-                  child: Text(
-                    title,
-                    style: AppTextStyles.cairo12RegularBlack.copyWith(
-                      fontSize: 16.sp,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            meals[index]!.length,
+            (index) {
+              return meals[this.index]![index].trim() != ''
+                  ? Row(
+                      children: [
+                        SizedBox(
+                          width: 35.w,
+                          height: 35.h,
+                          child: Card(
+                            elevation: 0,
+                            surfaceTintColor: Colors.white,
+                            color: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.r),
+                            ),
+                            child: Center(
+                              child: Image.asset(
+                                HelperMethods.getMealImage(
+                                    meals[this.index]![index]),
+                                height: 20.h,
+                                width: 20.w,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 8.w),
+                        Expanded(
+                          child: Text(
+                            meals[this.index]![index],
+                            style: AppTextStyles.cairo12RegularBlack.copyWith(
+                              fontSize: 16.sp,
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                  : Container();
+            },
           ),
         ),
       ),

@@ -1,10 +1,10 @@
 class AppConstants {
-  static const String baseUrl =
-      "https://nourish-me.up.railway.app/api/v1/";
+  static const String baseUrl = "https://nourish-me.up.railway.app/api/v1/";
 
   static const String login = "users/login";
   static const String logout = "users/logout";
   static const String register = "users/register";
+  static const String diet = "users/diet";
   static const String forgetPassword = "users/forget-password";
   static const String checkCode = "users/reset-password/check";
   static const String resetPassword = "users/reset-password/reset";

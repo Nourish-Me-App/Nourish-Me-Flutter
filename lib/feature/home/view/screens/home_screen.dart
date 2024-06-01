@@ -4,24 +4,22 @@ import 'package:flutter_offline/flutter_offline.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../../core/helpers/app_constants.dart';
 import '../../../../core/helpers/app_images.dart';
-import '../../../../core/theme/app_colors.dart';
+import '../../../../core/helpers/helper_methods.dart';
 import '../../../../core/widgets/custom_app_bar.dart';
+import '../../../../core/widgets/error_body.dart';
 import '../../data/model/home_model.dart';
 import '../../logic/cubit/home_cubit.dart';
 import '../widgets/custom_container.dart';
 import '../widgets/custom_container_user_personal_info.dart';
 import '../widgets/custom_user_mass.dart';
+import '../widgets/no_internet_connection.dart';
 import '../widgets/shimmer_home.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,24 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
             if (connected) {
               return child;
             } else {
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    const Icon(Icons.signal_wifi_off, size: 80),
-                    const SizedBox(height: 20),
-                    Text(
-                      'لا يوجد اتصال بالإنترنت',
-                      style: TextStyle(
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Cairo',
-                        color: AppColors.mainColor,
-                      ),
-                    ),
-                  ],
-                ),
-              );
+              return const NoInternetConnection();
             }
           },
           child: Padding(
@@ -64,8 +45,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 if (state is HomeLoadingState) {
                   return const ShimmerLoadingHome();
                 } else if (state is HomeFailureState) {
-                  return Center(
-                      child: Text('Failed to load data: ${state.error}'));
+                  return ErrorBody(
+                    buttonAction: () async {
+                      await BlocProvider.of<HomeCubit>(context)
+                          .fetchHomeData(AppConstants.home);
+                    },
+                  );
                 } else if (state is HomeSuccessState) {
                   HomeModel homeModel = state.homeModel;
                   return SingleChildScrollView(
@@ -95,7 +80,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           title: 'مؤشر كتلة الجسم ',
                           svgPath: SvgPicture.asset(Assets.svgsResultsVector),
                           resultOne: '${homeModel.data!.massIndex}',
-                          resultTwo: '${homeModel.data!.massIndex}',
+                          resultTwo: HelperMethods.calculateBMI(
+                              homeModel.data!.massIndex),
                         ),
                         SizedBox(height: 15.h),
                         CustomContainer(

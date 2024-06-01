@@ -120,6 +120,11 @@ class Assets {
   /// assets/images/meals/date.png
   static const String imagesMealsDate = "assets/images/meals/date.png";
 
+  /// Assets for imagesMealsDefaultFood
+  /// assets/images/meals/default_food.png
+  static const String imagesMealsDefaultFood =
+      "assets/images/meals/default_food.png";
+
   /// Assets for imagesMealsEggplant
   /// assets/images/meals/eggplant.png
   static const String imagesMealsEggplant = "assets/images/meals/eggplant.png";
@@ -147,6 +152,10 @@ class Assets {
   /// Assets for imagesMealsJuice
   /// assets/images/meals/juice.png
   static const String imagesMealsJuice = "assets/images/meals/juice.png";
+
+  /// Assets for imagesMealsLettuce
+  /// assets/images/meals/lettuce.png
+  static const String imagesMealsLettuce = "assets/images/meals/lettuce.png";
 
   /// Assets for imagesMealsLiver
   /// assets/images/meals/liver.png
