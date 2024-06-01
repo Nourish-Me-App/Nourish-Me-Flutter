@@ -20,25 +20,38 @@ class _WeightCounterState extends State<WeightCounter> {
     authCubit = BlocProvider.of<AuthCubit>(context);
     _weightController =
         TextEditingController(text: authCubit.weightCounter.toString());
-    _weightController.addListener(() {
-      int? newValue = int.tryParse(_weightController.text);
+    _weightController.addListener(_handleWeightChange);
+  }
+
+  void _handleWeightChange() {
+    String text = _weightController.text;
+    if (text.isEmpty) {
+      _showSnackBar("برجاء ادخال الوزن");
+    } else {
+      int? newValue = int.tryParse(text);
       if (newValue != null) {
         if (newValue >= 50) {
           authCubit.updateWeight(newValue);
         } else {
-          _weightController.text = authCubit.weightCounter.toString();
-          if (!_isSnackBarShown) {
-            _isSnackBarShown = true;
-            HelperMethods.showCustomSnackBarError(
-                context, "الوزن يجب ان يكون اكبر من او يساوي 50 kg");
-          }
+          _showSnackBar("الوزن يجب ان يكون اكبر من او يساوي 50 kg");
         }
       }
-    });
+    }
+  }
+
+  void _showSnackBar(String message) {
+    if (!_isSnackBarShown) {
+      _isSnackBarShown = true;
+      HelperMethods.showCustomSnackBarError(context, message);
+      Future.delayed(const Duration(seconds: 3), () {
+        _isSnackBarShown = false;
+      });
+    }
   }
 
   @override
   void dispose() {
+    _weightController.removeListener(_handleWeightChange);
     _weightController.dispose();
     super.dispose();
   }
@@ -47,10 +60,6 @@ class _WeightCounterState extends State<WeightCounter> {
   Widget build(BuildContext context) {
     return BlocBuilder<AuthCubit, AuthState>(
       builder: (context, state) {
-        if (_weightController.text != authCubit.weightCounter.toString()) {
-          _weightController.text = authCubit.weightCounter.toString();
-        }
-
         return Container(
           width: double.infinity,
           height: 64.h,
@@ -81,7 +90,7 @@ class _WeightCounterState extends State<WeightCounter> {
               ),
               SizedBox(
                 width: 60.w,
-                child: TextField(
+                child: TextFormField(
                   cursorColor: AppColors.mainColor,
                   controller: _weightController,
                   textAlign: TextAlign.center,
@@ -90,23 +99,24 @@ class _WeightCounterState extends State<WeightCounter> {
                   decoration: const InputDecoration(
                     border: InputBorder.none,
                   ),
-                  onSubmitted: (value) {
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Please enter a weight";
+                    }
                     int? newValue = int.tryParse(value);
-                    if (newValue != null) {
-                      if (newValue >= 50) {
-                        authCubit.updateWeight(newValue);
-                      } else {
-                        _weightController.text =
-                            authCubit.weightCounter.toString();
-                        if (!_isSnackBarShown) {
-                          _isSnackBarShown = true;
-                          HelperMethods.showCustomSnackBarError(context,
-                              "kg الوزن يجب ان يكون اكبر من او يساوي 50");
-                        }
-                      }
-                    } else {
+                    if (newValue == null || newValue < 50) {
+                      return "الوزن يجب ان يكون اكبر من او يساوي 50 kg";
+                    }
+                    return null;
+                  },
+                  onFieldSubmitted: (value) {
+                    if (Form.of(context)?.validate() ?? false) {
+                      _showSnackBar("الوزن يجب ان يكون اكبر من او يساوي 50 kg");
                       _weightController.text =
                           authCubit.weightCounter.toString();
+                    } else {
+                      int newValue = int.parse(value);
+                      authCubit.updateWeight(newValue);
                     }
                   },
                 ),

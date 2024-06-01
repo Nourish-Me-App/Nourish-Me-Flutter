@@ -20,25 +20,38 @@ class _HeightCounterState extends State<HeightCounter> {
     authCubit = BlocProvider.of<AuthCubit>(context);
     _heightController =
         TextEditingController(text: authCubit.heightCounter.toString());
-    _heightController.addListener(() {
-      int? newValue = int.tryParse(_heightController.text);
+    _heightController.addListener(_handleheighttChange);
+  }
+
+  void _handleheighttChange() {
+    String text = _heightController.text;
+    if (text.isEmpty) {
+      _showSnackBar("برجاء ادخال الطول");
+    } else {
+      int? newValue = int.tryParse(text);
       if (newValue != null) {
         if (newValue >= 160) {
-          authCubit.updateHeight(newValue);
+          authCubit.updateWeight(newValue);
         } else {
-          _heightController.text = authCubit.heightCounter.toString();
-          if (!_isSnackBarShown) {
-            _isSnackBarShown = true;
-            HelperMethods.showCustomSnackBarError(
-                context, "الطول يجب ان يكون اكبر من او يساوي 160 cm");
-          }
+          _showSnackBar("الطول يجب ان يكون اكبر من او يساوي 160 cm");
         }
       }
-    });
+    }
+  }
+
+  void _showSnackBar(String message) {
+    if (!_isSnackBarShown) {
+      _isSnackBarShown = true;
+      HelperMethods.showCustomSnackBarError(context, message);
+      Future.delayed(const Duration(seconds: 3), () {
+        _isSnackBarShown = false;
+      });
+    }
   }
 
   @override
   void dispose() {
+    _heightController.removeListener(_handleheighttChange);
     _heightController.dispose();
     super.dispose();
   }
@@ -47,10 +60,6 @@ class _HeightCounterState extends State<HeightCounter> {
   Widget build(BuildContext context) {
     return BlocBuilder<AuthCubit, AuthState>(
       builder: (context, state) {
-        if (_heightController.text != authCubit.heightCounter.toString()) {
-          _heightController.text = authCubit.heightCounter.toString();
-        }
-
         return Container(
           width: double.infinity,
           height: 64.h,
@@ -81,7 +90,7 @@ class _HeightCounterState extends State<HeightCounter> {
               ),
               SizedBox(
                 width: 60.w,
-                child: TextField(
+                child: TextFormField(
                   cursorColor: AppColors.mainColor,
                   controller: _heightController,
                   textAlign: TextAlign.center,
@@ -90,23 +99,24 @@ class _HeightCounterState extends State<HeightCounter> {
                   decoration: const InputDecoration(
                     border: InputBorder.none,
                   ),
-                  onSubmitted: (value) {
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "برجاء ادخال الطول";
+                    }
                     int? newValue = int.tryParse(value);
-                    if (newValue != null) {
-                      if (newValue >= 160) {
-                        authCubit.updateHeight(newValue);
-                      } else {
-                        _heightController.text =
-                            authCubit.heightCounter.toString();
-                        if (!_isSnackBarShown) {
-                          _isSnackBarShown = true;
-                          HelperMethods.showCustomSnackBarError(context,
-                              "cm الطول يجب ان يكون اكبر من او يساوي 160 ");
-                        }
-                      }
-                    } else {
+                    if (newValue == null || newValue < 160) {
+                      return "الطول يجب ان يكون اكبر من او يساوي 160 cm";
+                    }
+                    return null;
+                  },
+                  onFieldSubmitted: (value) {
+                    if (Form.of(context)?.validate() ?? false) {
+                      _showSnackBar("الطول يجب ان يكون اكبر من او يساوي 160 cm");
                       _heightController.text =
                           authCubit.heightCounter.toString();
+                    } else {
+                      int newValue = int.parse(value);
+                      authCubit.updateHeight(newValue);
                     }
                   },
                 ),

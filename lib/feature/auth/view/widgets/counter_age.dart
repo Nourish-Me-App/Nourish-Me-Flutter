@@ -1,11 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nourish_me/core/helpers/helper_methods.dart';
-
+import '../../../../core/imports/app_routes_imports.dart';
+import '../../../../core/imports/login_imports.dart';
 import '../../../../core/theme/app_colors.dart';
-import '../../../../core/theme/app_text_styles.dart';
-import '../../logic/cubit/auth_cubit.dart';
 
 class CounterAge extends StatefulWidget {
   const CounterAge({super.key});
@@ -25,26 +20,38 @@ class _CounterAgeState extends State<CounterAge> {
     authCubit = BlocProvider.of<AuthCubit>(context);
     _ageController =
         TextEditingController(text: authCubit.ageCounter.toString());
-    _ageController.addListener(() {
-      // Update the cubit when the text field changes
-      int? newValue = int.tryParse(_ageController.text);
+    _ageController.addListener(_handleWeightChange);
+  }
+
+  void _handleWeightChange() {
+    String text = _ageController.text;
+    if (text.isEmpty) {
+      _showSnackBar("برجاء ادخال العمر");
+    } else {
+      int? newValue = int.tryParse(text);
       if (newValue != null) {
         if (newValue >= 18) {
-          authCubit.updateAge(newValue);
+          authCubit.updateWeight(newValue);
         } else {
-          _ageController.text = authCubit.ageCounter.toString();
-          if (!_isSnackBarShown) {
-            _isSnackBarShown = true;
-            HelperMethods.showCustomSnackBarError(
-                context, "السن يجب ان يكون اكبر من او يساوي 18 سنه");
-          }
+          _showSnackBar("سنة الوزن يجب ان يكون اكبر من او يساوي 18 ");
         }
       }
-    });
+    }
+  }
+
+  void _showSnackBar(String message) {
+    if (!_isSnackBarShown) {
+      _isSnackBarShown = true;
+      HelperMethods.showCustomSnackBarError(context, message);
+      Future.delayed(const Duration(seconds: 3), () {
+        _isSnackBarShown = false;
+      });
+    }
   }
 
   @override
   void dispose() {
+    _ageController.removeListener(_handleWeightChange);
     _ageController.dispose();
     super.dispose();
   }
@@ -53,11 +60,6 @@ class _CounterAgeState extends State<CounterAge> {
   Widget build(BuildContext context) {
     return BlocBuilder<AuthCubit, AuthState>(
       builder: (context, state) {
-        // Update the text field if the state changes
-        if (_ageController.text != authCubit.ageCounter.toString()) {
-          _ageController.text = authCubit.ageCounter.toString();
-        }
-
         return Container(
           width: double.infinity,
           height: 64.h,
@@ -70,7 +72,7 @@ class _CounterAgeState extends State<CounterAge> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               GestureDetector(
-                onLongPressStart: (_) => authCubit.startTimerIncreaseAge(),
+                onLongPressStart: (_) => authCubit.startTimerDecreaseAge(),
                 onLongPressEnd: (_) => authCubit.stopTimer(),
                 onTap: () {
                   authCubit.increamnetAge();
@@ -88,7 +90,7 @@ class _CounterAgeState extends State<CounterAge> {
               ),
               SizedBox(
                 width: 60.w,
-                child: TextField(
+                child: TextFormField(
                   cursorColor: AppColors.mainColor,
                   controller: _ageController,
                   textAlign: TextAlign.center,
@@ -97,21 +99,23 @@ class _CounterAgeState extends State<CounterAge> {
                   decoration: const InputDecoration(
                     border: InputBorder.none,
                   ),
-                  onSubmitted: (value) {
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "برجاء ادخال العمر";
+                    }
                     int? newValue = int.tryParse(value);
-                    if (newValue != null) {
-                      if (newValue >= 18) {
-                        authCubit.updateAge(newValue);
-                      } else {
-                        _ageController.text = authCubit.ageCounter.toString();
-                        if (!_isSnackBarShown) {
-                          _isSnackBarShown = true;
-                          HelperMethods.showCustomSnackBarError(context,
-                              "السن يجب ان يكون اكبر من او يساوي 18 سنه");
-                        }
-                      }
-                    } else {
+                    if (newValue == null || newValue < 18) {
+                      return "الوزن يجب ان يكون اكبر من او يساوي  18";
+                    }
+                    return null;
+                  },
+                  onFieldSubmitted: (value) {
+                    if (Form.of(context)?.validate() ?? false) {
+                      _showSnackBar("العمر يجب ان يكون اكبر من او يساوي 18 ");
                       _ageController.text = authCubit.ageCounter.toString();
+                    } else {
+                      int newValue = int.parse(value);
+                      authCubit.updateAge(newValue);
                     }
                   },
                 ),
