@@ -3,10 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_offline/flutter_offline.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../../../core/helpers/app_constants.dart';
 import '../../../../core/helpers/app_images.dart';
 import '../../../../core/helpers/helper_methods.dart';
+import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/custom_app_bar.dart';
 import '../../../../core/widgets/error_body.dart';
 import '../../data/model/home_model.dart';
@@ -25,7 +27,9 @@ class HomeScreen extends StatelessWidget {
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
         return Scaffold(
-          appBar: const MyAppBar(title: 'النتائج'),
+          appBar: state is HomeLoadingState
+              ? _buildShimmerAppBar()
+              : const MyAppBar(title: 'النتائج'),
           body: SafeArea(
             child: Column(
               children: [
@@ -36,7 +40,8 @@ class HomeScreen extends StatelessWidget {
                       ConnectivityResult connectivity,
                       Widget child,
                     ) {
-                      final bool connected = connectivity != ConnectivityResult.none;
+                      final bool connected =
+                          connectivity != ConnectivityResult.none;
                       if (connected) {
                         return child;
                       } else {
@@ -117,6 +122,24 @@ class HomeScreen extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  PreferredSizeWidget _buildShimmerAppBar() {
+    return AppBar(
+      title: Shimmer.fromColors(
+        baseColor: AppColors.dietContainerColor,
+        highlightColor: Colors.grey[200]!,
+        child: Container(
+          decoration: BoxDecoration(
+            color: AppColors.dietContainerColor,
+            borderRadius: BorderRadius.circular(10.r),
+          ),
+          width: 150.w,
+          height: 24.h,
+        ),
+      ),
+      centerTitle: true,
     );
   }
 }
