@@ -1,10 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import '../../../../core/imports/app_routes_imports.dart';
+import '../../../../core/imports/login_imports.dart';
 import '../../../../core/theme/app_colors.dart';
-import '../../../../core/theme/app_text_styles.dart';
-import '../../logic/cubit/auth_cubit.dart';
 
 class HeightCounter extends StatefulWidget {
   const HeightCounter({super.key});
@@ -16,6 +12,7 @@ class HeightCounter extends StatefulWidget {
 class _HeightCounterState extends State<HeightCounter> {
   late TextEditingController _heightController;
   late AuthCubit authCubit;
+  bool _isSnackBarShown = false;
 
   @override
   void initState() {
@@ -25,8 +22,17 @@ class _HeightCounterState extends State<HeightCounter> {
         TextEditingController(text: authCubit.heightCounter.toString());
     _heightController.addListener(() {
       int? newValue = int.tryParse(_heightController.text);
-      if (newValue != null && newValue >= 0) {
-        authCubit.updateHeight(newValue);
+      if (newValue != null) {
+        if (newValue >= 160) {
+          authCubit.updateHeight(newValue);
+        } else {
+          _heightController.text = authCubit.heightCounter.toString();
+          if (!_isSnackBarShown) {
+            _isSnackBarShown = true;
+            HelperMethods.showCustomSnackBarError(
+                context, "الطول يجب ان يكون اكبر من او يساوي 160 cm");
+          }
+        }
       }
     });
   }
@@ -85,8 +91,18 @@ class _HeightCounterState extends State<HeightCounter> {
                   ),
                   onSubmitted: (value) {
                     int? newValue = int.tryParse(value);
-                    if (newValue != null && newValue >= 0) {
-                      authCubit.updateHeight(newValue);
+                    if (newValue != null) {
+                      if (newValue >= 160) {
+                        authCubit.updateHeight(newValue);
+                      } else {
+                        _heightController.text =
+                            authCubit.heightCounter.toString();
+                        if (!_isSnackBarShown) {
+                          _isSnackBarShown = true;
+                          HelperMethods.showCustomSnackBarError(context,
+                              "cm الطول يجب ان يكون اكبر من او يساوي 160 ");
+                        }
+                      }
                     } else {
                       _heightController.text =
                           authCubit.heightCounter.toString();

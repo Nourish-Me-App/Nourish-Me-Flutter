@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nourish_me/core/helpers/helper_methods.dart';
 
 import '../../../../core/theme/app_colors.dart';
-
 import '../../../../core/theme/app_text_styles.dart';
 import '../../logic/cubit/auth_cubit.dart';
 
@@ -17,6 +17,7 @@ class CounterAge extends StatefulWidget {
 class _CounterAgeState extends State<CounterAge> {
   late TextEditingController _ageController;
   late AuthCubit authCubit;
+  bool _isSnackBarShown = false; 
 
   @override
   void initState() {
@@ -27,7 +28,15 @@ class _CounterAgeState extends State<CounterAge> {
       // Update the cubit when the text field changes
       int? newValue = int.tryParse(_ageController.text);
       if (newValue != null) {
-        authCubit.updateAge(newValue);
+        if (newValue >= 18) {
+          authCubit.updateAge(newValue);
+        } else {
+          _ageController.text = authCubit.ageCounter.toString();
+          if (!_isSnackBarShown) {
+            _isSnackBarShown = true;
+            HelperMethods.showCustomSnackBarError(context, "السن يجب ان يكون اكبر من او يساوي 18 سنه");
+          }
+        }
       }
     });
   }
@@ -88,7 +97,16 @@ class _CounterAgeState extends State<CounterAge> {
                   onSubmitted: (value) {
                     int? newValue = int.tryParse(value);
                     if (newValue != null) {
-                      authCubit.updateAge(newValue);
+                      if (newValue >= 18) {
+                        authCubit.updateAge(newValue);
+                      } else {
+                        _ageController.text = authCubit.ageCounter.toString();
+                        if (!_isSnackBarShown) {
+                          _isSnackBarShown = true;
+                          HelperMethods.showCustomSnackBarError(context,
+                              "السن يجب ان يكون اكبر من او يساوي 18 سنه");
+                        }
+                      }
                     } else {
                       _ageController.text = authCubit.ageCounter.toString();
                     }

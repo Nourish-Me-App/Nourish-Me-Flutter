@@ -12,6 +12,7 @@ class WeightCounter extends StatefulWidget {
 class _WeightCounterState extends State<WeightCounter> {
   late TextEditingController _weightController;
   late AuthCubit authCubit;
+  bool _isSnackBarShown = false;
 
   @override
   void initState() {
@@ -21,8 +22,17 @@ class _WeightCounterState extends State<WeightCounter> {
         TextEditingController(text: authCubit.weightCounter.toString());
     _weightController.addListener(() {
       int? newValue = int.tryParse(_weightController.text);
-      if (newValue != null && newValue >= 0) {
-        authCubit.updateWeight(newValue);
+      if (newValue != null) {
+        if (newValue >= 50) {
+          authCubit.updateWeight(newValue);
+        } else {
+          _weightController.text = authCubit.weightCounter.toString();
+          if (!_isSnackBarShown) {
+            _isSnackBarShown = true;
+            HelperMethods.showCustomSnackBarError(
+                context, "الوزن يجب ان يكون اكبر من او يساوي 50 kg");
+          }
+        }
       }
     });
   }
@@ -81,8 +91,18 @@ class _WeightCounterState extends State<WeightCounter> {
                   ),
                   onSubmitted: (value) {
                     int? newValue = int.tryParse(value);
-                    if (newValue != null && newValue >= 0) {
-                      authCubit.updateWeight(newValue);
+                    if (newValue != null) {
+                      if (newValue >= 50) {
+                        authCubit.updateWeight(newValue);
+                      } else {
+                        _weightController.text =
+                            authCubit.weightCounter.toString();
+                        if (!_isSnackBarShown) {
+                          _isSnackBarShown = true;
+                          HelperMethods.showCustomSnackBarError(context,
+                              "kg الوزن يجب ان يكون اكبر من او يساوي 50");
+                        }
+                      }
                     } else {
                       _weightController.text =
                           authCubit.weightCounter.toString();
