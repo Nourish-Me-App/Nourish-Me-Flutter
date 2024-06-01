@@ -111,7 +111,7 @@ class _DataScreenState extends State<ContinueRegisterScreen> {
                     SizedBox(
                       height: 10.h,
                     ),
-                    const CounterAge(),
+                     const CounterAge(),
                     SizedBox(
                       height: 20.h,
                     ),
