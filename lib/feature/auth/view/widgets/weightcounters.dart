@@ -82,6 +82,7 @@ class _WeightCounterState extends State<WeightCounter> {
               SizedBox(
                 width: 60.w,
                 child: TextField(
+                  cursorColor: AppColors.mainColor,
                   controller: _weightController,
                   textAlign: TextAlign.center,
                   keyboardType: TextInputType.number,

@@ -17,13 +17,14 @@ class CounterAge extends StatefulWidget {
 class _CounterAgeState extends State<CounterAge> {
   late TextEditingController _ageController;
   late AuthCubit authCubit;
-  bool _isSnackBarShown = false; 
+  bool _isSnackBarShown = false;
 
   @override
   void initState() {
     super.initState();
     authCubit = BlocProvider.of<AuthCubit>(context);
-    _ageController = TextEditingController(text: authCubit.ageCounter.toString());
+    _ageController =
+        TextEditingController(text: authCubit.ageCounter.toString());
     _ageController.addListener(() {
       // Update the cubit when the text field changes
       int? newValue = int.tryParse(_ageController.text);
@@ -34,7 +35,8 @@ class _CounterAgeState extends State<CounterAge> {
           _ageController.text = authCubit.ageCounter.toString();
           if (!_isSnackBarShown) {
             _isSnackBarShown = true;
-            HelperMethods.showCustomSnackBarError(context, "السن يجب ان يكون اكبر من او يساوي 18 سنه");
+            HelperMethods.showCustomSnackBarError(
+                context, "السن يجب ان يكون اكبر من او يساوي 18 سنه");
           }
         }
       }
@@ -87,6 +89,7 @@ class _CounterAgeState extends State<CounterAge> {
               SizedBox(
                 width: 60.w,
                 child: TextField(
+                  cursorColor: AppColors.mainColor,
                   controller: _ageController,
                   textAlign: TextAlign.center,
                   keyboardType: TextInputType.number,
