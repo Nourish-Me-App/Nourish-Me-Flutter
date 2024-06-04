@@ -59,7 +59,12 @@ class _HeightCounterState extends State<HeightCounter> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AuthCubit, AuthState>(
+      buildWhen: (previous, current) => 
+      current is IncreamentCounter || current is DecreamentCounter ,
       builder: (context, state) {
+        if (state is IncreamentCounter || state is DecreamentCounter) {
+          _heightController.text = authCubit.heightCounter.toString();
+        }
         return Container(
           width: double.infinity,
           height: 64.h,

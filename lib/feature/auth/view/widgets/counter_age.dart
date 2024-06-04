@@ -19,8 +19,7 @@ class _CounterAgeState extends State<CounterAge> {
   void initState() {
     super.initState();
     authCubit = BlocProvider.of<AuthCubit>(context);
-    _ageController =
-        TextEditingController(text: authCubit.ageCounter.toString());
+    _ageController = TextEditingController(text: authCubit.ageCounter.toString());
     _ageController.addListener(_handleAgeChange);
   }
 
@@ -31,7 +30,7 @@ class _CounterAgeState extends State<CounterAge> {
     } else {
       int? newValue = int.tryParse(text);
       if (newValue != null) {
-        if (newValue >= 12 || newValue <= 80) {
+        if (newValue >= 12 && newValue <= 80) {
           authCubit.updateAge(newValue);
         } else {
           _showSnackBar("العمر يجب ان يكون بين 12 و 80");
@@ -60,7 +59,12 @@ class _CounterAgeState extends State<CounterAge> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AuthCubit, AuthState>(
+      buildWhen: (previous, current) =>
+          current is IncreamentCounter || current is DecreamentCounter,
       builder: (context, state) {
+        if (state is IncreamentCounter || state is DecreamentCounter) {
+          _ageController.text = authCubit.ageCounter.toString();
+        }
         return Form(
           key: _formKey,
           child: Container(
@@ -79,7 +83,6 @@ class _CounterAgeState extends State<CounterAge> {
                   onLongPressEnd: (_) => authCubit.stopTimerAge(),
                   onTap: () {
                     authCubit.increamnetAge();
-                    _ageController.text = authCubit.ageCounter.toString();
                   },
                   child: const CircleAvatar(
                     backgroundColor: Colors.white,
@@ -128,7 +131,6 @@ class _CounterAgeState extends State<CounterAge> {
                   onLongPressEnd: (_) => authCubit.stopTimerAge(),
                   onTap: () {
                     authCubit.decrementAge();
-                    _ageController.text = authCubit.ageCounter.toString();
                   },
                   child: const CircleAvatar(
                     backgroundColor: Colors.white,
