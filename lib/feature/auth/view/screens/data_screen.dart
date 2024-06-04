@@ -86,7 +86,6 @@ class _DataScreenState extends State<ContinueRegisterScreen> {
                             setState(() {
                               selectedValue = value;
                             });
-
                             log(value.toString());
                           },
                         ),
@@ -111,7 +110,7 @@ class _DataScreenState extends State<ContinueRegisterScreen> {
                     SizedBox(
                       height: 10.h,
                     ),
-                     const CounterAge(),
+                    const CounterAge(),
                     SizedBox(
                       height: 20.h,
                     ),
@@ -141,10 +140,23 @@ class _DataScreenState extends State<ContinueRegisterScreen> {
                       buttonText: 'متابعه',
                       buttonStyle: AppTextStyles.cairo16BoldWhite,
                       buttonAction: () async {
+                        final age = authCubit.ageCounter;
+                        final weight = authCubit.weightCounter;
+                        final height = authCubit.heightCounter;
                         if (selectedValue == null) {
+                          HelperMethods.showCustomSnackBarError(context,
+                              'من فضلك قم بتحديد قيم في المدي المخصص لها');
+                        } else if (age < 12 || age > 80) {
                           HelperMethods.showCustomSnackBarError(
-                              context, 'من فضلك قم بتحدد النوع');
-                        } else {
+                              context, 'العمر يجب أن يكون بين 12 و 80');
+                        }else if (weight<50 || weight>160) {
+                          HelperMethods.showCustomSnackBarError(
+                              context, 'الوزن يجب أن يكون بين 50 و 160');
+                          
+                        }else if(height<140||height>210){
+                          HelperMethods.showCustomSnackBarError(
+                              context, 'الطول يجب أن يكون بين 140 و 210');
+                        }  else {
                           await AuthRequests.continueRegister(
                             authCubit: authCubit,
                             continueRegisterModel: continueRegisterModel,

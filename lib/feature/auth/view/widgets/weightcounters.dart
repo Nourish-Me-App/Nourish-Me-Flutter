@@ -30,7 +30,7 @@ class _WeightCounterState extends State<WeightCounter> {
     } else {
       int? newValue = int.tryParse(text);
       if (newValue != null) {
-        if (newValue >= 50) {
+        if (newValue > 50 || newValue < 160) {
           authCubit.updateWeight(newValue);
         } else {
           _showSnackBar("الوزن يجب ان يكون اكبر من او يساوي 50 kg");
@@ -59,7 +59,12 @@ class _WeightCounterState extends State<WeightCounter> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AuthCubit, AuthState>(
+      buildWhen: (previous, current) =>
+          current is IncreamentCounter || current is DecreamentCounter,
       builder: (context, state) {
+        if(state is IncreamentCounter||state is DecreamentCounter){
+          _weightController.text = authCubit.weightCounter.toString();
+        }
         return Container(
           width: double.infinity,
           height: 64.h,
@@ -73,7 +78,7 @@ class _WeightCounterState extends State<WeightCounter> {
             children: [
               GestureDetector(
                 onLongPressStart: (_) => authCubit.startTimerIncreaseWeight(),
-                onLongPressEnd: (_) => authCubit.stopTimer(),
+                onLongPressEnd: (_) => authCubit.stopTimerWeight(),
                 onTap: () {
                   authCubit.incrementWeight();
                   _weightController.text = authCubit.weightCounter.toString();
@@ -101,16 +106,16 @@ class _WeightCounterState extends State<WeightCounter> {
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return "Please enter a weight";
+                      return "برجاء ادخال الوزن";
                     }
                     int? newValue = int.tryParse(value);
-                    if (newValue == null || newValue < 50) {
+                    if (newValue == null || newValue < 50 || newValue > 160) {
                       return "الوزن يجب ان يكون اكبر من او يساوي 50 kg";
                     }
                     return null;
                   },
                   onFieldSubmitted: (value) {
-                    if (Form.of(context)?.validate() ?? false) {
+                    if (Form.of(context).validate()) {
                       _showSnackBar("الوزن يجب ان يكون اكبر من او يساوي 50 kg");
                       _weightController.text =
                           authCubit.weightCounter.toString();
@@ -123,7 +128,7 @@ class _WeightCounterState extends State<WeightCounter> {
               ),
               GestureDetector(
                 onLongPressStart: (_) => authCubit.startTimerDecreaseWeight(),
-                onLongPressEnd: (_) => authCubit.stopTimer(),
+                onLongPressEnd: (_) => authCubit.stopTimerWeight(),
                 onTap: () {
                   authCubit.decrementWeight();
                   _weightController.text = authCubit.weightCounter.toString();
