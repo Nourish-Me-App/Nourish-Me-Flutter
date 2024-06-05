@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:nourish_me/feature/auth/logic/cubit/data_screen_cubit.dart';
+
 import '../../../../core/imports/login_imports.dart';
 import '../../../../core/imports/signup_screen_imports.dart';
 import '../../data/models/continue_register_model.dart';
@@ -21,17 +23,17 @@ class ContinueRegisterScreen extends StatefulWidget {
 class _DataScreenState extends State<ContinueRegisterScreen> {
   String? type;
   String? selectedValue;
-  late AuthCubit authCubit;
+  late DataScreenCubit dataScreenCubit;
   @override
   void initState() {
-    authCubit = BlocProvider.of<AuthCubit>(context);
+    dataScreenCubit = BlocProvider.of<DataScreenCubit>(context);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     ContinueRegisterModel continueRegisterModel = ContinueRegisterModel();
-    return BlocConsumer<AuthCubit, AuthState>(
+    return BlocConsumer<DataScreenCubit, DataScreenState>(
       listener: (context, state) {
         if (state is ContinueRegisterSuccess) {
           Navigator.pop(context);
@@ -140,32 +142,31 @@ class _DataScreenState extends State<ContinueRegisterScreen> {
                       buttonText: 'متابعه',
                       buttonStyle: AppTextStyles.cairo16BoldWhite,
                       buttonAction: () async {
-                        final age = authCubit.ageCounter;
-                        final weight = authCubit.weightCounter;
-                        final height = authCubit.heightCounter;
+                        final age = dataScreenCubit.ageCounter;
+                        final weight = dataScreenCubit.weightCounter;
+                        final height = dataScreenCubit.heightCounter;
                         if (selectedValue == null) {
                           HelperMethods.showCustomSnackBarError(context,
                               'من فضلك قم بتحديد قيم في المدي المخصص لها');
                         } else if (age < 12 || age > 80) {
                           HelperMethods.showCustomSnackBarError(
                               context, 'العمر يجب أن يكون بين 12 و 80');
-                        }else if (weight<50 || weight>160) {
+                        } else if (weight < 50 || weight > 160) {
                           HelperMethods.showCustomSnackBarError(
                               context, 'الوزن يجب أن يكون بين 50 و 160');
-                          
-                        }else if(height<140||height>210){
+                        } else if (height < 140 || height > 210) {
                           HelperMethods.showCustomSnackBarError(
                               context, 'الطول يجب أن يكون بين 140 و 210');
-                        }  else {
+                        } else {
                           await AuthRequests.continueRegister(
-                            authCubit: authCubit,
+                            datascreeCubit: dataScreenCubit,
                             continueRegisterModel: continueRegisterModel,
                             email: CacheHelper().getData(key: 'email'),
                             name: CacheHelper().getData(key: 'name'),
                             gender: selectedValue.toString(),
-                            age: authCubit.ageCounter.toString(),
-                            weight: authCubit.weightCounter.toString(),
-                            height: authCubit.heightCounter.toString(),
+                            age: dataScreenCubit.ageCounter.toString(),
+                            weight: dataScreenCubit.weightCounter.toString(),
+                            height: dataScreenCubit.heightCounter.toString(),
                             password: CacheHelper().getData(key: 'password'),
                             passwordConfirmation: CacheHelper()
                                 .getData(key: 'passwordConfirmation'),
