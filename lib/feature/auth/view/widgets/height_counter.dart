@@ -1,10 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import '../../../../core/imports/app_routes_imports.dart';
+import '../../../../core/imports/login_imports.dart';
 import '../../../../core/theme/app_colors.dart';
-import '../../../../core/theme/app_text_styles.dart';
-import '../../logic/cubit/auth_cubit.dart';
 
 class HeightCounter extends StatefulWidget {
   const HeightCounter({super.key});
@@ -16,6 +12,7 @@ class HeightCounter extends StatefulWidget {
 class _HeightCounterState extends State<HeightCounter> {
   late TextEditingController _heightController;
   late AuthCubit authCubit;
+  bool _isSnackBarShown = false;
 
   @override
   void initState() {
@@ -23,16 +20,38 @@ class _HeightCounterState extends State<HeightCounter> {
     authCubit = BlocProvider.of<AuthCubit>(context);
     _heightController =
         TextEditingController(text: authCubit.heightCounter.toString());
-    _heightController.addListener(() {
-      int? newValue = int.tryParse(_heightController.text);
-      if (newValue != null && newValue >= 0) {
-        authCubit.updateHeight(newValue);
+    _heightController.addListener(_handleheightChange);
+  }
+
+  void _handleheightChange() {
+    String text = _heightController.text;
+    if (text.isEmpty) {
+      _showSnackBar("برجاء ادخال الطول");
+    } else {
+      int? newValue = int.tryParse(text);
+      if (newValue != null) {
+        if (newValue > 140 || newValue < 210) {
+          authCubit.updateHeight(newValue);
+        } else {
+          _showSnackBar("الطول يجب ان يكون اكبر من او يساوي 160 cm");
+        }
       }
-    });
+    }
+  }
+
+  void _showSnackBar(String message) {
+    if (!_isSnackBarShown) {
+      _isSnackBarShown = true;
+      HelperMethods.showCustomSnackBarError(context, message);
+      Future.delayed(const Duration(seconds: 3), () {
+        _isSnackBarShown = false;
+      });
+    }
   }
 
   @override
   void dispose() {
+    _heightController.removeListener(_handleheightChange);
     _heightController.dispose();
     super.dispose();
   }
@@ -40,11 +59,12 @@ class _HeightCounterState extends State<HeightCounter> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AuthCubit, AuthState>(
+      buildWhen: (previous, current) => 
+      current is IncreamentCounter || current is DecreamentCounter ,
       builder: (context, state) {
-        if (_heightController.text != authCubit.heightCounter.toString()) {
+        if (state is IncreamentCounter || state is DecreamentCounter) {
           _heightController.text = authCubit.heightCounter.toString();
         }
-
         return Container(
           width: double.infinity,
           height: 64.h,
@@ -58,7 +78,7 @@ class _HeightCounterState extends State<HeightCounter> {
             children: [
               GestureDetector(
                 onLongPressStart: (_) => authCubit.startTimerIncreaseHeight(),
-                onLongPressEnd: (_) => authCubit.stopTimer(),
+                onLongPressEnd: (_) => authCubit.stopTimerHeight(),
                 onTap: () {
                   authCubit.incrementHeight();
                   _heightController.text = authCubit.heightCounter.toString();
@@ -75,7 +95,8 @@ class _HeightCounterState extends State<HeightCounter> {
               ),
               SizedBox(
                 width: 60.w,
-                child: TextField(
+                child: TextFormField(
+                  cursorColor: AppColors.mainColor,
                   controller: _heightController,
                   textAlign: TextAlign.center,
                   keyboardType: TextInputType.number,
@@ -83,20 +104,32 @@ class _HeightCounterState extends State<HeightCounter> {
                   decoration: const InputDecoration(
                     border: InputBorder.none,
                   ),
-                  onSubmitted: (value) {
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "برجاء ادخال الطول";
+                    }
                     int? newValue = int.tryParse(value);
-                    if (newValue != null && newValue >= 0) {
-                      authCubit.updateHeight(newValue);
-                    } else {
+                    if (newValue == null || newValue < 140 || newValue > 210) {
+                      return "الطول يجب ان يكون اكبر من او يساوي 140 cm";
+                    }
+                    return null;
+                  },
+                  onFieldSubmitted: (value) {
+                    if (Form.of(context).validate()) {
+                      _showSnackBar(
+                          "الطول يجب ان يكون اكبر من او يساوي 140 cm");
                       _heightController.text =
                           authCubit.heightCounter.toString();
+                    } else {
+                      int newValue = int.parse(value);
+                      authCubit.updateHeight(newValue);
                     }
                   },
                 ),
               ),
               GestureDetector(
                 onLongPressStart: (_) => authCubit.startTimerDecreaseHeight(),
-                onLongPressEnd: (_) => authCubit.stopTimer(),
+                onLongPressEnd: (_) => authCubit.stopTimerHeight(),
                 onTap: () {
                   authCubit.decrementHeight();
                   _heightController.text = authCubit.heightCounter.toString();

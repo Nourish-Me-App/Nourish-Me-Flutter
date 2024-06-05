@@ -40,3 +40,5 @@ final class LoadingCounter extends AuthState {}
 final class IncreamentCounter extends AuthState {}
 
 final class DecreamentCounter extends AuthState {}
+
+final class UpdateAgeCounter extends AuthState {}

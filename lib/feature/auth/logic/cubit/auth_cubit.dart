@@ -77,13 +77,15 @@ class AuthCubit extends Cubit<AuthState> {
 
   void increamnetAge() {
     emit(LoadingCounter());
-    ageCounter++;
-    emit(IncreamentCounter());
+    if (ageCounter < 80) {
+      ageCounter++;
+      emit(IncreamentCounter());
+    }
   }
 
   void decrementAge() {
     emit(LoadingCounter());
-    if (ageCounter > 18) {
+    if (ageCounter > 12) {
       ageCounter--;
       emit(DecreamentCounter());
     }
@@ -130,7 +132,7 @@ class AuthCubit extends Cubit<AuthState> {
 
   void decrementHeight() {
     emit(LoadingCounter());
-    if (heightCounter > 160) {
+    if (heightCounter > 140) {
       heightCounter--;
       emit(DecreamentCounter());
     }
@@ -139,8 +141,10 @@ class AuthCubit extends Cubit<AuthState> {
 
   void incrementHeight() {
     emit(LoadingCounter());
-    heightCounter++;
-    emit(IncreamentCounter());
+    if (heightCounter < 210) {
+      heightCounter++;
+      emit(IncreamentCounter());
+    }
   }
 
   void updateHeight(int height) {
@@ -151,28 +155,34 @@ class AuthCubit extends Cubit<AuthState> {
 
   void startTimerIncreaseAge() {
     _timerAge = Timer.periodic(const Duration(milliseconds: 100), (timer) {
-      ageCounter++;
-      emit(IncreamentCounter());
+      if (ageCounter < 80) {
+        ageCounter++;
+        emit(IncreamentCounter());
+      }
     });
   }
 
   void startTimerIncreaseHeight() {
     _timerHeight = Timer.periodic(const Duration(milliseconds: 100), (timer) {
-      heightCounter++;
-      emit(IncreamentCounter());
+      if (heightCounter < 210) {
+        heightCounter++;
+        emit(IncreamentCounter());
+      }
     });
   }
 
   void startTimerIncreaseWeight() {
     _timerWeight = Timer.periodic(const Duration(milliseconds: 100), (timer) {
-      weightCounter++;
-      emit(IncreamentCounter());
+      if (weightCounter < 160) {
+        weightCounter++;
+        emit(IncreamentCounter());
+      }
     });
   }
 
   void startTimerDecreaseAge() {
     _timerAge = Timer.periodic(const Duration(milliseconds: 100), (timer) {
-      if (ageCounter > 18) {
+      if (ageCounter >= 12) {
         ageCounter--;
         emit(DecreamentCounter());
       }
@@ -197,9 +207,15 @@ class AuthCubit extends Cubit<AuthState> {
     });
   }
 
-  void stopTimer() {
+  void stopTimerAge() {
     _timerAge?.cancel();
+  }
+
+  void stopTimerWeight() {
     _timerWeight?.cancel();
+  }
+
+  void stopTimerHeight() {
     _timerHeight?.cancel();
   }
 }
