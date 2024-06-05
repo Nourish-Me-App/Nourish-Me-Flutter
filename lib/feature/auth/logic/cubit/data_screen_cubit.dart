@@ -115,15 +115,7 @@ class DataScreenCubit extends Cubit<DataScreenState> {
     emit(IncreamentCounter());
   }
 
-  void startTimerIncreaseAge() {
-    _timerAge = Timer.periodic(const Duration(milliseconds: 100), (timer) {
-      if (ageCounter < 80) {
-        ageCounter++;
 
-        emit(IncreamentCounter());
-      }
-    });
-  }
 
   void startTimerIncreaseHeight() {
     _timerHeight = Timer.periodic(const Duration(milliseconds: 100), (timer) {
@@ -143,14 +135,7 @@ class DataScreenCubit extends Cubit<DataScreenState> {
     });
   }
 
-  startTimerDecreaseAge() {
-    _timerAge = Timer.periodic(const Duration(milliseconds: 100), (timer) {
-      if (ageCounter > 12) {
-        ageCounter--;
-        emit(DecreamentCounter());
-      }
-    });
-  }
+
 
   void startTimerDecreaseHeight() {
     _timerHeight = Timer.periodic(const Duration(milliseconds: 100), (timer) {
@@ -170,9 +155,7 @@ class DataScreenCubit extends Cubit<DataScreenState> {
     });
   }
 
-  void stopTimerAge() {
-    _timerAge?.cancel();
-  }
+
 
   void stopTimerWeight() {
     _timerWeight?.cancel();

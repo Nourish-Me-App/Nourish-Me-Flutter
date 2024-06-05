@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:nourish_me/feature/auth/logic/cubit/data_screen_cubit.dart';
 
 import '../../../../core/imports/app_routes_imports.dart';
@@ -15,6 +17,7 @@ class _HeightCounterState extends State<HeightCounter> {
   late TextEditingController _heightController;
   late DataScreenCubit dataScreenCubit;
   bool _isSnackBarShown = false;
+  Timer? _timerHeight;
 
   @override
   void initState() {
@@ -39,6 +42,32 @@ class _HeightCounterState extends State<HeightCounter> {
         }
       }
     }
+  }
+
+  void startIncreaseHeight() {
+    _timerHeight = Timer.periodic(const Duration(milliseconds: 100), (timer) {
+      if (dataScreenCubit.heightCounter < 210) {
+        dataScreenCubit.incrementHeight();
+      } else {
+        stopTimerHeight();
+      }
+      _heightController.text = dataScreenCubit.heightCounter.toString();
+    });
+  }
+
+  void startDecreaseHeight() {
+    _timerHeight = Timer.periodic(const Duration(milliseconds: 100), (timer) {
+      if (dataScreenCubit.heightCounter > 140) {
+        dataScreenCubit.decrementHeight();
+      } else {
+        stopTimerHeight();
+      }
+      _heightController.text = dataScreenCubit.heightCounter.toString();
+    });
+  }
+
+  void stopTimerHeight() {
+    _timerHeight?.cancel();
   }
 
   void _showSnackBar(String message) {
@@ -72,8 +101,8 @@ class _HeightCounterState extends State<HeightCounter> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           GestureDetector(
-            onLongPressStart: (_) => dataScreenCubit.startTimerIncreaseHeight(),
-            onLongPressEnd: (_) => dataScreenCubit.stopTimerHeight(),
+            onLongPressStart: (_) => startIncreaseHeight(),
+            onLongPressEnd: (_) => stopTimerHeight(),
             onTap: () {
               dataScreenCubit.incrementHeight();
               _heightController.text = dataScreenCubit.heightCounter.toString();
@@ -122,8 +151,8 @@ class _HeightCounterState extends State<HeightCounter> {
             ),
           ),
           GestureDetector(
-            onLongPressStart: (_) => dataScreenCubit.startTimerDecreaseHeight(),
-            onLongPressEnd: (_) => dataScreenCubit.stopTimerHeight(),
+            onLongPressStart: (_) => startDecreaseHeight(),
+            onLongPressEnd: (_) => stopTimerHeight(),
             onTap: () {
               dataScreenCubit.decrementHeight();
               _heightController.text = dataScreenCubit.heightCounter.toString();

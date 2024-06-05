@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:nourish_me/feature/auth/logic/cubit/data_screen_cubit.dart';
 
 import '../../../../core/imports/app_routes_imports.dart';
@@ -15,6 +17,7 @@ class _WeightCounterState extends State<WeightCounter> {
   late TextEditingController _weightController;
   late DataScreenCubit dataScreenCubit;
   bool _isSnackBarShown = false;
+  Timer? _timerWeight;
 
   @override
   void initState() {
@@ -23,6 +26,31 @@ class _WeightCounterState extends State<WeightCounter> {
     _weightController =
         TextEditingController(text: dataScreenCubit.weightCounter.toString());
     _weightController.addListener(_handleWeightChange);
+  }
+
+  void startTimerIncreaseWeight() {
+    _timerWeight = Timer.periodic(const Duration(milliseconds: 100), (timer) {
+      if (dataScreenCubit.weightCounter < 160) {
+        dataScreenCubit.incrementWeight();
+      } else {
+        stopTimerWeight();
+      }
+      _weightController.text = dataScreenCubit.weightCounter.toString();
+    });
+  }
+  void startTimerDecreaseWeight() {
+    _timerWeight = Timer.periodic(const Duration(milliseconds: 100), (timer) {
+      if (dataScreenCubit.weightCounter > 50) {
+        dataScreenCubit.decrementWeight();
+      } else {
+        stopTimerWeight();
+      }
+      _weightController.text = dataScreenCubit.weightCounter.toString();
+    });
+  }
+
+  void stopTimerWeight() {
+    _timerWeight?.cancel();
   }
 
   void _handleWeightChange() {
@@ -72,8 +100,8 @@ class _WeightCounterState extends State<WeightCounter> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           GestureDetector(
-            onLongPressStart: (_) => dataScreenCubit.startTimerIncreaseWeight(),
-            onLongPressEnd: (_) => dataScreenCubit.stopTimerWeight(),
+            onLongPressStart: (_) => startTimerIncreaseWeight(),
+            onLongPressEnd: (_) => stopTimerWeight(),
             onTap: () {
               dataScreenCubit.incrementWeight();
               _weightController.text = dataScreenCubit.weightCounter.toString();
@@ -121,8 +149,8 @@ class _WeightCounterState extends State<WeightCounter> {
             ),
           ),
           GestureDetector(
-            onLongPressStart: (_) => dataScreenCubit.startTimerDecreaseWeight(),
-            onLongPressEnd: (_) => dataScreenCubit.stopTimerWeight(),
+            onLongPressStart: (_) => startTimerDecreaseWeight(),
+            onLongPressEnd: (_) => stopTimerWeight(),
             onTap: () {
               dataScreenCubit.decrementWeight();
               _weightController.text = dataScreenCubit.weightCounter.toString();
