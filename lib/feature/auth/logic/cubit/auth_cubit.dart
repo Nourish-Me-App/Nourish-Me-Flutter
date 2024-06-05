@@ -11,7 +11,7 @@ import '../../data/repositories/signup_repo.dart';
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  AuthCubit(this.loginRepo, this.signUpRepo, this.continueRegisterRepo)
+  AuthCubit(this.loginRepo, this.signUpRepo)
       : super(AuthInitial());
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -22,7 +22,6 @@ class AuthCubit extends Cubit<AuthState> {
   bool rememberMe = false;
   late LoginRepo loginRepo;
   late SignUpRepo signUpRepo;
-  late ContinueRegisterRepo continueRegisterRepo;
 
   Future<void> login(String path, dynamic data) async {
     emit(LoginLoading());

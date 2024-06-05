@@ -25,7 +25,6 @@ class AppRoutes {
             create: (context) => AuthCubit(
               LoginRepo(dioHandler),
               SignUpRepo(dioHandler),
-              ContinueRegisterRepo(dioHandler),
             ),
             child: const SignUpScreen(),
           ),
@@ -36,7 +35,6 @@ class AppRoutes {
             create: (context) => AuthCubit(
               LoginRepo(dioHandler),
               SignUpRepo(dioHandler),
-              ContinueRegisterRepo(dioHandler),
             ),
             child: const LoginScreen(),
           ),
