@@ -94,7 +94,7 @@ class AppRoutes {
         );
       case Routes.onBoarding:
         return PageRouteBuilder(
-          transitionDuration: const Duration(milliseconds: 2000),
+          transitionDuration: const Duration(milliseconds: 1500),
           pageBuilder: (context, animation, secondaryAnimation) =>
               BlocProvider<OnBoardingCubit>(
             create: (context) => OnBoardingCubit(),
@@ -151,6 +151,9 @@ class AppRoutes {
                 create: (context) => SettingsCubit(
                   LogoutRepo(DioHandler()),
                 ),
+              ),
+              BlocProvider<BotNavBarCubit>(
+                create: (context) => BotNavBarCubit(),
               ),
             ],
             child: const BottomNav(),

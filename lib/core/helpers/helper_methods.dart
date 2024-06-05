@@ -83,9 +83,7 @@ class HelperMethods {
     CacheHelper cacheHelper = CacheHelper();
     Navigator.pop(context);
     authCubit.rememberMe
-        ? cacheHelper.saveData(
-            key: AppConstants.rememberMeToken,
-            value: value.data![AppConstants.token])
+        ? cacheHelper.saveData(key: AppConstants.rememberMeToken, value: true)
         : cacheHelper.removeData(key: AppConstants.rememberMeToken);
     cacheHelper.saveData(
         key: AppConstants.token, value: value.data![AppConstants.token]);
@@ -161,12 +159,14 @@ class HelperMethods {
       return Assets.imagesMealsDate;
     }
     if (meal.contains('فاكهة') ||
+        meal.contains('فواكه') ||
         meal.contains('تفاح') ||
         meal.contains('ثمرة فاكهة') ||
         meal.contains('موز') ||
         meal.contains('مشمش') ||
         meal.contains('برتقالة') ||
         meal.contains('تفاحة') ||
+        meal.contains('جواف') ||
         meal.contains('عنب') ||
         meal.contains('برتقال') ||
         meal.contains('شريحة بطيخ') ||
@@ -225,12 +225,12 @@ class HelperMethods {
     if (meal.contains('باذنجان')) {
       return Assets.imagesMealsEggplant;
     }
-    if (meal.contains('بذور شيا') || meal.contains('بذور الشيا')) {
+    if (meal.contains('شيا') || meal.contains('الشيا')) {
       return Assets.imagesMealsChiaSeeds;
     }
     if (meal.contains('دجاجة') ||
         meal.contains('دجاجه') ||
-        meal.contains('قطعة دجاج')) {
+        meal.contains('دجاج')) {
       return Assets.imagesMealsChicken;
     }
     if (meal.contains('معكرونة') ||
@@ -326,13 +326,13 @@ class HelperMethods {
     if (meal.contains('زيتون')) {
       return Assets.imagesMealsOlive;
     }
-    if (meal.contains('خيار وخس')) {
+    if (meal.contains('خيار') && meal.contains('خس')) {
       return Assets.imagesMealsCucumberLettuce;
     }
     if (meal.contains('جرجير')) {
       return Assets.imagesMealsArgula;
     }
-    if (meal.contains('بطاطس مكعبات')) {
+    if (meal.contains('بطاطس')) {
       return Assets.imagesMealsPotato;
     }
     if (meal.contains('بليلة') || meal.contains('بليله')) {
@@ -345,7 +345,8 @@ class HelperMethods {
       return Assets.imagesMealsLiver;
     }
     if (meal.contains('شيكولاتة') ||
-        meal.contains('داكنة') ||
+        meal.contains('الشيكولاتة') ||
+        meal.contains('الشيكولاته') ||
         meal.contains('شيكولاته')) {
       return Assets.imagesMealsChocolateBar;
     }
@@ -380,12 +381,14 @@ class HelperMethods {
     if (meal.contains('زبادي') || meal.contains('الزبادي')) {
       return Assets.imagesMealsYogurt;
     }
-    if (meal.contains('ستيك') || meal.contains('لحم')) {
+    if (meal.contains('ستيك') || meal.contains('لحم') || meal.contains('كفت')) {
       return Assets.imagesMealsMeat;
     }
     if (meal.contains('التونا') ||
         meal.contains('تونا') ||
         meal.contains('تونة') ||
+        meal.contains('تونه') ||
+        meal.contains('التونه') ||
         meal.contains('التونة')) {
       return Assets.imagesMealsTuna;
     } else {

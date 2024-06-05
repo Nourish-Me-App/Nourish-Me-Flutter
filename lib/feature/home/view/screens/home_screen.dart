@@ -10,7 +10,7 @@ import '../../../../core/helpers/helper_methods.dart';
 import '../../../../core/widgets/custom_app_bar.dart';
 import '../../../../core/widgets/error_body.dart';
 import '../../data/model/home_model.dart';
-import '../../logic/cubit/home_cubit.dart';
+import '../../logic/home/home_cubit.dart';
 import '../widgets/custom_container.dart';
 import '../widgets/custom_container_user_personal_info.dart';
 import '../widgets/custom_user_mass.dart';
