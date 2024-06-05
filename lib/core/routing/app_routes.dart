@@ -1,3 +1,5 @@
+import 'package:nourish_me/feature/auth/logic/cubit/data_screen_cubit.dart';
+
 import '../../feature/diets/data/repositories/diets_repo.dart';
 import '../../feature/diets/logic/cubit/diets_cubit.dart';
 import '../imports/app_routes_imports.dart';
@@ -19,11 +21,10 @@ class AppRoutes {
         );
       case Routes.signUpScreen:
         return CustomPageRoute(
-          builder: (context) => BlocProvider<AuthCubit>(
+          builder: (context) => BlocProvider(
             create: (context) => AuthCubit(
               LoginRepo(dioHandler),
               SignUpRepo(dioHandler),
-              ContinueRegisterRepo(dioHandler),
             ),
             child: const SignUpScreen(),
           ),
@@ -34,7 +35,6 @@ class AppRoutes {
             create: (context) => AuthCubit(
               LoginRepo(dioHandler),
               SignUpRepo(dioHandler),
-              ContinueRegisterRepo(dioHandler),
             ),
             child: const LoginScreen(),
           ),
@@ -116,10 +116,8 @@ class AppRoutes {
         );
       case Routes.continueRegisterScreen:
         return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (context) => AuthCubit(
-              LoginRepo(dioHandler),
-              SignUpRepo(dioHandler),
+          builder: (context) => BlocProvider<DataScreenCubit>(
+            create: (context) => DataScreenCubit(
               ContinueRegisterRepo(dioHandler),
             ),
             child: const ContinueRegisterScreen(),

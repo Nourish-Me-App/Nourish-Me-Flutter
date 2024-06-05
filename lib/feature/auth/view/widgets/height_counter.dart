@@ -1,3 +1,7 @@
+import 'dart:async';
+
+import 'package:nourish_me/feature/auth/logic/cubit/data_screen_cubit.dart';
+
 import '../../../../core/imports/app_routes_imports.dart';
 import '../../../../core/imports/login_imports.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -11,15 +15,16 @@ class HeightCounter extends StatefulWidget {
 
 class _HeightCounterState extends State<HeightCounter> {
   late TextEditingController _heightController;
-  late AuthCubit authCubit;
+  late DataScreenCubit dataScreenCubit;
   bool _isSnackBarShown = false;
+  Timer? _timerHeight;
 
   @override
   void initState() {
     super.initState();
-    authCubit = BlocProvider.of<AuthCubit>(context);
+    dataScreenCubit = BlocProvider.of<DataScreenCubit>(context);
     _heightController =
-        TextEditingController(text: authCubit.heightCounter.toString());
+        TextEditingController(text: dataScreenCubit.heightCounter.toString());
     _heightController.addListener(_handleheightChange);
   }
 
@@ -31,12 +36,38 @@ class _HeightCounterState extends State<HeightCounter> {
       int? newValue = int.tryParse(text);
       if (newValue != null) {
         if (newValue > 140 || newValue < 210) {
-          authCubit.updateHeight(newValue);
+          dataScreenCubit.updateHeight(newValue);
         } else {
           _showSnackBar("الطول يجب ان يكون اكبر من او يساوي 160 cm");
         }
       }
     }
+  }
+
+  void startIncreaseHeight() {
+    _timerHeight = Timer.periodic(const Duration(milliseconds: 100), (timer) {
+      if (dataScreenCubit.heightCounter < 210) {
+        dataScreenCubit.incrementHeight();
+      } else {
+        stopTimerHeight();
+      }
+      _heightController.text = dataScreenCubit.heightCounter.toString();
+    });
+  }
+
+  void startDecreaseHeight() {
+    _timerHeight = Timer.periodic(const Duration(milliseconds: 100), (timer) {
+      if (dataScreenCubit.heightCounter > 140) {
+        dataScreenCubit.decrementHeight();
+      } else {
+        stopTimerHeight();
+      }
+      _heightController.text = dataScreenCubit.heightCounter.toString();
+    });
+  }
+
+  void stopTimerHeight() {
+    _timerHeight?.cancel();
   }
 
   void _showSnackBar(String message) {
@@ -58,96 +89,86 @@ class _HeightCounterState extends State<HeightCounter> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AuthCubit, AuthState>(
-      buildWhen: (previous, current) => 
-      current is IncreamentCounter || current is DecreamentCounter ,
-      builder: (context, state) {
-        if (state is IncreamentCounter || state is DecreamentCounter) {
-          _heightController.text = authCubit.heightCounter.toString();
-        }
-        return Container(
-          width: double.infinity,
-          height: 64.h,
-          decoration: BoxDecoration(
-            color: AppColors.counterColor,
-            border: Border.all(color: AppColors.counterColor),
-            borderRadius: BorderRadius.circular(10.r),
+    return Container(
+      width: double.infinity,
+      height: 64.h,
+      decoration: BoxDecoration(
+        color: AppColors.counterColor,
+        border: Border.all(color: AppColors.counterColor),
+        borderRadius: BorderRadius.circular(10.r),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          GestureDetector(
+            onLongPressStart: (_) => startIncreaseHeight(),
+            onLongPressEnd: (_) => stopTimerHeight(),
+            onTap: () {
+              dataScreenCubit.incrementHeight();
+              _heightController.text = dataScreenCubit.heightCounter.toString();
+            },
+            child: const CircleAvatar(
+              backgroundColor: Colors.white,
+              child: Center(
+                child: Icon(
+                  Icons.add,
+                  color: Colors.black,
+                ),
+              ),
+            ),
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              GestureDetector(
-                onLongPressStart: (_) => authCubit.startTimerIncreaseHeight(),
-                onLongPressEnd: (_) => authCubit.stopTimerHeight(),
-                onTap: () {
-                  authCubit.incrementHeight();
-                  _heightController.text = authCubit.heightCounter.toString();
-                },
-                child: const CircleAvatar(
-                  backgroundColor: Colors.white,
-                  child: Center(
-                    child: Icon(
-                      Icons.add,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
+          SizedBox(
+            width: 60.w,
+            child: TextFormField(
+              cursorColor: AppColors.mainColor,
+              controller: _heightController,
+              textAlign: TextAlign.center,
+              keyboardType: TextInputType.number,
+              style: AppTextStyles.cairo24Boldmaincolor,
+              decoration: const InputDecoration(
+                border: InputBorder.none,
               ),
-              SizedBox(
-                width: 60.w,
-                child: TextFormField(
-                  cursorColor: AppColors.mainColor,
-                  controller: _heightController,
-                  textAlign: TextAlign.center,
-                  keyboardType: TextInputType.number,
-                  style: AppTextStyles.cairo24Boldmaincolor,
-                  decoration: const InputDecoration(
-                    border: InputBorder.none,
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return "برجاء ادخال الطول";
-                    }
-                    int? newValue = int.tryParse(value);
-                    if (newValue == null || newValue < 140 || newValue > 210) {
-                      return "الطول يجب ان يكون اكبر من او يساوي 140 cm";
-                    }
-                    return null;
-                  },
-                  onFieldSubmitted: (value) {
-                    if (Form.of(context).validate()) {
-                      _showSnackBar(
-                          "الطول يجب ان يكون اكبر من او يساوي 140 cm");
-                      _heightController.text =
-                          authCubit.heightCounter.toString();
-                    } else {
-                      int newValue = int.parse(value);
-                      authCubit.updateHeight(newValue);
-                    }
-                  },
-                ),
-              ),
-              GestureDetector(
-                onLongPressStart: (_) => authCubit.startTimerDecreaseHeight(),
-                onLongPressEnd: (_) => authCubit.stopTimerHeight(),
-                onTap: () {
-                  authCubit.decrementHeight();
-                  _heightController.text = authCubit.heightCounter.toString();
-                },
-                child: const CircleAvatar(
-                  backgroundColor: Colors.white,
-                  child: Center(
-                    child: Icon(
-                      Icons.remove,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-              ),
-            ],
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return "برجاء ادخال الطول";
+                }
+                int? newValue = int.tryParse(value);
+                if (newValue == null || newValue < 140 || newValue > 210) {
+                  return "الطول يجب ان يكون اكبر من او يساوي 140 cm";
+                }
+                return null;
+              },
+              onFieldSubmitted: (value) {
+                if (Form.of(context).validate()) {
+                  _showSnackBar("الطول يجب ان يكون اكبر من او يساوي 140 cm");
+                  _heightController.text =
+                      dataScreenCubit.heightCounter.toString();
+                } else {
+                  int newValue = int.parse(value);
+                  dataScreenCubit.updateHeight(newValue);
+                }
+              },
+            ),
           ),
-        );
-      },
+          GestureDetector(
+            onLongPressStart: (_) => startDecreaseHeight(),
+            onLongPressEnd: (_) => stopTimerHeight(),
+            onTap: () {
+              dataScreenCubit.decrementHeight();
+              _heightController.text = dataScreenCubit.heightCounter.toString();
+            },
+            child: const CircleAvatar(
+              backgroundColor: Colors.white,
+              child: Center(
+                child: Icon(
+                  Icons.remove,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
