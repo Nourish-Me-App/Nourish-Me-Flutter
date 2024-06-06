@@ -21,7 +21,7 @@ class AppRoutes {
         );
       case Routes.signUpScreen:
         return CustomPageRoute(
-          builder: (context) => BlocProvider(
+          builder: (context) => BlocProvider<AuthCubit>(
             create: (context) => AuthCubit(
               LoginRepo(dioHandler),
               SignUpRepo(dioHandler),
@@ -41,7 +41,7 @@ class AppRoutes {
         );
       case Routes.forgetPasswordScreen:
         return CustomPageRoute(
-          builder: (context) => BlocProvider(
+          builder: (context) => BlocProvider<ForgetPasswordCubit>(
             create: (context) => ForgetPasswordCubit(
               ForgetPasswordRepo(dioHandler),
               CheckCodeRepo(dioHandler),
