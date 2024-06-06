@@ -119,7 +119,7 @@ class _HeightCounterState extends State<HeightCounter> {
           SizedBox(
             width: 60.w,
             child: TextFormField(
-              inputFormatters: [LengthLimitingTextInputFormatter(2)],
+              inputFormatters: [LengthLimitingTextInputFormatter(3)],
               cursorColor: AppColors.mainColor,
               controller: _heightController,
               textAlign: TextAlign.center,
