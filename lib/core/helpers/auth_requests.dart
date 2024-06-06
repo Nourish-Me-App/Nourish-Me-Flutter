@@ -1,3 +1,5 @@
+import 'package:nourish_me/feature/auth/logic/cubit/data_screen_cubit.dart';
+
 import '../../feature/auth/data/models/continue_register_model.dart';
 
 import '../../feature/auth/data/models/login_model.dart';
@@ -54,7 +56,7 @@ class AuthRequests {
   }
 
   static Future continueRegister({
-    required AuthCubit authCubit,
+    required DataScreenCubit datascreeCubit,
     required ContinueRegisterModel continueRegisterModel,
     required String email,
     required String name,
@@ -65,7 +67,7 @@ class AuthRequests {
     required String password,
     required String passwordConfirmation,
   }) async {
-    await authCubit.continueRegister(
+    await datascreeCubit.continueRegister(
       AppConstants.continueRegister,
       continueRegisterModel.toJson(
         ContinueRegisterModel(
