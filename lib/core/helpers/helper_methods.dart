@@ -164,6 +164,7 @@ class HelperMethods {
         meal.contains('ثمرة فاكهة') ||
         meal.contains('موز') ||
         meal.contains('مشمش') ||
+        meal.contains('كيوي') ||
         meal.contains('برتقالة') ||
         meal.contains('تفاحة') ||
         meal.contains('جواف') ||
@@ -245,6 +246,7 @@ class HelperMethods {
         meal.contains('جبن ابيض منزوع الدسم') ||
         meal.contains('جبن منزوع الدسم') ||
         meal.contains('جبنة قليلة الدسم') ||
+        (meal.contains('جبن') && meal.contains('زيت')) ||
         meal.contains('جبنه قليلة الدسم')) {
       return Assets.imagesMealsLowFatCheese;
     }
@@ -347,6 +349,8 @@ class HelperMethods {
     if (meal.contains('شيكولاتة') ||
         meal.contains('الشيكولاتة') ||
         meal.contains('الشيكولاته') ||
+        meal.contains('شوكولاته') ||
+        meal.contains('شوكولاتة') ||
         meal.contains('شيكولاته')) {
       return Assets.imagesMealsChocolateBar;
     }
