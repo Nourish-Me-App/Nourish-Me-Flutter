@@ -1,10 +1,13 @@
 import 'dart:async';
 
+import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nourish_me/feature/auth/logic/cubit/data_screen_cubit.dart';
 
+import '../../../../core/helpers/helper_methods.dart';
 import '../../../../core/imports/app_routes_imports.dart';
-import '../../../../core/imports/login_imports.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/theme/app_text_styles.dart';
 
 class HeightCounter extends StatefulWidget {
   const HeightCounter({super.key});
@@ -30,16 +33,12 @@ class _HeightCounterState extends State<HeightCounter> {
 
   void _handleheightChange() {
     String text = _heightController.text;
-    if (text.isEmpty) {
-      _showSnackBar("برجاء ادخال الطول");
-    } else {
-      int? newValue = int.tryParse(text);
-      if (newValue != null) {
-        if (newValue > 140 || newValue < 210) {
-          dataScreenCubit.updateHeight(newValue);
-        } else {
-          _showSnackBar("الطول يجب ان يكون اكبر من او يساوي 160 cm");
-        }
+    int? newValue = int.tryParse(text);
+    if (newValue != null) {
+      if (newValue >= 140 || newValue <= 210) {
+        dataScreenCubit.updateHeight(newValue);
+      } else {
+        _showSnackBar('cm الطول يجب أن يكون بين 140 و 210');
       }
     }
   }
@@ -120,6 +119,7 @@ class _HeightCounterState extends State<HeightCounter> {
           SizedBox(
             width: 60.w,
             child: TextFormField(
+              inputFormatters: [LengthLimitingTextInputFormatter(3)],
               cursorColor: AppColors.mainColor,
               controller: _heightController,
               textAlign: TextAlign.center,
@@ -128,19 +128,13 @@ class _HeightCounterState extends State<HeightCounter> {
               decoration: const InputDecoration(
                 border: InputBorder.none,
               ),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return "برجاء ادخال الطول";
-                }
-                int? newValue = int.tryParse(value);
-                if (newValue == null || newValue < 140 || newValue > 210) {
-                  return "الطول يجب ان يكون اكبر من او يساوي 140 cm";
-                }
-                return null;
-              },
               onFieldSubmitted: (value) {
                 if (Form.of(context).validate()) {
-                  _showSnackBar("الطول يجب ان يكون اكبر من او يساوي 140 cm");
+                  int.tryParse(value) == null
+                      ? null
+                      : int.parse(value) < 140 || int.parse(value) > 210
+                          ? _showSnackBar('cm الطول يجب أن يكون بين 140 و 210')
+                          : null;
                   _heightController.text =
                       dataScreenCubit.heightCounter.toString();
                 } else {

@@ -7,11 +7,9 @@ import '../../../../core/helpers/app_images.dart';
 import '../../../../core/theme/app_text_styles.dart';
 
 class SocialIntegration extends StatelessWidget {
-  final Function() integrateWithFacebook;
   final Function() integrateWithGoogle;
   const SocialIntegration({
     super.key,
-    required this.integrateWithFacebook,
     required this.integrateWithGoogle,
   });
 
@@ -41,21 +39,10 @@ class SocialIntegration extends StatelessWidget {
           ],
         ),
         SizedBox(height: 8.h),
-        Directionality(
-          textDirection: TextDirection.ltr,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              PlatformCard(
-                integrateWith: integrateWithFacebook,
-                platformIcon: Assets.iconsFacbookFilledBlue,
-              ),
-              SizedBox(width: 32.w),
-              PlatformCard(
-                integrateWith: integrateWithGoogle,
-                platformIcon: Assets.iconsGoogle,
-              ),
-            ],
+        Center(
+          child: PlatformCard(
+            integrateWith: integrateWithGoogle,
+            platformIcon: Assets.iconsGoogle,
           ),
         ),
       ],

@@ -11,9 +11,10 @@ import 'nourish_me.dart';
 
 bool? showOnBoarding;
 void main() async {
+  CacheHelper cacheHelper = CacheHelper();
   await Future.wait<void>([
     ScreenUtil.ensureScreenSize(),
-    CacheHelper().init(),
+    cacheHelper.init(),
     GoogleFonts.pendingFonts([
       GoogleFonts.cairo(),
     ]),

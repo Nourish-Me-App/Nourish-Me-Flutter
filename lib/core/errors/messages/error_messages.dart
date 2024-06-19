@@ -33,6 +33,9 @@ class ErrorMessages {
     if (error == 'Invalid or expired token') {
       return 'الكود غير صالح أو إنتهت المدة الزمنية الخاصة به';
     }
+    if (error == 'There Is No Diet Fit With This Information') {
+      return 'لا يوجد نظام غذائي يتناسب مع هذه المعلومات';
+    }
     if (error == null || error.isEmpty) {
       return 'عذرا يوجد خطأ ، حاول مرة أخري في وقت لاحق';
     } else {

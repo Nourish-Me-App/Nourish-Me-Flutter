@@ -1,8 +1,8 @@
 import 'dart:async';
 
+import 'package:flutter/services.dart';
 import 'package:nourish_me/feature/auth/logic/cubit/data_screen_cubit.dart';
 
-import '../../../../core/imports/app_routes_imports.dart';
 import '../../../../core/imports/login_imports.dart';
 import '../../../../core/theme/app_colors.dart';
 
@@ -38,9 +38,10 @@ class _WeightCounterState extends State<WeightCounter> {
       _weightController.text = dataScreenCubit.weightCounter.toString();
     });
   }
+
   void startTimerDecreaseWeight() {
     _timerWeight = Timer.periodic(const Duration(milliseconds: 100), (timer) {
-      if (dataScreenCubit.weightCounter > 50) {
+      if (dataScreenCubit.weightCounter > 40) {
         dataScreenCubit.decrementWeight();
       } else {
         stopTimerWeight();
@@ -55,16 +56,12 @@ class _WeightCounterState extends State<WeightCounter> {
 
   void _handleWeightChange() {
     String text = _weightController.text;
-    if (text.isEmpty) {
-      _showSnackBar("برجاء ادخال الوزن");
-    } else {
-      int? newValue = int.tryParse(text);
-      if (newValue != null) {
-        if (newValue > 50 || newValue < 160) {
-          dataScreenCubit.updateWeight(newValue);
-        } else {
-          _showSnackBar("الوزن يجب ان يكون اكبر من او يساوي 50 kg");
-        }
+    int? newValue = int.tryParse(text);
+    if (newValue != null) {
+      if (newValue >= 40 || newValue <= 160) {
+        dataScreenCubit.updateWeight(newValue);
+      } else {
+        _showSnackBar('kg الوزن يجب أن يكون بين 40 و 160');
       }
     }
   }
@@ -119,6 +116,7 @@ class _WeightCounterState extends State<WeightCounter> {
           SizedBox(
             width: 60.w,
             child: TextFormField(
+              inputFormatters: [LengthLimitingTextInputFormatter(3)],
               cursorColor: AppColors.mainColor,
               controller: _weightController,
               textAlign: TextAlign.center,
@@ -127,20 +125,15 @@ class _WeightCounterState extends State<WeightCounter> {
               decoration: const InputDecoration(
                 border: InputBorder.none,
               ),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return "برجاء ادخال الوزن";
-                }
-                int? newValue = int.tryParse(value);
-                if (newValue == null || newValue < 50 || newValue > 160) {
-                  return "الوزن يجب ان يكون اكبر من او يساوي 50 kg";
-                }
-                return null;
-              },
               onFieldSubmitted: (value) {
                 if (Form.of(context).validate()) {
-                  _showSnackBar("الوزن يجب ان يكون اكبر من او يساوي 50 kg");
-                  _weightController.text = dataScreenCubit.weightCounter.toString();
+                  int.tryParse(value) == null
+                      ? null
+                      : int.parse(value) < 40 || int.parse(value) > 160
+                          ? _showSnackBar('kg الوزن يجب أن يكون بين 40 و 160')
+                          : null;
+                  _weightController.text =
+                      dataScreenCubit.weightCounter.toString();
                 } else {
                   int newValue = int.parse(value);
                   dataScreenCubit.updateWeight(newValue);

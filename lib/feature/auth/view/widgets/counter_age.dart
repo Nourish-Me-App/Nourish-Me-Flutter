@@ -1,12 +1,15 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nourish_me/feature/auth/logic/cubit/data_screen_cubit.dart';
 import 'dart:developer';
 
-import '../../../../core/imports/app_routes_imports.dart';
-import '../../../../core/imports/login_imports.dart';
+import '../../../../core/helpers/helper_methods.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/theme/app_text_styles.dart';
 
 class CounterAge extends StatefulWidget {
   const CounterAge({super.key});
@@ -58,16 +61,12 @@ class _CounterAgeState extends State<CounterAge> {
 
   void _handleAgeChange() {
     String text = _ageController.text;
-    if (text.isEmpty) {
-      _showSnackBar("برجاء ادخال العمر");
-    } else {
-      int? newValue = int.tryParse(text);
-      if (newValue != null) {
-        if (newValue >= 12 || newValue <= 80) {
-          dataScreenCubit.updateAge(newValue);
-        } else {
-          _showSnackBar("العمر يجب ان يكون بين 12 و 80");
-        }
+    int? newValue = int.tryParse(text);
+    if (newValue != null) {
+      if (newValue >= 12 || newValue <= 80) {
+        dataScreenCubit.updateAge(newValue);
+      } else {
+        _showSnackBar("العمر يجب ان يكون بين 12 و 80");
       }
     }
   }
@@ -129,6 +128,7 @@ class _CounterAgeState extends State<CounterAge> {
           SizedBox(
             width: 60.w,
             child: TextFormField(
+              inputFormatters: [LengthLimitingTextInputFormatter(2)],
               cursorColor: AppColors.mainColor,
               controller: _ageController,
               textAlign: TextAlign.center,
@@ -137,23 +137,18 @@ class _CounterAgeState extends State<CounterAge> {
               decoration: const InputDecoration(
                 border: InputBorder.none,
               ),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'برجاء ادخال العمر';
-                }
-                int? newValue = int.tryParse(value);
-                if (newValue == null || newValue < 12 || newValue > 80) {
-                  return 'العمر يجب ان يكون بين 12 و 80';
-                }
-                return null;
-              },
               onFieldSubmitted: (value) {
                 if (Form.of(context).validate()) {
-                  _showSnackBar('العمر يجب ان يكون بين 12 و 80');
+                  int.tryParse(value) == null
+                      ? null
+                      : int.parse(value) < 12 || int.parse(value) > 80
+                          ? _showSnackBar('العمر يجب ان يكون بين 12 و 80')
+                          : null;
                   _ageController.text = dataScreenCubit.ageCounter.toString();
                 } else {
                   int newValue = int.parse(value);
-                  dataScreenCubit.updateAge(newValue);}
+                  dataScreenCubit.updateAge(newValue);
+                }
               },
             ),
           ),

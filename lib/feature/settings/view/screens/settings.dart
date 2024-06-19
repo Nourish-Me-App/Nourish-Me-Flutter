@@ -7,6 +7,7 @@ import '../../../../core/helpers/app_constants.dart';
 import '../../../../core/helpers/app_images.dart';
 import '../../../../core/helpers/helper_methods.dart';
 import '../../../../core/routing/routes.dart';
+import '../../../home/logic/bot_nav_bar/bot_nav_bar_cubit.dart';
 import '../../logic/cubit/settings_cubit.dart';
 
 import '../widgets/setting_header.dart';
@@ -36,6 +37,7 @@ class SettingsScreen extends StatelessWidget {
                 );
                 CacheHelper().removeData(key: AppConstants.token);
                 CacheHelper().removeData(key: AppConstants.rememberMeToken);
+                BlocProvider.of<BotNavBarCubit>(context).resetIndex();
               }
               if (state is LogoutLoading) {
                 Navigator.pop(context);
@@ -54,13 +56,6 @@ class SettingsScreen extends StatelessWidget {
                 const SettingHeader(),
                 SizedBox(height: 48.h),
                 SettingsContainer(
-                  icon: Assets.svgsSettingsEmailChange,
-                  title: 'تغيير البريد الالكتروني',
-                  showBackIcon: true,
-                  onTap: () {},
-                ),
-                SizedBox(height: 16.h),
-                SettingsContainer(
                   icon: Assets.svgsSettingsPassChange,
                   title: 'تغيير كلمة المرور',
                   showBackIcon: true,
@@ -73,7 +68,10 @@ class SettingsScreen extends StatelessWidget {
                   icon: Assets.svgsSettingsRate,
                   title: 'تقييم التطبيق',
                   showBackIcon: false,
-                  onTap: () {},
+                  onTap: () {
+                    HelperMethods.showCustomSnackBarSuccess(
+                        context, 'قادم قريبا');
+                  },
                 ),
                 SizedBox(height: 16.h),
                 SettingsContainer(
