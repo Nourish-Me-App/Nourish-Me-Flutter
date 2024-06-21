@@ -32,10 +32,12 @@ class DietsCard extends StatelessWidget {
           ),
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: List.generate(
-            meals[index]!.length,
+            meals[index]!.isEmpty ? 1 : meals[index]!.length,
             (index) {
-              return meals[this.index]![index].trim() != ''
+              return meals[this.index]!.isEmpty ||
+                      meals[this.index]![index].trim() != ''
                   ? Row(
                       children: [
                         SizedBox(
@@ -49,19 +51,27 @@ class DietsCard extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10.r),
                             ),
                             child: Center(
-                              child: Image.asset(
-                                HelperMethods.getMealImage(
-                                    meals[this.index]![index]),
-                                height: 20.h,
-                                width: 20.w,
-                              ),
+                              child: meals[this.index]!.isNotEmpty
+                                  ? Image.asset(
+                                      HelperMethods.getMealImage(
+                                          meals[this.index]![index]),
+                                      height: 20.h,
+                                      width: 20.w,
+                                    )
+                                  : Icon(
+                                      Icons.close_outlined,
+                                      color: AppColors.mainColor,
+                                      size: 22.r,
+                                    ),
                             ),
                           ),
                         ),
                         SizedBox(width: 8.w),
                         Expanded(
                           child: Text(
-                            meals[this.index]![index],
+                            meals[this.index]!.isNotEmpty
+                                ? meals[this.index]![index]
+                                : 'لا يوجد وجبات',
                             style: AppTextStyles.cairo12RegularBlack.copyWith(
                               fontSize: 16.sp,
                             ),

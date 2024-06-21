@@ -25,6 +25,7 @@ class SettingsScreen extends StatelessWidget {
           child: BlocListener<SettingsCubit, SettingsState>(
             listener: (context, state) {
               if (state is LogoutSuccess) {
+                CacheHelper cacheHelper= CacheHelper();
                 Navigator.pop(context);
                 HelperMethods.showCustomSnackBarSuccess(
                   context,
@@ -35,8 +36,10 @@ class SettingsScreen extends StatelessWidget {
                   Routes.loginScreen,
                   (route) => false,
                 );
-                CacheHelper().removeData(key: AppConstants.token);
-                CacheHelper().removeData(key: AppConstants.rememberMeToken);
+                cacheHelper.removeData(key: AppConstants.token);
+                cacheHelper.removeData(key: AppConstants.rememberMeToken);
+                cacheHelper.removeData(key: 'name');
+                cacheHelper.removeData(key: 'email');
                 BlocProvider.of<BotNavBarCubit>(context).resetIndex();
               }
               if (state is LogoutLoading) {
