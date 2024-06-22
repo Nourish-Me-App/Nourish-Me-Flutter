@@ -32,3 +32,5 @@ final class UpdateProfileFailed extends SettingsState {
 
   UpdateProfileFailed({required this.error});
 }
+
+final class ImagePicked extends SettingsState {}

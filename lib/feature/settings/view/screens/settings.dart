@@ -40,6 +40,7 @@ class SettingsScreen extends StatelessWidget {
                 cacheHelper.removeData(key: AppConstants.rememberMeToken);
                 cacheHelper.removeData(key: 'name');
                 cacheHelper.removeData(key: 'email');
+                cacheHelper.removeData(key: 'image');
                 BlocProvider.of<BotNavBarCubit>(context).resetIndex();
               }
               if (state is LogoutLoading) {

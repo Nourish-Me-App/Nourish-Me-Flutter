@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
 import 'package:nourish_me/feature/settings/data/repositories/update_profile_repo.dart';
 import '../../data/models/logout_model.dart';
@@ -16,6 +17,8 @@ class SettingsCubit extends Cubit<SettingsState> {
   TextEditingController newPasswordController = TextEditingController();
   TextEditingController newPasswordConfirmationController =
       TextEditingController();
+  XFile? image;
+  ImagePicker imagePicker = ImagePicker();
   late LogoutRepo logoutRepo;
   late UpdateProfileRepo updateProfileRepo;
   SettingsCubit(this.logoutRepo, this.updateProfileRepo)
@@ -51,5 +54,27 @@ class SettingsCubit extends Cubit<SettingsState> {
     }, (updateProfileModel) {
       emit(UpdateProfileSuccess(updateProfileModel: updateProfileModel));
     });
+  }
+
+  Future<XFile?> galleryPick() async {
+    var pickedImage = await imagePicker.pickImage(source: ImageSource.gallery);
+    if (pickedImage != null) {
+      image = pickedImage;
+      emit(ImagePicked());
+      return image!;
+    } else {
+      return null;
+    }
+  }
+
+  Future<XFile?> cameraPick() async {
+    var pickedImage = await imagePicker.pickImage(source: ImageSource.camera);
+    if (pickedImage != null) {
+      image = pickedImage;
+      emit(ImagePicked());
+      return image!;
+    } else {
+      return null;
+    }
   }
 }

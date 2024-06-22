@@ -36,6 +36,9 @@ class ErrorMessages {
     if (error == 'Incorrect old password') {
       return 'كلمة المرور الحالية غير صحيحة';
     }
+    if (error == 'Request Entity Too Large') {
+      return 'حجم الصورة يجب أن يكون أقل من 2 ميجا بايت';
+    }
     if (error == 'There Is No Diet Fit With This Information') {
       return 'لا يوجد نظام غذائي يتناسب مع هذه المعلومات';
     }

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:nourish_me/feature/auth/logic/cubit/data_screen_cubit.dart';
 
 import '../../feature/auth/data/models/continue_register_model.dart';
@@ -9,6 +10,7 @@ import '../../feature/forgetpassword/data/models/check_code_model.dart';
 import '../../feature/forgetpassword/data/models/forget_password_model.dart';
 import '../../feature/forgetpassword/data/models/reset_password.dart';
 import '../../feature/forgetpassword/logic/forget_password_cubit.dart';
+import '../routing/routes.dart';
 import 'app_constants.dart';
 import 'cache_helper.dart';
 
@@ -150,5 +152,36 @@ class AuthRequests {
         ),
       ),
     );
+  }
+
+  static void afterLogin(
+    BuildContext context,
+    AuthCubit authCubit,
+    LoginModel value,
+  ) {
+    CacheHelper cacheHelper = CacheHelper();
+    Navigator.pop(context);
+    cacheHelper.saveData(key: 'email', value: value.data!['user']['email']);
+    cacheHelper.saveData(key: 'name', value: value.data!['user']['name']);
+    cacheHelper.saveData(key: 'image', value: value.data!['user']['image']);
+    authCubit.rememberMe
+        ? cacheHelper.saveData(key: AppConstants.rememberMeToken, value: true)
+        : cacheHelper.removeData(key: AppConstants.rememberMeToken);
+    cacheHelper.saveData(
+        key: AppConstants.token, value: value.data![AppConstants.token]);
+    cacheHelper.saveData(
+        key: AppConstants.isFirstQuestionsComplete,
+        value: value.data!['user'][AppConstants.isFirstQuestionsComplete]);
+    value.data!['user'][AppConstants.isFirstQuestionsComplete] == 'no'
+        ? Navigator.pushNamedAndRemoveUntil(
+            context,
+            Routes.questions,
+            (route) => false,
+          )
+        : Navigator.pushNamedAndRemoveUntil(
+            context,
+            Routes.bottomNavBar,
+            (route) => false,
+          );
   }
 }

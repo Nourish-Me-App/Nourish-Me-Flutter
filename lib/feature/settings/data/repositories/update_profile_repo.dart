@@ -17,7 +17,12 @@ class UpdateProfileRepo {
         path,
         data: data,
         isFormData: true,
-        options: Options(headers: {'Authorization': 'Bearer $token'}),
+        options: Options(
+          headers: {
+            'Authorization': 'Bearer $token',
+            'Content-Type': 'multipart/form-data',
+          },
+        ),
       );
       UpdateProfileModel result = UpdateProfileModel.fromJson(response);
       return Right(result);

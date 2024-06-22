@@ -46,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
           HelperMethods.showLoadingAlertDialog(context);
         }
         if (state is LoginSuccess) {
-          HelperMethods.afterLogin(context, authCubit, state.loginModel!);
+          AuthRequests.afterLogin(context, authCubit, state.loginModel!);
         }
       },
       child: Scaffold(
