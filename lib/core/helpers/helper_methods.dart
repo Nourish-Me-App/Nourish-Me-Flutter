@@ -2,16 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../feature/auth/data/models/login_model.dart';
-import '../../feature/auth/logic/cubit/auth_cubit.dart';
-import '../routing/routes.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
 import '../widgets/custom_border_button.dart';
 import '../widgets/custom_button.dart';
-import 'app_constants.dart';
 import 'app_images.dart';
-import 'cache_helper.dart';
 
 class HelperMethods {
   HelperMethods._();
@@ -73,37 +68,6 @@ class HelperMethods {
         ),
       ),
     );
-  }
-
-  static void afterLogin(
-    BuildContext context,
-    AuthCubit authCubit,
-    LoginModel value,
-  ) {
-    CacheHelper cacheHelper = CacheHelper();
-    Navigator.pop(context);
-    cacheHelper.saveData(key: 'email', value: value.data!['user']['email']);
-    Navigator.pop(context);
-    cacheHelper.saveData(key: 'name', value: value.data!['user']['name']);
-    authCubit.rememberMe
-        ? cacheHelper.saveData(key: AppConstants.rememberMeToken, value: true)
-        : cacheHelper.removeData(key: AppConstants.rememberMeToken);
-    cacheHelper.saveData(
-        key: AppConstants.token, value: value.data![AppConstants.token]);
-    cacheHelper.saveData(
-        key: AppConstants.isFirstQuestionsComplete,
-        value: value.data!['user'][AppConstants.isFirstQuestionsComplete]);
-    value.data!['user'][AppConstants.isFirstQuestionsComplete] == 'no'
-        ? Navigator.pushNamedAndRemoveUntil(
-            context,
-            Routes.questions,
-            (route) => false,
-          )
-        : Navigator.pushNamedAndRemoveUntil(
-            context,
-            Routes.bottomNavBar,
-            (route) => false,
-          );
   }
 
   static void svgPrecacheImage() {
@@ -217,7 +181,7 @@ class HelperMethods {
     if (meal.contains('بازلاء')) {
       return Assets.imagesMealsPea;
     }
-    if (meal.contains('شرائح خيار و طماطم')) {
+    if (meal.contains('طماطم') && meal.contains('خيار')) {
       return Assets.imagesMealsCucumberTomato;
     }
     if (meal.contains('كوب عصير') ||
@@ -259,7 +223,10 @@ class HelperMethods {
     if (meal.contains('جبن مع الخضراوات')) {
       return Assets.imagesMealsVegetableCheese;
     }
-    if (meal.contains('خضار مطهي') || meal.contains('خضار مطبوخ')) {
+    if (meal.contains('خضار سوتيه') ||
+        meal.contains('خضار مطهي') ||
+        meal.contains('خضراوات مطهي') ||
+        meal.contains('خضار مطبوخ')) {
       return Assets.imagesMealsCookedVege;
     }
     if (meal.contains('دجاج فيليه') ||

@@ -1,7 +1,3 @@
-import 'package:nourish_me/feature/auth/logic/cubit/data_screen_cubit.dart';
-
-import '../../feature/diets/data/repositories/diets_repo.dart';
-import '../../feature/diets/logic/cubit/diets_cubit.dart';
 import '../imports/app_routes_imports.dart';
 
 class CustomPageRoute extends MaterialPageRoute {
@@ -129,7 +125,13 @@ class AppRoutes {
         );
       case Routes.newPassword:
         return MaterialPageRoute(
-          builder: (context) => const NewPassword(),
+          builder: (context) => BlocProvider<SettingsCubit>(
+            create: (context) => SettingsCubit(
+              LogoutRepo(DioHandler()),
+              UpdateProfileRepo(DioHandler()),
+            ),
+            child: const NewPassword(),
+          ),
         );
       case Routes.bottomNavBar:
         return MaterialPageRoute(
@@ -148,6 +150,7 @@ class AppRoutes {
               BlocProvider<SettingsCubit>(
                 create: (context) => SettingsCubit(
                   LogoutRepo(DioHandler()),
+                  UpdateProfileRepo(DioHandler()),
                 ),
               ),
               BlocProvider<BotNavBarCubit>(

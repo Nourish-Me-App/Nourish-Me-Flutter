@@ -34,3 +34,8 @@ export '../../feature/splash/view/screens/splash.dart';
 export '../helpers/app_constants.dart';
 export '../networking/dio_handler.dart';
 export '../routing/routes.dart';
+export 'package:nourish_me/feature/auth/logic/cubit/data_screen_cubit.dart';
+
+export '../../feature/diets/data/repositories/diets_repo.dart';
+export '../../feature/diets/logic/cubit/diets_cubit.dart';
+export '../../feature/settings/data/repositories/update_profile_repo.dart';
