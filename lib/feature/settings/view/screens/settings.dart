@@ -25,7 +25,7 @@ class SettingsScreen extends StatelessWidget {
           child: BlocListener<SettingsCubit, SettingsState>(
             listener: (context, state) {
               if (state is LogoutSuccess) {
-                CacheHelper cacheHelper= CacheHelper();
+                CacheHelper cacheHelper = CacheHelper();
                 Navigator.pop(context);
                 HelperMethods.showCustomSnackBarSuccess(
                   context,
@@ -54,6 +54,10 @@ class SettingsScreen extends StatelessWidget {
                 );
               }
             },
+            listenWhen: (context, state) =>
+                state is LogoutFailed ||
+                state is LogoutSuccess ||
+                state is LogoutLoading,
             child: Column(
               children: [
                 const SettingHeader(),

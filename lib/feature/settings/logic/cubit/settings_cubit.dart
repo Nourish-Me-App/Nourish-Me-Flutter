@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'package:nourish_me/feature/settings/data/repositories/update_profile_repo.dart';
 import '../../data/models/logout_model.dart';
@@ -11,6 +12,10 @@ import '../../../../core/helpers/cache_helper.dart';
 part 'settings_state.dart';
 
 class SettingsCubit extends Cubit<SettingsState> {
+  TextEditingController oldPasswordController = TextEditingController();
+  TextEditingController newPasswordController = TextEditingController();
+  TextEditingController newPasswordConfirmationController =
+      TextEditingController();
   late LogoutRepo logoutRepo;
   late UpdateProfileRepo updateProfileRepo;
   SettingsCubit(this.logoutRepo, this.updateProfileRepo)

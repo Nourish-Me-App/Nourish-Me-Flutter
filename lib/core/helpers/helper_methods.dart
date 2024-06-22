@@ -217,7 +217,7 @@ class HelperMethods {
     if (meal.contains('بازلاء')) {
       return Assets.imagesMealsPea;
     }
-    if (meal.contains('شرائح خيار و طماطم')) {
+    if (meal.contains('طماطم') && meal.contains('خيار')) {
       return Assets.imagesMealsCucumberTomato;
     }
     if (meal.contains('كوب عصير') ||
@@ -259,7 +259,10 @@ class HelperMethods {
     if (meal.contains('جبن مع الخضراوات')) {
       return Assets.imagesMealsVegetableCheese;
     }
-    if (meal.contains('خضار مطهي') || meal.contains('خضار مطبوخ')) {
+    if (meal.contains('خضار سوتيه') ||
+        meal.contains('خضار مطهي') ||
+        meal.contains('خضراوات مطهي') ||
+        meal.contains('خضار مطبوخ')) {
       return Assets.imagesMealsCookedVege;
     }
     if (meal.contains('دجاج فيليه') ||
