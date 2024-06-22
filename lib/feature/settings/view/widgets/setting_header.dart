@@ -15,8 +15,8 @@ class SettingHeader extends StatelessWidget {
     return Row(
       children: [
         SizedBox(
-          height: 80.h,
-          width: 52.w,
+          height: 120.h,
+          width: 85.w,
           child: InkWell(
             highlightColor: Colors.transparent,
             splashColor: Colors.transparent,
@@ -27,20 +27,21 @@ class SettingHeader extends StatelessWidget {
               children: [
                 CircleAvatar(
                   backgroundColor: AppColors.dietContainerColor,
-                  radius: 30.r,
-                  child: const Center(
+                  radius: 70.r,
+                  child: Center(
                     child: Icon(
                       Icons.person,
                       color: AppColors.mainColor,
+                      size: 40.r,
                     ),
                   ),
                 ),
                 Positioned(
-                  top: 52.h,
-                  left: 26.w,
+                  top: 80.h,
+                  left: 50.w,
                   child: CircleAvatar(
                     backgroundColor: AppColors.mainColor,
-                    radius: 13.r,
+                    radius: 17.r,
                     child: Center(
                       child: Icon(
                         Icons.camera_alt_outlined,
