@@ -8,7 +8,7 @@ import '../../../../core/helpers/app_constants.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/custom_app_bar.dart';
 import '../../../../core/widgets/error_body.dart';
-import '../../../home/view/widgets/no_internet_connection.dart';
+import '../../../../core/widgets/no_internet_connection.dart';
 import '../../data/models/diets_model.dart';
 import '../../logic/cubit/diets_cubit.dart';
 import '../widgets/diets_card.dart';
@@ -75,9 +75,13 @@ class DietsScreen extends StatelessWidget {
                           Day? currentDay = days[index];
                           List<List<String>?> meals = [
                             currentDay!.breakfast,
-                            currentDay.firstSnack!.split('+'),
+                            currentDay.firstSnack == null
+                                ? []
+                                : currentDay.firstSnack!.split('+'),
                             currentDay.lunch,
-                            currentDay.secondSnack!.split('+'),
+                            currentDay.secondSnack == null
+                                ? []
+                                : currentDay.secondSnack!.split('+'),
                             currentDay.dinner,
                           ];
                           return ListView.separated(

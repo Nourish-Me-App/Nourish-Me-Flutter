@@ -319,6 +319,10 @@ class Assets {
   static const String imagesOnBoardingOnBoarding3 =
       "assets/images/on_boarding/onBoarding3.png";
 
+  /// Assets for imagesServerError
+  /// assets/images/server_error.png
+  static const String imagesServerError = "assets/images/server_error.png";
+
   /// Assets for imagesSplashSplashLogoBody
   /// assets/images/splash/splash_logo_body.png
   static const String imagesSplashSplashLogoBody =

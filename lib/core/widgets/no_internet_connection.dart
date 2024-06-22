@@ -1,9 +1,9 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import '../../../../core/helpers/app_images.dart';
-import '../../../../core/imports/app_routes_imports.dart';
+import '../helpers/app_images.dart';
+import '../imports/app_routes_imports.dart';
 
-import '../../../../core/theme/app_text_styles.dart';
+import '../theme/app_text_styles.dart';
 
 class NoInternetConnection extends StatelessWidget {
   const NoInternetConnection({super.key});

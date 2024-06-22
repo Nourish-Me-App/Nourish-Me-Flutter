@@ -16,7 +16,7 @@ import '../../logic/home/home_cubit.dart';
 import '../widgets/custom_container.dart';
 import '../widgets/custom_container_user_personal_info.dart';
 import '../widgets/custom_user_mass.dart';
-import '../widgets/no_internet_connection.dart';
+import '../../../../core/widgets/no_internet_connection.dart';
 import '../widgets/shimmer_home.dart';
 
 class HomeScreen extends StatelessWidget {

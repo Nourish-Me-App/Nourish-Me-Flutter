@@ -82,6 +82,9 @@ class HelperMethods {
   ) {
     CacheHelper cacheHelper = CacheHelper();
     Navigator.pop(context);
+    cacheHelper.saveData(key: 'email', value: value.data!['user']['email']);
+    Navigator.pop(context);
+    cacheHelper.saveData(key: 'name', value: value.data!['user']['name']);
     authCubit.rememberMe
         ? cacheHelper.saveData(key: AppConstants.rememberMeToken, value: true)
         : cacheHelper.removeData(key: AppConstants.rememberMeToken);
