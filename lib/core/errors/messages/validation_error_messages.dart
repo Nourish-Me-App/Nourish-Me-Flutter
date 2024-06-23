@@ -15,7 +15,7 @@ class ValidationErrorTexts {
       return 'لا تستخدم أرقام';
     }
     if (firstName.length < 2) {
-      return 'الإسم الأول يجب ألا يقل عن حرفين';
+      return 'يجب ألا يقل عن حرفين';
     }
     return null;
   }
@@ -46,7 +46,7 @@ class ValidationErrorTexts {
       return 'لا تستخدم أرقام';
     }
     if (lastName.length < 2) {
-      return 'الإسم الأخير يجب ألا يقل عن حرفين';
+      return 'يجب ألا يقل عن حرفين';
     }
     return null;
   }

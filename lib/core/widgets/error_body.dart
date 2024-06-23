@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../helpers/app_images.dart';
 import '../theme/app_text_styles.dart';
@@ -16,7 +15,10 @@ class ErrorBody extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          SvgPicture.asset(Assets.svgsResultsNoConnection),
+          Image.asset(
+            Assets.imagesServerError,
+            height: 340.h,
+          ),
           SizedBox(height: 10.h),
           Text(
             'عذرا ، حدث خطأ في الاتصال بالسيرفر',

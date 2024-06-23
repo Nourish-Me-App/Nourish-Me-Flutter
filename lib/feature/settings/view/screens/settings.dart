@@ -7,6 +7,7 @@ import '../../../../core/helpers/app_constants.dart';
 import '../../../../core/helpers/app_images.dart';
 import '../../../../core/helpers/helper_methods.dart';
 import '../../../../core/routing/routes.dart';
+import '../../../home/logic/bot_nav_bar/bot_nav_bar_cubit.dart';
 import '../../logic/cubit/settings_cubit.dart';
 
 import '../widgets/setting_header.dart';
@@ -24,6 +25,7 @@ class SettingsScreen extends StatelessWidget {
           child: BlocListener<SettingsCubit, SettingsState>(
             listener: (context, state) {
               if (state is LogoutSuccess) {
+                CacheHelper cacheHelper = CacheHelper();
                 Navigator.pop(context);
                 HelperMethods.showCustomSnackBarSuccess(
                   context,
@@ -34,8 +36,12 @@ class SettingsScreen extends StatelessWidget {
                   Routes.loginScreen,
                   (route) => false,
                 );
-                CacheHelper().removeData(key: AppConstants.token);
-                CacheHelper().removeData(key: AppConstants.rememberMeToken);
+                cacheHelper.removeData(key: AppConstants.token);
+                cacheHelper.removeData(key: AppConstants.rememberMeToken);
+                cacheHelper.removeData(key: 'name');
+                cacheHelper.removeData(key: 'email');
+                cacheHelper.removeData(key: 'image');
+                BlocProvider.of<BotNavBarCubit>(context).resetIndex();
               }
               if (state is LogoutLoading) {
                 Navigator.pop(context);
@@ -49,17 +55,14 @@ class SettingsScreen extends StatelessWidget {
                 );
               }
             },
+            listenWhen: (context, state) =>
+                state is LogoutFailed ||
+                state is LogoutSuccess ||
+                state is LogoutLoading,
             child: Column(
               children: [
                 const SettingHeader(),
                 SizedBox(height: 48.h),
-                SettingsContainer(
-                  icon: Assets.svgsSettingsEmailChange,
-                  title: 'تغيير البريد الالكتروني',
-                  showBackIcon: true,
-                  onTap: () {},
-                ),
-                SizedBox(height: 16.h),
                 SettingsContainer(
                   icon: Assets.svgsSettingsPassChange,
                   title: 'تغيير كلمة المرور',
@@ -73,7 +76,10 @@ class SettingsScreen extends StatelessWidget {
                   icon: Assets.svgsSettingsRate,
                   title: 'تقييم التطبيق',
                   showBackIcon: false,
-                  onTap: () {},
+                  onTap: () {
+                    HelperMethods.showCustomSnackBarSuccess(
+                        context, 'قادم قريبا');
+                  },
                 ),
                 SizedBox(height: 16.h),
                 SettingsContainer(

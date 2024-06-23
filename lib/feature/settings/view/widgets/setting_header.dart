@@ -1,6 +1,15 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:nourish_me/core/helpers/app_constants.dart';
+import 'package:nourish_me/feature/settings/logic/cubit/settings_cubit.dart';
+import 'package:nourish_me/feature/settings/view/widgets/choose_image_source_dialog.dart';
 
+import '../../../../core/errors/messages/error_messages.dart';
+import '../../../../core/helpers/cache_helper.dart';
+import '../../../../core/helpers/helper_methods.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 
@@ -11,65 +20,143 @@ class SettingHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        SizedBox(
-          height: 80.h,
-          width: 52.w,
-          child: InkWell(
-            highlightColor: Colors.transparent,
-            splashColor: Colors.transparent,
-            overlayColor: const WidgetStatePropertyAll(Colors.transparent),
-            onTap: () {},
-            child: Stack(
-              alignment: Alignment.centerLeft,
-              children: [
-                CircleAvatar(
-                  backgroundColor: AppColors.dietContainerColor,
-                  radius: 30.r,
-                  child: const Center(
-                    child: Icon(
-                      Icons.person,
-                      color: AppColors.mainColor,
+    var settingCubit = BlocProvider.of<SettingsCubit>(context);
+    return BlocConsumer<SettingsCubit, SettingsState>(
+      listener: (context, state) {
+        if (state is UpdateProfileLoading) {
+          HelperMethods.showLoadingAlertDialog(context);
+        }
+        if (state is UpdateProfileFailed) {
+          Navigator.pop(context);
+          HelperMethods.showCustomSnackBarError(
+              context, ErrorMessages.errorMessage(state.error));
+        }
+        if (state is UpdateProfileSuccess) {
+          Navigator.pop(context);
+          HelperMethods.showCustomSnackBarSuccess(
+              context, 'تم رفع الصورة الشخصية بنجاح');
+          CacheHelper().saveData(
+              key: 'image', value: state.updateProfileModel.data!.image);
+        }
+      },
+      listenWhen: (context, state) =>
+          state is UpdateProfileFailed ||
+          state is UpdateProfileLoading ||
+          state is UpdateProfileSuccess,
+      buildWhen: (context, state) => state is UpdateProfileSuccess,
+      builder: (context, state) {
+        return Row(
+          children: [
+            SizedBox(
+              height: 120.h,
+              width: 85.w,
+              child: InkWell(
+                highlightColor: Colors.transparent,
+                splashColor: Colors.transparent,
+                overlayColor: const WidgetStatePropertyAll(Colors.transparent),
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => ChooseImageSourceDialog(
+                      cameraPick: () async {
+                        XFile? pickedImage =
+                            await settingCubit.cameraPick().then((value) {
+                          Navigator.pop(context);
+                          return value;
+                        });
+                        pickedImage != null
+                            ? settingCubit.updateProfile(
+                                AppConstants.updateProfile,
+                                {
+                                  'image': await MultipartFile.fromFile(
+                                    pickedImage.path,
+                                    filename: pickedImage.path.split('/').last,
+                                  ),
+                                },
+                              )
+                            : null;
+                      },
+                      galleryPick: () async {
+                        XFile? pickedImage =
+                            await settingCubit.galleryPick().then((value) {
+                          Navigator.pop(context);
+                          return value;
+                        });
+                        pickedImage != null
+                            ? settingCubit.updateProfile(
+                                AppConstants.updateProfile,
+                                {
+                                  'image': await MultipartFile.fromFile(
+                                    pickedImage.path,
+                                    filename: pickedImage.path.split('/').last,
+                                  ),
+                                },
+                              )
+                            : null;
+                      },
                     ),
-                  ),
-                ),
-                Positioned(
-                  top: 52.h,
-                  left: 26.w,
-                  child: CircleAvatar(
-                    backgroundColor: AppColors.mainColor,
-                    radius: 13.r,
-                    child: Center(
-                      child: Icon(
-                        Icons.camera_alt_outlined,
-                        color: Colors.white,
-                        size: 13.r,
+                  );
+                },
+                child: Stack(
+                  alignment: Alignment.centerLeft,
+                  children: [
+                    CacheHelper().getData(key: 'image') == null
+                        ? CircleAvatar(
+                            backgroundColor: AppColors.dietContainerColor,
+                            radius: 70.r,
+                            child: Center(
+                              child: Icon(
+                                Icons.person,
+                                color: AppColors.mainColor,
+                                size: 40.r,
+                              ),
+                            ),
+                          )
+                        : CircleAvatar(
+                            backgroundColor: AppColors.dietContainerColor,
+                            radius: 70.r,
+                            backgroundImage: NetworkImage(
+                              CacheHelper().getData(key: 'image'),
+                            ),
+                          ),
+                    Positioned(
+                      top: 80.h,
+                      left: 50.w,
+                      child: CircleAvatar(
+                        backgroundColor: AppColors.mainColor,
+                        radius: 17.r,
+                        child: Center(
+                          child: Icon(
+                            Icons.camera_alt_outlined,
+                            color: Colors.white,
+                            size: 13.r,
+                          ),
+                        ),
                       ),
                     ),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(width: 16.w),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  CacheHelper().getData(key: 'name'),
+                  style: AppTextStyles.cairo18BoldBlack,
+                ),
+                Text(
+                  CacheHelper().getData(key: 'email'),
+                  style: AppTextStyles.cairo16SemiBoldBlack.copyWith(
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
               ],
             ),
-          ),
-        ),
-        SizedBox(width: 16.w),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Manar Gehad',
-              style: AppTextStyles.cairo18BoldBlack,
-            ),
-            Text(
-              'manargehad@gmail.com',
-              style: AppTextStyles.cairo16SemiBoldBlack.copyWith(
-                fontWeight: FontWeight.w400,
-              ),
-            ),
           ],
-        ),
-      ],
+        );
+      },
     );
   }
 }

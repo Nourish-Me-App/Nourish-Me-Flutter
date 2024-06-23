@@ -1,7 +1,3 @@
-import 'package:nourish_me/feature/auth/logic/cubit/data_screen_cubit.dart';
-
-import '../../feature/diets/data/repositories/diets_repo.dart';
-import '../../feature/diets/logic/cubit/diets_cubit.dart';
 import '../imports/app_routes_imports.dart';
 
 class CustomPageRoute extends MaterialPageRoute {
@@ -21,7 +17,7 @@ class AppRoutes {
         );
       case Routes.signUpScreen:
         return CustomPageRoute(
-          builder: (context) => BlocProvider(
+          builder: (context) => BlocProvider<AuthCubit>(
             create: (context) => AuthCubit(
               LoginRepo(dioHandler),
               SignUpRepo(dioHandler),
@@ -41,7 +37,7 @@ class AppRoutes {
         );
       case Routes.forgetPasswordScreen:
         return CustomPageRoute(
-          builder: (context) => BlocProvider(
+          builder: (context) => BlocProvider<ForgetPasswordCubit>(
             create: (context) => ForgetPasswordCubit(
               ForgetPasswordRepo(dioHandler),
               CheckCodeRepo(dioHandler),
@@ -94,7 +90,7 @@ class AppRoutes {
         );
       case Routes.onBoarding:
         return PageRouteBuilder(
-          transitionDuration: const Duration(milliseconds: 2000),
+          transitionDuration: const Duration(milliseconds: 1500),
           pageBuilder: (context, animation, secondaryAnimation) =>
               BlocProvider<OnBoardingCubit>(
             create: (context) => OnBoardingCubit(),
@@ -129,7 +125,13 @@ class AppRoutes {
         );
       case Routes.newPassword:
         return MaterialPageRoute(
-          builder: (context) => const NewPassword(),
+          builder: (context) => BlocProvider<SettingsCubit>(
+            create: (context) => SettingsCubit(
+              LogoutRepo(DioHandler()),
+              UpdateProfileRepo(DioHandler()),
+            ),
+            child: const NewPassword(),
+          ),
         );
       case Routes.bottomNavBar:
         return MaterialPageRoute(
@@ -148,7 +150,11 @@ class AppRoutes {
               BlocProvider<SettingsCubit>(
                 create: (context) => SettingsCubit(
                   LogoutRepo(DioHandler()),
+                  UpdateProfileRepo(DioHandler()),
                 ),
+              ),
+              BlocProvider<BotNavBarCubit>(
+                create: (context) => BotNavBarCubit(),
               ),
             ],
             child: const BottomNav(),

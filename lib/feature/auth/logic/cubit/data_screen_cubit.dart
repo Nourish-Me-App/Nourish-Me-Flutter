@@ -14,6 +14,9 @@ class DataScreenCubit extends Cubit<DataScreenState> {
   int ageCounter = 18;
   int weightCounter = 50;
   int heightCounter = 160;
+  //Timer? _timerAge;
+  Timer? _timerHeight;
+  Timer? _timerWeight;
 
   Future<void> continueRegister(String path, dynamic data) async {
     emit(ContinueRegisterLoading());

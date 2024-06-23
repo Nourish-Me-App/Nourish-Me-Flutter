@@ -23,6 +23,7 @@ class _SplashScreenState extends State<SplashScreen>
 
   late Animation<double> firstFadeAnimation;
   late Animation<Offset> secondFadeAnimation;
+  late CacheHelper cacheHelper;
   bool isShowWelcomeText = false;
   Timer? timer;
   @override
@@ -30,13 +31,14 @@ class _SplashScreenState extends State<SplashScreen>
     super.initState();
     myFirstFadeAnimation();
     mySecondFadeAnimation();
-    timer = Timer(const Duration(milliseconds: 5000), () {
+    cacheHelper = CacheHelper();
+    timer = Timer(const Duration(milliseconds: 4000), () {
       Navigator.of(context).pushNamedAndRemoveUntil(
         showOnBoarding == null
             ? Routes.onBoarding
-            : CacheHelper().getData(key: AppConstants.rememberMeToken) == null
+            : cacheHelper.getData(key: AppConstants.rememberMeToken) == null
                 ? Routes.signUpScreen
-                : CacheHelper().getData(
+                : cacheHelper.getData(
                             key: AppConstants.isFirstQuestionsComplete) ==
                         'no'
                     ? Routes.questions
@@ -49,7 +51,7 @@ class _SplashScreenState extends State<SplashScreen>
   void myFirstFadeAnimation() {
     firstFadeAnimationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 2500),
+      duration: const Duration(milliseconds: 1800),
     )..forward();
     firstFadeAnimation = Tween<double>(
       begin: 0.3,
@@ -63,7 +65,7 @@ class _SplashScreenState extends State<SplashScreen>
   void mySecondFadeAnimation() {
     secondFadeAnimationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 4000),
+      duration: const Duration(milliseconds: 3000),
     )..forward();
     secondFadeAnimation = Tween<Offset>(
       begin: const Offset(0, 0),

@@ -10,6 +10,7 @@ class AppConstants {
   static const String resetPassword = "users/reset-password/reset";
   static const String postQuestions = "users/answers";
   static const String continueRegister = "users/register/continue";
+  static const String updateProfile = "users/profile/update";
   static const String questions = "questions";
   static const String rememberMeToken = "rememberMeToken";
   static const String token = "token";

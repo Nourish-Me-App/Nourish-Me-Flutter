@@ -43,6 +43,11 @@ class ExceptionHelperMethods {
         badResponseExceptionThrow(e);
       case 409:
         badResponseExceptionThrow(e);
+      case 413:
+        throw ApiException(
+          errorModel:
+              ErrorModel.fromJson({'message': 'Request Entity Too Large'}),
+        );
       case 422:
         badResponseExceptionThrow(e);
       case 502:

@@ -2,16 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../feature/auth/data/models/login_model.dart';
-import '../../feature/auth/logic/cubit/auth_cubit.dart';
-import '../routing/routes.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
 import '../widgets/custom_border_button.dart';
 import '../widgets/custom_button.dart';
-import 'app_constants.dart';
 import 'app_images.dart';
-import 'cache_helper.dart';
 
 class HelperMethods {
   HelperMethods._();
@@ -75,36 +70,6 @@ class HelperMethods {
     );
   }
 
-  static void afterLogin(
-    BuildContext context,
-    AuthCubit authCubit,
-    LoginModel value,
-  ) {
-    CacheHelper cacheHelper = CacheHelper();
-    Navigator.pop(context);
-    authCubit.rememberMe
-        ? cacheHelper.saveData(
-            key: AppConstants.rememberMeToken,
-            value: value.data![AppConstants.token])
-        : cacheHelper.removeData(key: AppConstants.rememberMeToken);
-    cacheHelper.saveData(
-        key: AppConstants.token, value: value.data![AppConstants.token]);
-    cacheHelper.saveData(
-        key: AppConstants.isFirstQuestionsComplete,
-        value: value.data!['user'][AppConstants.isFirstQuestionsComplete]);
-    value.data!['user'][AppConstants.isFirstQuestionsComplete] == 'no'
-        ? Navigator.pushNamedAndRemoveUntil(
-            context,
-            Routes.questions,
-            (route) => false,
-          )
-        : Navigator.pushNamedAndRemoveUntil(
-            context,
-            Routes.bottomNavBar,
-            (route) => false,
-          );
-  }
-
   static void svgPrecacheImage() {
     const cacheSvgImages = [
       Assets.svgsResultsNoConnection,
@@ -161,12 +126,15 @@ class HelperMethods {
       return Assets.imagesMealsDate;
     }
     if (meal.contains('فاكهة') ||
+        meal.contains('فواكه') ||
         meal.contains('تفاح') ||
         meal.contains('ثمرة فاكهة') ||
         meal.contains('موز') ||
         meal.contains('مشمش') ||
+        meal.contains('كيوي') ||
         meal.contains('برتقالة') ||
         meal.contains('تفاحة') ||
+        meal.contains('جواف') ||
         meal.contains('عنب') ||
         meal.contains('برتقال') ||
         meal.contains('شريحة بطيخ') ||
@@ -213,7 +181,7 @@ class HelperMethods {
     if (meal.contains('بازلاء')) {
       return Assets.imagesMealsPea;
     }
-    if (meal.contains('شرائح خيار و طماطم')) {
+    if (meal.contains('طماطم') && meal.contains('خيار')) {
       return Assets.imagesMealsCucumberTomato;
     }
     if (meal.contains('كوب عصير') ||
@@ -225,12 +193,12 @@ class HelperMethods {
     if (meal.contains('باذنجان')) {
       return Assets.imagesMealsEggplant;
     }
-    if (meal.contains('بذور شيا') || meal.contains('بذور الشيا')) {
+    if (meal.contains('شيا') || meal.contains('الشيا')) {
       return Assets.imagesMealsChiaSeeds;
     }
     if (meal.contains('دجاجة') ||
         meal.contains('دجاجه') ||
-        meal.contains('قطعة دجاج')) {
+        meal.contains('دجاج')) {
       return Assets.imagesMealsChicken;
     }
     if (meal.contains('معكرونة') ||
@@ -245,6 +213,7 @@ class HelperMethods {
         meal.contains('جبن ابيض منزوع الدسم') ||
         meal.contains('جبن منزوع الدسم') ||
         meal.contains('جبنة قليلة الدسم') ||
+        (meal.contains('جبن') && meal.contains('زيت')) ||
         meal.contains('جبنه قليلة الدسم')) {
       return Assets.imagesMealsLowFatCheese;
     }
@@ -254,7 +223,10 @@ class HelperMethods {
     if (meal.contains('جبن مع الخضراوات')) {
       return Assets.imagesMealsVegetableCheese;
     }
-    if (meal.contains('خضار مطهي') || meal.contains('خضار مطبوخ')) {
+    if (meal.contains('خضار سوتيه') ||
+        meal.contains('خضار مطهي') ||
+        meal.contains('خضراوات مطهي') ||
+        meal.contains('خضار مطبوخ')) {
       return Assets.imagesMealsCookedVege;
     }
     if (meal.contains('دجاج فيليه') ||
@@ -326,13 +298,13 @@ class HelperMethods {
     if (meal.contains('زيتون')) {
       return Assets.imagesMealsOlive;
     }
-    if (meal.contains('خيار وخس')) {
+    if (meal.contains('خيار') && meal.contains('خس')) {
       return Assets.imagesMealsCucumberLettuce;
     }
     if (meal.contains('جرجير')) {
       return Assets.imagesMealsArgula;
     }
-    if (meal.contains('بطاطس مكعبات')) {
+    if (meal.contains('بطاطس')) {
       return Assets.imagesMealsPotato;
     }
     if (meal.contains('بليلة') || meal.contains('بليله')) {
@@ -345,7 +317,10 @@ class HelperMethods {
       return Assets.imagesMealsLiver;
     }
     if (meal.contains('شيكولاتة') ||
-        meal.contains('داكنة') ||
+        meal.contains('الشيكولاتة') ||
+        meal.contains('الشيكولاته') ||
+        meal.contains('شوكولاته') ||
+        meal.contains('شوكولاتة') ||
         meal.contains('شيكولاته')) {
       return Assets.imagesMealsChocolateBar;
     }
@@ -380,12 +355,14 @@ class HelperMethods {
     if (meal.contains('زبادي') || meal.contains('الزبادي')) {
       return Assets.imagesMealsYogurt;
     }
-    if (meal.contains('ستيك') || meal.contains('لحم')) {
+    if (meal.contains('ستيك') || meal.contains('لحم') || meal.contains('كفت')) {
       return Assets.imagesMealsMeat;
     }
     if (meal.contains('التونا') ||
         meal.contains('تونا') ||
         meal.contains('تونة') ||
+        meal.contains('تونه') ||
+        meal.contains('التونه') ||
         meal.contains('التونة')) {
       return Assets.imagesMealsTuna;
     } else {
