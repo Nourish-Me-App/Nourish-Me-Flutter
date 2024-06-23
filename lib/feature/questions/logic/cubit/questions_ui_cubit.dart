@@ -9,12 +9,15 @@ class QuestionsUICubit extends Cubit<QuestionsUIState> {
   int? questionOneValue,
       questionTwoValue,
       questionFourValue,
+      questionThreeValue,
       questionFiveValue,
       continueQuestionOneValue;
-  List questionThreeValue = [
+  List continueQuestionThreeValue = [
     false,
     false,
     false,
+  ];
+  List continueQuestionThreeValue2 = [
     false,
     false,
   ];
@@ -35,6 +38,21 @@ class QuestionsUICubit extends Cubit<QuestionsUIState> {
     }
   }
 
+  void resetContinueQuestionThreeValueList() {
+    continueQuestionThreeValue = [
+      false,
+      false,
+      false,
+    ];
+  }
+
+  void resetContinueQuestionThreeValueList2() {
+    continueQuestionThreeValue2 = [
+      false,
+      false,
+    ];
+  }
+
   void onChangedRadioValue({
     dynamic value,
     int? questionNum,
@@ -49,7 +67,7 @@ class QuestionsUICubit extends Cubit<QuestionsUIState> {
         questionTwoValue = value!;
         emit(RadioValueChosed());
       case 2:
-        questionThreeValue[index!] = value;
+        questionThreeValue = value;
         emit(RadioValueChosed());
       case 3:
         questionFourValue = value!;
@@ -59,6 +77,11 @@ class QuestionsUICubit extends Cubit<QuestionsUIState> {
         emit(RadioValueChosed());
       case 5:
         continueQuestionOneValue = value!;
+        emit(RadioValueChosed());
+      case 6:
+        questionThreeValue == 0
+            ? continueQuestionThreeValue[index!] = value!
+            : continueQuestionThreeValue2[index!] = value!;
         emit(RadioValueChosed());
     }
   }
@@ -74,8 +97,12 @@ class QuestionsUICubit extends Cubit<QuestionsUIState> {
       return questionFourValue;
     } else if (value == 4) {
       return questionFiveValue;
-    } else {
+    } else if (value == 5) {
       return continueQuestionOneValue;
+    } else {
+      return questionThreeValue == 0
+          ? continueQuestionThreeValue
+          : continueQuestionThreeValue2;
     }
   }
 
@@ -103,7 +130,7 @@ class QuestionsUICubit extends Cubit<QuestionsUIState> {
           return false;
         }
       case 2:
-        if (!questionThreeValue.contains(true)) {
+        if (questionThreeValue == null) {
           questionThreeValidate = true;
           emit(Validated());
           return true;

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nourish_me/feature/questions/view/widgets/custom_check_box.dart';
 import '../../data/models/questions_model.dart';
 import '../../logic/cubit/questions_cubit.dart';
 
@@ -7,7 +8,6 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/widgets/custom_radio.dart';
 import '../../logic/cubit/questions_ui_cubit.dart';
-import 'custom_check_box.dart';
 
 class CardBody extends StatelessWidget {
   final int? questionsNumber, answersNumber;
@@ -51,17 +51,16 @@ class CardBody extends StatelessWidget {
         ),
         SizedBox(height: 12.h),
         Column(
-          children: questionsUICubit.questionNumber == 2
+          children: questionsNumber == 6
               ? List.generate(
                   answersNumber!,
                   (index) => MyCheckBox(
-                    index: index,
-                    answer: answer[index].answer!,
-                    questionsUICubit: questionsUICubit,
-                    questionsCubit: questionsCubit,
-                    questionNumber: questionsNumber!,
-                    answerId: answer[index].id!,
-                  ),
+                      answer: answer[index].answer!,
+                      questionsUICubit: questionsUICubit,
+                      questionNumber: questionsNumber!,
+                      index: index,
+                      answerId: answer[index].id!,
+                      questionsCubit: questionsCubit),
                 )
               : List.generate(
                   answersNumber!,
@@ -74,12 +73,26 @@ class CardBody extends StatelessWidget {
                         value: val,
                         questionNum: questionsNumber!,
                       );
+
                       questionsUICubit.clearValidation();
 
                       if (questionsUICubit.questionNumber == 0 &&
                           questionsUICubit.questionOneValue == 1) {
                         questionsCubit.answerValue(5, null);
                       }
+
+                      if (questionsUICubit.questionNumber == 2 &&
+                          questionsUICubit.questionThreeValue == 1) {
+                        questionsCubit.resetQuestionThreeAnswersList();
+                        questionsUICubit.resetContinueQuestionThreeValueList();
+                      }
+
+                      if (questionsUICubit.questionNumber == 2 &&
+                          questionsUICubit.questionThreeValue == 0) {
+                        questionsUICubit.resetContinueQuestionThreeValueList2();
+                        questionsCubit.resetQuestionThreeAnswersList();
+                      }
+
                       questionsCubit.answerValue(
                           questionsNumber, answer[index].id!);
 
