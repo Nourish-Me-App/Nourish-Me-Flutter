@@ -13,7 +13,12 @@ part 'questions_state.dart';
 class QuestionsCubit extends Cubit<QuestionsState> {
   late QuestionsAndAnswersRepo questionsAndAnswersRepo;
   QuestionsCubit(this.questionsAndAnswersRepo) : super(QuestionsInitial());
-  String? answerOne, answerTwo, answerFour, answerFive, continueAnswerOne;
+  String? answerOne,
+      answerTwo,
+      answerThree,
+      answerFour,
+      answerFive,
+      continueAnswerOne;
   List<Map<String, dynamic>> answers = [];
   List<String> questionThreeAnswersList = [];
 
@@ -24,7 +29,7 @@ class QuestionsCubit extends Cubit<QuestionsState> {
             {"question_title": "Sleep Hours", "answer_id": "$answerTwo"},
             {
               "question_title": "Disease",
-              "answer_id": questionThreeAnswersList
+              "answer_id": [answerThree, ...questionThreeAnswersList]
             },
             {"question_title": "Water Amount", "answer_id": "$answerFour"},
             {"question_title": "Goal", "answer_id": "$answerFive"}
@@ -54,12 +59,18 @@ class QuestionsCubit extends Cubit<QuestionsState> {
     log('$questionThreeAnswersList');
   }
 
+  void resetQuestionThreeAnswersList() {
+    questionThreeAnswersList = [];
+  }
+
   void answerValue(int? questionNumber, dynamic value) {
     switch (questionNumber) {
       case 0:
         answerOne = value;
       case 1:
         answerTwo = value;
+      case 2:
+        answerThree = value;
       case 3:
         answerFour = value;
       case 4:

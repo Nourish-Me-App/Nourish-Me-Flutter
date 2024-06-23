@@ -50,7 +50,9 @@ class MyCheckBox extends StatelessWidget {
               activeColor: AppColors.mainColor,
               side:
                   const BorderSide(width: 2, color: AppColors.radioBorderColor),
-              value: questionsUICubit.questionThreeValue[index],
+              value: questionsUICubit.questionThreeValue == 0
+                  ? questionsUICubit.continueQuestionThreeValue[index]
+                  : questionsUICubit.continueQuestionThreeValue2[index],
               onChanged: (value) {
                 questionsUICubit.onChangedRadioValue(
                   value: value,

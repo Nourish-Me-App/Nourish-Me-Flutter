@@ -97,9 +97,7 @@ class _QuestionsState extends State<Questions> {
                             ? Padding(
                                 padding: EdgeInsets.symmetric(vertical: 8.h),
                                 child: Text(
-                                  questionsUICubit.questionNumber == 2
-                                      ? '! يجب إختيار واحد من الإختيارات السابقة علي الأقل'
-                                      : '! يجب اختيار واحد من الاختيارات السابقة',
+                                  '! يجب اختيار واحد من الاختيارات السابقة',
                                   style:
                                       AppTextStyles.cairo11MediumTFFErrorColor,
                                 ),

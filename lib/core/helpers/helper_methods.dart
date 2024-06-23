@@ -225,6 +225,7 @@ class HelperMethods {
     }
     if (meal.contains('خضار سوتيه') ||
         meal.contains('خضار مطهي') ||
+        meal.contains('الخضار المطهي') ||
         meal.contains('خضراوات مطهي') ||
         meal.contains('خضار مطبوخ')) {
       return Assets.imagesMealsCookedVege;
@@ -239,6 +240,7 @@ class HelperMethods {
     }
     if (meal.contains('خضار متقطع') ||
         meal.contains('خضار مقطع') ||
+        meal.contains('خضار') ||
         meal.contains('خضروات') ||
         meal.contains('شرائح طماطم وخضار') ||
         meal == 'خضار') {
