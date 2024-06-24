@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nourish_me/core/errors/messages/error_messages.dart';
-import 'package:nourish_me/core/helpers/app_constants.dart';
-import 'package:nourish_me/core/helpers/helper_methods.dart';
-import 'package:nourish_me/core/routing/routes.dart';
+import '../../../../core/errors/messages/error_messages.dart';
+import '../../../../core/helpers/app_constants.dart';
+import '../../../../core/helpers/helper_methods.dart';
+import '../../../../core/routing/routes.dart';
 import '../../../../core/errors/messages/validation_error_messages.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/widgets/custom_button.dart';

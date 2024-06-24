@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nourish_me/feature/auth/logic/cubit/data_screen_cubit.dart';
+import '../../logic/cubit/data_screen_cubit.dart';
 
 import '../../../../core/helpers/helper_methods.dart';
 import '../../../../core/theme/app_colors.dart';

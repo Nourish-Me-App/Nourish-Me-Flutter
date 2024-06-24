@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:nourish_me/feature/settings/data/models/update_profile_model.dart';
+import '../models/update_profile_model.dart';
 import '../../../../core/errors/api/exceptions/api_exception.dart';
 import '../../../../core/networking/api_services.dart';
 

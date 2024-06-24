@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:nourish_me/core/helpers/app_constants.dart';
-import 'package:nourish_me/feature/settings/logic/cubit/settings_cubit.dart';
-import 'package:nourish_me/feature/settings/view/widgets/choose_image_source_dialog.dart';
+import '../../../../core/helpers/app_constants.dart';
+import '../../logic/cubit/settings_cubit.dart';
+import 'choose_image_source_dialog.dart';
 
 import '../../../../core/errors/messages/error_messages.dart';
 import '../../../../core/helpers/cache_helper.dart';

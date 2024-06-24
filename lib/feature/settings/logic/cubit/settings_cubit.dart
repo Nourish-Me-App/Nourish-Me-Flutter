@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
-import 'package:nourish_me/feature/settings/data/repositories/update_profile_repo.dart';
+import '../../data/repositories/update_profile_repo.dart';
 import '../../data/models/logout_model.dart';
 import '../../data/models/update_profile_model.dart';
 import '../../data/repositories/logout_repo.dart';

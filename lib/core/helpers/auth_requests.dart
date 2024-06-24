@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nourish_me/feature/auth/logic/cubit/data_screen_cubit.dart';
+import '../../feature/auth/logic/cubit/data_screen_cubit.dart';
 
 import '../../feature/auth/data/models/continue_register_model.dart';
 

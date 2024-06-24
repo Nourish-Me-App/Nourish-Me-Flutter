@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:nourish_me/core/helpers/cache_helper.dart';
-import 'package:nourish_me/feature/home/logic/bot_nav_bar/bot_nav_bar_cubit.dart';
+import '../helpers/cache_helper.dart';
+import '../../feature/home/logic/bot_nav_bar/bot_nav_bar_cubit.dart';
 
 import '../helpers/app_images.dart';
 import '../theme/app_colors.dart';

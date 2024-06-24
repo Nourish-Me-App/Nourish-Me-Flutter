@@ -46,6 +46,10 @@ class QuestionsUICubit extends Cubit<QuestionsUIState> {
     ];
   }
 
+  void resetQuestionFiveValue() {
+    questionFiveValue = null;
+  }
+
   void resetContinueQuestionThreeValueList2() {
     continueQuestionThreeValue2 = [
       false,
@@ -53,7 +57,7 @@ class QuestionsUICubit extends Cubit<QuestionsUIState> {
     ];
   }
 
-  void onChangedRadioValue({
+  void onChangedValue({
     dynamic value,
     int? questionNum,
     int? index,
