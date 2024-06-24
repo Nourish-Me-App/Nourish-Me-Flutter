@@ -3,8 +3,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../logic/cubit/data_screen_cubit.dart';
 
+import '../../../../core/errors/messages/error_messages.dart';
 import '../../../../core/helpers/app_images.dart';
 import '../../../../core/helpers/auth_requests.dart';
 import '../../../../core/helpers/cache_helper.dart';
@@ -13,12 +13,11 @@ import '../../../../core/routing/routes.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/widgets/custom_button.dart';
 import '../../data/models/continue_register_model.dart';
-import '../widgets/counter_age.dart';
-import '../widgets/height_counter.dart';
-
-import '../../../../core/errors/messages/error_messages.dart';
+import '../../logic/cubit/data_screen_cubit.dart';
 import '../widgets/continue_register_lable.dart';
+import '../widgets/counter_age.dart';
 import '../widgets/custom_radio.dart';
+import '../widgets/height_counter.dart';
 import '../widgets/weightcounters.dart';
 
 class ContinueRegisterScreen extends StatefulWidget {
@@ -171,20 +170,24 @@ class _DataScreenState extends State<ContinueRegisterScreen> {
                             await AuthRequests.continueRegister(
                               datascreeCubit: dataScreenCubit,
                               continueRegisterModel: continueRegisterModel,
-                              email: cacheHelper.getData(key: 'email'),
-                              name: cacheHelper.getData(key: 'name'),
+                              email: (await cacheHelper.getSecuredData(
+                                  key: 'email'))!,
+                              name: (await cacheHelper.getSecuredData(
+                                  key: 'name'))!,
                               gender: selectedValue.toString(),
                               age: dataScreenCubit.ageCounter.toString(),
                               weight: dataScreenCubit.weightCounter.toString(),
                               height: dataScreenCubit.heightCounter.toString(),
-                              password: cacheHelper.getData(key: 'password'),
-                              passwordConfirmation: CacheHelper()
-                                  .getData(key: 'passwordConfirmation'),
+                              password: (await cacheHelper.getSecuredData(
+                                  key: 'password'))!,
+                              passwordConfirmation: (await CacheHelper()
+                                  .getSecuredData(
+                                      key: 'passwordConfirmation'))!,
                             ).then((value) {
-                              cacheHelper.removeData(key: 'email');
-                              cacheHelper.removeData(key: 'name');
-                              cacheHelper.removeData(key: 'password');
-                              cacheHelper.removeData(
+                              cacheHelper.deleteSecuredData(key: 'email');
+                              cacheHelper.deleteSecuredData(key: 'name');
+                              cacheHelper.deleteSecuredData(key: 'password');
+                              cacheHelper.deleteSecuredData(
                                   key: 'passwordConfirmation');
                             });
                           }

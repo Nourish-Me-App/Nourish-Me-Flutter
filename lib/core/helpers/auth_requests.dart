@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import '../../feature/auth/logic/cubit/data_screen_cubit.dart';
 
 import '../../feature/auth/data/models/continue_register_model.dart';
-
 import '../../feature/auth/data/models/login_model.dart';
 import '../../feature/auth/data/models/signup_model.dart';
 import '../../feature/auth/logic/cubit/auth_cubit.dart';
+import '../../feature/auth/logic/cubit/data_screen_cubit.dart';
 import '../../feature/forgetpassword/data/models/check_code_model.dart';
 import '../../feature/forgetpassword/data/models/forget_password_model.dart';
 import '../../feature/forgetpassword/data/models/reset_password.dart';
@@ -38,19 +37,19 @@ class AuthRequests {
     )
         .then((value) {
       CacheHelper cacheHelper = CacheHelper();
-      cacheHelper.saveData(
+      cacheHelper.saveSecuredData(
         key: 'email',
         value: email,
       );
-      cacheHelper.saveData(
+      cacheHelper.saveSecuredData(
         key: 'password',
         value: password,
       );
-      cacheHelper.saveData(
+      cacheHelper.saveSecuredData(
         key: 'name',
         value: name,
       );
-      cacheHelper.saveData(
+      cacheHelper.saveSecuredData(
         key: 'passwordConfirmation',
         value: passwordConfirmation,
       );
@@ -161,8 +160,8 @@ class AuthRequests {
   ) {
     CacheHelper cacheHelper = CacheHelper();
     Navigator.pop(context);
-    cacheHelper.saveData(key: 'email', value: value.data!['user']['email']);
-    cacheHelper.saveData(key: 'name', value: value.data!['user']['name']);
+    cacheHelper.saveSecuredData(key: 'email', value: value.data!['user']['email']);
+    cacheHelper.saveSecuredData(key: 'name', value: value.data!['user']['name']);
     value.data!['user']['image'] == null
         ? cacheHelper.removeData(key: 'image')
         : cacheHelper.saveData(
@@ -170,7 +169,7 @@ class AuthRequests {
     authCubit.rememberMe
         ? cacheHelper.saveData(key: AppConstants.rememberMeToken, value: true)
         : cacheHelper.removeData(key: AppConstants.rememberMeToken);
-    cacheHelper.saveData(
+    cacheHelper.saveSecuredData(
         key: AppConstants.token, value: value.data![AppConstants.token]);
     cacheHelper.saveData(
         key: AppConstants.isFirstQuestionsComplete,

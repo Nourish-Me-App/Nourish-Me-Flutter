@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../core/helpers/cache_helper.dart';
+
 import '../../../../core/errors/messages/error_messages.dart';
 import '../../../../core/helpers/app_constants.dart';
 import '../../../../core/helpers/app_images.dart';
+import '../../../../core/helpers/cache_helper.dart';
 import '../../../../core/helpers/helper_methods.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../home/logic/bot_nav_bar/bot_nav_bar_cubit.dart';
 import '../../logic/cubit/settings_cubit.dart';
-
 import '../widgets/setting_header.dart';
 import '../widgets/settings_card.dart';
 
@@ -36,10 +36,10 @@ class SettingsScreen extends StatelessWidget {
                   Routes.loginScreen,
                   (route) => false,
                 );
-                cacheHelper.removeData(key: AppConstants.token);
+                cacheHelper.deleteSecuredData(key: AppConstants.token);
                 cacheHelper.removeData(key: AppConstants.rememberMeToken);
-                cacheHelper.removeData(key: 'name');
-                cacheHelper.removeData(key: 'email');
+                cacheHelper.deleteSecuredData(key: 'name');
+                cacheHelper.deleteSecuredData(key: 'email');
                 cacheHelper.removeData(key: 'image');
                 BlocProvider.of<BotNavBarCubit>(context).resetIndex();
               }

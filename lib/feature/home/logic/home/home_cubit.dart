@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+
 import '../../../../core/helpers/app_constants.dart';
 import '../../../../core/helpers/cache_helper.dart';
 import '../../data/model/home_model.dart';
@@ -14,7 +15,8 @@ class HomeCubit extends Cubit<HomeState> {
   Future<void> fetchHomeData(String path) async {
     emit(HomeLoadingState());
     try {
-      var result = await homeRepo.getHomeData(path,CacheHelper().getData(key: AppConstants.token));
+      var result = await homeRepo.getHomeData(
+          path, (await CacheHelper().getSecuredData(key: AppConstants.token))!);
       result.fold(
         (error) => emit(HomeFailureState(error: error)),
         (homeModel) => emit(HomeSuccessState(homeModel: homeModel)),

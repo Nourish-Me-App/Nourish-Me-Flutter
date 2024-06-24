@@ -1,6 +1,5 @@
 import '../../../../core/imports/app_routes_imports.dart';
 import '../../../../core/imports/verification_screen_imports.dart';
-import '../../../../core/routing/routes.dart';
 import '../../data/models/check_code_model.dart';
 import '../widgets/timer_code.dart';
 
@@ -78,7 +77,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                           style: AppTextStyles.cairo12RegularBlack),
                       SizedBox(height: 5.h),
                       Text(
-                        '${CacheHelper().getData(key: 'email')}',
+                        '${CacheHelper().getSecuredData(key: 'email')}',
                         style: AppTextStyles.cairo12BoldMainColor,
                       ),
                       SvgPicture.asset(Assets.svgsAuthVerify),
@@ -120,7 +119,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                               await AuthRequests.checkCode(
                                 forgetPasswordCubit: checkCode,
                                 checkCodeModel: checkCodeModel,
-                                email: CacheHelper().getData(key: 'email'),
+                                email:(await CacheHelper().getSecuredData(key: 'email'))!,
                                 token: checkCode.codeController.text,
                               );
                             },
@@ -139,7 +138,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                               await AuthRequests.checkCode(
                                 forgetPasswordCubit: checkCode,
                                 checkCodeModel: checkCodeModel,
-                                email: CacheHelper().getData(key: 'email'),
+                                email:(await CacheHelper().getSecuredData(key: 'email'))!,
                                 token: checkCode.codeController.text,
                               );
                             }

@@ -30,12 +30,12 @@ class _TimerCodeState extends State<TimerCode> {
   bool codeSent = false;
   ForgetPasswordModel forgetPasswordModel = ForgetPasswordModel();
 
-  resendCode() {
+  resendCode()async {
     sendCodeTimer();
     AuthRequests.forgetPassword(
       forgetPasswordCubit: forgetPasswordCubit,
       forgetPasswordModel: forgetPasswordModel,
-      email: CacheHelper().getData(key: 'email'),
+      email:(await CacheHelper().getSecuredData(key: 'email'))!,
     );
     log('resend code');
   }
