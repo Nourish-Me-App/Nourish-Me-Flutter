@@ -35,7 +35,7 @@ class _TimerCodeState extends State<TimerCode> {
     AuthRequests.forgetPassword(
       forgetPasswordCubit: forgetPasswordCubit,
       forgetPasswordModel: forgetPasswordModel,
-      email:(await CacheHelper().getSecuredData(key: 'email'))!,
+      email:(await CacheHelper().getData(key: 'email'))!,
     );
     log('resend code');
   }

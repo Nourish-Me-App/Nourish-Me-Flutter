@@ -37,19 +37,19 @@ class AuthRequests {
     )
         .then((value) {
       CacheHelper cacheHelper = CacheHelper();
-      cacheHelper.saveSecuredData(
+      cacheHelper.saveData(
         key: 'email',
         value: email,
       );
-      cacheHelper.saveSecuredData(
+      cacheHelper.saveData(
         key: 'password',
         value: password,
       );
-      cacheHelper.saveSecuredData(
+      cacheHelper.saveData(
         key: 'name',
         value: name,
       );
-      cacheHelper.saveSecuredData(
+      cacheHelper.saveData(
         key: 'passwordConfirmation',
         value: passwordConfirmation,
       );
@@ -160,8 +160,8 @@ class AuthRequests {
   ) {
     CacheHelper cacheHelper = CacheHelper();
     Navigator.pop(context);
-    cacheHelper.saveSecuredData(key: 'email', value: value.data!['user']['email']);
-    cacheHelper.saveSecuredData(key: 'name', value: value.data!['user']['name']);
+    cacheHelper.saveData(key: 'email', value: value.data!['user']['email']);
+    cacheHelper.saveData(key: 'name', value: value.data!['user']['name']);
     value.data!['user']['image'] == null
         ? cacheHelper.removeData(key: 'image')
         : cacheHelper.saveData(

@@ -109,7 +109,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                                   email:
                                       forgetPasswordCubit.emailController.text,
                                 ).then((value) {
-                                  CacheHelper().saveSecuredData(
+                                  CacheHelper().saveData(
                                       key: 'email',
                                       value: forgetPasswordCubit
                                           .emailController.text);

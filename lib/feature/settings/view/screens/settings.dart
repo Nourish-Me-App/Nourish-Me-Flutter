@@ -38,8 +38,8 @@ class SettingsScreen extends StatelessWidget {
                 );
                 cacheHelper.deleteSecuredData(key: AppConstants.token);
                 cacheHelper.removeData(key: AppConstants.rememberMeToken);
-                cacheHelper.deleteSecuredData(key: 'name');
-                cacheHelper.deleteSecuredData(key: 'email');
+                cacheHelper.removeData(key: 'name');
+                cacheHelper.removeData(key: 'email');
                 cacheHelper.removeData(key: 'image');
                 BlocProvider.of<BotNavBarCubit>(context).resetIndex();
               }

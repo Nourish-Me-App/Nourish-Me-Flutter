@@ -170,24 +170,20 @@ class _DataScreenState extends State<ContinueRegisterScreen> {
                             await AuthRequests.continueRegister(
                               datascreeCubit: dataScreenCubit,
                               continueRegisterModel: continueRegisterModel,
-                              email: (await cacheHelper.getSecuredData(
-                                  key: 'email'))!,
-                              name: (await cacheHelper.getSecuredData(
-                                  key: 'name'))!,
+                              email: cacheHelper.getData(key: 'email'),
+                              name: cacheHelper.getData(key: 'name'),
                               gender: selectedValue.toString(),
                               age: dataScreenCubit.ageCounter.toString(),
                               weight: dataScreenCubit.weightCounter.toString(),
                               height: dataScreenCubit.heightCounter.toString(),
-                              password: (await cacheHelper.getSecuredData(
-                                  key: 'password'))!,
-                              passwordConfirmation: (await CacheHelper()
-                                  .getSecuredData(
-                                      key: 'passwordConfirmation'))!,
+                              password: cacheHelper.getData(key: 'password'),
+                              passwordConfirmation: CacheHelper()
+                                  .getData(key: 'passwordConfirmation'),
                             ).then((value) {
-                              cacheHelper.deleteSecuredData(key: 'email');
-                              cacheHelper.deleteSecuredData(key: 'name');
-                              cacheHelper.deleteSecuredData(key: 'password');
-                              cacheHelper.deleteSecuredData(
+                              cacheHelper.removeData(key: 'email');
+                              cacheHelper.removeData(key: 'name');
+                              cacheHelper.removeData(key: 'password');
+                              cacheHelper.removeData(
                                   key: 'passwordConfirmation');
                             });
                           }
