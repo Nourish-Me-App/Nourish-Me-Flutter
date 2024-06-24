@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:nourish_me/feature/auth/data/repositories/continue_register_repo.dart';
+import '../../data/repositories/continue_register_repo.dart';
 
 part 'data_screen_state.dart';
 

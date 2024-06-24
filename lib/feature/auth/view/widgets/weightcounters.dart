@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/services.dart';
-import 'package:nourish_me/feature/auth/logic/cubit/data_screen_cubit.dart';
+import '../../logic/cubit/data_screen_cubit.dart';
 
 import '../../../../core/imports/login_imports.dart';
 import '../../../../core/theme/app_colors.dart';

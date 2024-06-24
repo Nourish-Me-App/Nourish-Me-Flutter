@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nourish_me/feature/questions/view/widgets/custom_check_box.dart';
+import '../../../../core/helpers/cache_helper.dart';
+import 'custom_check_box.dart';
 import '../../data/models/questions_model.dart';
 import '../../logic/cubit/questions_cubit.dart';
 
@@ -65,11 +66,25 @@ class CardBody extends StatelessWidget {
               : List.generate(
                   answersNumber!,
                   (index) => CustomRadio(
+                    isDisabled: answer[index].answer == 'زيادة الوزن'
+                        ? CacheHelper().getData(key: 'answer') == 'سمنة'
+                            ? true
+                            : false
+                        : answer[index].answer == 'خسارة الوزن'
+                            ? CacheHelper().getData(key: 'answer') == 'نحافة'
+                                ? true
+                                : false
+                            : answer[index].answer == 'ثبات الوزن'
+                                ? CacheHelper().getData(key: 'answer2') ==
+                                        'ثبات الوزن'
+                                    ? true
+                                    : false
+                                : false,
                     answer: answer[index].answer!,
                     value: index,
                     groupValue: questionsUICubit.cardNumber(questionsNumber!),
                     onChanged: (val) {
-                      questionsUICubit.onChangedRadioValue(
+                      questionsUICubit.onChangedValue(
                         value: val,
                         questionNum: questionsNumber!,
                       );
@@ -85,17 +100,25 @@ class CardBody extends StatelessWidget {
                           questionsUICubit.questionThreeValue == 1) {
                         questionsCubit.resetQuestionThreeAnswersList();
                         questionsUICubit.resetContinueQuestionThreeValueList();
+                        questionsCubit.answerValue(4, null);
+                        questionsUICubit.resetQuestionFiveValue();
+                        CacheHelper().removeData(key: 'answer2');
                       }
 
                       if (questionsUICubit.questionNumber == 2 &&
                           questionsUICubit.questionThreeValue == 0) {
                         questionsUICubit.resetContinueQuestionThreeValueList2();
                         questionsCubit.resetQuestionThreeAnswersList();
+                        questionsCubit.answerValue(4, null);
+                        questionsUICubit.resetQuestionFiveValue();
                       }
 
                       questionsCubit.answerValue(
                           questionsNumber, answer[index].id!);
-
+                      questionsUICubit.questionNumber == 2
+                          ? CacheHelper().saveData(
+                              key: 'answer', value: answer[index].answer)
+                          : null;
                       questionsCubit.answersList();
                     },
                   ),

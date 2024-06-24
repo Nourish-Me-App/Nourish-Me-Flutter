@@ -2,11 +2,11 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+
 import '../../../../core/helpers/app_constants.dart';
 import '../../../../core/helpers/cache_helper.dart';
-import '../../data/repositories/questions_answers_repo.dart';
-
 import '../../data/models/questions_model.dart';
+import '../../data/repositories/questions_answers_repo.dart';
 
 part 'questions_state.dart';
 
@@ -85,7 +85,7 @@ class QuestionsCubit extends Cubit<QuestionsState> {
   ) async {
     emit(QuestionsLoadingState());
     var response = await questionsAndAnswersRepo.getQuestionsAnswers(
-        path, CacheHelper().getData(key: AppConstants.token));
+        path, (await CacheHelper().getSecuredData(key: AppConstants.token))!);
 
     response.fold((error) {
       emit(QuestionsFailureState(error));
@@ -100,7 +100,7 @@ class QuestionsCubit extends Cubit<QuestionsState> {
   }) async {
     emit(PostQuestionsLoadingState());
     var response = await questionsAndAnswersRepo.postQuestionsAnswers(path,
-        data: data, token: CacheHelper().getData(key: AppConstants.token));
+        data: data, token:(await CacheHelper().getSecuredData(key: AppConstants.token))!);
 
     response.fold((error) {
       emit(PostQuestionsFailureState(error));
