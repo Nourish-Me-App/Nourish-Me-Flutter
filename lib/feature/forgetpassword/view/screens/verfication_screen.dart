@@ -77,7 +77,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                           style: AppTextStyles.cairo12RegularBlack),
                       SizedBox(height: 5.h),
                       Text(
-                        '${CacheHelper().getSecuredData(key: 'email')}',
+                        '${CacheHelper().getData(key: 'email')}',
                         style: AppTextStyles.cairo12BoldMainColor,
                       ),
                       SvgPicture.asset(Assets.svgsAuthVerify),
@@ -119,7 +119,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                               await AuthRequests.checkCode(
                                 forgetPasswordCubit: checkCode,
                                 checkCodeModel: checkCodeModel,
-                                email:(await CacheHelper().getSecuredData(key: 'email'))!,
+                                email:(await CacheHelper().getData(key: 'email'))!,
                                 token: checkCode.codeController.text,
                               );
                             },
@@ -138,7 +138,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                               await AuthRequests.checkCode(
                                 forgetPasswordCubit: checkCode,
                                 checkCodeModel: checkCodeModel,
-                                email:(await CacheHelper().getSecuredData(key: 'email'))!,
+                                email:(await CacheHelper().getData(key: 'email'))!,
                                 token: checkCode.codeController.text,
                               );
                             }

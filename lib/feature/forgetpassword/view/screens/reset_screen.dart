@@ -106,13 +106,13 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                             await AuthRequests.resetPassword(
                               forgetPasswordCubit: resetPasswordCubit,
                               resetPasswordModel: resetPasswordModel,
-                              email:(await CacheHelper().getSecuredData(key: 'email'))!,
+                              email:(await CacheHelper().getData(key: 'email'))!,
                               newPassword:
                                   resetPasswordCubit.passwordController.text,
                               newPasswordConfirmation: resetPasswordCubit
                                   .confirmPasswordController.text,
                             ).then((value) {
-                              CacheHelper().deleteSecuredData(key: 'email');
+                              CacheHelper().removeData(key: 'email');
                               log(
                                 "${resetPasswordCubit.passwordController.text}////${resetPasswordCubit.confirmPasswordController.text}",
                               );
