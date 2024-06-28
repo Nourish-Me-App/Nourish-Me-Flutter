@@ -30,6 +30,21 @@ class QuestionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<AnswerOptions> problems = answers.where(
+      (element) {
+        return element.answer == 'نحافة' || element.answer == 'سمنة';
+      },
+    ).toList();
+    List<AnswerOptions> problemsAndDeseases = answers.where(
+      (element) {
+        return element.answer != 'نحافة' && element.answer != 'سمنة';
+      },
+    ).toList();
+    List<AnswerOptions> problemsAndDeseases2 = answers.where(
+      (element) {
+        return element.answer == 'ضغط' || element.answer == 'سكر';
+      },
+    ).toList();
     return Card(
       color: AppColors.currentQuestionColor,
       shape: RoundedRectangleBorder(
@@ -43,9 +58,11 @@ class QuestionCard extends StatelessWidget {
             CardBody(
               questionsNumber: questionsNumber,
               questionsUICubit: questionsUICubit,
-              answersNumber: answersNumber,
-              question: question,
-              answer: answers,
+              answersNumber:
+                  questionsNumber == 2 ? problems.length : answersNumber,
+              question:
+                  questionsNumber == 2 ? 'أي من المشاكل تعاني منها؟' : question,
+              answer: questionsNumber == 2 ? problems : answers,
               questionsCubit: questionsCubit,
             ),
             if (questionsNumber == 0 && questionsUICubit.questionOneValue == 0)
@@ -57,6 +74,32 @@ class QuestionCard extends StatelessWidget {
                   answersNumber: continueQAnswerNumber,
                   question: continueQQuestion!,
                   answer: continueQanswers!,
+                  questionsCubit: questionsCubit,
+                ),
+              ),
+            if (questionsNumber == 2 &&
+                questionsUICubit.questionThreeValue == 0)
+              Padding(
+                padding: EdgeInsets.only(top: 12.h),
+                child: CardBody(
+                  questionsNumber: 6,
+                  questionsUICubit: questionsUICubit,
+                  answersNumber: problemsAndDeseases.length,
+                  question: question,
+                  answer: problemsAndDeseases,
+                  questionsCubit: questionsCubit,
+                ),
+              ),
+            if (questionsNumber == 2 &&
+                questionsUICubit.questionThreeValue == 1)
+              Padding(
+                padding: EdgeInsets.only(top: 12.h),
+                child: CardBody(
+                  questionsNumber: 6,
+                  questionsUICubit: questionsUICubit,
+                  answersNumber: problemsAndDeseases2.length,
+                  question: question,
+                  answer: problemsAndDeseases2,
                   questionsCubit: questionsCubit,
                 ),
               ),

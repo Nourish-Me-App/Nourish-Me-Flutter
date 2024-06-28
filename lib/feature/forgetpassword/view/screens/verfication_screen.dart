@@ -119,7 +119,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                               await AuthRequests.checkCode(
                                 forgetPasswordCubit: checkCode,
                                 checkCodeModel: checkCodeModel,
-                                email: CacheHelper().getData(key: 'email'),
+                                email:(await CacheHelper().getData(key: 'email'))!,
                                 token: checkCode.codeController.text,
                               );
                             },
@@ -138,7 +138,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                               await AuthRequests.checkCode(
                                 forgetPasswordCubit: checkCode,
                                 checkCodeModel: checkCodeModel,
-                                email: CacheHelper().getData(key: 'email'),
+                                email:(await CacheHelper().getData(key: 'email'))!,
                                 token: checkCode.codeController.text,
                               );
                             }

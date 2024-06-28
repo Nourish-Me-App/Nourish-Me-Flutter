@@ -58,10 +58,12 @@ dependencies:
   google_nav_bar: ^5.0.6
   # For navigation in onBoarding.
   smooth_page_indicator: ^1.1.0
-  # For timeUp screen 
+  # For timeUp screen.
   circular_countdown_timer: ^0.2.3
   # For internet connection.
   flutter_offline: "^3.0.1"
+  # For secured cahce.
+  flutter_secure_storage: ^9.2.2
 
 
 

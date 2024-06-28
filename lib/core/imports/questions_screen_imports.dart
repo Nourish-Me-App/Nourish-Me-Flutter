@@ -6,14 +6,15 @@ export 'package:nourish_me/core/theme/app_colors.dart';
 export 'package:nourish_me/feature/questions/logic/cubit/questions_cubit.dart';
 export 'package:nourish_me/feature/questions/logic/cubit/questions_ui_cubit.dart';
 export 'package:nourish_me/feature/questions/view/widgets/custom_loading.dart';
-export '../errors/messages/error_messages.dart';
+export 'package:shimmer/shimmer.dart';
+
 export '../../../../core/helpers/app_constants.dart';
 export '../../../../core/helpers/app_images.dart';
 export '../../../../core/helpers/helper_methods.dart';
 export '../../../../core/theme/app_text_styles.dart';
-export 'package:shimmer/shimmer.dart';
 export '../../feature/questions/data/models/questions_model.dart';
 export '../../feature/questions/view/widgets/current_question.dart';
 export '../../feature/questions/view/widgets/on_questions_error.dart';
 export '../../feature/questions/view/widgets/questions_buttons.dart';
 export '../../feature/questions/view/widgets/questions_view.dart';
+export '../errors/messages/error_messages.dart';

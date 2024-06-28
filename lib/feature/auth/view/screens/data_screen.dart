@@ -3,8 +3,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nourish_me/feature/auth/logic/cubit/data_screen_cubit.dart';
 
+import '../../../../core/errors/messages/error_messages.dart';
 import '../../../../core/helpers/app_images.dart';
 import '../../../../core/helpers/auth_requests.dart';
 import '../../../../core/helpers/cache_helper.dart';
@@ -13,12 +13,11 @@ import '../../../../core/routing/routes.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/widgets/custom_button.dart';
 import '../../data/models/continue_register_model.dart';
-import '../widgets/counter_age.dart';
-import '../widgets/height_counter.dart';
-
-import '../../../../core/errors/messages/error_messages.dart';
+import '../../logic/cubit/data_screen_cubit.dart';
 import '../widgets/continue_register_lable.dart';
+import '../widgets/counter_age.dart';
 import '../widgets/custom_radio.dart';
+import '../widgets/height_counter.dart';
 import '../widgets/weightcounters.dart';
 
 class ContinueRegisterScreen extends StatefulWidget {

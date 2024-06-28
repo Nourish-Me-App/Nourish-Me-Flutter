@@ -2,18 +2,23 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+
 import '../../../../core/helpers/app_constants.dart';
 import '../../../../core/helpers/cache_helper.dart';
-import '../../data/repositories/questions_answers_repo.dart';
-
 import '../../data/models/questions_model.dart';
+import '../../data/repositories/questions_answers_repo.dart';
 
 part 'questions_state.dart';
 
 class QuestionsCubit extends Cubit<QuestionsState> {
   late QuestionsAndAnswersRepo questionsAndAnswersRepo;
   QuestionsCubit(this.questionsAndAnswersRepo) : super(QuestionsInitial());
-  String? answerOne, answerTwo, answerFour, answerFive, continueAnswerOne;
+  String? answerOne,
+      answerTwo,
+      answerThree,
+      answerFour,
+      answerFive,
+      continueAnswerOne;
   List<Map<String, dynamic>> answers = [];
   List<String> questionThreeAnswersList = [];
 
@@ -24,7 +29,7 @@ class QuestionsCubit extends Cubit<QuestionsState> {
             {"question_title": "Sleep Hours", "answer_id": "$answerTwo"},
             {
               "question_title": "Disease",
-              "answer_id": questionThreeAnswersList
+              "answer_id": [answerThree, ...questionThreeAnswersList]
             },
             {"question_title": "Water Amount", "answer_id": "$answerFour"},
             {"question_title": "Goal", "answer_id": "$answerFive"}
@@ -54,12 +59,18 @@ class QuestionsCubit extends Cubit<QuestionsState> {
     log('$questionThreeAnswersList');
   }
 
+  void resetQuestionThreeAnswersList() {
+    questionThreeAnswersList = [];
+  }
+
   void answerValue(int? questionNumber, dynamic value) {
     switch (questionNumber) {
       case 0:
         answerOne = value;
       case 1:
         answerTwo = value;
+      case 2:
+        answerThree = value;
       case 3:
         answerFour = value;
       case 4:
@@ -74,7 +85,7 @@ class QuestionsCubit extends Cubit<QuestionsState> {
   ) async {
     emit(QuestionsLoadingState());
     var response = await questionsAndAnswersRepo.getQuestionsAnswers(
-        path, CacheHelper().getData(key: AppConstants.token));
+        path, (await CacheHelper().getSecuredData(key: AppConstants.token))!);
 
     response.fold((error) {
       emit(QuestionsFailureState(error));
@@ -89,7 +100,7 @@ class QuestionsCubit extends Cubit<QuestionsState> {
   }) async {
     emit(PostQuestionsLoadingState());
     var response = await questionsAndAnswersRepo.postQuestionsAnswers(path,
-        data: data, token: CacheHelper().getData(key: AppConstants.token));
+        data: data, token:(await CacheHelper().getSecuredData(key: AppConstants.token))!);
 
     response.fold((error) {
       emit(PostQuestionsFailureState(error));

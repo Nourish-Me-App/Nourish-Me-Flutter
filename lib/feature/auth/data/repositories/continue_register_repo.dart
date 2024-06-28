@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
-import '../models/continue_register_model.dart';
 
 import '../../../../core/errors/api/exceptions/api_exception.dart';
 import '../../../../core/networking/api_services.dart';
+import '../models/continue_register_model.dart';
 
 class ContinueRegisterRepo {
   late ApiServices apiServices;

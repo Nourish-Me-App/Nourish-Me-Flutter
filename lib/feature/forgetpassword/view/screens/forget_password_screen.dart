@@ -1,11 +1,10 @@
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../../../core/errors/messages/error_messages.dart';
 import '../../../../core/imports/login_imports.dart';
 import '../../../../core/widgets/custom_border_button.dart';
-import '../../../../core/errors/messages/error_messages.dart';
-
-import '../../logic/forget_password_cubit.dart';
-
 import '../../data/models/forget_password_model.dart';
+import '../../logic/forget_password_cubit.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
   const ForgetPasswordScreen({super.key});
