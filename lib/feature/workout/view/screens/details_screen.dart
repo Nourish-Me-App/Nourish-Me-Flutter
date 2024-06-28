@@ -176,11 +176,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       ),
                     ),
                   ),
-                if (index > 0)
-                  const VerticalDivider(
-                    color: Colors.red,
-                    thickness: 5,
-                  ),
                 Directionality(
                   textDirection: TextDirection.ltr,
                   child: TextButton.icon(
@@ -199,7 +194,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         );
                       } else {
                         HelperMethods.showCustomSnackBarSuccess(
-                            context, 'تم الانتهاء من التمرين');
+                            context, 'تم الانتهاء من تمرين اليوم');
                       }
                     },
                     icon: Image.asset(Assets.imagesArrowNext),
