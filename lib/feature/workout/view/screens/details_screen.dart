@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nourish_me/feature/workout/view/widgets/sits.dart';
 
 import '../../../../core/helpers/app_images.dart';
 import '../../../../core/helpers/helper_methods.dart';
-import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../data/item_model.dart';
 import 'times_up_screen.dart';
@@ -121,29 +121,32 @@ class _DetailsScreenState extends State<DetailsScreen> {
           const SizedBox(
             height: 40,
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 120.h),
-            child: SizedBox(
-              width: double.infinity,
-              height: 32.h,
-              child: ElevatedButton(
-                onPressed: _onButtonPressed,
-                style: ButtonStyle(
-                  backgroundColor:
-                      const WidgetStatePropertyAll(AppColors.mainColor),
-                  shape: WidgetStatePropertyAll(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.r),
-                    ),
-                  ),
-                  elevation: WidgetStateProperty.all(0),
-                ),
-                child: Text(
-                    isRunning ? (isPaused ? 'استمرار' : 'توقف') : 'أبدا',
-                    style: AppTextStyles.cairosemibold16white),
-              ),
-            ),
-          ),
+          
+            
+          // Padding(
+          //   padding: EdgeInsets.symmetric(horizontal: 120.h),
+          //   child: SizedBox(
+          //     width: double.infinity,
+          //     height: 32.h,
+          //     child: ElevatedButton(
+          //       onPressed: _onButtonPressed,
+          //       style: ButtonStyle(
+          //         backgroundColor:
+          //             const WidgetStatePropertyAll(AppColors.mainColor),
+          //         shape: WidgetStatePropertyAll(
+          //           RoundedRectangleBorder(
+          //             borderRadius: BorderRadius.circular(10.r),
+          //           ),
+          //         ),
+          //         elevation: WidgetStateProperty.all(0),
+          //       ),
+          //       child: Text(
+          //           isRunning ? (isPaused ? 'استمرار' : 'توقف') : 'أبدا',
+          //           style: AppTextStyles.cairosemibold16white),
+          //     ),
+          //   ),
+          // ),
+           const Sits(),
           SizedBox(
             height: 140.h,
           ),
