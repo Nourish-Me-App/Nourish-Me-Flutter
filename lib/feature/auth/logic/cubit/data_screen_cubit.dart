@@ -117,51 +117,5 @@ class DataScreenCubit extends Cubit<DataScreenState> {
 
 
 
-  void startTimerIncreaseHeight() {
-    _timerHeight = Timer.periodic(const Duration(milliseconds: 100), (timer) {
-      if (heightCounter < 210) {
-        heightCounter++;
-        emit(IncreamentCounter());
-      }
-    });
-  }
-
-  void startTimerIncreaseWeight() {
-    _timerWeight = Timer.periodic(const Duration(milliseconds: 100), (timer) {
-      if (weightCounter < 160) {
-        weightCounter++;
-        emit(IncreamentCounter());
-      }
-    });
-  }
-
-
-
-  void startTimerDecreaseHeight() {
-    _timerHeight = Timer.periodic(const Duration(milliseconds: 100), (timer) {
-      if (heightCounter > 160) {
-        heightCounter--;
-        emit(DecreamentCounter());
-      }
-    });
-  }
-
-  void startTimerDecreaseWeight() {
-    _timerWeight = Timer.periodic(const Duration(milliseconds: 100), (timer) {
-      if (weightCounter > 50) {
-        weightCounter--;
-        emit(DecreamentCounter());
-      }
-    });
-  }
-
-
-
-  void stopTimerWeight() {
-    _timerWeight?.cancel();
-  }
-
-  void stopTimerHeight() {
-    _timerHeight?.cancel();
-  }
+  
 }
