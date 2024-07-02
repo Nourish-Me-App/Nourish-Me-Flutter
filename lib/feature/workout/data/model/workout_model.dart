@@ -1,12 +1,12 @@
-class WorkOut {
+class WorkOutModel {
   String? message;
   String? status;
   int? statusCode;
   Data? data;
 
-  WorkOut({this.message, this.status, this.statusCode, this.data});
+  WorkOutModel({this.message, this.status, this.statusCode, this.data});
 
-  WorkOut.fromJson(Map<String, dynamic> json) {
+  WorkOutModel.fromJson(Map<String, dynamic> json) {
     message = json['message'];
     status = json['status'];
     statusCode = json['status_code'];

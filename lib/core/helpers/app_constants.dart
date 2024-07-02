@@ -1,3 +1,5 @@
+import 'package:nourish_me/feature/workout/data/model/workout_model.dart';
+
 class AppConstants {
   static const String baseUrl = "https://nourish-me.up.railway.app/api/v1/";
 
@@ -15,5 +17,6 @@ class AppConstants {
   static const String rememberMeToken = "rememberMeToken";
   static const String token = "token";
   static const String home = "home";
+  static const String exercises = "";
   static const String isFirstQuestionsComplete = "is_first_questions_complete";
 }
