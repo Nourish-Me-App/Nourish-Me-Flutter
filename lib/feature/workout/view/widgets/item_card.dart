@@ -35,7 +35,7 @@ class ItemCard extends StatelessWidget {
               children: [
                 Padding(
                   padding: EdgeInsets.only(left: 10.h, bottom: 7.w, top: 7.w),
-                  child: Image.asset(
+                  child: Image.network(
                     image,
                     width: 66.w,
                     height: 66.h,

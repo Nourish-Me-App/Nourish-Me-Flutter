@@ -2,19 +2,23 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nourish_me/feature/workout/view/widgets/sits.dart';
+import 'package:nourish_me/core/theme/app_colors.dart';
+import 'package:nourish_me/feature/workout/data/model/workout_model.dart';
 
 import '../../../../core/helpers/app_images.dart';
 import '../../../../core/helpers/helper_methods.dart';
 import '../../../../core/theme/app_text_styles.dart';
-import '../../data/item_model.dart';
 import 'times_up_screen.dart';
 
 class DetailsScreen extends StatefulWidget {
   const DetailsScreen(
-      {super.key, required this.currentIndex, required this.item});
+      {super.key,
+      required this.currentIndex,
+      required this.item,
+      required this.length});
   final int currentIndex;
-  final List<ItemModel> item;
+  final List<Exercises> item;
+  final int length;
 
   @override
   State<DetailsScreen> createState() => _DetailsScreenState();
@@ -34,13 +38,14 @@ class _DetailsScreenState extends State<DetailsScreen> {
           remainingTime--;
         } else {
           _timer?.cancel();
-          Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => TimesUpScreen(
-                        currentIndex: widget.currentIndex,
-                        item: widget.item,
-                      )));
+          // Navigator.pushReplacement(
+          //     context,
+          //     MaterialPageRoute(
+          //         builder: (context) => TimesUpScreen(
+          //               currentIndex: widget.currentIndex,
+          //               item: widget.item[widget.currentIndex],
+          //               rest: widget,
+          //             )));
         }
       });
     });
@@ -79,7 +84,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
         actions: [
           Padding(
             padding: EdgeInsets.only(right: 8.w),
-            child: Text('${widget.currentIndex + 1}/8'),
+            child: Text('${widget.currentIndex + 1}/${widget.item.length}',
+                style: AppTextStyles.cairo16Boldskip
+                    .copyWith(color: AppColors.mainColor, fontSize: 16.sp)),
           ),
         ],
       ),
@@ -88,20 +95,27 @@ class _DetailsScreenState extends State<DetailsScreen> {
         transitionBuilder: (Widget child, Animation<double> animation) {
           return FadeTransition(opacity: animation, child: child);
         },
-        child: _buildContent(widget.currentIndex),
+        child: _buildContent(
+          widget.currentIndex,
+          widget.item[widget.currentIndex],
+          widget.length,
+        ),
       ),
     );
   }
 
-  Widget _buildContent(int index) {
-    final item = widget.item[index];
+  Widget _buildContent(int index, Exercises item, int length) {
     return Center(
       key: ValueKey<int>(index),
       child: Column(
         children: [
-          Image.asset(
+          SizedBox(
+            height: 40.h,
+          ),
+          Image.network(
             item.image!,
-            height: 265.h,
+            height: 200.h,
+            width: 200.w,
           ),
           SizedBox(
             height: 26.h,
@@ -114,39 +128,46 @@ class _DetailsScreenState extends State<DetailsScreen> {
           SizedBox(
             height: 26.h,
           ),
-          Text(
-            _formatTime(remainingTime),
-            style: const TextStyle(fontSize: 40),
-          ),
+          if (item.sets != null)
+            Text(
+              "${widget.item[index].sets} sets - ${widget.item[index].repeats} reps",
+              style: AppTextStyles.cairo18BoldBlack,
+            ),
           const SizedBox(
             height: 40,
           ),
-          
-            
-          // Padding(
-          //   padding: EdgeInsets.symmetric(horizontal: 120.h),
-          //   child: SizedBox(
-          //     width: double.infinity,
-          //     height: 32.h,
-          //     child: ElevatedButton(
-          //       onPressed: _onButtonPressed,
-          //       style: ButtonStyle(
-          //         backgroundColor:
-          //             const WidgetStatePropertyAll(AppColors.mainColor),
-          //         shape: WidgetStatePropertyAll(
-          //           RoundedRectangleBorder(
-          //             borderRadius: BorderRadius.circular(10.r),
-          //           ),
-          //         ),
-          //         elevation: WidgetStateProperty.all(0),
-          //       ),
-          //       child: Text(
-          //           isRunning ? (isPaused ? 'استمرار' : 'توقف') : 'أبدا',
-          //           style: AppTextStyles.cairosemibold16white),
-          //     ),
-          //   ),
-          // ),
-           const Sits(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 120),
+            child: SizedBox(
+              width: double.infinity,
+              height: 32,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => TimesUpScreen(
+                                currentIndex: widget.currentIndex,
+                                item: widget.item,
+                                rest: int.parse(widget.item[widget.currentIndex].rest!),
+                              )));
+                },
+                style: ButtonStyle(
+                  backgroundColor: WidgetStateProperty.all(AppColors.mainColor),
+                  shape: WidgetStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  elevation: WidgetStateProperty.all(0),
+                ),
+                child: const Text(
+                  'انهاء',
+                  style: TextStyle(color: Colors.white, fontSize: 16),
+                ),
+              ),
+            ),
+          ),
           SizedBox(
             height: 140.h,
           ),
@@ -167,6 +188,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 DetailsScreen(
                               currentIndex: index - 1,
                               item: widget.item,
+                              length: widget.length,
                             ),
                             transitionDuration: const Duration(seconds: 0),
                           ),
@@ -183,7 +205,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   textDirection: TextDirection.ltr,
                   child: TextButton.icon(
                     onPressed: () {
-                      if (index < widget.item.length - 1) {
+                      if (index < widget.length - 1) {
                         Navigator.pushReplacement(
                           context,
                           PageRouteBuilder(
@@ -191,6 +213,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 DetailsScreen(
                               currentIndex: index + 1,
                               item: widget.item,
+                              length: widget.length,
                             ),
                             transitionDuration: const Duration(seconds: 1),
                           ),
