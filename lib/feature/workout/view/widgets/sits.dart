@@ -2,11 +2,14 @@
 import 'package:flutter/material.dart';
 
 import 'package:nourish_me/core/theme/app_colors.dart';
+import 'package:nourish_me/feature/workout/data/model/workout_model.dart';
 
 class Sits extends StatefulWidget {
   const Sits({
-    super.key,
+    super.key, required this.item,
   });
+
+  final Exercises item;
 
   @override
   State<Sits> createState() => _SitsState();
@@ -19,7 +22,7 @@ class _SitsState extends State<Sits> {
 
     return Column(
       children: [
-        const Text("sits"),
+         Text("${widget.item.name}"),
         const SizedBox(
           height: 40,
         ),

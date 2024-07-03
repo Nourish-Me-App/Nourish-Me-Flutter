@@ -380,6 +380,10 @@ class Assets {
   /// assets/svgs/results/age.svg
   static const String svgsResultsAge = "assets/svgs/results/age.svg";
 
+  /// Assets for svgsResultsBreak
+  /// assets/svgs/results/break.svg
+  static const String svgsResultsBreak = "assets/svgs/results/break.svg";
+
   /// Assets for svgsResultsFluentMdl2Calories
   /// assets/svgs/results/fluent-mdl2_calories.svg
   static const String svgsResultsFluentMdl2Calories =
