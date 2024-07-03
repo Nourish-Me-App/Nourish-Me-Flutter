@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nourish_me/core/imports/questions_screen_imports.dart';
 import 'package:nourish_me/core/theme/app_colors.dart';
 import 'package:nourish_me/feature/workout/data/model/workout_model.dart';
 
@@ -25,58 +26,6 @@ class DetailsScreen extends StatefulWidget {
 }
 
 class _DetailsScreenState extends State<DetailsScreen> {
-  static const int countdownDuration = 5;
-  int remainingTime = countdownDuration;
-  Timer? _timer;
-  bool isRunning = false;
-  bool isPaused = false;
-
-  void _startTimer() {
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      setState(() {
-        if (remainingTime > 0) {
-          remainingTime--;
-        } else {
-          _timer?.cancel();
-          // Navigator.pushReplacement(
-          //     context,
-          //     MaterialPageRoute(
-          //         builder: (context) => TimesUpScreen(
-          //               currentIndex: widget.currentIndex,
-          //               item: widget.item[widget.currentIndex],
-          //               rest: widget,
-          //             )));
-        }
-      });
-    });
-  }
-
-  void _onButtonPressed() {
-    if (!isRunning) {
-      _startTimer();
-      setState(() {
-        isRunning = true;
-        isPaused = false;
-      });
-    } else if (isRunning && !isPaused) {
-      _timer?.cancel();
-      setState(() {
-        isPaused = true;
-      });
-    } else if (isPaused) {
-      _startTimer();
-      setState(() {
-        isPaused = false;
-      });
-    }
-  }
-
-  String _formatTime(int seconds) {
-    final minutes = (seconds ~/ 60).toString().padLeft(2, '0');
-    final secs = (seconds % 60).toString().padLeft(2, '0');
-    return '$minutes:$secs';
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -110,7 +59,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
       child: Column(
         children: [
           SizedBox(
-            height: 40.h,
+            height: 130.h,
           ),
           Image.network(
             item.image!,
@@ -130,7 +79,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
           ),
           if (item.sets != null)
             Text(
-              "${widget.item[index].sets} sets - ${widget.item[index].repeats} reps",
+              "${widget.item[index].sets}  - ${widget.item[index].repeats} ",
               style: AppTextStyles.cairo18BoldBlack,
             ),
           const SizedBox(
@@ -143,14 +92,23 @@ class _DetailsScreenState extends State<DetailsScreen> {
               height: 32,
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.pushReplacement(
+                  if (index < widget.length - 1) {
+                    Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(
-                          builder: (context) => TimesUpScreen(
-                                currentIndex: widget.currentIndex,
-                                item: widget.item,
-                                rest: int.parse(widget.item[widget.currentIndex].rest!),
-                              )));
+                      PageRouteBuilder(
+                        pageBuilder: (context, animation1, animation2) =>
+                            DetailsScreen(
+                          currentIndex: index + 1,
+                          item: widget.item,
+                          length: widget.length,
+                        ),
+                        transitionDuration: const Duration(seconds: 1),
+                      ),
+                    );
+                  } else {
+                    HelperMethods.showCustomSnackBarSuccess(
+                        context, 'تم الانتهاء من تمرين اليوم');
+                  }
                 },
                 style: ButtonStyle(
                   backgroundColor: WidgetStateProperty.all(AppColors.mainColor),
@@ -161,9 +119,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   ),
                   elevation: WidgetStateProperty.all(0),
                 ),
-                child: const Text(
+                child: Text(
                   'انهاء',
-                  style: TextStyle(color: Colors.white, fontSize: 16),
+                  style: AppTextStyles.cairosemibold14white,
                 ),
               ),
             ),
@@ -194,7 +152,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           ),
                         );
                       },
-                      icon: Image.asset(Assets.imagesArrowNext),
+                      icon: Transform.flip(
+                          filterQuality: FilterQuality.high,
+                          flipX: true,
+                          child: Image.asset(Assets.imagesArrowNext)),
                       label: Text(
                         'السابق',
                         style: AppTextStyles.cairo16Boldskip,
@@ -202,7 +163,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     ),
                   ),
                 Directionality(
-                  textDirection: TextDirection.ltr,
+                  textDirection: TextDirection.rtl,
                   child: TextButton.icon(
                     onPressed: () {
                       if (index < widget.length - 1) {

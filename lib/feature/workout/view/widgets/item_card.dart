@@ -24,43 +24,46 @@ class ItemCard extends StatelessWidget {
       textDirection: TextDirection.ltr,
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.w),
-        child: SizedBox(
-          width: double.infinity,
-          height: 80.h,
-          child: Card(
-            color: AppColors.workOutCardbackGroundColor,
-            elevation: 0.0,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(left: 10.h, bottom: 7.w, top: 7.w),
-                  child: Image.network(
-                    image,
-                    width: 66.w,
-                    height: 66.h,
-                  ),
-                ),
-                SizedBox(
-                  width: 16.w,
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(title, style: AppTextStyles.cairo16BoldBlack),
-                    Text(
-                      time,
-                      textAlign: TextAlign.start,
+        child: InkWell(
+          onTap: onTap,
+          child: SizedBox(
+            width: 342.w,
+            height: 80.h,
+            child: Card(
+              color: AppColors.workOutCardbackGroundColor,
+              elevation: 0.0,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(left: 10.h, bottom: 7.w, top: 7.w),
+                    child: Image.network(
+                      image,
+                      width: 66.w,
+                      height: 66.h,
                     ),
-                  ],
-                ),
-                const Spacer(),
-                IconButton(
-                  icon: Image.asset(Assets.imagesArrowRight),
-                  onPressed: onTap,
-                ),
-              ],
+                  ),
+                  SizedBox(
+                    width: 16.w,
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(title, style: AppTextStyles.cairo16BoldBlack),
+                      Text(
+                        time,
+                        textAlign: TextAlign.start,
+                      ),
+                    ],
+                  ),
+                  const Spacer(),
+                  IconButton(
+                    icon: Image.asset(Assets.imagesArrowRight),
+                    onPressed: onTap,
+                  ),
+                ],
+              ),
             ),
           ),
         ),

@@ -44,7 +44,7 @@ class DataScreenCubit extends Cubit<DataScreenState> {
 
   void decrementAge() {
     emit(LoadingCounter());
-    if (ageCounter > 12) {
+    if (ageCounter > 18) {
       ageCounter--;
       
       emit(DecreamentCounter());

@@ -90,7 +90,39 @@ class _TimesUpScreenState extends State<TimesUpScreen> {
                       context, 'تم الانتهاء من تمرين اليوم');
                 }
               },
-            )
+            ),
+            SizedBox(
+              height: 32.h,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Directionality(
+                  textDirection: TextDirection.ltr,
+                  child: TextButton.icon(
+                    onPressed: () {
+                      if (widget.currentIndex < widget.item.length - 1) {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DetailsScreen(
+                              currentIndex: widget.currentIndex + 1,
+                              item: widget.item,
+                              length: widget.item.length,
+                            ),
+                          ),
+                        );
+                      }
+                    },
+                    icon: Image.asset(Assets.imagesArrowNext),
+                    label: Text(
+                      'تخطي',
+                      style: AppTextStyles.cairo16Boldskip,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),

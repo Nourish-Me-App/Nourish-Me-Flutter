@@ -4,9 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:nourish_me/core/helpers/app_constants.dart';
 import 'package:nourish_me/core/helpers/app_images.dart';
 import 'package:nourish_me/core/helpers/helper_methods.dart';
 import 'package:nourish_me/core/theme/app_text_styles.dart';
+import 'package:nourish_me/core/widgets/error_body.dart';
+import 'package:nourish_me/feature/diets/view/widgets/diets_loading.dart';
 import 'package:nourish_me/feature/diets/view/widgets/tab_bar.dart';
 import 'package:nourish_me/feature/workout/data/model/workout_model.dart';
 import 'package:nourish_me/feature/workout/logic/cubit/workout_cubit.dart';
@@ -22,9 +25,14 @@ class WorkOutScreen extends StatelessWidget {
     return BlocBuilder<WorkoutCubit, WorkoutState>(
       builder: (context, state) {
         if (state is WorkoutLoadingState) {
-          return const Center(child: CircularProgressIndicator());
+          return const DietsLoading();
         } else if (state is WorkoutFailureState) {
-          return Center(child: Text('Failed to load: ${state.error}'));
+          return ErrorBody(
+            buttonAction: () async {
+              await BlocProvider.of<WorkoutCubit>(context)
+                  .fetchWorkout(AppConstants.workOut);
+            },
+          );
         } else if (state is WorkoutSuccessState) {
           final exercises = state.workoutModel.data?.exercises ?? [];
           List<Exercises> saturday =
@@ -65,7 +73,7 @@ class WorkOutScreen extends StatelessWidget {
               textDirection: TextDirection.rtl,
               child: Scaffold(
                 appBar:
-                    const MyAppBarWorkOut(title: 'تمرين', bottom: MyTabBar()),
+                    const MyAppBarWorkOut(title: 'تمارين', bottom: MyTabBar()),
                 body: TabBarView(
                   physics: const NeverScrollableScrollPhysics(),
                   children: List.generate(7, (pageIndex) {
@@ -78,21 +86,22 @@ class WorkOutScreen extends StatelessWidget {
                             height: 10.h,
                           ),
                           Text(
-                            'لا يوجد تمارين اليوم',
-                            style:
-                                AppTextStyles.cairo12ExtraBoldTFFContentColor,
+                            'لا يوجد لديك تمارين اليوم',
+                            style: AppTextStyles.cairosemibold14white.copyWith(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w700,
+                            ),
                           )
                         ],
                       );
-                      
-                    }else {
+                    } else {
                       return ListView.builder(
                         itemCount: exercise[pageIndex].length,
                         itemBuilder: (context, index) {
                           return ItemCard(
                             title: exercise[pageIndex][index].name!,
                             time: exercise[pageIndex][index].type!,
-                            image: exercise[pageIndex][index].image??'',
+                            image: exercise[pageIndex][index].image ?? '',
                             onTap: () {
                               Navigator.push(
                                 context,

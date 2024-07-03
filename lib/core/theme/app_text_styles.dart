@@ -20,6 +20,12 @@ class AppTextStyles {
     fontWeight: FontWeight.w600,
   );
 
+  static TextStyle cairosemibold14white = GoogleFonts.cairo(
+    color: Colors.white,
+    fontSize: 18.sp,
+    fontWeight: FontWeight.w600,
+  );
+
   static TextStyle cairosemibold16black = GoogleFonts.cairo(
     color: Colors.black,
     fontSize: 16.sp,
