@@ -8,7 +8,7 @@ import 'package:nourish_me/feature/workout/data/repo/workout_repo.dart';
 part 'workout_state.dart';
 
 class WorkoutCubit extends Cubit<WorkoutState> {
-  WorkoutCubit() : super(WorkoutInitial());
+  WorkoutCubit(this.workoutRepo) : super(WorkoutInitial());
 
   late WorkoutRepo workoutRepo;
   Future<void> fetchWorkout(String path) async {

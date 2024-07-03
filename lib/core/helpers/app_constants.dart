@@ -17,6 +17,6 @@ class AppConstants {
   static const String rememberMeToken = "rememberMeToken";
   static const String token = "token";
   static const String home = "home";
-  static const String exercises = "";
+  static const String workOut = "";
   static const String isFirstQuestionsComplete = "is_first_questions_complete";
 }
