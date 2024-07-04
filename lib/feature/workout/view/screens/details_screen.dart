@@ -1,8 +1,9 @@
+import 'dart:async';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nourish_me/core/theme/app_colors.dart';
 import 'package:nourish_me/feature/workout/data/model/workout_model.dart';
-
 import '../../../../core/helpers/app_images.dart';
 import '../../../../core/helpers/helper_methods.dart';
 import '../../../../core/theme/app_text_styles.dart';
@@ -22,6 +23,35 @@ class DetailsScreen extends StatefulWidget {
 }
 
 class _DetailsScreenState extends State<DetailsScreen> {
+  Timer? _timer;
+  int _remainingSeconds = 0;
+
+  void _startCountdown(String reps) {
+    final seconds = int.tryParse(reps.replaceAll(RegExp(r'\D'), ''));
+    if (seconds != null && seconds > 15) {
+      setState(() {
+        _remainingSeconds = seconds;
+      });
+
+      _timer?.cancel();
+      _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+        if (_remainingSeconds > 0) {
+          setState(() {
+            _remainingSeconds--;
+          });
+        } else {
+          timer.cancel();
+        }
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,6 +80,35 @@ class _DetailsScreenState extends State<DetailsScreen> {
   }
 
   Widget _buildContent(int index, Exercises item, int length) {
+    bool hasSets = item.sets != null;
+    bool hasReps = item.repeats != null;
+    bool hasSecReps = hasReps && (item.repeats!.toLowerCase().contains('sec'));
+    bool hasMinReps = hasReps && (item.repeats!.toLowerCase().contains('min'));
+    bool hasRepsWord =
+        hasReps && (item.repeats!.toLowerCase().contains('reps'));
+
+    if (hasSecReps) {
+      _startCountdown(item.repeats!);
+    }
+
+    String repsDisplay = '';
+    if (hasReps) {
+      if (hasSecReps && _remainingSeconds > 0) {
+        repsDisplay = '$_remainingSeconds seconds remaining';
+      } else if (hasMinReps || hasRepsWord) {
+        repsDisplay = item.repeats!;
+      } else if (!hasMinReps && !hasRepsWord) {
+        final repsCount =
+            int.tryParse(item.repeats!.replaceAll(RegExp(r'\D'), ''));
+        if (repsCount != null && repsCount > 15) {
+          _startCountdown(item.repeats!);
+          repsDisplay = '$_remainingSeconds seconds remaining';
+        } else {
+          repsDisplay = item.repeats!;
+        }
+      }
+    }
+
     return Center(
       key: ValueKey<int>(index),
       child: Column(
@@ -57,11 +116,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
           SizedBox(
             height: 130.h,
           ),
-          Image.network(
-            item.image!,
-            height: 200.h,
-            width: 200.w,
-          ),
+          SizedBox(
+              width: 378.w,
+              height: 200.h,
+              child: CachedNetworkImage(imageUrl: item.image!)),
           SizedBox(
             height: 26.h,
           ),
@@ -73,9 +131,19 @@ class _DetailsScreenState extends State<DetailsScreen> {
           SizedBox(
             height: 26.h,
           ),
-          if (item.sets != null)
+          if (hasSets && repsDisplay.isNotEmpty)
             Text(
-              "${widget.item[index].sets}  - ${widget.item[index].repeats} ",
+              "${widget.item[index].sets} sets - $repsDisplay",
+              style: AppTextStyles.cairo18BoldBlack,
+            ),
+          if (hasSets && repsDisplay.isEmpty)
+            Text(
+              "${widget.item[index].sets} sets",
+              style: AppTextStyles.cairo18BoldBlack,
+            ),
+          if (!hasSets && repsDisplay.isNotEmpty)
+            Text(
+              repsDisplay,
               style: AppTextStyles.cairo18BoldBlack,
             ),
           const SizedBox(
