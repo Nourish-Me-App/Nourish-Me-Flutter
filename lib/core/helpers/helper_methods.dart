@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:nourish_me/feature/workout/data/model/workout_model.dart';
 
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
@@ -80,6 +81,8 @@ class HelperMethods {
       Assets.svgsAuthVerify,
       Assets.svgsAuthFemale,
       Assets.svgsAuthMale,
+      Assets.svgsResultsBreak,
+      Assets.imagesTimeOver,
       Assets.iconsFacbookFilledBlue,
       Assets.iconsGoogle,
       Assets.svgsAppbarlogo,
@@ -467,5 +470,11 @@ class HelperMethods {
       default:
         return 'غير معروف';
     }
+  }
+
+  static List<Exercises> setDaysExercises(String day, List<Exercises> data) {
+    return data.where((element) {
+      return element.day == day;
+    }).toList();
   }
 }

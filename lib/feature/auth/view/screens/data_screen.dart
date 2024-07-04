@@ -156,9 +156,9 @@ class _DataScreenState extends State<ContinueRegisterScreen> {
                           if (selectedValue == null) {
                             HelperMethods.showCustomSnackBarError(
                                 context, 'من فضلك قم بتحدي الجنس');
-                          } else if (age < 12 || age > 80) {
+                          } else if (age < 18 || age > 80) {
                             HelperMethods.showCustomSnackBarError(
-                                context, 'العمر يجب أن يكون بين 12 و 80');
+                                context, 'العمر يجب أن يكون بين 18 و 80');
                           } else if (weight < 40 || weight > 160) {
                             HelperMethods.showCustomSnackBarError(
                                 context, 'kg الوزن يجب أن يكون بين 40 و 160');

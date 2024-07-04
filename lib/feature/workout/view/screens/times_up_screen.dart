@@ -1,24 +1,31 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nourish_me/core/imports/verification_screen_imports.dart';
+import 'package:nourish_me/feature/workout/data/model/workout_model.dart';
+import 'package:nourish_me/feature/workout/view/screens/details_screen.dart';
 import '../../../../core/imports/app_routes_imports.dart';
 import '../../../../core/imports/login_imports.dart';
 import '../../../../core/theme/app_colors.dart';
-import '../../data/item_model.dart';
-import 'details_screen.dart';
 
 class TimesUpScreen extends StatefulWidget {
   const TimesUpScreen({
     super.key,
     required this.currentIndex,
     required this.item,
+    required this.rest,
   });
   final int currentIndex;
-  final List<ItemModel> item;
+  final List<Exercises> item;
+  final int rest;
 
   @override
   State<TimesUpScreen> createState() => _TimesUpScreenState();
 }
 
 class _TimesUpScreenState extends State<TimesUpScreen> {
+  final CountDownController _controller = CountDownController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,12 +63,12 @@ class _TimesUpScreenState extends State<TimesUpScreen> {
             CircularCountDownTimer(
               width: 75.w,
               height: 75.h,
-              duration: 10,
+              duration: widget.rest,
               fillColor: AppColors.mainColor,
               ringColor: AppColors.skipButtonColor,
               autoStart: true,
-              controller: CountDownController(),
-              isReverse: false,
+              controller: _controller,
+              isReverse: true,
               textStyle: AppTextStyles.cairo18BoldBlack.copyWith(
                 fontSize: 20.sp,
                 fontWeight: FontWeight.w600,
@@ -74,19 +81,48 @@ class _TimesUpScreenState extends State<TimesUpScreen> {
                       builder: (context) => DetailsScreen(
                         currentIndex: widget.currentIndex + 1,
                         item: widget.item,
+                        length: widget.item.length,
                       ),
                     ),
                   );
                 } else {
-                  Navigator.pop(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const BottomNav(),
-                    ),
-                  );
+                  HelperMethods.showCustomSnackBarSuccess(
+                      context, 'تم الانتهاء من تمرين اليوم');
                 }
               },
-            )
+            ),
+            SizedBox(
+              height: 32.h,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Directionality(
+                  textDirection: TextDirection.ltr,
+                  child: TextButton.icon(
+                    onPressed: () {
+                      if (widget.currentIndex < widget.item.length - 1) {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DetailsScreen(
+                              currentIndex: widget.currentIndex + 1,
+                              item: widget.item,
+                              length: widget.item.length,
+                            ),
+                          ),
+                        );
+                      }
+                    },
+                    icon: Image.asset(Assets.imagesArrowNext),
+                    label: Text(
+                      'تخطي',
+                      style: AppTextStyles.cairo16Boldskip,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),

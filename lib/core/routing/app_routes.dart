@@ -1,3 +1,6 @@
+import 'package:nourish_me/feature/workout/data/repo/workout_repo.dart';
+import 'package:nourish_me/feature/workout/logic/cubit/workout_cubit.dart';
+
 import '../imports/app_routes_imports.dart';
 
 class CustomPageRoute extends MaterialPageRoute {
@@ -146,6 +149,11 @@ class AppRoutes {
                 create: (context) => DietsCubit(
                   DietsRepo(DioHandler()),
                 )..fetchDietMeals(AppConstants.diet),
+              ),
+              BlocProvider<WorkoutCubit>(
+                create: (context) => WorkoutCubit(
+                  WorkoutRepo(DioHandler()),
+                )..fetchWorkout(AppConstants.workOut),
               ),
               BlocProvider<SettingsCubit>(
                 create: (context) => SettingsCubit(

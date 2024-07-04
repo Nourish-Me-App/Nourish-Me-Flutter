@@ -46,7 +46,7 @@ class _CounterAgeState extends State<CounterAge> {
 
   void startAgeDecreament() {
     _timerAge = Timer.periodic(const Duration(milliseconds: 100), (timer) {
-      if (dataScreenCubit.ageCounter > 12) {
+      if (dataScreenCubit.ageCounter > 18) {
         dataScreenCubit.decrementAge();
       } else {
         stopTimerAge();
@@ -63,10 +63,10 @@ class _CounterAgeState extends State<CounterAge> {
     String text = _ageController.text;
     int? newValue = int.tryParse(text);
     if (newValue != null) {
-      if (newValue >= 12 || newValue <= 80) {
+      if (newValue >= 18 || newValue <= 80) {
         dataScreenCubit.updateAge(newValue);
       } else {
-        _showSnackBar("العمر يجب ان يكون بين 12 و 80");
+        _showSnackBar("العمر يجب ان يكون بين 18 و 80");
       }
     }
   }
@@ -141,8 +141,8 @@ class _CounterAgeState extends State<CounterAge> {
                 if (Form.of(context).validate()) {
                   int.tryParse(value) == null
                       ? null
-                      : int.parse(value) < 12 || int.parse(value) > 80
-                          ? _showSnackBar('العمر يجب ان يكون بين 12 و 80')
+                      : int.parse(value) < 18 || int.parse(value) > 80
+                          ? _showSnackBar('العمر يجب ان يكون بين 18 و 80')
                           : null;
                   _ageController.text = dataScreenCubit.ageCounter.toString();
                 } else {
