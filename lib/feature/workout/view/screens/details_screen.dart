@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nourish_me/core/theme/app_colors.dart';
@@ -22,6 +24,33 @@ class DetailsScreen extends StatefulWidget {
 }
 
 class _DetailsScreenState extends State<DetailsScreen> {
+  Timer? _timer;
+  int _remaningSeconds = 0;
+
+  void _startCountdown(String reps) {
+    final seconds = int.tryParse(reps.replaceAll(RegExp(r'\D'), ''));
+    if (seconds != null) {
+      setState(() {
+        _remaningSeconds = seconds;
+      });
+      _timer?.cancel();
+      _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+        if (_remaningSeconds > 0) {
+          setState(() {
+            _remaningSeconds--;
+          });
+        } else {
+          timer.cancel();
+        }
+      });
+    }
+  }
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +78,15 @@ class _DetailsScreenState extends State<DetailsScreen> {
     );
   }
 
-  Widget _buildContent(int index, Exercises item, int length) {
+ Widget _buildContent(int index, Exercises item, int length) {
+    bool hasSets = item.sets != null;
+    bool hasReps = item.repeats != null;
+    bool hasSecReps = hasReps && (item.repeats!.toLowerCase().contains('sec'));
+
+    if (hasSecReps) {
+      _startCountdown(item.repeats!);
+    }
+
     return Center(
       key: ValueKey<int>(index),
       child: Column(
@@ -73,9 +110,29 @@ class _DetailsScreenState extends State<DetailsScreen> {
           SizedBox(
             height: 26.h,
           ),
-          if (item.sets != null)
+          if (hasSets && hasReps && _remaningSeconds == 0)
             Text(
-              "${widget.item[index].sets}  - ${widget.item[index].repeats} ",
+              "${widget.item[index].sets} sets - ${widget.item[index].repeats} reps",
+              style: AppTextStyles.cairo18BoldBlack,
+            ),
+          if (hasSets && hasSecReps && _remaningSeconds > 0)
+            Text(
+              "${widget.item[index].sets} sets - $_remaningSeconds seconds remaining",
+              style: AppTextStyles.cairo18BoldBlack,
+            ),
+          if (hasSets && !hasReps)
+            Text(
+              "${widget.item[index].sets} sets",
+              style: AppTextStyles.cairo18BoldBlack,
+            ),
+          if (!hasSets && hasReps && _remaningSeconds == 0)
+            Text(
+              "${widget.item[index].repeats} reps",
+              style: AppTextStyles.cairo18BoldBlack,
+            ),
+          if (!hasSets && hasSecReps && _remaningSeconds > 0)
+            Text(
+              '$_remaningSeconds seconds remaining',
               style: AppTextStyles.cairo18BoldBlack,
             ),
           const SizedBox(
@@ -107,13 +164,13 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   }
                 },
                 style: ButtonStyle(
-                  backgroundColor: WidgetStateProperty.all(AppColors.mainColor),
-                  shape: WidgetStateProperty.all(
+                  backgroundColor: MaterialStateProperty.all(AppColors.mainColor),
+                  shape: MaterialStateProperty.all(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  elevation: WidgetStateProperty.all(0),
+                  elevation: MaterialStateProperty.all(0),
                 ),
                 child: Text(
                   'انهاء',
