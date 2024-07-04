@@ -6,7 +6,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../feature/home/logic/bot_nav_bar/bot_nav_bar_cubit.dart';
 import '../helpers/app_images.dart';
 import '../helpers/cache_helper.dart';
-import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -27,7 +26,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
           builder: (context, state) {
             return AppBar(
               bottom: bottom,
-              leadingWidth: !title.contains('نظام') ? 80.w : null,
+              leadingWidth: !title.contains('نظام') ? 75.w : null,
               title: Text(
                 title,
                 style: AppTextStyles.cairo12ExtraBoldTFFContentColor.copyWith(
@@ -37,22 +36,43 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
               leading: !title.contains('نظام')
                   ? CacheHelper().getData(key: 'image') != null
-                      ? CircleAvatar(
-                          backgroundColor: AppColors.dietContainerColor,
-                          backgroundImage: NetworkImage(
-                            CacheHelper().getData(key: 'image'),
+                      ? Padding(
+                          padding: EdgeInsets.only(left: 15.w),
+                          child: Container(
+                            height: 70.h,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                fit: BoxFit.fill,
+                                image: NetworkImage(
+                                  CacheHelper().getData(key: 'image'),
+                                ),
+                              ),
+                              borderRadius: BorderRadius.circular(24.r),
+                            ),
                           ),
                         )
-                      : SvgPicture.asset(Assets.svgsAppbarlogo)
+                      : Padding(
+                          padding: const EdgeInsets.only(left: 2.0),
+                          child: SvgPicture.asset(Assets.svgsAppbarlogo),
+                        )
                   : null,
               actions: title.contains('نظام')
                   ? [
                       CacheHelper().getData(key: 'image') != null
-                          ? CircleAvatar(
-                              radius: 40.r,
-                              backgroundColor: AppColors.dietContainerColor,
-                              backgroundImage: NetworkImage(
-                                CacheHelper().getData(key: 'image'),
+                          ? Padding(
+                              padding: EdgeInsets.only(left: 15.w),
+                              child: Container(
+                                height: 60.h,
+                                width: 60.w,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    fit: BoxFit.fill,
+                                    image: NetworkImage(
+                                      CacheHelper().getData(key: 'image'),
+                                    ),
+                                  ),
+                                  borderRadius: BorderRadius.circular(24.r),
+                                ),
                               ),
                             )
                           : Padding(

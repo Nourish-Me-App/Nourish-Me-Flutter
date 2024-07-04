@@ -64,6 +64,10 @@ dependencies:
   flutter_offline: "^3.0.1"
   # For secured cahce.
   flutter_secure_storage: ^9.2.2
+  # Flutter plugin for launching a URL.
+  url_launcher: ^6.3.0
+  # Flutter plugin for Google Sign-In.
+  google_sign_in: ^6.2.1
 
 
 

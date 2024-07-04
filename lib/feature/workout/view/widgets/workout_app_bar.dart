@@ -5,7 +5,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../home/logic/bot_nav_bar/bot_nav_bar_cubit.dart';
 import '../../../../core/helpers/app_images.dart';
 import '../../../../core/helpers/cache_helper.dart';
-import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 
 class MyAppBarWorkOut extends StatelessWidget implements PreferredSizeWidget {
@@ -35,11 +34,20 @@ class MyAppBarWorkOut extends StatelessWidget implements PreferredSizeWidget {
               ),
               actions: [
                 CacheHelper().getData(key: 'image') != null
-                    ? CircleAvatar(
-                        radius: 40.r,
-                        backgroundColor: AppColors.dietContainerColor,
-                        backgroundImage: NetworkImage(
-                          CacheHelper().getData(key: 'image'),
+                    ? Padding(
+                        padding: EdgeInsets.only(left: 15.w),
+                        child: Container(
+                          height: 60.h,
+                          width: 60.w,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              fit: BoxFit.fill,
+                              image: NetworkImage(
+                                CacheHelper().getData(key: 'image'),
+                              ),
+                            ),
+                            borderRadius: BorderRadius.circular(24.r),
+                          ),
                         ),
                       )
                     : Padding(

@@ -112,24 +112,36 @@ class SettingHeader extends StatelessWidget {
                               ),
                             ),
                           )
-                        : CircleAvatar(
-                            backgroundColor: AppColors.dietContainerColor,
-                            radius: 70.r,
-                            backgroundImage: NetworkImage(
-                              CacheHelper().getData(key: 'image'),
+                        : Container(
+                            height: 80.h,
+                            width: 80.w,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                fit: BoxFit.fill,
+                                image: NetworkImage(
+                                  CacheHelper().getData(key: 'image'),
+                                ),
+                              ),
+                              borderRadius: BorderRadius.circular(30.r),
                             ),
                           ),
                     Positioned(
-                      top: 80.h,
-                      left: 50.w,
+                      top: CacheHelper().getData(key: 'image') == null
+                          ? 80.h
+                          : 83.h,
+                      left: CacheHelper().getData(key: 'image') == null
+                          ? 50.w
+                          : 55.w,
                       child: CircleAvatar(
                         backgroundColor: AppColors.mainColor,
-                        radius: 17.r,
+                        radius: CacheHelper().getData(key: 'image') == null
+                            ? 17.r
+                            : 15.r,
                         child: Center(
                           child: Icon(
                             Icons.camera_alt_outlined,
                             color: Colors.white,
-                            size: 13.r,
+                            size: 15.r,
                           ),
                         ),
                       ),
@@ -138,7 +150,7 @@ class SettingHeader extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(width: 16.w),
+            SizedBox(width: 8.w),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
