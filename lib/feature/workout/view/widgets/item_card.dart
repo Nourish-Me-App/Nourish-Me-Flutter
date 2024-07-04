@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/helpers/app_images.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -37,10 +38,21 @@ class ItemCard extends StatelessWidget {
                 children: [
                   Padding(
                     padding: EdgeInsets.only(left: 10.h, bottom: 7.w, top: 7.w),
-                    child: Image.network(
-                      image,
-                      width: 66.w,
-                      height: 66.h,
+                    child: ClipRect(
+                      child: Container(
+                          width: 66.w,
+                          height: 66.h,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(15.r),
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15.r),
+                            child: CachedNetworkImage(
+                              imageUrl: image,
+                              fit: BoxFit.fill,
+                            ),
+                          )),
                     ),
                   ),
                   SizedBox(
