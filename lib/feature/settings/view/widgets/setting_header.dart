@@ -139,20 +139,24 @@ class SettingHeader extends StatelessWidget {
               ),
             ),
             SizedBox(width: 16.w),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  CacheHelper().getData(key: 'name'),
-                  style: AppTextStyles.cairo18BoldBlack,
-                ),
-                Text(
-                  CacheHelper().getData(key: 'email'),
-                  style: AppTextStyles.cairo16SemiBoldBlack.copyWith(
-                    fontWeight: FontWeight.w400,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    CacheHelper().getData(key: 'name'),
+                    style: AppTextStyles.cairo18BoldBlack,
                   ),
-                ),
-              ],
+                  Text(
+                    softWrap: true,
+                    CacheHelper().getData(key: 'email'),
+                    style: AppTextStyles.cairo16SemiBoldBlack.copyWith(
+                      fontWeight: FontWeight.w400,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         );
