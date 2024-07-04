@@ -82,7 +82,6 @@ class HelperMethods {
       Assets.svgsAuthFemale,
       Assets.svgsAuthMale,
       Assets.svgsResultsBreak,
-      Assets.imagesTimeOver,
       Assets.iconsFacbookFilledBlue,
       Assets.iconsGoogle,
       Assets.svgsAppbarlogo,
@@ -106,6 +105,8 @@ class HelperMethods {
       Assets.svgsSettingsEmailChange,
       Assets.svgsSettingsPassChange,
       Assets.svgsSettingsRate,
+      Assets.iconsIconFacebook,
+      Assets.iconsIconInstagram,
     ];
 
     for (String element in cacheSvgImages) {

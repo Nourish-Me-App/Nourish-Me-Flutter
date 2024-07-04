@@ -29,7 +29,9 @@ class QuestionsCubit extends Cubit<QuestionsState> {
             {"question_title": "Sleep Hours", "answer_id": "$answerTwo"},
             {
               "question_title": "Disease",
-              "answer_id": [answerThree, ...questionThreeAnswersList]
+              "answer_id": questionThreeAnswersList.isEmpty
+                  ? answerThree
+                  : [answerThree, ...questionThreeAnswersList]
             },
             {"question_title": "Water Amount", "answer_id": "$answerFour"},
             {"question_title": "Goal", "answer_id": "$answerFive"}
@@ -40,9 +42,9 @@ class QuestionsCubit extends Cubit<QuestionsState> {
             {"question_title": "Sleep Hours", "answer_id": "$answerTwo"},
             {
               "question_title": "Disease",
-              "answer_id": [
-                'eyJpdiI6InM2aVcwU0FWZEQxMmUrT09pakVYT3c9PSIsInZhbHVlIjoiR3NZcWcvZDR4WWQ4RVZ3RnpwbU1yUT09IiwibWFjIjoiOTIwNTBlMmJjZjBkOGY3MWQyMzc0YTM5OWMwMjIwN2Q0YTBjODM2NWI1ZmRmNGVmYjA5YjA1MWI2NDM1M2Y2NSIsInRhZyI6IiJ9'
-              ]
+              "answer_id": questionThreeAnswersList.isEmpty
+                  ? answerThree
+                  : [answerThree, ...questionThreeAnswersList]
             },
             {"question_title": "Water Amount", "answer_id": "$answerFour"},
             {"question_title": "Goal", "answer_id": "$answerFive"}
@@ -100,7 +102,8 @@ class QuestionsCubit extends Cubit<QuestionsState> {
   }) async {
     emit(PostQuestionsLoadingState());
     var response = await questionsAndAnswersRepo.postQuestionsAnswers(path,
-        data: data, token:(await CacheHelper().getSecuredData(key: AppConstants.token))!);
+        data: data,
+        token: (await CacheHelper().getSecuredData(key: AppConstants.token))!);
 
     response.fold((error) {
       emit(PostQuestionsFailureState(error));
