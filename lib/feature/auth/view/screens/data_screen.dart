@@ -21,7 +21,7 @@ import '../widgets/height_counter.dart';
 import '../widgets/weightcounters.dart';
 
 class ContinueRegisterScreen extends StatefulWidget {
-  final String loginType;
+  final String? loginType;
   const ContinueRegisterScreen({super.key, required this.loginType});
 
   @override
