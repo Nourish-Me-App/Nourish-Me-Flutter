@@ -34,6 +34,18 @@ class AuthCubit extends Cubit<AuthState> {
       emit(LoginSuccess(loginModel: loginModel));
     });
   }
+  Future<void> googleLogin(String path, dynamic data) async {
+    emit(GoogleLoginLoading());
+    final loginModel = await loginRepo.googleLogin(
+      path,
+      data,
+    );
+    loginModel.fold((error) {
+      emit(GoogleLoginFailure(error: error));
+    }, (loginModel) {
+      emit(GoogleLoginSuccess(loginModel: loginModel));
+    });
+  }
 
   Future<void> signUp(String path, dynamic data) async {
     emit(SignUpLoading());

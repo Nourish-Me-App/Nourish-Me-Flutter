@@ -13,6 +13,7 @@ class CustomPageRoute extends MaterialPageRoute {
 class AppRoutes {
   Route? generateRoute(RouteSettings routeSettings) {
     DioHandler dioHandler = DioHandler();
+    var args = routeSettings.arguments;
     switch (routeSettings.name) {
       case Routes.splash:
         return MaterialPageRoute(
@@ -88,7 +89,7 @@ class AppRoutes {
                 ),
               ),
             ],
-            child: const Questions(),
+            child: Questions(loginType: args as String),
           ),
         );
       case Routes.onBoarding:
@@ -119,7 +120,7 @@ class AppRoutes {
             create: (context) => DataScreenCubit(
               ContinueRegisterRepo(dioHandler),
             ),
-            child: const ContinueRegisterScreen(),
+            child: ContinueRegisterScreen(loginType: args as String),
           ),
         );
       case Routes.home:

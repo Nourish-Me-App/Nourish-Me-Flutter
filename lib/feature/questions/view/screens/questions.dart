@@ -3,7 +3,8 @@ import '../../../../core/imports/questions_screen_imports.dart';
 import '../../../../core/routing/routes.dart';
 
 class Questions extends StatefulWidget {
-  const Questions({super.key});
+  final String loginType;
+  const Questions({super.key, required this.loginType});
 
   @override
   State<Questions> createState() => _QuestionsState();
@@ -104,6 +105,7 @@ class _QuestionsState extends State<Questions> {
                               )
                             : SizedBox(height: 24.h),
                         QuestionsButtons(
+                          loginType: widget.loginType,
                           questionsUICubit: questionsUICubit,
                           questionsCubit: questionsCubit,
                         ),

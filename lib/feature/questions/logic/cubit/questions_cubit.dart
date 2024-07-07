@@ -99,11 +99,14 @@ class QuestionsCubit extends Cubit<QuestionsState> {
   Future<void> postQuestionsAnswers(
     String path, {
     dynamic data,
+    String? loginType,
   }) async {
     emit(PostQuestionsLoadingState());
     var response = await questionsAndAnswersRepo.postQuestionsAnswers(path,
         data: data,
-        token: (await CacheHelper().getSecuredData(key: AppConstants.token))!);
+        token: loginType == 'googleLogin'
+            ? (await CacheHelper().getSecuredData(key: 'googleToken'))!
+            : (await CacheHelper().getSecuredData(key: AppConstants.token))!);
 
     response.fold((error) {
       emit(PostQuestionsFailureState(error));

@@ -14,7 +14,10 @@ class WorkoutCubit extends Cubit<WorkoutState> {
   Future<void> fetchWorkout(String path) async {
     emit(WorkoutLoadingState());
     var result = await workoutRepo.fetchWorkout(
-        path, (await CacheHelper().getSecuredData(key: AppConstants.token))!);
+        path,
+        (await CacheHelper().getSecuredData(key: 'googleToken')) == null
+            ? (await CacheHelper().getSecuredData(key: AppConstants.token))!
+            : (await CacheHelper().getSecuredData(key: 'googleToken'))!);
     result.fold(
       (error) => emit(WorkoutFailureState(error)),
       (workoutModel) {

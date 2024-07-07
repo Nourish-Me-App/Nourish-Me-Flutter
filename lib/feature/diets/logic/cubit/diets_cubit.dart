@@ -15,7 +15,9 @@ class DietsCubit extends Cubit<DietsState> {
   Future<void> fetchDietMeals(String path) async {
     emit(DietsLoadingState());
     var result = await dietsRepo.getDietMeals(
-        path,(await CacheHelper().getSecuredData(key: AppConstants.token))!);
+        path,(await CacheHelper().getSecuredData(key: 'googleToken')) == null
+            ? (await CacheHelper().getSecuredData(key: AppConstants.token))!
+            : (await CacheHelper().getSecuredData(key: 'googleToken'))!);
     result.fold(
       (error) => emit(DietsFailureState(error)),
       (dietModel) {

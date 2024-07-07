@@ -14,6 +14,15 @@ final class ContinueRegisterFailure extends DataScreenState {
   ContinueRegisterFailure({this.error});
 }
 
+final class ContinueGoogleRegisterSuccess extends DataScreenState {}
+
+final class ContinueGoogleRegisterLoading extends DataScreenState {}
+
+final class ContinueGoogleRegisterFailure extends DataScreenState {
+  final String? error;
+  ContinueGoogleRegisterFailure({this.error});
+}
+
 final class LoadingCounter extends DataScreenState {}
 
 final class IncreamentCounter extends DataScreenState {}

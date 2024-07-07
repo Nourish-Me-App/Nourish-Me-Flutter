@@ -45,6 +45,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           Navigator.pushNamedAndRemoveUntil(
             context,
             Routes.continueRegisterScreen,
+            arguments: 'initialLogin',
             (route) => false,
           );
         }

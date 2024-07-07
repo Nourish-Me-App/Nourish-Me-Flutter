@@ -16,7 +16,6 @@ class DataScreenCubit extends Cubit<DataScreenState> {
   int heightCounter = 160;
   //Timer? _timerAge;
 
-
   Future<void> continueRegister(String path, dynamic data) async {
     emit(ContinueRegisterLoading());
     final continueRegisterModel = await continueRegisterRepo.continueRegister(
@@ -29,6 +28,22 @@ class DataScreenCubit extends Cubit<DataScreenState> {
       }),
       ((continueRegisterModel) {
         emit(ContinueRegisterSuccess());
+      }),
+    );
+  }
+
+  Future<void> continueGoogleRegister(String path, dynamic data) async {
+    emit(ContinueGoogleRegisterLoading());
+    final continueRegisterModel = await continueRegisterRepo.continueGoogleRegister(
+      path,
+      data,
+    );
+    continueRegisterModel.fold(
+      ((error) {
+        emit(ContinueGoogleRegisterFailure(error: error));
+      }),
+      ((continueRegisterModel) {
+        emit(ContinueGoogleRegisterSuccess());
       }),
     );
   }
@@ -46,7 +61,7 @@ class DataScreenCubit extends Cubit<DataScreenState> {
     emit(LoadingCounter());
     if (ageCounter > 18) {
       ageCounter--;
-      
+
       emit(DecreamentCounter());
     }
   }
@@ -54,7 +69,7 @@ class DataScreenCubit extends Cubit<DataScreenState> {
   void updateAge(int age) {
     emit(LoadingCounter());
     ageCounter = age;
-    
+
     emit(IncreamentCounter());
   }
 
@@ -113,8 +128,4 @@ class DataScreenCubit extends Cubit<DataScreenState> {
     heightCounter = height;
     emit(IncreamentCounter());
   }
-
-
-
-  
 }
