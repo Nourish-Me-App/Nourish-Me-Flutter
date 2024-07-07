@@ -39,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen>
             : cacheHelper.getData(key: AppConstants.rememberMeToken) == null &&
                     cacheHelper.getData(key: 'googleRememberMe') == null
                 ? Routes.signUpScreen
-                : cacheHelper.getData(key: 'isDataSaved') == null
+                : cacheHelper.getData(key: 'isDataSaved') == "no"
                     ? Routes.continueRegisterScreen
                     : cacheHelper.getData(
                                     key: AppConstants
