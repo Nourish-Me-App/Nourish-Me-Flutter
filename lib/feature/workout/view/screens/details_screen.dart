@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nourish_me/core/imports/app_routes_imports.dart';
 import 'package:nourish_me/core/theme/app_colors.dart';
 import 'package:nourish_me/feature/workout/data/model/workout_model.dart';
 import '../../../../core/helpers/app_images.dart';
@@ -82,73 +83,67 @@ class _DetailsScreenState extends State<DetailsScreen> {
   Widget _buildContent(int index, Exercises item, int length) {
     bool hasSets = item.sets != null;
     bool hasReps = item.repeats != null;
-    bool hasSecReps = hasReps && (item.repeats!.toLowerCase().contains('sec'));
-    bool hasMinReps = hasReps && (item.repeats!.toLowerCase().contains('min'));
-    bool hasRepsWord =
-        hasReps && (item.repeats!.toLowerCase().contains('reps'));
+    bool hasRepsWord = hasReps && item.repeats!.toLowerCase().contains('reps');
 
-    if (hasSecReps) {
-      _startCountdown(item.repeats!);
+    String setsDisplay = '';
+    String repsDisplay = '';
+
+    // Determine how to display sets and reps based on conditions
+    if (!hasSets && !hasReps) {
+      // If neither sets nor reps are present
+      setsDisplay = '';
+      repsDisplay = '';
+    } else if (!hasSets && hasReps) {
+      // If sets are absent but reps are present
+      setsDisplay = '';
+      repsDisplay = item.repeats!;
+    } else if (hasSets && !hasReps) {
+      // If sets are present but reps are absent
+      setsDisplay = item.sets!;
+      repsDisplay = 'reps';
+    } else {
+      // If both sets and reps are present
+      setsDisplay = item.sets!;
+      repsDisplay = item.repeats!;
     }
 
-    String repsDisplay = '';
-    if (hasReps) {
-      if (hasSecReps && _remainingSeconds > 0) {
-        repsDisplay = '$_remainingSeconds seconds remaining';
-      } else if (hasMinReps || hasRepsWord) {
-        repsDisplay = item.repeats!;
-      } else if (!hasMinReps && !hasRepsWord) {
-        final repsCount =
-            int.tryParse(item.repeats!.replaceAll(RegExp(r'\D'), ''));
-        if (repsCount != null && repsCount > 15) {
-          _startCountdown(item.repeats!);
-          repsDisplay = '$_remainingSeconds seconds remaining';
-        } else {
-          repsDisplay = item.repeats!;
-        }
-      }
+    // Add the word "sets" if it's not present in setsDisplay
+    if (hasSets && !setsDisplay.toLowerCase().contains('set')) {
+      setsDisplay = '${item.sets} sets';
     }
 
     return Center(
       key: ValueKey<int>(index),
       child: Column(
         children: [
-          SizedBox(
-            height: 130.h,
-          ),
+          SizedBox(height: 130.h),
           SizedBox(
               width: 378.w,
               height: 200.h,
               child: CachedNetworkImage(imageUrl: item.image!)),
-          SizedBox(
-            height: 26.h,
-          ),
+          SizedBox(height: 26.h),
           Text(
             item.name!,
             style: AppTextStyles.cairo18BoldBlack
                 .copyWith(fontSize: 20.sp, fontWeight: FontWeight.w500),
           ),
-          SizedBox(
-            height: 26.h,
-          ),
-          if (hasSets && repsDisplay.isNotEmpty)
+          SizedBox(height: 26.h),
+          if (setsDisplay.isNotEmpty && repsDisplay.isNotEmpty)
             Text(
-              "${widget.item[index].sets} sets - $repsDisplay",
+              "$setsDisplay - $repsDisplay",
               style: AppTextStyles.cairo18BoldBlack,
             ),
-          if (hasSets && repsDisplay.isEmpty)
+          if (setsDisplay.isNotEmpty && repsDisplay.isEmpty)
             Text(
-              "${widget.item[index].sets} sets",
+              setsDisplay,
               style: AppTextStyles.cairo18BoldBlack,
             ),
-          if (!hasSets && repsDisplay.isNotEmpty)
+          if (setsDisplay.isEmpty && repsDisplay.isNotEmpty)
             Text(
               repsDisplay,
               style: AppTextStyles.cairo18BoldBlack,
             ),
-          const SizedBox(
-            height: 40,
-          ),
+          const SizedBox(height: 40),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 120),
             child: SizedBox(
@@ -170,8 +165,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       ),
                     );
                   } else {
-                    HelperMethods.showCustomSnackBarSuccess(
-                        context, 'تم الانتهاء من تمرين اليوم');
+                    Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        Routes.bottomNavBar,
+                        ModalRoute.withName(Routes.bottomNavBar));
                   }
                 },
                 style: ButtonStyle(
@@ -190,9 +187,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
               ),
             ),
           ),
-          SizedBox(
-            height: 140.h,
-          ),
+          SizedBox(height: 140.h),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 25.h),
             child: Row(
@@ -217,9 +212,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         );
                       },
                       icon: Transform.flip(
-                          filterQuality: FilterQuality.high,
-                          flipX: true,
-                          child: Image.asset(Assets.imagesArrowNext)),
+                        filterQuality: FilterQuality.high,
+                        flipX: true,
+                        child: Image.asset(Assets.imagesArrowNext),
+                      ),
                       label: Text(
                         'السابق',
                         style: AppTextStyles.cairo16Boldskip,
