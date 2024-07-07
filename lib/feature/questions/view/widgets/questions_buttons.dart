@@ -9,10 +9,12 @@ import '../../logic/cubit/questions_cubit.dart';
 import '../../logic/cubit/questions_ui_cubit.dart';
 
 class QuestionsButtons extends StatelessWidget {
+    final String? loginType;
+
   const QuestionsButtons({
     super.key,
     required this.questionsUICubit,
-    required this.questionsCubit,
+    required this.questionsCubit, required this.loginType,
   });
 
   final QuestionsUICubit questionsUICubit;
@@ -44,6 +46,7 @@ class QuestionsButtons extends StatelessWidget {
                 ? null
                 : questionsUICubit.questionNumber == 4
                     ? await questionsCubit.postQuestionsAnswers(
+                      loginType:loginType ,
                         AppConstants.postQuestions,
                         data: {'answers': questionsCubit.answers},
                       )

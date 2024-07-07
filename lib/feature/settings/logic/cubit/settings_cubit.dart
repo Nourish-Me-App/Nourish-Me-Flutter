@@ -28,7 +28,10 @@ class SettingsCubit extends Cubit<SettingsState> {
   ) async {
     emit(LogoutLoading());
     var response = await logoutRepo.logout(
-        path,(await CacheHelper().getSecuredData(key: AppConstants.token))!);
+        path,
+        (await CacheHelper().getSecuredData(key: 'googleToken')) == null
+            ? (await CacheHelper().getSecuredData(key: AppConstants.token))!
+            : (await CacheHelper().getSecuredData(key: 'googleToken'))!);
 
     response.fold((error) {
       emit(LogoutFailed(error: error));
@@ -44,7 +47,9 @@ class SettingsCubit extends Cubit<SettingsState> {
     emit(UpdateProfileLoading());
     var response = await updateProfileRepo.updateProfile(
       path,
-      (await CacheHelper().getSecuredData(key: AppConstants.token))!,
+      (await CacheHelper().getSecuredData(key: 'googleToken')) == null
+          ? (await CacheHelper().getSecuredData(key: AppConstants.token))!
+          : (await CacheHelper().getSecuredData(key: 'googleToken'))!,
       data,
     );
 

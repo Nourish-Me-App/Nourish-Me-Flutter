@@ -21,7 +21,8 @@ import '../widgets/height_counter.dart';
 import '../widgets/weightcounters.dart';
 
 class ContinueRegisterScreen extends StatefulWidget {
-  const ContinueRegisterScreen({super.key});
+  final String loginType;
+  const ContinueRegisterScreen({super.key, required this.loginType});
 
   @override
   State<ContinueRegisterScreen> createState() => _DataScreenState();
@@ -42,25 +43,58 @@ class _DataScreenState extends State<ContinueRegisterScreen> {
     ContinueRegisterModel continueRegisterModel = ContinueRegisterModel();
     return BlocConsumer<DataScreenCubit, DataScreenState>(
       listener: (context, state) {
-        if (state is ContinueRegisterSuccess) {
-          Navigator.pop(context);
-          HelperMethods.showCustomSnackBarSuccess(
-              context, 'تم انشاء الحساب بنجاح');
-          Navigator.pushNamedAndRemoveUntil(
-            context,
-            Routes.loginScreen,
-            (route) => false,
-          );
+        if (widget.loginType != 'googleLogin') {
+          if (state is ContinueRegisterSuccess) {
+            Navigator.pop(context);
+
+            HelperMethods.showCustomSnackBarSuccess(
+                context, 'تم انشاء الحساب بنجاح');
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              Routes.loginScreen,
+              (route) => false,
+            );
+          }
+          if (state is ContinueRegisterFailure) {
+            Navigator.pop(context);
+            HelperMethods.showCustomSnackBarError(
+              context,
+              ErrorMessages.errorMessage(state.error!),
+            );
+          }
+          if (state is ContinueRegisterLoading) {
+            HelperMethods.showLoadingAlertDialog(context);
+          }
         }
-        if (state is ContinueRegisterFailure) {
-          Navigator.pop(context);
-          HelperMethods.showCustomSnackBarError(
-            context,
-            ErrorMessages.errorMessage(state.error!),
-          );
-        }
-        if (state is ContinueRegisterLoading) {
-          HelperMethods.showLoadingAlertDialog(context);
+        if (widget.loginType == 'googleLogin') {
+          if (state is ContinueGoogleRegisterSuccess) {
+            CacheHelper().saveData(key: 'isDataSaved', value: 'yes');
+            HelperMethods.showCustomSnackBarSuccess(
+                context, 'تم تسجيل البيانات بنجاح');
+            CacheHelper().getData(key: 'isFirstQuestionsCompleteGoogle') ==
+                    'yes'
+                ? Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    Routes.bottomNavBar,
+                    (route) => false,
+                  )
+                : Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    Routes.questions,
+                    arguments: 'googleLogin',
+                    (route) => false,
+                  );
+          }
+          if (state is ContinueGoogleRegisterFailure) {
+            Navigator.pop(context);
+            HelperMethods.showCustomSnackBarError(
+              context,
+              ErrorMessages.errorMessage(state.error!),
+            );
+          }
+          if (state is ContinueGoogleRegisterLoading) {
+            HelperMethods.showLoadingAlertDialog(context);
+          }
         }
       },
       builder: (context, state) {
@@ -167,25 +201,40 @@ class _DataScreenState extends State<ContinueRegisterScreen> {
                                 context, 'cm الطول يجب أن يكون بين 140 و 210');
                           } else {
                             CacheHelper cacheHelper = CacheHelper();
-                            await AuthRequests.continueRegister(
-                              datascreeCubit: dataScreenCubit,
-                              continueRegisterModel: continueRegisterModel,
-                              email: cacheHelper.getData(key: 'email'),
-                              name: cacheHelper.getData(key: 'name'),
-                              gender: selectedValue.toString(),
-                              age: dataScreenCubit.ageCounter.toString(),
-                              weight: dataScreenCubit.weightCounter.toString(),
-                              height: dataScreenCubit.heightCounter.toString(),
-                              password: cacheHelper.getData(key: 'password'),
-                              passwordConfirmation: CacheHelper()
-                                  .getData(key: 'passwordConfirmation'),
-                            ).then((value) {
-                              cacheHelper.removeData(key: 'email');
-                              cacheHelper.removeData(key: 'name');
-                              cacheHelper.removeData(key: 'password');
-                              cacheHelper.removeData(
-                                  key: 'passwordConfirmation');
-                            });
+                            widget.loginType == 'googleLogin'
+                                ? await dataScreenCubit.continueGoogleRegister(
+                                    'users/google/continue/registration', {
+                                    'gender': selectedValue.toString(),
+                                    'weight': dataScreenCubit.weightCounter
+                                        .toString(),
+                                    'age':
+                                        dataScreenCubit.ageCounter.toString(),
+                                    'height': dataScreenCubit.heightCounter
+                                        .toString(),
+                                  })
+                                : await AuthRequests.continueRegister(
+                                    datascreeCubit: dataScreenCubit,
+                                    continueRegisterModel:
+                                        continueRegisterModel,
+                                    email: cacheHelper.getData(key: 'email'),
+                                    name: cacheHelper.getData(key: 'name'),
+                                    gender: selectedValue.toString(),
+                                    age: dataScreenCubit.ageCounter.toString(),
+                                    weight: dataScreenCubit.weightCounter
+                                        .toString(),
+                                    height: dataScreenCubit.heightCounter
+                                        .toString(),
+                                    password:
+                                        cacheHelper.getData(key: 'password'),
+                                    passwordConfirmation: CacheHelper()
+                                        .getData(key: 'passwordConfirmation'),
+                                  ).then((value) {
+                                    cacheHelper.removeData(key: 'email');
+                                    cacheHelper.removeData(key: 'name');
+                                    cacheHelper.removeData(key: 'password');
+                                    cacheHelper.removeData(
+                                        key: 'passwordConfirmation');
+                                  });
                           }
                         },
                       )

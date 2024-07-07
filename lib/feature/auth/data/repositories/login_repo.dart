@@ -23,4 +23,19 @@ class LoginRepo {
       return Left(e.errorModel.message!);
     }
   }
+  Future<Either<String, LoginModel>> googleLogin(
+    String path,
+    dynamic data,
+  ) async {
+    try {
+      var response = await apiServices.get(
+        path,
+        data: data,
+      );
+      var result = LoginModel.fromJson(response);
+      return Right(result);
+    } on ApiException catch (e) {
+      return Left(e.errorModel.message!);
+    }
+  }
 }

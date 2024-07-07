@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../core/errors/messages/error_messages.dart';
@@ -41,8 +42,10 @@ class SettingsScreen extends StatelessWidget {
                   (route) => false,
                 );
                 cacheHelper.deleteSecuredData(key: AppConstants.token);
+                cacheHelper.deleteSecuredData(key: 'googleToken');
                 cacheHelper.removeData(key: AppConstants.rememberMeToken);
                 cacheHelper.removeData(key: 'name');
+                cacheHelper.removeData(key: 'googleRememberMe');
                 cacheHelper.removeData(key: 'email');
                 cacheHelper.removeData(key: 'image');
                 BlocProvider.of<BotNavBarCubit>(context).resetIndex();
@@ -71,8 +74,12 @@ class SettingsScreen extends StatelessWidget {
                   icon: Assets.svgsSettingsPassChange,
                   title: 'تغيير كلمة المرور',
                   showBackIcon: true,
-                  onTap: () {
-                    Navigator.pushNamed(context, Routes.newPassword);
+                  onTap: () async {
+                    (await CacheHelper().getSecuredData(key: 'googleToken')) ==
+                            null
+                        ? Navigator.pushNamed(context, Routes.newPassword)
+                        : HelperMethods.showCustomSnackBarSuccess(
+                            context, 'هذه الخدمة غير متوفرة لهذا الحساب');
                   },
                 ),
                 SizedBox(height: 16.h),
@@ -90,7 +97,7 @@ class SettingsScreen extends StatelessWidget {
                   icon: Assets.svgsSettingsLogout,
                   title: 'تسجيل الخروج',
                   showBackIcon: false,
-                  onTap: () {
+                  onTap: () async {
                     HelperMethods.showLogoutAlertDialog(
                       context,
                       () {
@@ -98,6 +105,7 @@ class SettingsScreen extends StatelessWidget {
                             .logout(AppConstants.logout);
                       },
                     );
+                    await GoogleSignIn().signOut();
                   },
                 ),
                 SizedBox(height: 34.h),

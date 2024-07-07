@@ -36,13 +36,20 @@ class _SplashScreenState extends State<SplashScreen>
       Navigator.of(context).pushNamedAndRemoveUntil(
         showOnBoarding == null
             ? Routes.onBoarding
-            : cacheHelper.getData(key: AppConstants.rememberMeToken) == null
+            : cacheHelper.getData(key: AppConstants.rememberMeToken) == null &&
+                    cacheHelper.getData(key: 'googleRememberMe') == null
                 ? Routes.signUpScreen
-                : cacheHelper.getData(
-                            key: AppConstants.isFirstQuestionsComplete) ==
-                        'no'
-                    ? Routes.questions
-                    : Routes.bottomNavBar,
+                : cacheHelper.getData(key: 'isDataSaved') == null
+                    ? Routes.continueRegisterScreen
+                    : cacheHelper.getData(
+                                    key: AppConstants
+                                        .isFirstQuestionsComplete) ==
+                                'no' &&
+                            cacheHelper.getData(
+                                    key: 'isFirstQuestionsCompleteGoogle') ==
+                                'no'
+                        ? Routes.questions
+                        : Routes.bottomNavBar,
         (route) => false,
       );
     });
