@@ -71,7 +71,8 @@ class _DataScreenState extends State<ContinueRegisterScreen> {
             CacheHelper().saveData(key: 'isDataSaved', value: 'yes');
             HelperMethods.showCustomSnackBarSuccess(
                 context, 'تم تسجيل البيانات بنجاح');
-            CacheHelper().getData(key: 'isFirstQuestionsCompleteGoogle') == 'yes'
+            CacheHelper().getData(key: 'isFirstQuestionsCompleteGoogle') ==
+                    'yes'
                 ? Navigator.pushNamedAndRemoveUntil(
                     context,
                     Routes.bottomNavBar,
@@ -80,8 +81,7 @@ class _DataScreenState extends State<ContinueRegisterScreen> {
                 : Navigator.pushNamedAndRemoveUntil(
                     context,
                     Routes.questions,
-                                          arguments: 'googleLogin',
-
+                    arguments: 'googleLogin',
                     (route) => false,
                   );
           }

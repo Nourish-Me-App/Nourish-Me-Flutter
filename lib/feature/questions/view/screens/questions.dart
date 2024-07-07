@@ -3,7 +3,7 @@ import '../../../../core/imports/questions_screen_imports.dart';
 import '../../../../core/routing/routes.dart';
 
 class Questions extends StatefulWidget {
-  final String loginType;
+  final String? loginType;
   const Questions({super.key, required this.loginType});
 
   @override

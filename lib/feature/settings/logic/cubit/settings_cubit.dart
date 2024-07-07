@@ -47,7 +47,9 @@ class SettingsCubit extends Cubit<SettingsState> {
     emit(UpdateProfileLoading());
     var response = await updateProfileRepo.updateProfile(
       path,
-      (await CacheHelper().getSecuredData(key: AppConstants.token))!,
+      (await CacheHelper().getSecuredData(key: 'googleToken')) == null
+          ? (await CacheHelper().getSecuredData(key: AppConstants.token))!
+          : (await CacheHelper().getSecuredData(key: 'googleToken'))!,
       data,
     );
 

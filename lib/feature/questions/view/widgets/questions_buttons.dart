@@ -9,7 +9,7 @@ import '../../logic/cubit/questions_cubit.dart';
 import '../../logic/cubit/questions_ui_cubit.dart';
 
 class QuestionsButtons extends StatelessWidget {
-    final String loginType;
+    final String? loginType;
 
   const QuestionsButtons({
     super.key,

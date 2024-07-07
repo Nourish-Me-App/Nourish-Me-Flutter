@@ -89,7 +89,7 @@ class AppRoutes {
                 ),
               ),
             ],
-            child: Questions(loginType: args as String),
+            child: Questions(loginType: args == null ? null : args as String),
           ),
         );
       case Routes.onBoarding:

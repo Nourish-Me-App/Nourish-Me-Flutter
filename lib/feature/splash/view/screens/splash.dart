@@ -36,7 +36,7 @@ class _SplashScreenState extends State<SplashScreen>
       Navigator.of(context).pushNamedAndRemoveUntil(
         showOnBoarding == null
             ? Routes.onBoarding
-            : cacheHelper.getData(key: AppConstants.rememberMeToken) == null ||
+            : cacheHelper.getData(key: AppConstants.rememberMeToken) == null &&
                     cacheHelper.getData(key: 'googleRememberMe') == null
                 ? Routes.signUpScreen
                 : cacheHelper.getData(key: 'isDataSaved') == null
@@ -44,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen>
                     : cacheHelper.getData(
                                     key: AppConstants
                                         .isFirstQuestionsComplete) ==
-                                'no' ||
+                                'no' &&
                             cacheHelper.getData(
                                     key: 'isFirstQuestionsCompleteGoogle') ==
                                 'no'
