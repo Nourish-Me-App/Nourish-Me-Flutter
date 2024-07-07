@@ -2,12 +2,11 @@ import 'dart:async';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nourish_me/core/imports/app_routes_imports.dart';
 import 'package:nourish_me/core/theme/app_colors.dart';
 import 'package:nourish_me/feature/workout/data/model/workout_model.dart';
 import '../../../../core/helpers/app_images.dart';
-import '../../../../core/helpers/helper_methods.dart';
 import '../../../../core/theme/app_text_styles.dart';
+import 'times_up_screen.dart';
 
 class DetailsScreen extends StatefulWidget {
   const DetailsScreen(
@@ -151,25 +150,18 @@ class _DetailsScreenState extends State<DetailsScreen> {
               height: 32,
               child: ElevatedButton(
                 onPressed: () {
-                  if (index < widget.length - 1) {
-                    Navigator.pushReplacement(
-                      context,
-                      PageRouteBuilder(
-                        pageBuilder: (context, animation1, animation2) =>
-                            DetailsScreen(
-                          currentIndex: index + 1,
-                          item: widget.item,
-                          length: widget.length,
-                        ),
-                        transitionDuration: const Duration(seconds: 1),
+                  Navigator.pushReplacement(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation1, animation2) =>
+                          TimesUpScreen(
+                        currentIndex: index,
+                        item: widget.item,
+                        rest: int.parse(item.rest ?? '0'),
                       ),
-                    );
-                  } else {
-                    Navigator.pushNamedAndRemoveUntil(
-                        context,
-                        Routes.bottomNavBar,
-                        ModalRoute.withName(Routes.bottomNavBar));
-                  }
+                      transitionDuration: const Duration(seconds: 1),
+                    ),
+                  );
                 },
                 style: ButtonStyle(
                   backgroundColor: WidgetStateProperty.all(AppColors.mainColor),
@@ -240,8 +232,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           ),
                         );
                       } else {
-                        HelperMethods.showCustomSnackBarSuccess(
-                            context, 'تم الانتهاء من تمرين اليوم');
+                        // Navigate to home page when finished
+                        Navigator.pushReplacementNamed(context, '/home');
                       }
                     },
                     icon: Image.asset(Assets.imagesArrowNext),
