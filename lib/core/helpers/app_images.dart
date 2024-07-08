@@ -388,6 +388,10 @@ class Assets {
   /// assets/svgs/results/age.svg
   static const String svgsResultsAge = "assets/svgs/results/age.svg";
 
+  /// Assets for svgsResultsAdvices
+  /// assets/svgs/results/advices.svg
+  static const String svgsResultsAdvices = "assets/svgs/results/advices.svg";
+
   /// Assets for svgsResultsBreak
   /// assets/svgs/results/break.svg
   static const String svgsResultsBreak = "assets/svgs/results/break.svg";

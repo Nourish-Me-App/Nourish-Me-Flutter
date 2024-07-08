@@ -67,6 +67,15 @@ class ShimmerLoadingHome extends StatelessWidget {
               width: double.infinity,
               height: 50.0.h,
             ),
+            SizedBox(height: 15.0.h),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.r),
+                color: Colors.white,
+              ),
+              width: double.infinity,
+              height: 600.0.h,
+            ),
           ],
         ),
       ),

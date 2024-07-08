@@ -9,6 +9,12 @@ class AppTextStyles {
     fontSize: 20.sp,
     fontWeight: FontWeight.bold,
   );
+
+    static TextStyle cairo212BoldBlack = GoogleFonts.cairo(
+    color: Colors.black,
+    fontSize: 12.sp,
+    fontWeight: FontWeight.w500,
+  );
   static TextStyle cairo24Boldmaincolor = GoogleFonts.cairo(
     color: AppColors.mainColor,
     fontSize: 24.sp,
