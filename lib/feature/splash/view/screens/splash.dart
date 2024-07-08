@@ -33,25 +33,66 @@ class _SplashScreenState extends State<SplashScreen>
     mySecondFadeAnimation();
     cacheHelper = CacheHelper();
     timer = Timer(const Duration(milliseconds: 4000), () {
-      Navigator.of(context).pushNamedAndRemoveUntil(
-        showOnBoarding == null
-            ? Routes.onBoarding
-            : cacheHelper.getData(key: AppConstants.rememberMeToken) == null &&
-                    cacheHelper.getData(key: 'googleRememberMe') == null
-                ? Routes.signUpScreen
-                : cacheHelper.getData(key: 'isDataSaved') == null
-                    ? Routes.continueRegisterScreen
-                    : cacheHelper.getData(
-                                    key: AppConstants
-                                        .isFirstQuestionsComplete) ==
-                                'no' &&
-                            cacheHelper.getData(
-                                    key: 'isFirstQuestionsCompleteGoogle') ==
-                                'no'
-                        ? Routes.questions
-                        : Routes.bottomNavBar,
-        (route) => false,
-      );
+      if (showOnBoarding == null) {
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          Routes.onBoarding,
+          (route) => false,
+        );
+      } else {
+        if (cacheHelper.getData(key: AppConstants.rememberMeToken) == null &&
+            cacheHelper.getData(key: 'googleRememberMe') == null) {
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            Routes.signUpScreen,
+            (route) => false,
+          );
+        } else {
+          if (cacheHelper.getData(key: AppConstants.rememberMeToken) != null) {
+            if (cacheHelper.getData(
+                    key: AppConstants.isFirstQuestionsComplete) ==
+                'no') {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                Routes.questions,
+                (route) => false,
+              );
+            } else {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                Routes.bottomNavBar,
+                (route) => false,
+              );
+            }
+          }
+          if (cacheHelper.getData(key: 'googleRememberMe') != null) {
+            if (cacheHelper.getData(key: 'isDataSaved') == "no") {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                Routes.continueRegisterScreen,
+                arguments: 'googleLogin',
+                (route) => false,
+              );
+            } else {
+              if (cacheHelper.getData(key: 'isFirstQuestionsCompleteGoogle') ==
+                  'no') {
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  Routes.questions,
+                  arguments: 'googleLogin',
+                  (route) => false,
+                );
+              } else {
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  Routes.bottomNavBar,
+                  (route) => false,
+                );
+              }
+            }
+          }
+        }
+      }
     });
   }
 

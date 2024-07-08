@@ -120,8 +120,7 @@ class AppRoutes {
             create: (context) => DataScreenCubit(
               ContinueRegisterRepo(dioHandler),
             ),
-            child: ContinueRegisterScreen(
-                loginType: args == null ? null : args as String),
+            child: ContinueRegisterScreen(loginType: args == null ? null : args as String),
           ),
         );
       case Routes.home:
