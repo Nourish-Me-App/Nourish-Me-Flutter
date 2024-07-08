@@ -11,64 +11,103 @@ import '../../../../core/theme/app_text_styles.dart';
 import 'times_up_screen.dart';
 
 class DetailsScreen extends StatefulWidget {
-  const DetailsScreen(
-      {super.key,
-      required this.currentIndex,
-      required this.item,
-      required this.length});
+  const DetailsScreen({
+    super.key,
+    required this.currentIndex,
+    required this.item,
+    required this.length,
+    this.currentSet = 1,
+    this.remainingSeconds = 0,
+  });
+
   final int currentIndex;
   final List<Exercises> item;
   final int length;
+  final int currentSet;
+  final int remainingSeconds;
 
   @override
   State<DetailsScreen> createState() => _DetailsScreenState();
 }
 
-class _DetailsScreenState extends State<DetailsScreen> {
+class _DetailsScreenState extends State<DetailsScreen>
+    with SingleTickerProviderStateMixin {
   Timer? _timer;
   int _remainingSeconds = 0;
   bool _isPaused = true;
+  int _currentSet = 1;
+
+  @override
+  void initState() {
+    super.initState();
+    _remainingSeconds = widget.remainingSeconds;
+    _currentSet = widget.currentSet;
+    if (_remainingSeconds > 0) {
+      _startCountdown(_remainingSeconds.toString());
+    }
+  }
 
   void _startCountdown(String reps, {bool fromPlayButton = false}) {
     if (fromPlayButton) {
       final seconds = int.tryParse(reps.replaceAll(RegExp(r'\D'), ''));
       if (seconds != null && reps.toLowerCase().contains('sec')) {
-        setState(() {
-          _remainingSeconds = seconds;
-          _isPaused = false;
-        });
+        if (mounted) {
+          setState(() {
+            _remainingSeconds = seconds;
+            _isPaused = false;
+          });
+        }
       }
     }
 
     _timer?.cancel();
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (_remainingSeconds > 0 && !_isPaused) {
-        setState(() {
-          _remainingSeconds--;
-        });
+        if (mounted) {
+          setState(() {
+            _remainingSeconds--;
+          });
+        }
       } else {
         timer.cancel();
         if (_remainingSeconds == 0) {
-          _navigateToTimesUpScreen();
+          _handleSetCompletion();
         }
       }
     });
   }
 
+  void _handleSetCompletion() {
+    if (_currentSet < int.parse(widget.item[widget.currentIndex].sets ?? '1')) {
+      if (mounted) {
+        setState(() {
+          _currentSet++;
+        });
+      }
+      _navigateToTimesUpScreen(betweenSets: true);
+    } else {
+      _navigateToTimesUpScreen(betweenSets: false);
+    }
+  }
+
   void _pauseCountdown() {
-    setState(() {
-      _isPaused = true;
-    });
+    if (mounted) {
+      setState(() {
+        _isPaused = true;
+      });
+    }
   }
 
   void _stopCountdown() {
-    setState(() {
-      _timer?.cancel();
-      _remainingSeconds = 0;
-    });
+    if (mounted) {
+      setState(() {
+        _timer?.cancel();
+        _remainingSeconds = 0;
+      });
+    }
   }
 
-  void _navigateToTimesUpScreen() {
+  void _navigateToTimesUpScreen({required bool betweenSets}) {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
@@ -76,9 +115,51 @@ class _DetailsScreenState extends State<DetailsScreen> {
           currentIndex: widget.currentIndex,
           item: widget.item,
           rest: int.parse(widget.item[widget.currentIndex].rest ?? '60'),
+          betweenSets: betweenSets,
+          currentSet: _currentSet,
+          remainingSeconds: _remainingSeconds,
         ),
       ),
-    );
+    ).then((_) {
+      if (!mounted) return;
+
+      if (betweenSets) {
+        setState(() {
+          _remainingSeconds = int.parse(widget
+              .item[widget.currentIndex].repeats!
+              .replaceAll(RegExp(r'\D'), ''));
+        });
+        _startCountdown(widget.item[widget.currentIndex].repeats!);
+      } else {
+        _moveToNextWorkout();
+      }
+    });
+  }
+
+  void _moveToNextWorkout() {
+    if (!mounted) return;
+
+    if (widget.currentIndex < widget.length - 1) {
+      Navigator.pushReplacement(
+        context,
+        PageRouteBuilder(
+          pageBuilder: (context, animation1, animation2) => DetailsScreen(
+            currentIndex: widget.currentIndex + 1,
+            item: widget.item,
+            length: widget.length,
+          ),
+          transitionDuration: const Duration(seconds: 1),
+        ),
+      );
+    } else {
+      HelperMethods.showCustomSnackBarSuccess(
+          context, 'تم الانتهاء من تمارين اليوم');
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        Routes.bottomNavBar,
+        ModalRoute.withName(Routes.bottomNavBar),
+      );
+    }
   }
 
   @override
@@ -96,12 +177,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
             padding: EdgeInsets.only(right: 8.w),
             child: Text('${widget.currentIndex + 1}/${widget.item.length}',
                 style: AppTextStyles.cairo16Boldskip
-                    .copyWith(color: AppColors.mainColor, fontSize: 16.sp)),
+                    .copyWith(color: AppColors.mainColor, fontSize: 14.sp)),
           ),
         ],
       ),
       body: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 500),
         transitionBuilder: (Widget child, Animation<double> animation) {
           return FadeTransition(opacity: animation, child: child);
         },
@@ -121,26 +202,20 @@ class _DetailsScreenState extends State<DetailsScreen> {
     String setsDisplay = '';
     String repsDisplay = '';
 
-    // Determine how to display sets and reps based on conditions
     if (!hasSets && !hasReps) {
-      // If neither sets nor reps are present
       setsDisplay = '';
       repsDisplay = '';
     } else if (!hasSets && hasReps) {
-      // If sets are absent but reps are present
       setsDisplay = '';
       repsDisplay = item.repeats!;
     } else if (hasSets && !hasReps) {
-      // If sets are present but reps are absent
       setsDisplay = item.sets!;
       repsDisplay = 'reps';
     } else {
-      // If both sets and reps are present
       setsDisplay = item.sets!;
       repsDisplay = item.repeats!;
     }
 
-    // Add the word "sets" if it's not present in setsDisplay
     if (hasSets && !setsDisplay.toLowerCase().contains('set')) {
       setsDisplay = '${item.sets} sets';
     }
@@ -234,7 +309,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 width: double.infinity,
                 height: 32.h,
                 child: ElevatedButton(
-                  onPressed: _navigateToTimesUpScreen,
+                  onPressed: () => _navigateToTimesUpScreen(betweenSets: false),
                   style: ButtonStyle(
                     backgroundColor:
                         WidgetStateProperty.all(AppColors.mainColor),
@@ -263,18 +338,23 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       textDirection: TextDirection.ltr,
                       child: TextButton.icon(
                         onPressed: () {
-                          Navigator.pushReplacement(
-                            context,
-                            PageRouteBuilder(
-                              pageBuilder: (context, animation1, animation2) =>
-                                  DetailsScreen(
-                                currentIndex: index - 1,
-                                item: widget.item,
-                                length: widget.length,
+                          if (mounted) {
+                            Navigator.pushReplacement(
+                              context,
+                              PageRouteBuilder(
+                                pageBuilder:
+                                    (context, animation1, animation2) =>
+                                        DetailsScreen(
+                                  currentIndex: index - 1,
+                                  item: widget.item,
+                                  length: widget.length,
+                                  currentSet: _currentSet,
+                                  remainingSeconds: _remainingSeconds,
+                                ),
+                                transitionDuration: const Duration(seconds: 0),
                               ),
-                              transitionDuration: const Duration(seconds: 0),
-                            ),
-                          );
+                            );
+                          }
                         },
                         icon: Transform.flip(
                           filterQuality: FilterQuality.high,
@@ -300,19 +380,20 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 currentIndex: index + 1,
                                 item: widget.item,
                                 length: widget.length,
+                                currentSet: _currentSet,
+                                remainingSeconds: _remainingSeconds,
                               ),
                               transitionDuration: const Duration(seconds: 1),
                             ),
                           );
                         } else {
-                          HelperMethods.showCustomSnackBarSuccess(
-                              context, 'تم الانتهاء من تمارين اليوم');
-
                           // Navigate to home page when finished
-                          Navigator.pushNamedAndRemoveUntil(
-                              context,
-                              Routes.bottomNavBar,
-                              ModalRoute.withName(Routes.bottomNavBar));
+                          if (mounted) {
+                            Navigator.pushNamedAndRemoveUntil(
+                                context,
+                                Routes.bottomNavBar,
+                                ModalRoute.withName(Routes.bottomNavBar));
+                          }
                         }
                       },
                       icon: Image.asset(Assets.imagesArrowNext),
