@@ -116,9 +116,11 @@ class HomeScreen extends StatelessWidget {
                                     title: 'الماء',
                                   ),
                                   SizedBox(height: 15.h),
-                                  const BloodPressureWidgets(),
+                                  if (homeModel.data!.dietType == 'الضغط')
+                                    const BloodPressureWidgets(),
                                   SizedBox(height: 15.h),
-                                  const BloodSugerWidgets(),
+                                  if (homeModel.data!.dietType == 'السكر')
+                                    const BloodSugerWidgets(),
                                 ],
                               ),
                             );
