@@ -10,9 +10,9 @@ class DioHandler extends ApiServices {
   DioHandler() {
     BaseOptions baseOptions = BaseOptions(
       baseUrl: AppConstants.baseUrl,
-      receiveTimeout: const Duration(seconds: 20),
-      sendTimeout: const Duration(seconds: 20),
-      connectTimeout: const Duration(seconds: 20),
+      receiveTimeout: const Duration(seconds: 30),
+      sendTimeout: const Duration(seconds: 30),
+      connectTimeout: const Duration(seconds: 30),
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
