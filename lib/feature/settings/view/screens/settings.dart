@@ -78,8 +78,8 @@ class SettingsScreen extends StatelessWidget {
                     (await CacheHelper().getSecuredData(key: 'googleToken')) ==
                             null
                         ? Navigator.pushNamed(context, Routes.newPassword)
-                        : HelperMethods.showCustomSnackBarSuccess(
-                            context, 'هذه الخدمة غير متوفرة لهذا الحساب');
+                        : HelperMethods.showCustomSnackBarError(context,
+                            'لا يمكن تغيير كلمة المرور للبريد الالكتروني المسجل بجوجل');
                   },
                 ),
                 SizedBox(height: 16.h),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_offline/flutter_offline.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nourish_me/core/theme/app_text_styles.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../../core/helpers/app_constants.dart';
@@ -73,54 +74,65 @@ class DietsScreen extends StatelessWidget {
                         7,
                         (index) {
                           Day? currentDay = days[index];
-                          List<List<String>?> meals = [
-                            currentDay!.breakfast,
-                            currentDay.firstSnack == null
-                                ? []
-                                : currentDay.firstSnack!.split('+'),
-                            currentDay.lunch,
-                            currentDay.secondSnack == null
-                                ? []
-                                : currentDay.secondSnack!.split('+'),
-                            currentDay.dinner,
-                          ];
-                          return ListView.separated(
-                            itemBuilder: (context, itemIndex) {
-                              if (itemIndex == 0) {
-                                return DietsSeparator(whatToEat: whatToEat[0]);
-                              } else {
-                                return SizedBox(
-                                  child: IntrinsicHeight(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        VerticalDivider(
-                                          width: 10.w,
-                                          thickness: 2.w,
-                                          color: AppColors.dividerColor,
-                                        ),
-                                        SizedBox(width: 8.w),
-                                        DietsCard(
-                                          meals: meals,
-                                          index: itemIndex - 1,
-                                        ),
-                                      ],
-                                    ),
+                          List<List<String>?> meals = currentDay == null
+                              ? []
+                              : [
+                                  currentDay.breakfast,
+                                  currentDay.firstSnack == null
+                                      ? []
+                                      : currentDay.firstSnack!.split('+'),
+                                  currentDay.lunch,
+                                  currentDay.secondSnack == null
+                                      ? []
+                                      : currentDay.secondSnack!.split('+'),
+                                  currentDay.dinner,
+                                ];
+                          return meals.isEmpty
+                              ? Center(
+                                  child: Text(
+                                    'لا يوجد وجبات اليوم',
+                                    style: AppTextStyles.cairo24Boldmaincolor
+                                        .copyWith(color: Colors.black),
                                   ),
+                                )
+                              : ListView.separated(
+                                  itemBuilder: (context, itemIndex) {
+                                    if (itemIndex == 0) {
+                                      return DietsSeparator(
+                                          whatToEat: whatToEat[0]);
+                                    } else {
+                                      return SizedBox(
+                                        child: IntrinsicHeight(
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              VerticalDivider(
+                                                width: 10.w,
+                                                thickness: 2.w,
+                                                color: AppColors.dividerColor,
+                                              ),
+                                              SizedBox(width: 8.w),
+                                              DietsCard(
+                                                meals: meals,
+                                                index: itemIndex - 1,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                  },
+                                  separatorBuilder: (context, itemIndex) {
+                                    if (itemIndex == 0) {
+                                      return const SizedBox();
+                                    } else {
+                                      return DietsSeparator(
+                                          whatToEat: whatToEat[itemIndex]);
+                                    }
+                                  },
+                                  itemCount: 6,
                                 );
-                              }
-                            },
-                            separatorBuilder: (context, itemIndex) {
-                              if (itemIndex == 0) {
-                                return const SizedBox();
-                              } else {
-                                return DietsSeparator(
-                                    whatToEat: whatToEat[itemIndex]);
-                              }
-                            },
-                            itemCount: 6,
-                          );
                         },
                       ),
                     ),

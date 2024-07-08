@@ -47,6 +47,10 @@ class ErrorMessages {
       if (error == 'There Is No Diet Fit With This Information') {
         return 'لا يوجد نظام غذائي يتناسب مع هذه المعلومات';
       }
+      if (error ==
+          'You cannot reset your password because you signed up with Google') {
+        return 'لا يمكن تغيير كلمة المرور للبريد الالكتروني المسجل بجوجل';
+      }
     }
     if (error == null || error.isEmpty) {
       return 'عذرا يوجد خطأ ، حاول مرة أخري في وقت لاحق';
