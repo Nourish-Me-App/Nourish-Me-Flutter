@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_offline/flutter_offline.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:nourish_me/feature/home/view/widgets/blood_pressure_widgets.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../../core/helpers/app_constants.dart';
@@ -69,26 +70,32 @@ class HomeScreen extends StatelessWidget {
                                   SvgPicture.asset(Assets.svgsResultsResults),
                                   SizedBox(height: 32.h),
                                   CustomContainerUserInfo(
-                                    titleOne: '${homeModel.data!.ageInYears} years',
-                                    titleTwo: '${homeModel.data!.heightInCM} cm',
-                                    titleThree: '${homeModel.data!.weightInKG} kg',
-                                    svgPathOne: SvgPicture.asset(Assets.svgsResultsAge),
-                                    svgPathTwo: SvgPicture.asset(
-                                        Assets.svgsResultsGuidanceGuestHeightLimit),
-                                    svgPathThree: SvgPicture.asset(
-                                        Assets.svgsResultsIconParkOutlineWeight),
+                                    titleOne:
+                                        '${homeModel.data!.ageInYears} years',
+                                    titleTwo:
+                                        '${homeModel.data!.heightInCM} cm',
+                                    titleThree:
+                                        '${homeModel.data!.weightInKG} kg',
+                                    svgPathOne:
+                                        SvgPicture.asset(Assets.svgsResultsAge),
+                                    svgPathTwo: SvgPicture.asset(Assets
+                                        .svgsResultsGuidanceGuestHeightLimit),
+                                    svgPathThree: SvgPicture.asset(Assets
+                                        .svgsResultsIconParkOutlineWeight),
                                   ),
                                   SizedBox(height: 15.h),
                                   CustomContainer(
                                     title: 'السعرات الحرارية',
                                     svgPath: SvgPicture.asset(
                                         Assets.svgsResultsFluentMdl2Calories),
-                                    result: '${homeModel.data!.totalCalories} cal',
+                                    result:
+                                        '${homeModel.data!.totalCalories} cal',
                                   ),
                                   SizedBox(height: 15.h),
                                   CustomUserMass(
                                     title: 'مؤشر كتلة الجسم ',
-                                    svgPath: SvgPicture.asset(Assets.svgsResultsVector),
+                                    svgPath: SvgPicture.asset(
+                                        Assets.svgsResultsVector),
                                     resultOne: '${homeModel.data!.massIndex}',
                                     resultTwo: HelperMethods.calculateBMI(
                                         homeModel.data!.massIndex),
@@ -96,17 +103,19 @@ class HomeScreen extends StatelessWidget {
                                   SizedBox(height: 15.h),
                                   CustomContainer(
                                     result: '${homeModel.data!.dietType}',
-                                    svgPath: SvgPicture.asset(
-                                        Assets.svgsResultsFluentSpatulaSpoon16Regular),
+                                    svgPath: SvgPicture.asset(Assets
+                                        .svgsResultsFluentSpatulaSpoon16Regular),
                                     title: 'نوع النظام ',
                                   ),
                                   SizedBox(height: 15.h),
                                   CustomContainer(
                                     result: '${homeModel.data!.waterAmount}',
-                                    svgPath: SvgPicture.asset(Assets.svgsResultsWaterdrop),
+                                    svgPath: SvgPicture.asset(
+                                        Assets.svgsResultsWaterdrop),
                                     title: 'الماء',
                                   ),
-                                  SizedBox(height: 8.h),
+                                  SizedBox(height: 15.h),
+                                  const BloodPressureWidgets()
                                 ],
                               ),
                             );
