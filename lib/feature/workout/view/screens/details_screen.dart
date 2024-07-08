@@ -146,23 +146,26 @@ class _DetailsScreenState extends State<DetailsScreen> {
       setsDisplay = '${item.sets} sets';
     }
 
+    if (hasReps && !repsDisplay.toLowerCase().contains('rep')) {
+      repsDisplay = '${item.repeats} reps';
+    }
+
     return Center(
       key: ValueKey<int>(index),
       child: Column(
         children: [
-          const SizedBox(
-            height: 110,
-          ),
           SizedBox(
-              width: 378.w,
-              height: 200.h,
-              child: CachedNetworkImage(imageUrl: item.image!)),
-          SizedBox(height: 30.h),
+            height: 90.h,
+          ),
           Text(
             item.name!,
             style: AppTextStyles.cairo18BoldBlack
                 .copyWith(fontSize: 20.sp, fontWeight: FontWeight.w500),
           ),
+          SizedBox(
+              width: 378.w,
+              height: 200.h,
+              child: CachedNetworkImage(imageUrl: item.image!)),
           SizedBox(height: 30.h),
           if (setsDisplay.isNotEmpty && repsDisplay.isNotEmpty)
             Text(
@@ -179,6 +182,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
               repsDisplay,
               style: AppTextStyles.cairo18BoldBlack,
             ),
+        
           SizedBox(height: 20.h),
           if (repsDisplay.toLowerCase().contains('sec'))
             Column(
@@ -208,10 +212,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 ),
               ],
             ),
-          
-            SizedBox(
-              height: 20.h,
-            ),
+          SizedBox(
+            height: 20.h,
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 120),
             child: SizedBox(
@@ -220,8 +223,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
               child: ElevatedButton(
                 onPressed: _navigateToTimesUpScreen,
                 style: ButtonStyle(
-                  backgroundColor:
-                      WidgetStateProperty.all(AppColors.mainColor),
+                  backgroundColor: WidgetStateProperty.all(AppColors.mainColor),
                   shape: WidgetStateProperty.all(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
