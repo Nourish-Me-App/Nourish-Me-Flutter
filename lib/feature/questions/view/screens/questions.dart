@@ -19,7 +19,7 @@ class _QuestionsState extends State<Questions> {
     super.initState();
     questionsUICubit = BlocProvider.of<QuestionsUICubit>(context);
     questionsCubit = BlocProvider.of<QuestionsCubit>(context);
-    questionsCubit.fetchQuestionsAnswers(AppConstants.questions);
+    questionsCubit.fetchQuestionsAnswers(AppConstants.questions,loginType:  widget.loginType);
   }
 
   @override
@@ -115,6 +115,7 @@ class _QuestionsState extends State<Questions> {
                 );
               } else if (state is QuestionsFailureState) {
                 return OnQuestionsError(
+                  loginType:widget.loginType! ,
                   questionsCubit: questionsCubit,
                   title: ErrorMessages.errorMessage(state.error),
                 );
