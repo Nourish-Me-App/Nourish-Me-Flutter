@@ -9,25 +9,24 @@ class ExceptionHelperMethods {
   static handleDioExceptionsTypes(DioException e) {
     switch (e.type) {
       case DioExceptionType.connectionTimeout:
-        throwApiException();
+        throwApiException(noInternetErrorMessage);
       case DioExceptionType.sendTimeout:
-        throwApiException();
+        throwApiException(noInternetErrorMessage);
       case DioExceptionType.receiveTimeout:
-        throwApiException();
+        throwApiException(noInternetErrorMessage);
       case DioExceptionType.badCertificate:
-        throwApiException();
+        throwApiException(connectionErrorMessage);
       case DioExceptionType.cancel:
-        throwApiException();
+        throwApiException(connectionErrorMessage);
       case DioExceptionType.unknown:
-        throwApiException();
+        throwApiException(connectionErrorMessage);
       case DioExceptionType.badResponse:
         badResponseErrorHandle(e);
       case DioExceptionType.connectionError:
-        throw ApiException(
-          errorModel: ErrorModel.fromJson(noInternetErrorMessage),
-        );
+        throwApiException(noInternetErrorMessage);
+
       default:
-        throwApiException();
+        throwApiException(connectionErrorMessage);
     }
   }
 
@@ -72,16 +71,16 @@ class ExceptionHelperMethods {
           errorModel: ErrorModel.fromJson(e.response!.data),
         );
       } else {
-        throwApiException();
+        throwApiException(connectionErrorMessage);
       }
     } else {
-      throwApiException();
+      throwApiException(connectionErrorMessage);
     }
   }
 
-  static void throwApiException() {
+  static void throwApiException(Map<String, dynamic> error) {
     throw ApiException(
-      errorModel: ErrorModel.fromJson(connectionErrorMessage),
+      errorModel: ErrorModel.fromJson(error),
     );
   }
 
@@ -89,5 +88,5 @@ class ExceptionHelperMethods {
       {'message': 'حاول مرة أخري في وقت لاحق'};
 
   static Map<String, dynamic> get noInternetErrorMessage =>
-      {'message': 'لا يوجد إتصال بالإنترنت أو يوجد خطأ في السيرفر'};
+      {'message': 'لا يوجد إتصال بالإنترنت أو الاتصال ضعيف'};
 }

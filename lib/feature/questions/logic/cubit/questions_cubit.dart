@@ -36,7 +36,9 @@ class QuestionsCubit extends Cubit<QuestionsState> {
                           ? []
                           : answerThree
                   : answerThree!.isEmpty
-                      ? [...questionThreeAnswersList]
+                      ? questionThreeAnswersList.length < 2
+                          ? questionThreeAnswersList[0]
+                          : [...questionThreeAnswersList]
                       : [answerThree, ...questionThreeAnswersList]
             },
             {"question_title": "Water Amount", "answer_id": "$answerFour"},
@@ -55,7 +57,9 @@ class QuestionsCubit extends Cubit<QuestionsState> {
                           ? []
                           : answerThree
                   : answerThree!.isEmpty
-                      ? [...questionThreeAnswersList]
+                      ? questionThreeAnswersList.length < 2
+                          ? questionThreeAnswersList[0]
+                          : [...questionThreeAnswersList]
                       : [answerThree, ...questionThreeAnswersList]
             },
             {"question_title": "Water Amount", "answer_id": "$answerFour"},

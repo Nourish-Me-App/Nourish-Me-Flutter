@@ -12,8 +12,6 @@ class HomeModel {
     statusCode = json['status_code'];
     data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
-
-
 }
 
 class Data {
@@ -24,15 +22,18 @@ class Data {
   String? massIndex;
   String? dietType;
   String? waterAmount;
+  List<String?>? disease;
 
-  Data(
-      {this.weightInKG,
-      this.heightInCM,
-      this.ageInYears,
-      this.totalCalories,
-      this.massIndex,
-      this.dietType,
-      this.waterAmount});
+  Data({
+    this.weightInKG,
+    this.heightInCM,
+    this.ageInYears,
+    this.totalCalories,
+    this.massIndex,
+    this.dietType,
+    this.waterAmount,
+    this.disease,
+  });
 
   Data.fromJson(Map<String, dynamic> json) {
     weightInKG = json['weight_in_KG'];
@@ -42,8 +43,6 @@ class Data {
     massIndex = json['mass_index'];
     dietType = json['diet_type'];
     waterAmount = json['water_amount'];
+    disease = json['disease'];
   }
-
- 
 }
-

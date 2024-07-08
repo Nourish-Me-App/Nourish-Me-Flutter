@@ -2,13 +2,13 @@ import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nourish_me/core/helpers/helper_methods.dart';
-import 'package:nourish_me/core/imports/login_imports.dart';
 import 'package:nourish_me/core/routing/routes.dart';
 import 'package:nourish_me/feature/workout/data/model/workout_model.dart';
 import 'package:nourish_me/feature/workout/view/screens/details_screen.dart';
 import '../../../../core/helpers/app_images.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
+import '../../../../core/widgets/custom_button.dart';
 
 class TimesUpScreen extends StatefulWidget {
   const TimesUpScreen({

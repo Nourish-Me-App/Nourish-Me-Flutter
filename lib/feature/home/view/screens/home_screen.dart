@@ -116,15 +116,7 @@ class HomeScreen extends StatelessWidget {
                                     title: 'الماء',
                                   ),
                                   SizedBox(height: 15.h),
-                                  if (homeModel.data!.dietType == 'الضغط' ||
-                                      homeModel.data!.dietType ==
-                                          'الضغط والسكر')
-                                    const BloodPressureWidgets(),
-                                  SizedBox(height: 15.h),
-                                  if (homeModel.data!.dietType == 'السكر' ||
-                                      homeModel.data!.dietType ==
-                                          'الضغط والسكر')
-                                    const BloodSugerWidgets(),
+                                  getAdvices(homeModel),
                                 ],
                               ),
                             );
@@ -141,6 +133,36 @@ class HomeScreen extends StatelessWidget {
         );
       },
     );
+  }
+
+  Widget getAdvices(HomeModel homeModel) {
+    if (homeModel.data!.disease == null) {
+      return Container();
+    } else {
+      if (homeModel.data!.disease!.contains('ضغط') &&
+          homeModel.data!.disease!.contains('سكر')) {
+        return Column(
+          children: [
+            const BloodPressureWidgets(),
+            SizedBox(height: 15.h),
+            const BloodSugerWidgets(),
+            SizedBox(height: 15.h),
+          ],
+        );
+      }
+      if (homeModel.data!.disease!.contains('ضغط')) {
+        return Column(
+          children: [const BloodPressureWidgets(), SizedBox(height: 15.h)],
+        );
+      }
+      if (homeModel.data!.disease!.contains('سكر')) {
+        return Column(
+          children: [const BloodSugerWidgets(), SizedBox(height: 15.h)],
+        );
+      } else {
+        return Container();
+      }
+    }
   }
 
   PreferredSizeWidget _buildShimmerAppBar() {
