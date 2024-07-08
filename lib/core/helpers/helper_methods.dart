@@ -256,7 +256,7 @@ class HelperMethods {
     if (meal.contains('قهوة') || meal.contains('قهوه')) {
       return Assets.imagesMealsCoffee;
     }
-    if (meal.contains('فاصولياء')) {
+    if (meal.contains('فاصولياء') || meal.contains('فاصوليا')) {
       return Assets.imagesMealsFasolia;
     }
     if (meal.contains('شوربة') || meal.contains('شوربه')) {
