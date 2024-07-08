@@ -83,11 +83,15 @@ class QuestionsCubit extends Cubit<QuestionsState> {
   }
 
   Future<void> fetchQuestionsAnswers(
-    String path,
+    String path,{
+    String? loginType,
+  }
   ) async {
     emit(QuestionsLoadingState());
     var response = await questionsAndAnswersRepo.getQuestionsAnswers(
-        path, (await CacheHelper().getSecuredData(key: AppConstants.token))!);
+        path, loginType == 'googleLogin'
+            ? (await CacheHelper().getSecuredData(key: 'googleToken'))!
+            : (await CacheHelper().getSecuredData(key: AppConstants.token))!);
 
     response.fold((error) {
       emit(QuestionsFailureState(error));

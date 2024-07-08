@@ -10,11 +10,12 @@ class OnQuestionsError extends StatelessWidget {
   const OnQuestionsError({
     super.key,
     required this.questionsCubit,
-    required this.title,
+    required this.title, required this.loginType,
   });
 
   final QuestionsCubit questionsCubit;
   final String title;
+  final String loginType;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +42,7 @@ class OnQuestionsError extends StatelessWidget {
               buttonText: 'إعادة تحميل',
               buttonAction: () async {
                 await questionsCubit
-                    .fetchQuestionsAnswers(AppConstants.questions);
+                    .fetchQuestionsAnswers(AppConstants.questions,loginType:  loginType);
               },
               buttonStyle: AppTextStyles.cairo16BoldWhite,
             ),
