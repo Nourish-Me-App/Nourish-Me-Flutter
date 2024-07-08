@@ -4,6 +4,7 @@ import 'package:flutter_offline/flutter_offline.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:nourish_me/feature/home/view/widgets/blood_pressure_widgets.dart';
+import 'package:nourish_me/feature/home/view/widgets/blood_suger_widgets.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../../core/helpers/app_constants.dart';
@@ -115,7 +116,9 @@ class HomeScreen extends StatelessWidget {
                                     title: 'الماء',
                                   ),
                                   SizedBox(height: 15.h),
-                                  const BloodPressureWidgets()
+                                  const BloodPressureWidgets(),
+                                  SizedBox(height: 15.h),
+                                  const BloodSugerWidgets(),
                                 ],
                               ),
                             );
