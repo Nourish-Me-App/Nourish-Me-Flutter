@@ -21,6 +21,10 @@ class QuestionsUICubit extends Cubit<QuestionsUIState> {
     false,
     false,
   ];
+  List continueQuestionThreeValue3 = [
+    false,
+    false,
+  ];
   double questionNumber = 0;
   bool questionOneValidate = false,
       questionTwoValidate = false,
@@ -57,6 +61,13 @@ class QuestionsUICubit extends Cubit<QuestionsUIState> {
     ];
   }
 
+  void resetContinueQuestionThreeValueList3() {
+    continueQuestionThreeValue3 = [
+      false,
+      false,
+    ];
+  }
+
   void onChangedValue({
     dynamic value,
     int? questionNum,
@@ -85,7 +96,9 @@ class QuestionsUICubit extends Cubit<QuestionsUIState> {
       case 6:
         questionThreeValue == 0
             ? continueQuestionThreeValue[index!] = value!
-            : continueQuestionThreeValue2[index!] = value!;
+            : questionThreeValue == 1
+                ? continueQuestionThreeValue2[index!] = value!
+                : continueQuestionThreeValue3[index!] = value!;
         emit(RadioValueChosed());
     }
   }
@@ -106,7 +119,9 @@ class QuestionsUICubit extends Cubit<QuestionsUIState> {
     } else {
       return questionThreeValue == 0
           ? continueQuestionThreeValue
-          : continueQuestionThreeValue2;
+          : questionThreeValue == 1
+              ? continueQuestionThreeValue2
+              : continueQuestionThreeValue3;
     }
   }
 

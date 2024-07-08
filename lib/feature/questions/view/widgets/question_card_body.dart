@@ -34,10 +34,12 @@ class CardBody extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Text(
-              question,
-              style: AppTextStyles.cairo16SemiBoldBlack,
-              textAlign: TextAlign.right,
+            Expanded(
+              child: Text(
+                question,
+                style: AppTextStyles.cairo16SemiBoldBlack,
+                textAlign: TextAlign.right,
+              ),
             ),
             SizedBox(width: 8.w),
             Container(
@@ -67,16 +69,22 @@ class CardBody extends StatelessWidget {
                   answersNumber!,
                   (index) => CustomRadio(
                     isDisabled: answer[index].answer == 'زيادة الوزن'
-                        ? CacheHelper().getData(key: 'answer') == 'سمنة'
+                        ? CacheHelper().getData(key: 'answer') == 'سمنة' ||
+                                CacheHelper().getData(key: 'answer') ==
+                                    'لا أعاني'
                             ? true
                             : false
                         : answer[index].answer == 'خسارة الوزن'
-                            ? CacheHelper().getData(key: 'answer') == 'نحافة'
+                            ? CacheHelper().getData(key: 'answer') == 'نحافة' ||
+                                    CacheHelper().getData(key: 'answer') ==
+                                        'لا أعاني'
                                 ? true
                                 : false
                             : answer[index].answer == 'ثبات الوزن'
                                 ? CacheHelper().getData(key: 'answer2') ==
-                                        'ثبات الوزن'
+                                            'ثبات الوزن' ||
+                                        CacheHelper().getData(key: 'answer') ==
+                                            'نحافة'
                                     ? true
                                     : false
                                 : false,
@@ -100,6 +108,7 @@ class CardBody extends StatelessWidget {
                           questionsUICubit.questionThreeValue == 1) {
                         questionsCubit.resetQuestionThreeAnswersList();
                         questionsUICubit.resetContinueQuestionThreeValueList();
+                        questionsUICubit.resetContinueQuestionThreeValueList3();
                         questionsCubit.answerValue(4, null);
                         questionsUICubit.resetQuestionFiveValue();
                         CacheHelper().removeData(key: 'answer2');
@@ -108,8 +117,18 @@ class CardBody extends StatelessWidget {
                       if (questionsUICubit.questionNumber == 2 &&
                           questionsUICubit.questionThreeValue == 0) {
                         questionsUICubit.resetContinueQuestionThreeValueList2();
+                        questionsUICubit.resetContinueQuestionThreeValueList3();
                         questionsCubit.resetQuestionThreeAnswersList();
                         questionsCubit.answerValue(4, null);
+                        questionsUICubit.resetQuestionFiveValue();
+                      }
+                      if (questionsUICubit.questionNumber == 2 &&
+                          questionsUICubit.questionThreeValue == 2) {
+                        questionsUICubit.resetContinueQuestionThreeValueList();
+                        questionsUICubit.resetContinueQuestionThreeValueList2();
+                        questionsCubit.resetQuestionThreeAnswersList();
+                        questionsCubit.answerValue(4, null);
+                        CacheHelper().removeData(key: 'answer2');
                         questionsUICubit.resetQuestionFiveValue();
                       }
 

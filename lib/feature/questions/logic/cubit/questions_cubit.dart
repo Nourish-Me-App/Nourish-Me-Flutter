@@ -30,8 +30,14 @@ class QuestionsCubit extends Cubit<QuestionsState> {
             {
               "question_title": "Disease",
               "answer_id": questionThreeAnswersList.isEmpty
-                  ? answerThree
-                  : [answerThree, ...questionThreeAnswersList]
+                  ? answerThree == null
+                      ? null
+                      : answerThree!.isEmpty
+                          ? []
+                          : answerThree
+                  : answerThree!.isEmpty
+                      ? [...questionThreeAnswersList]
+                      : [answerThree, ...questionThreeAnswersList]
             },
             {"question_title": "Water Amount", "answer_id": "$answerFour"},
             {"question_title": "Goal", "answer_id": "$answerFive"}
@@ -43,8 +49,14 @@ class QuestionsCubit extends Cubit<QuestionsState> {
             {
               "question_title": "Disease",
               "answer_id": questionThreeAnswersList.isEmpty
-                  ? answerThree
-                  : [answerThree, ...questionThreeAnswersList]
+                  ? answerThree == null
+                      ? null
+                      : answerThree!.isEmpty
+                          ? []
+                          : answerThree
+                  : answerThree!.isEmpty
+                      ? [...questionThreeAnswersList]
+                      : [answerThree, ...questionThreeAnswersList]
             },
             {"question_title": "Water Amount", "answer_id": "$answerFour"},
             {"question_title": "Goal", "answer_id": "$answerFive"}
@@ -83,13 +95,13 @@ class QuestionsCubit extends Cubit<QuestionsState> {
   }
 
   Future<void> fetchQuestionsAnswers(
-    String path,{
+    String path, {
     String? loginType,
-  }
-  ) async {
+  }) async {
     emit(QuestionsLoadingState());
     var response = await questionsAndAnswersRepo.getQuestionsAnswers(
-        path, loginType == 'googleLogin'
+        path,
+        loginType == 'googleLogin'
             ? (await CacheHelper().getSecuredData(key: 'googleToken'))!
             : (await CacheHelper().getSecuredData(key: AppConstants.token))!);
 
