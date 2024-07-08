@@ -156,8 +156,10 @@ class SettingHeader extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
+                    softWrap: true,
                     CacheHelper().getData(key: 'name'),
                     style: AppTextStyles.cairo18BoldBlack,
+                    overflow: TextOverflow.ellipsis,
                   ),
                   Text(
                     softWrap: true,

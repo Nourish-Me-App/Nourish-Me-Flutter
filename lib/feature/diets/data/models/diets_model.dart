@@ -62,25 +62,39 @@ class Meals {
   Meals.fromJson(Map<String, dynamic> json) {
     saturday = json['Saturday'] != null
         ? Day.fromJson(json['Saturday'])
-        : Day.fromJson(json['saturday']);
+        : json['saturday'] == null
+            ? null
+            : Day.fromJson(json['saturday']);
     sunday = json['Sunday'] != null
         ? Day.fromJson(json['Sunday'])
-        : Day.fromJson(json['sunday']);
+        : json['sunday'] == null
+            ? null
+            : Day.fromJson(json['sunday']);
     monday = json['Monday'] != null
         ? Day.fromJson(json['Monday'])
-        : Day.fromJson(json['monday']);
+        : json['monday'] == null
+            ? null
+            : Day.fromJson(json['monday']);
     tuesday = json['Tuesday'] != null
         ? Day.fromJson(json['Tuesday'])
-        : Day.fromJson(json['tuesday']);
+        : json['tuesday'] == null
+            ? null
+            : Day.fromJson(json['tuesday']);
     wednesday = json['Wednesday'] != null
         ? Day.fromJson(json['Wednesday'])
-        : Day.fromJson(json['wednesday']);
+        : json['wednesday'] == null
+            ? null
+            : Day.fromJson(json['wednesday']);
     thursday = json['Thursday'] != null
         ? Day.fromJson(json['Thursday'])
-        : Day.fromJson(json['thursday']);
+        : json['thursday'] == null
+            ? null
+            : Day.fromJson(json['thursday']);
     friday = json['Friday'] != null
         ? Day.fromJson(json['Friday'])
-        : Day.fromJson(json['friday']);
+        : json['friday'] == null
+            ? null
+            : Day.fromJson(json['friday']);
   }
 }
 

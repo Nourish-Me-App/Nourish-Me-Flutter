@@ -94,7 +94,7 @@ class AppRoutes {
         );
       case Routes.onBoarding:
         return PageRouteBuilder(
-          transitionDuration: const Duration(milliseconds: 1500),
+          transitionDuration: const Duration(milliseconds: 1100),
           pageBuilder: (context, animation, secondaryAnimation) =>
               BlocProvider<OnBoardingCubit>(
             create: (context) => OnBoardingCubit(),
@@ -120,7 +120,8 @@ class AppRoutes {
             create: (context) => DataScreenCubit(
               ContinueRegisterRepo(dioHandler),
             ),
-            child: ContinueRegisterScreen(loginType: args == null ? null : args as String),
+            child: ContinueRegisterScreen(
+                loginType: args == null ? null : args as String),
           ),
         );
       case Routes.home:
