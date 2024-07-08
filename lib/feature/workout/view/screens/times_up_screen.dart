@@ -5,6 +5,7 @@ import 'package:nourish_me/core/routing/routes.dart';
 import 'package:nourish_me/feature/workout/data/model/workout_model.dart';
 import 'package:nourish_me/feature/workout/view/screens/details_screen.dart';
 import '../../../../core/helpers/app_images.dart';
+import '../../../../core/helpers/helper_methods.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 
@@ -63,7 +64,7 @@ class _TimesUpScreenState extends State<TimesUpScreen> {
             CircularCountDownTimer(
                 width: 75.w,
                 height: 75.h,
-                duration: widget.rest,
+                duration: widget.rest < 30 ? 30 : widget.rest,
                 fillColor: AppColors.mainColor,
                 ringColor: AppColors.skipButtonColor,
                 autoStart: true,
@@ -105,6 +106,9 @@ class _TimesUpScreenState extends State<TimesUpScreen> {
                           ),
                         );
                       } else {
+                        HelperMethods.showCustomSnackBarSuccess(
+                            context, 'تم الانتهاء من تمارين اليوم');
+
                         // Navigate to home page
                         Navigator.pushNamedAndRemoveUntil(
                           context,

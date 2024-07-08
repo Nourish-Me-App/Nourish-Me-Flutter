@@ -33,6 +33,8 @@ void main() async {
       );
     },
   );
-
-  runApp(const NourishMe());
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
+    runApp(const NourishMe());
+  });
 }

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nourish_me/core/helpers/helper_methods.dart';
 import 'package:nourish_me/core/routing/routes.dart';
 import 'package:nourish_me/core/theme/app_colors.dart';
 import 'package:nourish_me/feature/workout/data/model/workout_model.dart';
@@ -99,17 +100,15 @@ class _DetailsScreenState extends State<DetailsScreen> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: AnimatedSwitcher(
-          duration: const Duration(milliseconds: 300),
-          transitionBuilder: (Widget child, Animation<double> animation) {
-            return FadeTransition(opacity: animation, child: child);
-          },
-          child: _buildContent(
-            widget.currentIndex,
-            widget.item[widget.currentIndex],
-            widget.length,
-          ),
+      body: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 300),
+        transitionBuilder: (Widget child, Animation<double> animation) {
+          return FadeTransition(opacity: animation, child: child);
+        },
+        child: _buildContent(
+          widget.currentIndex,
+          widget.item[widget.currentIndex],
+          widget.length,
         ),
       ),
     );
@@ -147,168 +146,187 @@ class _DetailsScreenState extends State<DetailsScreen> {
     }
 
     if (hasReps && !repsDisplay.toLowerCase().contains('rep')) {
-      repsDisplay = '${item.repeats} reps';
+      repsDisplay.toLowerCase().contains('sec') ||
+              repsDisplay.toLowerCase().contains('min')
+          ? repsDisplay = '${item.repeats}'
+          : repsDisplay = '${item.repeats} reps';
     }
 
-    return Center(
-      key: ValueKey<int>(index),
-      child: Column(
-        children: [
-          SizedBox(
-            height: 90.h,
-          ),
-          Text(
-            item.name!,
-            style: AppTextStyles.cairo18BoldBlack
-                .copyWith(fontSize: 20.sp, fontWeight: FontWeight.w500),
-          ),
-          SizedBox(
-              width: 378.w,
-              height: 200.h,
-              child: CachedNetworkImage(imageUrl: item.image!)),
-          SizedBox(height: 30.h),
-          if (setsDisplay.isNotEmpty && repsDisplay.isNotEmpty)
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 24.h),
+      child: Center(
+        key: ValueKey<int>(index),
+        child: Column(
+          children: [
             Text(
-              "$setsDisplay - $repsDisplay",
-              style: AppTextStyles.cairo18BoldBlack,
+              item.name!,
+              style: AppTextStyles.cairo18BoldBlack
+                  .copyWith(fontSize: 20.sp, fontWeight: FontWeight.w500),
             ),
-          if (setsDisplay.isNotEmpty && repsDisplay.isEmpty)
-            Text(
-              setsDisplay,
-              style: AppTextStyles.cairo18BoldBlack,
-            ),
-          if (setsDisplay.isEmpty && repsDisplay.isNotEmpty)
-            Text(
-              repsDisplay,
-              style: AppTextStyles.cairo18BoldBlack,
-            ),
-        
-          SizedBox(height: 20.h),
-          if (repsDisplay.toLowerCase().contains('sec'))
-            Column(
-              children: [
-                Text(
-                  '$_remainingSeconds sec',
-                  style: AppTextStyles.cairo18BoldBlack,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    IconButton(
-                      icon: const Icon(Icons.play_arrow),
-                      onPressed: () {
-                        _startCountdown(repsDisplay, fromPlayButton: true);
-                      },
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.pause),
-                      onPressed: _pauseCountdown,
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.stop),
-                      onPressed: _stopCountdown,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          SizedBox(
-            height: 20.h,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 120),
-            child: SizedBox(
-              width: double.infinity,
-              height: 32,
-              child: ElevatedButton(
-                onPressed: _navigateToTimesUpScreen,
-                style: ButtonStyle(
-                  backgroundColor: WidgetStateProperty.all(AppColors.mainColor),
-                  shape: WidgetStateProperty.all(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
+            repsDisplay.toLowerCase().contains('sec')
+                ? SizedBox(height: 76.h)
+                : SizedBox(height: 96.h),
+            SizedBox(
+                width: 378.w,
+                height: 200.h,
+                child: CachedNetworkImage(imageUrl: item.image!)),
+            repsDisplay.toLowerCase().contains('sec')
+                ? SizedBox(height: 52.h)
+                : SizedBox(height: 64.h),
+            if (setsDisplay.isNotEmpty && repsDisplay.isNotEmpty)
+              Text(
+                "$setsDisplay - $repsDisplay",
+                style: AppTextStyles.cairo18BoldBlack,
+              ),
+            if (setsDisplay.isNotEmpty && repsDisplay.isEmpty)
+              Text(
+                setsDisplay,
+                style: AppTextStyles.cairo18BoldBlack,
+              ),
+            if (setsDisplay.isEmpty && repsDisplay.isNotEmpty)
+              Text(
+                repsDisplay,
+                style: AppTextStyles.cairo18BoldBlack,
+              ),
+            SizedBox(height: 32.h),
+            if (repsDisplay.toLowerCase().contains('sec'))
+              Column(
+                children: [
+                  Text(
+                    '$_remainingSeconds sec',
+                    style: AppTextStyles.cairo18BoldBlack,
                   ),
-                  elevation: WidgetStateProperty.all(0),
-                ),
-                child: Text(
-                  'انهاء',
-                  style: AppTextStyles.cairosemibold14white,
+                  SizedBox(height: 16.h),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      IconButton(
+                        icon: Icon(
+                          Icons.play_arrow,
+                          size: 36.r,
+                        ),
+                        onPressed: () {
+                          _startCountdown(repsDisplay, fromPlayButton: true);
+                        },
+                      ),
+                      IconButton(
+                        icon: Icon(
+                          Icons.pause,
+                          size: 36.r,
+                        ),
+                        onPressed: _pauseCountdown,
+                      ),
+                      IconButton(
+                        icon: Icon(
+                          Icons.stop,
+                          size: 36.r,
+                        ),
+                        onPressed: _stopCountdown,
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 24.h),
+                ],
+              ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 120.w),
+              child: SizedBox(
+                width: double.infinity,
+                height: 32.h,
+                child: ElevatedButton(
+                  onPressed: _navigateToTimesUpScreen,
+                  style: ButtonStyle(
+                    backgroundColor:
+                        WidgetStateProperty.all(AppColors.mainColor),
+                    shape: WidgetStateProperty.all(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    elevation: WidgetStateProperty.all(0),
+                  ),
+                  child: Text(
+                    'انهاء',
+                    style: AppTextStyles.cairosemibold14white,
+                  ),
                 ),
               ),
             ),
-          ),
-          SizedBox(height: 60.h),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 25.h),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                if (index > 0)
+            const Spacer(),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 25.h),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  if (index > 0)
+                    Directionality(
+                      textDirection: TextDirection.ltr,
+                      child: TextButton.icon(
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                            context,
+                            PageRouteBuilder(
+                              pageBuilder: (context, animation1, animation2) =>
+                                  DetailsScreen(
+                                currentIndex: index - 1,
+                                item: widget.item,
+                                length: widget.length,
+                              ),
+                              transitionDuration: const Duration(seconds: 0),
+                            ),
+                          );
+                        },
+                        icon: Transform.flip(
+                          filterQuality: FilterQuality.high,
+                          flipX: true,
+                          child: Image.asset(Assets.imagesArrowNext),
+                        ),
+                        label: Text(
+                          'السابق',
+                          style: AppTextStyles.cairo16Boldskip,
+                        ),
+                      ),
+                    ),
                   Directionality(
-                    textDirection: TextDirection.ltr,
+                    textDirection: TextDirection.rtl,
                     child: TextButton.icon(
                       onPressed: () {
-                        Navigator.pushReplacement(
-                          context,
-                          PageRouteBuilder(
-                            pageBuilder: (context, animation1, animation2) =>
-                                DetailsScreen(
-                              currentIndex: index - 1,
-                              item: widget.item,
-                              length: widget.length,
+                        if (index < widget.length - 1) {
+                          Navigator.pushReplacement(
+                            context,
+                            PageRouteBuilder(
+                              pageBuilder: (context, animation1, animation2) =>
+                                  DetailsScreen(
+                                currentIndex: index + 1,
+                                item: widget.item,
+                                length: widget.length,
+                              ),
+                              transitionDuration: const Duration(seconds: 1),
                             ),
-                            transitionDuration: const Duration(seconds: 0),
-                          ),
-                        );
+                          );
+                        } else {
+                          HelperMethods.showCustomSnackBarSuccess(
+                              context, 'تم الانتهاء من تمارين اليوم');
+
+                          // Navigate to home page when finished
+                          Navigator.pushNamedAndRemoveUntil(
+                              context,
+                              Routes.bottomNavBar,
+                              ModalRoute.withName(Routes.bottomNavBar));
+                        }
                       },
-                      icon: Transform.flip(
-                        filterQuality: FilterQuality.high,
-                        flipX: true,
-                        child: Image.asset(Assets.imagesArrowNext),
-                      ),
+                      icon: Image.asset(Assets.imagesArrowNext),
                       label: Text(
-                        'السابق',
+                        'تخطي',
                         style: AppTextStyles.cairo16Boldskip,
                       ),
                     ),
                   ),
-                Directionality(
-                  textDirection: TextDirection.rtl,
-                  child: TextButton.icon(
-                    onPressed: () {
-                      if (index < widget.length - 1) {
-                        Navigator.pushReplacement(
-                          context,
-                          PageRouteBuilder(
-                            pageBuilder: (context, animation1, animation2) =>
-                                DetailsScreen(
-                              currentIndex: index + 1,
-                              item: widget.item,
-                              length: widget.length,
-                            ),
-                            transitionDuration: const Duration(seconds: 1),
-                          ),
-                        );
-                      } else {
-                        // Navigate to home page when finished
-                        Navigator.pushNamedAndRemoveUntil(
-                            context,
-                            Routes.bottomNavBar,
-                            ModalRoute.withName(Routes.bottomNavBar));
-                      }
-                    },
-                    icon: Image.asset(Assets.imagesArrowNext),
-                    label: Text(
-                      'تخطي',
-                      style: AppTextStyles.cairo16Boldskip,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          )
-        ],
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
