@@ -72,7 +72,17 @@ class _TimesUpScreenState extends State<TimesUpScreen> {
                 textStyle: AppTextStyles.cairo18BoldBlack.copyWith(
                   fontSize: 20.sp,
                   fontWeight: FontWeight.w600,
-                )),
+                ),
+                onComplete: () => Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DetailsScreen(
+                          currentIndex: widget.currentIndex + 1,
+                          item: widget.item,
+                          length: widget.item.length,
+                        ),
+                      ),
+                    )),
             SizedBox(
               height: 32.h,
             ),
