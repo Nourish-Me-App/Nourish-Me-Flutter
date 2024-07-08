@@ -387,9 +387,6 @@ class _DetailsScreenState extends State<DetailsScreen>
                             ),
                           );
                         } else {
-                          HelperMethods.showCustomSnackBarSuccess(
-                              context, 'تم الانتهاء من تمارين اليوم');
-
                           // Navigate to home page when finished
                           if (mounted) {
                             Navigator.pushNamedAndRemoveUntil(

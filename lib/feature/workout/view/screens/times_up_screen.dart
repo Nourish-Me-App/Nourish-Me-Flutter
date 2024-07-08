@@ -2,6 +2,7 @@ import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nourish_me/core/helpers/helper_methods.dart';
+import 'package:nourish_me/core/imports/login_imports.dart';
 import 'package:nourish_me/core/routing/routes.dart';
 import 'package:nourish_me/feature/workout/data/model/workout_model.dart';
 import 'package:nourish_me/feature/workout/view/screens/details_screen.dart';
@@ -54,7 +55,7 @@ class _TimesUpScreenState extends State<TimesUpScreen> {
         ),
       );
     } else {
-      // Navigate to the next workout
+      // Navigate to the next workout or completion message
       if (widget.currentIndex < widget.item.length - 1) {
         Navigator.pushReplacement(
           context,
@@ -71,13 +72,13 @@ class _TimesUpScreenState extends State<TimesUpScreen> {
           ),
         );
       } else {
-        // If it's the last workout, navigate to the home screen or show a completion message
+        // If it's the last workout, show completion message and navigate to results
         HelperMethods.showCustomSnackBarSuccess(
-            context, 'تم الانتهاء من تمارين اليوم');
+            context, 'تم الانتهاء من تمارين اليوم ');
         Navigator.pushNamedAndRemoveUntil(
           context,
           Routes.bottomNavBar,
-          ModalRoute.withName(Routes.bottomNavBar),
+          (Route<dynamic> route) => false,
         );
       }
     }
@@ -85,8 +86,8 @@ class _TimesUpScreenState extends State<TimesUpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final bool isLastWorkout = widget.currentIndex == widget.item.length - 1;
     return Scaffold(
-      appBar: AppBar(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -106,9 +107,11 @@ class _TimesUpScreenState extends State<TimesUpScreen> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 32.w),
               child: Text(
-                widget.betweenSets
-                    ? 'استرح الان وستبدء المجموعه التالية خلال ثواني'
-                    : 'استرح الان وسيبدء التمرين التالي في غضون بضع ثواني ',
+                isLastWorkout
+                    ? 'تم الانتهاء من تمارين اليوم '
+                    : widget.betweenSets
+                        ? 'استرح الان وستبدء المجموعه التالية خلال ثواني'
+                        : 'استرح الان وسيبدء التمرين التالي في غضون بضع ثواني ',
                 textAlign: TextAlign.center,
                 style: AppTextStyles.cairo18BoldBlack.copyWith(
                   fontSize: 16.sp,
@@ -119,40 +122,40 @@ class _TimesUpScreenState extends State<TimesUpScreen> {
             SizedBox(
               height: 28.h,
             ),
-            CircularCountDownTimer(
-              width: 75.w,
-              height: 75.h,
-              duration: widget.rest < 30 ? 30 : widget.rest,
-              fillColor: AppColors.mainColor,
-              ringColor: AppColors.skipButtonColor,
-              autoStart: true,
-              controller: _controller,
-              isReverse: true,
-              textStyle: AppTextStyles.cairo18BoldBlack.copyWith(
-                fontSize: 20.sp,
-                fontWeight: FontWeight.w600,
+            if (!isLastWorkout)
+              CircularCountDownTimer(
+                width: 75.w,
+                height: 75.h,
+                duration: widget.rest < 30 ? 30 : widget.rest,
+                fillColor: AppColors.mainColor,
+                ringColor: AppColors.skipButtonColor,
+                autoStart: true,
+                controller: _controller,
+                isReverse: true,
+                textStyle: AppTextStyles.cairo18BoldBlack.copyWith(
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.w600,
+                ),
+                onComplete: _navigateToNextScreen,
               ),
-              onComplete: _navigateToNextScreen,
-            ),
             SizedBox(
               height: 32.h,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Directionality(
-                  textDirection: TextDirection.ltr,
-                  child: TextButton.icon(
-                    onPressed: _navigateToNextScreen,
-                    icon: Image.asset(Assets.imagesArrowNext),
-                    label: Text(
-                      'تخطي',
-                      style: AppTextStyles.cairo16Boldskip,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            if (isLastWorkout)
+              CustomButton(
+                  width: 200.w,
+                  buttonText: 'العوده الي النتائج',
+                  buttonAction: () {
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      Routes.bottomNavBar,
+                      (Route<dynamic> route) => false,
+                    );
+                  },
+                  buttonStyle: AppTextStyles.cairo18BoldBlack.copyWith(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white)),
           ],
         ),
       ),
