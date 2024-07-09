@@ -11,20 +11,19 @@ import '../../../../core/theme/app_text_styles.dart';
 import 'times_up_screen.dart';
 
 class DetailsScreen extends StatefulWidget {
-  const DetailsScreen({
-    super.key,
-    required this.currentIndex,
-    required this.item,
-    required this.length,
-    this.currentSet = 1,
-    this.remainingSeconds = 0,
-  });
+  const DetailsScreen(
+      {super.key,
+      required this.currentIndex,
+      required this.item,
+      required this.length,
+      this.currentSet = 1,
+      this.remainingSeconds});
 
   final int currentIndex;
   final List<Exercises> item;
   final int length;
   final int currentSet;
-  final int remainingSeconds;
+  final int? remainingSeconds;
 
   @override
   State<DetailsScreen> createState() => _DetailsScreenState();
@@ -40,7 +39,9 @@ class _DetailsScreenState extends State<DetailsScreen>
   @override
   void initState() {
     super.initState();
-    _remainingSeconds = widget.remainingSeconds;
+    String repsDisplay = widget.item[widget.currentIndex].repeats ?? '0 sec';
+    _remainingSeconds =
+        int.tryParse(repsDisplay.replaceAll(RegExp(r'\D'), '')) ?? 0;
     _currentSet = widget.currentSet;
     if (_remainingSeconds > 0) {
       _startCountdown(_remainingSeconds.toString());
@@ -90,19 +91,15 @@ class _DetailsScreenState extends State<DetailsScreen>
     }
   }
 
-  void _pauseCountdown() {
-    if (mounted) {
-      setState(() {
-        _isPaused = true;
-      });
-    }
-  }
-
   void _stopCountdown() {
     if (mounted) {
       setState(() {
         _timer?.cancel();
-        _remainingSeconds = 0;
+        String repsDisplay =
+            widget.item[widget.currentIndex].repeats ?? '0 sec';
+        _remainingSeconds =
+            int.tryParse(repsDisplay.replaceAll(RegExp(r'\D'), '')) ?? 0;
+        _isPaused = true;
       });
     }
   }
@@ -278,15 +275,11 @@ class _DetailsScreenState extends State<DetailsScreen>
                     children: [
                       IconButton(
                         icon: Icon(
-                          _isPaused ? Icons.play_arrow : Icons.pause,
+                          Icons.play_arrow,
                           size: 36.r,
                         ),
                         onPressed: () {
-                          if (_isPaused) {
-                            _startCountdown(repsDisplay, fromPlayButton: true);
-                          } else {
-                            _pauseCountdown();
-                          }
+                          _startCountdown(repsDisplay, fromPlayButton: true);
                         },
                       ),
                       IconButton(
