@@ -13,8 +13,7 @@ class BloodPressureWidgets extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 787.h,
-      width: 346.w,
+      width: double.infinity,
       decoration: BoxDecoration(
         color: AppColors.backGroundColorofNavBar,
         borderRadius: BorderRadius.circular(20.r),
@@ -22,7 +21,7 @@ class BloodPressureWidgets extends StatelessWidget {
       child: Directionality(
         textDirection: TextDirection.rtl,
         child: Padding(
-          padding: EdgeInsets.all(20.r),
+          padding: EdgeInsets.all(24.r),
           child: Column(
             children: [
               Row(
