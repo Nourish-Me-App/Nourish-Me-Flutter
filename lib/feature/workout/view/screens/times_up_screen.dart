@@ -47,7 +47,7 @@ class _TimesUpScreenState extends State<TimesUpScreen> {
             currentIndex: widget.currentIndex,
             item: widget.item,
             length: widget.item.length,
-            currentSet: widget.currentSet + 1,
+            currentSet: widget.currentSet,
             remainingSeconds: int.parse(widget
                 .item[widget.currentIndex].repeats!
                 .replaceAll(RegExp(r'\D'), '')),

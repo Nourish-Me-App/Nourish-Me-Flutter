@@ -13,8 +13,7 @@ class BloodSugerWidgets extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 712.h,
-      width: 400.w,
+      width: double.infinity,
       decoration: BoxDecoration(
         color: AppColors.backGroundColorofNavBar,
         borderRadius: BorderRadius.circular(20.r),

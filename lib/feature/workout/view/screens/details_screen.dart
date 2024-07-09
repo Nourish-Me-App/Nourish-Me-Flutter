@@ -300,30 +300,51 @@ class _DetailsScreenState extends State<DetailsScreen>
                   SizedBox(height: 24.h),
                 ],
               ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 120.w),
-              child: SizedBox(
-                width: double.infinity,
-                height: 32.h,
-                child: ElevatedButton(
-                  onPressed: () => _navigateToTimesUpScreen(betweenSets: false),
-                  style: ButtonStyle(
-                    backgroundColor:
-                        WidgetStateProperty.all(AppColors.mainColor),
-                    shape: WidgetStateProperty.all(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+            !repsDisplay.toLowerCase().contains('sec')
+                ? Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 120.w),
+                    child: SizedBox(
+                      width: double.infinity,
+                      height: 32.h,
+                      child: ElevatedButton(
+                        onPressed: () =>
+                            _navigateToTimesUpScreen(betweenSets: false),
+                        style: ButtonStyle(
+                          backgroundColor:
+                              WidgetStateProperty.all(AppColors.mainColor),
+                          shape: WidgetStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                          elevation: WidgetStateProperty.all(0),
+                        ),
+                        child: Text(
+                          'انهاء',
+                          style: AppTextStyles.cairosemibold14white,
+                        ),
                       ),
                     ),
-                    elevation: WidgetStateProperty.all(0),
-                  ),
-                  child: Text(
-                    'انهاء',
-                    style: AppTextStyles.cairosemibold14white,
-                  ),
-                ),
-              ),
-            ),
+                  )
+                : widget.currentSet == 1
+                    ? Text(
+                        'المجموعة الأولي',
+                        style: AppTextStyles.cairo18BoldBlack,
+                      )
+                    : widget.currentSet == 2
+                        ? Text(
+                            'المجموعة الثانية',
+                            style: AppTextStyles.cairo18BoldBlack,
+                          )
+                        : widget.currentSet == 3
+                            ? Text(
+                                'المجموعة الثالثة',
+                                style: AppTextStyles.cairo18BoldBlack,
+                              )
+                            : Text(
+                                'المجموعة الرابعة',
+                                style: AppTextStyles.cairo18BoldBlack,
+                              ),
             const Spacer(),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 25.h),
