@@ -39,6 +39,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
       listener: (context, state) {
         if (state is ResetPasswordFailure) {
           Navigator.pop(context);
+          ScaffoldMessenger.of(context).removeCurrentSnackBar();
           HelperMethods.showCustomSnackBarError(
               context, ErrorMessages.errorMessage(state.error!));
         }
@@ -46,6 +47,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           HelperMethods.showLoadingAlertDialog(context);
         }
         if (state is ResetPasswordSuccess) {
+          ScaffoldMessenger.of(context).removeCurrentSnackBar();
           HelperMethods.showCustomSnackBarSuccess(
               context, 'تم تعيين كلمه المرور بنجاح');
           Navigator.pushNamed(context, Routes.succesScreen);
@@ -106,7 +108,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                             await AuthRequests.resetPassword(
                               forgetPasswordCubit: resetPasswordCubit,
                               resetPasswordModel: resetPasswordModel,
-                              email:(await CacheHelper().getData(key: 'email'))!,
+                              email:
+                                  (await CacheHelper().getData(key: 'email'))!,
                               newPassword:
                                   resetPasswordCubit.passwordController.text,
                               newPasswordConfirmation: resetPasswordCubit

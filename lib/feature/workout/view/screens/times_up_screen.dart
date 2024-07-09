@@ -73,6 +73,7 @@ class _TimesUpScreenState extends State<TimesUpScreen> {
         );
       } else {
         // If it's the last workout, show completion message and navigate to results
+        ScaffoldMessenger.of(context).removeCurrentSnackBar();
         HelperMethods.showCustomSnackBarSuccess(
             context, 'تم الانتهاء من تمارين اليوم ');
         Navigator.pushNamedAndRemoveUntil(

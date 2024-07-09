@@ -73,6 +73,7 @@ class _HeightCounterState extends State<HeightCounter> {
   void _showSnackBar(String message) {
     if (!_isSnackBarShown) {
       _isSnackBarShown = true;
+      ScaffoldMessenger.of(context).removeCurrentSnackBar();
       HelperMethods.showCustomSnackBarError(context, message);
       Future.delayed(const Duration(seconds: 3), () {
         _isSnackBarShown = false;

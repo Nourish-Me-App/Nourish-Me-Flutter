@@ -22,7 +22,7 @@ class Data {
   String? massIndex;
   String? dietType;
   String? waterAmount;
-  List<String?>? disease;
+  List? disease;
 
   Data({
     this.weightInKG,

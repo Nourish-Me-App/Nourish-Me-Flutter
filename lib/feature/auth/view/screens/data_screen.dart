@@ -46,7 +46,7 @@ class _DataScreenState extends State<ContinueRegisterScreen> {
         if (widget.loginType != 'googleLogin') {
           if (state is ContinueRegisterSuccess) {
             Navigator.pop(context);
-
+            ScaffoldMessenger.of(context).removeCurrentSnackBar();
             HelperMethods.showCustomSnackBarSuccess(
                 context, 'تم انشاء الحساب بنجاح');
             Navigator.pushNamedAndRemoveUntil(
@@ -57,6 +57,7 @@ class _DataScreenState extends State<ContinueRegisterScreen> {
           }
           if (state is ContinueRegisterFailure) {
             Navigator.pop(context);
+            ScaffoldMessenger.of(context).removeCurrentSnackBar();
             HelperMethods.showCustomSnackBarError(
               context,
               ErrorMessages.errorMessage(state.error!),
@@ -69,6 +70,7 @@ class _DataScreenState extends State<ContinueRegisterScreen> {
         if (widget.loginType == 'googleLogin') {
           if (state is ContinueGoogleRegisterSuccess) {
             CacheHelper().saveData(key: 'isDataSaved', value: 'yes');
+            ScaffoldMessenger.of(context).removeCurrentSnackBar();
             HelperMethods.showCustomSnackBarSuccess(
                 context, 'تم تسجيل البيانات بنجاح');
             CacheHelper().getData(key: 'isFirstQuestionsCompleteGoogle') ==
@@ -87,6 +89,7 @@ class _DataScreenState extends State<ContinueRegisterScreen> {
           }
           if (state is ContinueGoogleRegisterFailure) {
             Navigator.pop(context);
+            ScaffoldMessenger.of(context).removeCurrentSnackBar();
             HelperMethods.showCustomSnackBarError(
               context,
               ErrorMessages.errorMessage(state.error!),
@@ -188,15 +191,23 @@ class _DataScreenState extends State<ContinueRegisterScreen> {
                           final weight = dataScreenCubit.weightCounter;
                           final height = dataScreenCubit.heightCounter;
                           if (selectedValue == null) {
+                            ScaffoldMessenger.of(context)
+                                .removeCurrentSnackBar();
                             HelperMethods.showCustomSnackBarError(
                                 context, 'من فضلك قم بتحدي الجنس');
                           } else if (age < 18 || age > 80) {
+                            ScaffoldMessenger.of(context)
+                                .removeCurrentSnackBar();
                             HelperMethods.showCustomSnackBarError(
                                 context, 'العمر يجب أن يكون بين 18 و 80');
                           } else if (weight < 40 || weight > 160) {
+                            ScaffoldMessenger.of(context)
+                                .removeCurrentSnackBar();
                             HelperMethods.showCustomSnackBarError(
                                 context, 'kg الوزن يجب أن يكون بين 40 و 160');
                           } else if (height < 140 || height > 210) {
+                            ScaffoldMessenger.of(context)
+                                .removeCurrentSnackBar();
                             HelperMethods.showCustomSnackBarError(
                                 context, 'cm الطول يجب أن يكون بين 140 و 210');
                           } else {

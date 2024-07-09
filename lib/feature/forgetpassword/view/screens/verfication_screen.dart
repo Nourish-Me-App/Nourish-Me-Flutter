@@ -36,6 +36,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
       listener: (context, state) {
         if (state is CheckCodeFailure) {
           Navigator.pop(context);
+          ScaffoldMessenger.of(context).removeCurrentSnackBar();
           HelperMethods.showCustomSnackBarError(
               context, ErrorMessages.errorMessage(state.error!));
         }
@@ -44,6 +45,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
             context,
             Routes.resetScreen,
           );
+          ScaffoldMessenger.of(context).removeCurrentSnackBar();
           HelperMethods.showCustomSnackBarSuccess(context, 'تم التحقق بنجاح');
         }
         if (state is CheckCodeLoading) {
@@ -119,7 +121,8 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                               await AuthRequests.checkCode(
                                 forgetPasswordCubit: checkCode,
                                 checkCodeModel: checkCodeModel,
-                                email:(await CacheHelper().getData(key: 'email'))!,
+                                email: (await CacheHelper()
+                                    .getData(key: 'email'))!,
                                 token: checkCode.codeController.text,
                               );
                             },
@@ -138,7 +141,8 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                               await AuthRequests.checkCode(
                                 forgetPasswordCubit: checkCode,
                                 checkCodeModel: checkCodeModel,
-                                email:(await CacheHelper().getData(key: 'email'))!,
+                                email: (await CacheHelper()
+                                    .getData(key: 'email'))!,
                                 token: checkCode.codeController.text,
                               );
                             }

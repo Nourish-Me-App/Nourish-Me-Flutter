@@ -32,6 +32,7 @@ class SettingsScreen extends StatelessWidget {
               if (state is LogoutSuccess) {
                 CacheHelper cacheHelper = CacheHelper();
                 Navigator.pop(context);
+                ScaffoldMessenger.of(context).removeCurrentSnackBar();
                 HelperMethods.showCustomSnackBarSuccess(
                   context,
                   'تم تسجيل الخروج بنجاح',
@@ -56,6 +57,7 @@ class SettingsScreen extends StatelessWidget {
               }
               if (state is LogoutFailed) {
                 Navigator.pop(context);
+                ScaffoldMessenger.of(context).removeCurrentSnackBar();
                 HelperMethods.showCustomSnackBarError(
                   context,
                   ErrorMessages.errorMessage(state.error),
@@ -75,6 +77,7 @@ class SettingsScreen extends StatelessWidget {
                   title: 'تغيير كلمة المرور',
                   showBackIcon: true,
                   onTap: () async {
+                    ScaffoldMessenger.of(context).removeCurrentSnackBar();
                     (await CacheHelper().getSecuredData(key: 'googleToken')) ==
                             null
                         ? Navigator.pushNamed(context, Routes.newPassword)
@@ -88,6 +91,7 @@ class SettingsScreen extends StatelessWidget {
                   title: 'تقييم التطبيق',
                   showBackIcon: false,
                   onTap: () {
+                    ScaffoldMessenger.of(context).removeCurrentSnackBar();
                     HelperMethods.showCustomSnackBarSuccess(
                         context, 'قادم قريبا');
                   },

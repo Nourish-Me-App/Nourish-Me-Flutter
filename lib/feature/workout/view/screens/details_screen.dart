@@ -152,6 +152,7 @@ class _DetailsScreenState extends State<DetailsScreen>
         ),
       );
     } else {
+      ScaffoldMessenger.of(context).removeCurrentSnackBar();
       HelperMethods.showCustomSnackBarSuccess(
           context, 'تم الانتهاء من تمارين اليوم');
       Navigator.pushNamedAndRemoveUntil(

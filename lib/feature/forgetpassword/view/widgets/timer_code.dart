@@ -30,12 +30,12 @@ class _TimerCodeState extends State<TimerCode> {
   bool codeSent = false;
   ForgetPasswordModel forgetPasswordModel = ForgetPasswordModel();
 
-  resendCode()async {
+  resendCode() async {
     sendCodeTimer();
     AuthRequests.forgetPassword(
       forgetPasswordCubit: forgetPasswordCubit,
       forgetPasswordModel: forgetPasswordModel,
-      email:(await CacheHelper().getData(key: 'email'))!,
+      email: (await CacheHelper().getData(key: 'email'))!,
     );
     log('resend code');
   }
@@ -67,6 +67,7 @@ class _TimerCodeState extends State<TimerCode> {
       listener: (context, state) {
         if (state is ForgetPasswordFailure) {
           Navigator.pop(context);
+          ScaffoldMessenger.of(context).removeCurrentSnackBar();
           HelperMethods.showCustomSnackBarError(
               context, ErrorMessages.errorMessage(state.error!));
         }
@@ -75,6 +76,7 @@ class _TimerCodeState extends State<TimerCode> {
         }
         if (state is ForgetPasswordSuccess) {
           Navigator.pop(context);
+          ScaffoldMessenger.of(context).removeCurrentSnackBar();
           HelperMethods.showCustomSnackBarSuccess(
               context, 'تم ارسال رمز التحقق بنجاح');
         }

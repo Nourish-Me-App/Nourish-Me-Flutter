@@ -40,6 +40,7 @@ class _QuestionsState extends State<Questions> {
             listener: (context, state) {
               if (state is PostQuestionsFailureState) {
                 Navigator.pop(context);
+                ScaffoldMessenger.of(context).removeCurrentSnackBar();
                 HelperMethods.showCustomSnackBarError(
                   context,
                   ErrorMessages.errorMessage(state.error),
@@ -50,10 +51,15 @@ class _QuestionsState extends State<Questions> {
               }
               if (state is PostQuestionsSuccessState) {
                 Navigator.pop(context);
-                CacheHelper().saveData(
-                  key: AppConstants.isFirstQuestionsComplete,
-                  value: 'yes',
-                );
+                widget.loginType == 'googleLogin'
+                    ? CacheHelper().saveData(
+                        key: 'isFirstQuestionsCompleteGoogle',
+                        value: 'yes',
+                      )
+                    : CacheHelper().saveData(
+                        key: AppConstants.isFirstQuestionsComplete,
+                        value: 'yes',
+                      );
                 Navigator.pushNamedAndRemoveUntil(
                   context,
                   Routes.bottomNavBar,

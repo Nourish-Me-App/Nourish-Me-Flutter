@@ -14,18 +14,15 @@ class HomeCubit extends Cubit<HomeState> {
 
   Future<void> fetchHomeData(String path) async {
     emit(HomeLoadingState());
-    try {
-      var result = await homeRepo.getHomeData(
-          path,
-          (await CacheHelper().getSecuredData(key: 'googleToken')) == null
-              ? (await CacheHelper().getSecuredData(key: AppConstants.token))!
-              : (await CacheHelper().getSecuredData(key: 'googleToken'))!);
-      result.fold(
-        (error) => emit(HomeFailureState(error: error)),
-        (homeModel) => emit(HomeSuccessState(homeModel: homeModel)),
-      );
-    } catch (e) {
-      emit(HomeFailureState(error: e.toString()));
-    }
+
+    var result = await homeRepo.getHomeData(
+        path,
+        (await CacheHelper().getSecuredData(key: 'googleToken')) == null
+            ? (await CacheHelper().getSecuredData(key: AppConstants.token))!
+            : (await CacheHelper().getSecuredData(key: 'googleToken'))!);
+    result.fold(
+      (error) => emit(HomeFailureState(error: error)),
+      (homeModel) => emit(HomeSuccessState(homeModel: homeModel)),
+    );
   }
 }

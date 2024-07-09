@@ -39,6 +39,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
       listener: (context, state) {
         if (state is ForgetPasswordFailure) {
           Navigator.pop(context);
+          ScaffoldMessenger.of(context).removeCurrentSnackBar();
           HelperMethods.showCustomSnackBarError(
               context, ErrorMessages.errorMessage(state.error!));
         }
@@ -47,6 +48,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
         }
         if (state is ForgetPasswordSuccess) {
           Navigator.pushNamed(context, Routes.verifyEmailScreen);
+          ScaffoldMessenger.of(context).removeCurrentSnackBar();
           HelperMethods.showCustomSnackBarSuccess(
               context, 'تم ارسال رمز التحقق بنجاح');
         }
