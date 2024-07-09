@@ -278,19 +278,16 @@ class _DetailsScreenState extends State<DetailsScreen>
                     children: [
                       IconButton(
                         icon: Icon(
-                          Icons.play_arrow,
+                          _isPaused ? Icons.play_arrow : Icons.pause,
                           size: 36.r,
                         ),
                         onPressed: () {
-                          _startCountdown(repsDisplay, fromPlayButton: true);
+                          if (_isPaused) {
+                            _startCountdown(repsDisplay, fromPlayButton: true);
+                          } else {
+                            _pauseCountdown();
+                          }
                         },
-                      ),
-                      IconButton(
-                        icon: Icon(
-                          Icons.pause,
-                          size: 36.r,
-                        ),
-                        onPressed: _pauseCountdown,
                       ),
                       IconButton(
                         icon: Icon(
