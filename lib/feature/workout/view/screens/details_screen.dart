@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nourish_me/core/helpers/helper_methods.dart';
@@ -104,7 +105,7 @@ class _DetailsScreenState extends State<DetailsScreen>
     }
   }
 
-  void _navigateToTimesUpScreen({required bool betweenSets}) {
+  _navigateToTimesUpScreen({required bool betweenSets}) {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
@@ -266,8 +267,8 @@ class _DetailsScreenState extends State<DetailsScreen>
               Column(
                 children: [
                   Text(
-                    '$_remainingSeconds sec',
-                    style: AppTextStyles.cairo18BoldBlack,
+                    '00:$_remainingSeconds',
+                    style: AppTextStyles.cairo25BoldBlack,
                   ),
                   SizedBox(height: 16.h),
                   Row(

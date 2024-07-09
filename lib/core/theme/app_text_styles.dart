@@ -10,7 +10,7 @@ class AppTextStyles {
     fontWeight: FontWeight.bold,
   );
 
-  static TextStyle cairo212BoldBlack = GoogleFonts.cairo(
+  static TextStyle cairo15BoldBlack = GoogleFonts.cairo(
     color: Colors.black,
     fontSize: 15.sp,
     fontWeight: FontWeight.w500,
@@ -46,6 +46,12 @@ class AppTextStyles {
   static TextStyle cairo18BoldBlack = GoogleFonts.cairo(
     color: Colors.black,
     fontSize: 18.sp,
+    fontWeight: FontWeight.bold,
+  );
+
+  static TextStyle cairo25BoldBlack = GoogleFonts.cairo(
+    color: Colors.black,
+    fontSize: 50.sp,
     fontWeight: FontWeight.bold,
   );
 
