@@ -34,7 +34,7 @@ class CustomContainer extends StatelessWidget {
             Text(
               title,
               style: AppTextStyles.cairosemibold14maincolor.copyWith(
-                fontSize: 12.sp,
+                fontSize: 13.sp,
                 fontWeight: FontWeight.w400,
                 color: Colors.black,
               ),
