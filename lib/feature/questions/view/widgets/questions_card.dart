@@ -35,6 +35,10 @@ class QuestionCard extends StatelessWidget {
         return element.answer == 'نحافة' || element.answer == 'سمنة';
       },
     ).toList();
+    List<AnswerOptions> problemsOrNot = [
+      ...problems,
+      AnswerOptions(answer: 'لا أعاني', id: ''),
+    ];
     List<AnswerOptions> problemsAndDeseases = answers.where(
       (element) {
         return element.answer != 'نحافة' && element.answer != 'سمنة';
@@ -59,10 +63,10 @@ class QuestionCard extends StatelessWidget {
               questionsNumber: questionsNumber,
               questionsUICubit: questionsUICubit,
               answersNumber:
-                  questionsNumber == 2 ? problems.length : answersNumber,
+                  questionsNumber == 2 ? problemsOrNot.length : answersNumber,
               question:
                   questionsNumber == 2 ? 'أي من المشاكل تعاني منها؟' : question,
-              answer: questionsNumber == 2 ? problems : answers,
+              answer: questionsNumber == 2 ? problemsOrNot : answers,
               questionsCubit: questionsCubit,
             ),
             if (questionsNumber == 0 && questionsUICubit.questionOneValue == 0)
@@ -85,7 +89,8 @@ class QuestionCard extends StatelessWidget {
                   questionsNumber: 6,
                   questionsUICubit: questionsUICubit,
                   answersNumber: problemsAndDeseases.length,
-                  question: question,
+                  question:
+                      'أي من الامراض تعاني منها (يمكن عدم الاختيار او تحديد اكثر من اختيار)؟',
                   answer: problemsAndDeseases,
                   questionsCubit: questionsCubit,
                 ),
@@ -98,7 +103,22 @@ class QuestionCard extends StatelessWidget {
                   questionsNumber: 6,
                   questionsUICubit: questionsUICubit,
                   answersNumber: problemsAndDeseases2.length,
-                  question: question,
+                  question:
+                      'أي من الامراض تعاني منها (يمكن عدم الاختيار او تحديد اكثر من اختيار)؟',
+                  answer: problemsAndDeseases2,
+                  questionsCubit: questionsCubit,
+                ),
+              ),
+            if (questionsNumber == 2 &&
+                questionsUICubit.questionThreeValue == 2)
+              Padding(
+                padding: EdgeInsets.only(top: 12.h),
+                child: CardBody(
+                  questionsNumber: 6,
+                  questionsUICubit: questionsUICubit,
+                  answersNumber: problemsAndDeseases2.length,
+                  question:
+                      'أي من الامراض تعاني منها (يمكن عدم الاختيار او تحديد اكثر من اختيار)؟',
                   answer: problemsAndDeseases2,
                   questionsCubit: questionsCubit,
                 ),

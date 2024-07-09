@@ -53,16 +53,17 @@ class MyCheckBox extends StatelessWidget {
                   const BorderSide(width: 2, color: AppColors.radioBorderColor),
               value: questionsUICubit.questionThreeValue == 0
                   ? questionsUICubit.continueQuestionThreeValue[index]
-                  : questionsUICubit.continueQuestionThreeValue2[index],
+                  : questionsUICubit.questionThreeValue == 1
+                      ? questionsUICubit.continueQuestionThreeValue2[index]
+                      : questionsUICubit.continueQuestionThreeValue3[index],
               onChanged: (value) {
                 questionsUICubit.onChangedValue(
                   value: value,
                   questionNum: questionNumber,
                   index: index,
                 );
-                if (questionsUICubit.continueQuestionThreeValue[index] ==
-                    true) {
-                  CacheHelper().saveData(key: 'answer2', value: answer);
+                if (questionsUICubit.continueQuestionThreeValue[0] == true) {
+                  CacheHelper().saveData(key: 'answer2', value: 'ثبات الوزن');
                   questionsCubit.answerValue(4, null);
                   questionsUICubit.resetQuestionFiveValue();
                 } else {

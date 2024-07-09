@@ -105,6 +105,7 @@ class HelperMethods {
       Assets.svgsSettingsEmailChange,
       Assets.svgsSettingsPassChange,
       Assets.svgsSettingsRate,
+      Assets.svgsResultsAdvices,
       Assets.iconsIconFacebook,
       Assets.iconsIconInstagram,
     ];
@@ -148,6 +149,16 @@ class HelperMethods {
     }
     if (meal.contains('الفشار') || meal.contains('فشار')) {
       return Assets.imagesMealsPopcorn;
+    }
+    if (meal.contains('جبنة بالطماطم') ||
+        meal.contains('جبنه بالطماطم') ||
+        meal.contains('قطعه جبن متوسطه الحجم مع الطماطم') ||
+        meal.contains('جبن ابيض منزوع الدسم') ||
+        meal.contains('جبن منزوع الدسم') ||
+        meal.contains('جبنة قليلة الدسم') ||
+        (meal.contains('جبن') && meal.contains('زيت')) ||
+        meal.contains('جبنه قليلة الدسم')) {
+      return Assets.imagesMealsLowFatCheese;
     }
     if (meal.contains('بيضة') ||
         meal.contains('بيضه') ||
@@ -211,16 +222,7 @@ class HelperMethods {
         meal.contains('مكرونة')) {
       return Assets.imagesMealsSpaghetti;
     }
-    if (meal.contains('جبنة بالطماطم') ||
-        meal.contains('جبنه بالطماطم') ||
-        meal.contains('قطعه جبن متوسطه الحجم مع الطماطم') ||
-        meal.contains('جبن ابيض منزوع الدسم') ||
-        meal.contains('جبن منزوع الدسم') ||
-        meal.contains('جبنة قليلة الدسم') ||
-        (meal.contains('جبن') && meal.contains('زيت')) ||
-        meal.contains('جبنه قليلة الدسم')) {
-      return Assets.imagesMealsLowFatCheese;
-    }
+
     if (meal.contains('سمكة') || meal.contains('سمكه')) {
       return Assets.imagesMealsFish;
     }

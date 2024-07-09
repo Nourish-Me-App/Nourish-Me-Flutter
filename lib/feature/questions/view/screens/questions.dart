@@ -19,7 +19,8 @@ class _QuestionsState extends State<Questions> {
     super.initState();
     questionsUICubit = BlocProvider.of<QuestionsUICubit>(context);
     questionsCubit = BlocProvider.of<QuestionsCubit>(context);
-    questionsCubit.fetchQuestionsAnswers(AppConstants.questions,loginType:  widget.loginType);
+    questionsCubit.fetchQuestionsAnswers(AppConstants.questions,
+        loginType: widget.loginType);
   }
 
   @override
@@ -66,56 +67,62 @@ class _QuestionsState extends State<Questions> {
                     state.questionAndAnswerModel;
                 return BlocBuilder<QuestionsUICubit, QuestionsUIState>(
                   builder: (context, state) {
-                    return Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Center(
-                          child: Text(
-                            'أجب علي الأسئلة التالية',
-                            style: AppTextStyles.cairo18BoldBlack
-                                .copyWith(fontSize: 16.sp),
+                    return SingleChildScrollView(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Center(
+                            child: Text(
+                              'أجب علي الأسئلة التالية',
+                              style: AppTextStyles.cairo18BoldBlack
+                                  .copyWith(fontSize: 16.sp),
+                            ),
                           ),
-                        ),
-                        SizedBox(height: 16.h),
-                        CurrentQuestion(
-                          index: questionsUICubit.questionNumber.toInt(),
-                          numberOfQuestions:
-                              questionsAndAnswersModel.data!.questions!.length -
-                                  1,
-                        ),
-                        SizedBox(height: 28.h),
-                        Center(
-                          child: SvgPicture.asset(Assets.svgsAuthQuestion),
-                        ),
-                        SizedBox(height: 20.h),
-                        QuestionsView(
-                          questionsAndAnswersModel: questionsAndAnswersModel,
-                          questionsUICubit: questionsUICubit,
-                          questionsCubit: questionsCubit,
-                        ),
-                        questionsUICubit.validate()
-                            ? Padding(
-                                padding: EdgeInsets.symmetric(vertical: 8.h),
-                                child: Text(
-                                  '! يجب اختيار واحد من الاختيارات السابقة',
-                                  style:
-                                      AppTextStyles.cairo11MediumTFFErrorColor,
-                                ),
-                              )
-                            : SizedBox(height: 24.h),
-                        QuestionsButtons(
-                          loginType: widget.loginType,
-                          questionsUICubit: questionsUICubit,
-                          questionsCubit: questionsCubit,
-                        ),
-                      ],
+                          SizedBox(height: 16.h),
+                          CurrentQuestion(
+                            index: questionsUICubit.questionNumber.toInt(),
+                            numberOfQuestions: questionsAndAnswersModel
+                                    .data!.questions!.length -
+                                1,
+                          ),
+                          SizedBox(height: 28.h),
+                          Center(
+                            child: SvgPicture.asset(Assets.svgsAuthQuestion),
+                          ),
+                          SizedBox(height: 20.h),
+                          QuestionsView(
+                            questionsAndAnswersModel: questionsAndAnswersModel,
+                            questionsUICubit: questionsUICubit,
+                            questionsCubit: questionsCubit,
+                          ),
+                          questionsUICubit.validate()
+                              ? Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 8.h),
+                                  child: Text(
+                                    '! يجب اختيار واحد من الاختيارات السابقة',
+                                    style: AppTextStyles
+                                        .cairo11MediumTFFErrorColor,
+                                  ),
+                                )
+                              : SizedBox(height: 24.h),
+                          QuestionsButtons(
+                            loginType: widget.loginType,
+                            questionsUICubit: questionsUICubit,
+                            questionsCubit: questionsCubit,
+                          ),
+                          questionsUICubit.questionNumber == 2 &&
+                                  questionsUICubit.questionThreeValue == 0
+                              ? SizedBox(height: 16.h)
+                              : Container(),
+                        ],
+                      ),
                     );
                   },
                 );
               } else if (state is QuestionsFailureState) {
                 return OnQuestionsError(
-                  loginType:widget.loginType! ,
+                  loginType: widget.loginType!,
                   questionsCubit: questionsCubit,
                   title: ErrorMessages.errorMessage(state.error),
                 );
