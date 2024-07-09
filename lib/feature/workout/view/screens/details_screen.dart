@@ -34,6 +34,7 @@ class _DetailsScreenState extends State<DetailsScreen>
   Timer? _timer;
   int _remainingSeconds = 0;
   bool _isPaused = true;
+  bool _isCountdownActive = false;
   int _currentSet = 1;
 
   @override
@@ -56,6 +57,7 @@ class _DetailsScreenState extends State<DetailsScreen>
           setState(() {
             _remainingSeconds = seconds;
             _isPaused = false;
+            _isCountdownActive = true; // Activate countdown
           });
         }
       }
@@ -100,11 +102,12 @@ class _DetailsScreenState extends State<DetailsScreen>
         _remainingSeconds =
             int.tryParse(repsDisplay.replaceAll(RegExp(r'\D'), '')) ?? 0;
         _isPaused = true;
+        _isCountdownActive = false; // Deactivate countdown
       });
     }
   }
 
-  void _navigateToTimesUpScreen({required bool betweenSets}) {
+  _navigateToTimesUpScreen({required bool betweenSets}) {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
@@ -266,8 +269,8 @@ class _DetailsScreenState extends State<DetailsScreen>
               Column(
                 children: [
                   Text(
-                    '$_remainingSeconds sec',
-                    style: AppTextStyles.cairo18BoldBlack,
+                    '00:$_remainingSeconds',
+                    style: AppTextStyles.cairo25BoldBlack,
                   ),
                   SizedBox(height: 16.h),
                   Row(
@@ -278,9 +281,12 @@ class _DetailsScreenState extends State<DetailsScreen>
                           Icons.play_arrow,
                           size: 36.r,
                         ),
-                        onPressed: () {
-                          _startCountdown(repsDisplay, fromPlayButton: true);
-                        },
+                        onPressed: _isCountdownActive
+                            ? null
+                            : () {
+                                _startCountdown(repsDisplay,
+                                    fromPlayButton: true);
+                              },
                       ),
                       IconButton(
                         icon: Icon(

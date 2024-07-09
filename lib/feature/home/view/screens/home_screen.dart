@@ -51,7 +51,9 @@ class HomeScreen extends StatelessWidget {
                       }
                     },
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20.0.w),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 20.0.w,
+                      ),
                       child: Builder(
                         builder: (context) {
                           if (state is HomeFailureState) {
