@@ -10,9 +10,9 @@ class AppTextStyles {
     fontWeight: FontWeight.bold,
   );
 
-    static TextStyle cairo212BoldBlack = GoogleFonts.cairo(
+  static TextStyle cairo212BoldBlack = GoogleFonts.cairo(
     color: Colors.black,
-    fontSize: 12.sp,
+    fontSize: 15.sp,
     fontWeight: FontWeight.w500,
   );
   static TextStyle cairo24Boldmaincolor = GoogleFonts.cairo(
