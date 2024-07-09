@@ -37,6 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
       listener: (context, state) {
         if (state is LoginFailure) {
           Navigator.pop(context);
+          ScaffoldMessenger.of(context).removeCurrentSnackBar();
           HelperMethods.showCustomSnackBarError(
             context,
             ErrorMessages.errorMessage(state.error!),

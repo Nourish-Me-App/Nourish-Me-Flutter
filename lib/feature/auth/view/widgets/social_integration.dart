@@ -123,6 +123,7 @@ class PlatformCard extends StatelessWidget {
         }
         if (state is GoogleLoginFailure) {
           Navigator.pop(context);
+          ScaffoldMessenger.of(context).removeCurrentSnackBar();
           HelperMethods.showCustomSnackBarError(
             context,
             ErrorMessages.errorMessage(state.error!),

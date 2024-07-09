@@ -54,9 +54,7 @@ class HomeScreen extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: 20.0.w),
                       child: Builder(
                         builder: (context) {
-                          if (state is HomeLoadingState) {
-                            return const ShimmerLoadingHome();
-                          } else if (state is HomeFailureState) {
+                          if (state is HomeFailureState) {
                             return ErrorBody(
                               buttonAction: () async {
                                 await BlocProvider.of<HomeCubit>(context)
@@ -120,8 +118,9 @@ class HomeScreen extends StatelessWidget {
                                 ],
                               ),
                             );
+                          } else {
+                            return const ShimmerLoadingHome();
                           }
-                          return Container();
                         },
                       ),
                     ),

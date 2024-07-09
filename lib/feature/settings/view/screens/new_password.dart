@@ -59,11 +59,13 @@ class _NewPasswordState extends State<NewPassword> {
               }
               if (state is UpdateProfileFailed) {
                 Navigator.pop(context);
+                ScaffoldMessenger.of(context).removeCurrentSnackBar();
                 HelperMethods.showCustomSnackBarError(
                     context, ErrorMessages.errorMessage(state.error));
               }
               if (state is UpdateProfileSuccess) {
                 Navigator.pop(context);
+                ScaffoldMessenger.of(context).removeCurrentSnackBar();
                 HelperMethods.showCustomSnackBarSuccess(
                     context, 'تم تغيير كلمة المرور بنجاح');
                 Navigator.pushNamedAndRemoveUntil(

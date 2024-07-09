@@ -40,6 +40,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       listener: (context, state) {
         if (state is SignUpSuccess) {
           Navigator.pop(context);
+          ScaffoldMessenger.of(context).removeCurrentSnackBar();
           HelperMethods.showCustomSnackBarSuccess(
               context, 'معلومات صحيحة يرجى إكمال بقية الحقول');
           Navigator.pushNamedAndRemoveUntil(
@@ -51,6 +52,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         }
         if (state is SignUpFailure) {
           Navigator.pop(context);
+          ScaffoldMessenger.of(context).removeCurrentSnackBar();
           HelperMethods.showCustomSnackBarError(
             context,
             ErrorMessages.errorMessage(state.error!),
