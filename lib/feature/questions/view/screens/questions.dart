@@ -97,7 +97,53 @@ class _QuestionsState extends State<Questions> {
                             child: SvgPicture.asset(Assets.svgsAuthQuestion),
                           ),
                           SizedBox(height: 20.h),
+                          num.parse(CacheHelper().getData(
+                                      key: widget.loginType == 'googleLogin'
+                                          ? 'googleBmi'
+                                          : 'bmi')) >=
+                                  25
+                              ? Center(
+                                  child: Text(
+                                    'انت تعاني من السمنة بناءا علي مؤشر كتلة الجسم',
+                                    style: AppTextStyles.cairosemibold16black
+                                        .copyWith(fontSize: 14.sp),
+                                  ),
+                                )
+                              : Container(),
+                          questionsUICubit.questionNumber == 2
+                              ? num.parse(CacheHelper().getData(
+                                          key: widget.loginType == 'googleLogin'
+                                              ? 'googleBmi'
+                                              : 'bmi')) <=
+                                      18.5
+                                  ? Center(
+                                      child: Text(
+                                        'انت تعاني من النحافة بناءا علي مؤشر كتلة الجسم',
+                                        style: AppTextStyles
+                                            .cairosemibold16black
+                                            .copyWith(fontSize: 14.sp),
+                                      ),
+                                    )
+                                  : Container()
+                              : Container(),
+                          questionsUICubit.questionNumber == 2
+                              ? num.parse(CacheHelper().getData(
+                                              key: widget.loginType ==
+                                                      'googleLogin'
+                                                  ? 'googleBmi'
+                                                  : 'bmi')) >=
+                                          25 ||
+                                      num.parse(CacheHelper().getData(
+                                              key: widget.loginType ==
+                                                      'googleLogin'
+                                                  ? 'googleBmi'
+                                                  : 'bmi')) <=
+                                          18.4
+                                  ? SizedBox(height: 10.h)
+                                  : Container()
+                              : Container(),
                           QuestionsView(
+                            loginType: widget.loginType,
                             questionsAndAnswersModel: questionsAndAnswersModel,
                             questionsUICubit: questionsUICubit,
                             questionsCubit: questionsCubit,
@@ -118,7 +164,8 @@ class _QuestionsState extends State<Questions> {
                             questionsCubit: questionsCubit,
                           ),
                           questionsUICubit.questionNumber == 2 &&
-                                  questionsUICubit.questionThreeValue == 0
+                                  (questionsUICubit.questionThreeValue == 0 ||
+                                      questionsUICubit.questionThreeValue == 1)
                               ? SizedBox(height: 16.h)
                               : Container(),
                         ],

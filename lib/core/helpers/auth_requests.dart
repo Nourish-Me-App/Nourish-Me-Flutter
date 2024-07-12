@@ -174,6 +174,7 @@ class AuthRequests {
     cacheHelper.saveData(
         key: AppConstants.isFirstQuestionsComplete,
         value: value.data!['user'][AppConstants.isFirstQuestionsComplete]);
+    cacheHelper.saveData(key: 'bmi', value: value.data!['user']['mass_index']);
     value.data!['user'][AppConstants.isFirstQuestionsComplete] == 'no'
         ? Navigator.pushNamedAndRemoveUntil(
             context,

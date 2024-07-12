@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import '../../data/models/continue_register_model.dart';
 import '../../data/repositories/continue_register_repo.dart';
 
 part 'data_screen_state.dart';
@@ -27,14 +28,16 @@ class DataScreenCubit extends Cubit<DataScreenState> {
         emit(ContinueRegisterFailure(error: error));
       }),
       ((continueRegisterModel) {
-        emit(ContinueRegisterSuccess());
+        emit(ContinueRegisterSuccess(
+            continueRegisterModel: continueRegisterModel));
       }),
     );
   }
 
   Future<void> continueGoogleRegister(String path, dynamic data) async {
     emit(ContinueGoogleRegisterLoading());
-    final continueRegisterModel = await continueRegisterRepo.continueGoogleRegister(
+    final continueRegisterModel =
+        await continueRegisterRepo.continueGoogleRegister(
       path,
       data,
     );
@@ -43,7 +46,8 @@ class DataScreenCubit extends Cubit<DataScreenState> {
         emit(ContinueGoogleRegisterFailure(error: error));
       }),
       ((continueRegisterModel) {
-        emit(ContinueGoogleRegisterSuccess());
+        emit(ContinueGoogleRegisterSuccess(
+            continueRegisterModel: continueRegisterModel));
       }),
     );
   }

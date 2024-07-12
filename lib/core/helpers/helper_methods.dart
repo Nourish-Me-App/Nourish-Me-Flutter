@@ -118,6 +118,12 @@ class HelperMethods {
   }
 
   static String getMealImage(String meal) {
+    if (meal.contains('الجبن') || meal.contains('جبن')) {
+      return Assets.imagesMealsSingleCheese;
+    }
+    if (meal.contains('شوفان') || meal.contains('الشوفان')) {
+      return Assets.imagesMealsOat;
+    }
     {
       if (meal.contains('رغيف') ||
           meal.contains('خبز') ||
@@ -127,7 +133,7 @@ class HelperMethods {
         return Assets.imagesMealsBrownToast;
       }
     }
-    if (meal.contains('تمر')) {
+    if (meal.contains('تمر') || meal.contains('بلح')) {
       return Assets.imagesMealsDate;
     }
     if (meal.contains('فاكهة') ||
@@ -147,6 +153,14 @@ class HelperMethods {
         meal.contains('موزة')) {
       return Assets.imagesMealsFruits;
     }
+    if (meal.contains('التونا') ||
+        meal.contains('تونا') ||
+        meal.contains('تونة') ||
+        meal.contains('تونه') ||
+        meal.contains('التونه') ||
+        meal.contains('التونة')) {
+      return Assets.imagesMealsTuna;
+    }
     if (meal.contains('الفشار') || meal.contains('فشار')) {
       return Assets.imagesMealsPopcorn;
     }
@@ -160,6 +174,7 @@ class HelperMethods {
         meal.contains('جبنه قليلة الدسم')) {
       return Assets.imagesMealsLowFatCheese;
     }
+
     if (meal.contains('بيضة') ||
         meal.contains('بيضه') ||
         meal.contains('بيضات') ||
@@ -285,9 +300,6 @@ class HelperMethods {
         return Assets.imagesMealsBiscuit;
       }
     }
-    if (meal.contains('شوفان') || meal.contains('الشوفان')) {
-      return Assets.imagesMealsOat;
-    }
     if (meal.contains('بطاطا')) {
       return Assets.imagesMealsSweetPotato;
     }
@@ -321,7 +333,9 @@ class HelperMethods {
     if (meal.contains('بسكوت') || meal.contains('بسكويت')) {
       return Assets.imagesMealsBiscuit;
     }
-    if (meal.contains('كبدة') || meal.contains('كبده')) {
+    if (meal.contains('كبدة') ||
+        meal.contains('كبده') ||
+        meal.contains('كبد')) {
       return Assets.imagesMealsLiver;
     }
     if (meal.contains('شيكولاتة') ||
@@ -338,10 +352,6 @@ class HelperMethods {
     if (meal.contains('خيار وجزر')) {
       return Assets.imagesMealsCarrotCucmber;
     }
-    if (meal.contains('الجبن') || meal.contains('جبن')) {
-      return Assets.imagesMealsSingleCheese;
-    }
-
     if (meal.contains('جبن قريش بالبقدونس')) {
       return Assets.imagesMealsCottageCheese;
     }
@@ -365,14 +375,6 @@ class HelperMethods {
     }
     if (meal.contains('ستيك') || meal.contains('لحم') || meal.contains('كفت')) {
       return Assets.imagesMealsMeat;
-    }
-    if (meal.contains('التونا') ||
-        meal.contains('تونا') ||
-        meal.contains('تونة') ||
-        meal.contains('تونه') ||
-        meal.contains('التونه') ||
-        meal.contains('التونة')) {
-      return Assets.imagesMealsTuna;
     } else {
       return Assets.imagesMealsDefaultFood;
     }
