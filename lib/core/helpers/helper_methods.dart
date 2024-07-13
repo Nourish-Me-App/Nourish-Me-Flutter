@@ -142,6 +142,7 @@ class HelperMethods {
         meal.contains('ثمرة فاكهة') ||
         meal.contains('موز') ||
         meal.contains('مشمش') ||
+        meal.contains('خوخ') ||
         meal.contains('كيوي') ||
         meal.contains('برتقالة') ||
         meal.contains('تفاحة') ||
@@ -175,6 +176,10 @@ class HelperMethods {
       return Assets.imagesMealsLowFatCheese;
     }
 
+    if (meal.contains('معلقه صغيره زيت') ||
+        meal.contains('معلقه زيت زيتون صغيره')) {
+      return Assets.imagesMealsOliveOil;
+    }
     if (meal.contains('بيضة') ||
         meal.contains('بيضه') ||
         meal.contains('بيضات') ||
@@ -196,9 +201,6 @@ class HelperMethods {
         meal.contains('بيضة مقلية') ||
         meal.contains('بيضه مقليه')) {
       return Assets.imagesMealsOmleteEyes;
-    }
-    if (meal == 'معلقه صغيره زيت') {
-      return Assets.imagesMealsOliveOil;
     }
     if (meal == ' خس' || meal == 'خس ' || meal == 'خس') {
       return Assets.imagesMealsLettuce;
@@ -238,7 +240,9 @@ class HelperMethods {
       return Assets.imagesMealsSpaghetti;
     }
 
-    if (meal.contains('سمكة') || meal.contains('سمكه')) {
+    if (meal.contains('سمكة') ||
+        meal.contains('سمكه') ||
+        meal.contains('سلمون')) {
       return Assets.imagesMealsFish;
     }
     if (meal.contains('جبن مع الخضراوات')) {

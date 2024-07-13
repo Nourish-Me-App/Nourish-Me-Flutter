@@ -69,9 +69,12 @@ class _DataScreenState extends State<ContinueRegisterScreen> {
         }
         if (widget.loginType == 'googleLogin') {
           if (state is ContinueGoogleRegisterSuccess) {
+            Navigator.pop(context);
+            log(state.continueRegisterModel.data!.massIndex.toString());
             CacheHelper().saveData(
-                key: 'googleBmi', value: state.continueRegisterModel.data!.massIndex);
-            log(CacheHelper().getData(key: 'bmi'));
+                key: 'googleBmi',
+                value: state.continueRegisterModel.data!.massIndex);
+                log('${CacheHelper().getData(key: 'googleBmi')}');
             CacheHelper().saveData(key: 'isDataSaved', value: 'yes');
             ScaffoldMessenger.of(context).removeCurrentSnackBar();
             HelperMethods.showCustomSnackBarSuccess(

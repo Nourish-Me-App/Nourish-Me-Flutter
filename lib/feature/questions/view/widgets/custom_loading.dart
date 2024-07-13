@@ -22,27 +22,30 @@ class CustomQuestionLoading extends StatelessWidget {
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 32.h),
-        child: Column(
-          children: [
-            buildLoading(width: 185.w, height: 25.h),
-            SizedBox(height: 16.h),
-            buildLoading(width: 250.w, height: 10.h),
-            SizedBox(height: 48.h),
-            buildLoading(width: 246.w, height: 220.h),
-            SizedBox(height: 24.h),
-            Align(
-              alignment: Alignment.centerRight,
-              child: buildLoading(width: 350.w, height: 180.h),
-            ),
-            SizedBox(height: 24.h),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                buildLoading(width: 130.w, height: 30.h),
-                buildLoading(width: 130.w, height: 30.h),
-              ],
-            ),
-          ],
+        child: SingleChildScrollView(
+          physics: const NeverScrollableScrollPhysics(),
+          child: Column(
+            children: [
+              buildLoading(width: 185.w, height: 25.h),
+              SizedBox(height: 16.h),
+              buildLoading(width: 250.w, height: 10.h),
+              SizedBox(height: 48.h),
+              buildLoading(width: 246.w, height: 220.h),
+              SizedBox(height: 24.h),
+              Align(
+                alignment: Alignment.centerRight,
+                child: buildLoading(width: 350.w, height: 180.h),
+              ),
+              SizedBox(height: 24.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  buildLoading(width: 130.w, height: 30.h),
+                  buildLoading(width: 130.w, height: 30.h),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

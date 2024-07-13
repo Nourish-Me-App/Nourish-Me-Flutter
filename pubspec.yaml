@@ -68,6 +68,9 @@ dependencies:
   url_launcher: ^6.3.0
   # Flutter plugin for Google Sign-In.
   google_sign_in: ^6.2.1
+  # For crash reports.
+  firebase_core: ^3.2.0
+  firebase_crashlytics: ^4.0.3
 
 
 
