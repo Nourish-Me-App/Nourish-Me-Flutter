@@ -12,6 +12,7 @@ class QuestionCard extends StatelessWidget {
   final String question;
   final List<AnswerOptions>? continueQanswers;
   final String? continueQQuestion;
+  final String? loginType;
   final QuestionsCubit questionsCubit;
   final List<AnswerOptions> answers;
 
@@ -26,6 +27,7 @@ class QuestionCard extends StatelessWidget {
     this.continueQanswers,
     this.continueQQuestion,
     required this.questionsCubit,
+    this.loginType,
   });
 
   @override
@@ -60,6 +62,7 @@ class QuestionCard extends StatelessWidget {
         child: Column(
           children: [
             CardBody(
+              loginType: loginType,
               questionsNumber: questionsNumber,
               questionsUICubit: questionsUICubit,
               answersNumber:
@@ -73,6 +76,7 @@ class QuestionCard extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(top: 12.h),
                 child: CardBody(
+                  loginType: loginType,
                   questionsNumber: 5,
                   questionsUICubit: questionsUICubit,
                   answersNumber: continueQAnswerNumber,
@@ -86,6 +90,7 @@ class QuestionCard extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(top: 12.h),
                 child: CardBody(
+                  loginType: loginType,
                   questionsNumber: 6,
                   questionsUICubit: questionsUICubit,
                   answersNumber: problemsAndDeseases.length,
@@ -100,6 +105,7 @@ class QuestionCard extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(top: 12.h),
                 child: CardBody(
+                  loginType: loginType,
                   questionsNumber: 6,
                   questionsUICubit: questionsUICubit,
                   answersNumber: problemsAndDeseases2.length,
@@ -114,6 +120,7 @@ class QuestionCard extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(top: 12.h),
                 child: CardBody(
+                  loginType: loginType,
                   questionsNumber: 6,
                   questionsUICubit: questionsUICubit,
                   answersNumber: problemsAndDeseases2.length,

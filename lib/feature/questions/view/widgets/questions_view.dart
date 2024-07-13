@@ -9,12 +9,14 @@ class QuestionsView extends StatelessWidget {
   final QuestionsUICubit questionsUICubit;
   final QuestionAndAnswerModel questionsAndAnswersModel;
   final QuestionsCubit questionsCubit;
+  final String? loginType;
 
   const QuestionsView({
     super.key,
     required this.questionsUICubit,
     required this.questionsAndAnswersModel,
     required this.questionsCubit,
+    this.loginType,
   });
 
   @override
@@ -33,6 +35,7 @@ class QuestionsView extends StatelessWidget {
     int questionNumber = questionsUICubit.questionNumber.toInt();
     List<Questions> questions = questionsAndAnswersModel.data!.questions!;
     return QuestionCard(
+      loginType: loginType,
       key: ValueKey<int>(questionNumber),
       answers: questionNumber != 0
           ? questions[question + 1].answerOptions!

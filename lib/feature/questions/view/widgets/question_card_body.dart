@@ -14,6 +14,7 @@ class CardBody extends StatelessWidget {
   final int? questionsNumber, answersNumber;
   final QuestionsUICubit questionsUICubit;
   final String question;
+  final String? loginType;
   final List<AnswerOptions> answer;
   final QuestionsCubit questionsCubit;
 
@@ -25,10 +26,12 @@ class CardBody extends StatelessWidget {
     required this.question,
     required this.answer,
     required this.questionsCubit,
+    this.loginType,
   });
 
   @override
   Widget build(BuildContext context) {
+    CacheHelper cacheHelper = CacheHelper();
     return Column(
       children: [
         Row(
@@ -68,26 +71,46 @@ class CardBody extends StatelessWidget {
               : List.generate(
                   answersNumber!,
                   (index) => CustomRadio(
-                    isDisabled: answer[index].answer == 'زيادة الوزن'
-                        ? CacheHelper().getData(key: 'answer') == 'سمنة' ||
-                                CacheHelper().getData(key: 'answer') ==
-                                    'لا أعاني'
-                            ? true
-                            : false
-                        : answer[index].answer == 'خسارة الوزن'
-                            ? CacheHelper().getData(key: 'answer') == 'نحافة' ||
-                                    CacheHelper().getData(key: 'answer') ==
+                    isDisabled: num.parse(cacheHelper.getData(key: loginType == 'googleLogin' ? 'googleBmi' : 'bmi')) >= 18.5 &&
+                            num.parse(cacheHelper.getData(key: loginType == 'googleLogin' ? 'googleBmi' : 'bmi')) <=
+                                24.9
+                        ? (answer[index].answer == 'زيادة الوزن'
+                            ? cacheHelper.getData(key: 'answer') == 'سمنة' ||
+                                    cacheHelper.getData(key: 'answer') ==
                                         'لا أعاني'
                                 ? true
                                 : false
-                            : answer[index].answer == 'ثبات الوزن'
-                                ? CacheHelper().getData(key: 'answer2') ==
-                                            'ثبات الوزن' ||
-                                        CacheHelper().getData(key: 'answer') ==
-                                            'نحافة'
+                            : answer[index].answer == 'خسارة الوزن'
+                                ? cacheHelper.getData(key: 'answer') == 'نحافة' ||
+                                        cacheHelper.getData(key: 'answer') ==
+                                            'لا أعاني'
                                     ? true
                                     : false
-                                : false,
+                                : answer[index].answer == 'ثبات الوزن'
+                                    ? cacheHelper.getData(key: 'answer2') ==
+                                                'ثبات الوزن' ||
+                                            cacheHelper.getData(key: 'answer') ==
+                                                'نحافة'
+                                        ? true
+                                        : false
+                                    : false)
+                        : (num.parse(cacheHelper.getData(key: loginType == 'googleLogin' ? 'googleBmi' : 'bmi')) <= 18.5 &&
+                                (answer[index].answer == 'سمنة' ||
+                                    answer[index].answer == 'لا أعاني')
+                            ? true
+                            : (num.parse(cacheHelper.getData(key: loginType == 'googleLogin' ? 'googleBmi' : 'bmi')) <= 18.5 &&
+                                    (answer[index].answer == 'ثبات الوزن' ||
+                                        answer[index].answer == 'خسارة الوزن'))
+                                ? true
+                                : num.parse(cacheHelper.getData(key: loginType == 'googleLogin' ? 'googleBmi' : 'bmi')) >= 24.9 &&
+                                        (answer[index].answer == 'نحافة' ||
+                                            answer[index].answer == 'لا أعاني')
+                                    ? true
+                                    : num.parse(cacheHelper.getData(key: loginType == 'googleLogin' ? 'googleBmi' : 'bmi')) >= 24.9
+                                        ? (answer[index].answer == 'زيادة الوزن') || (answer[index].answer == 'ثبات الوزن' && cacheHelper.getData(key: 'answer2') == 'ثبات الوزن')
+                                            ? true
+                                            : false
+                                        : false),
                     answer: answer[index].answer!,
                     value: index,
                     groupValue: questionsUICubit.cardNumber(questionsNumber!),
@@ -111,7 +134,7 @@ class CardBody extends StatelessWidget {
                         questionsUICubit.resetContinueQuestionThreeValueList3();
                         questionsCubit.answerValue(4, null);
                         questionsUICubit.resetQuestionFiveValue();
-                        CacheHelper().removeData(key: 'answer2');
+                        cacheHelper.removeData(key: 'answer2');
                       }
 
                       if (questionsUICubit.questionNumber == 2 &&
@@ -128,14 +151,14 @@ class CardBody extends StatelessWidget {
                         questionsUICubit.resetContinueQuestionThreeValueList2();
                         questionsCubit.resetQuestionThreeAnswersList();
                         questionsCubit.answerValue(4, null);
-                        CacheHelper().removeData(key: 'answer2');
+                        cacheHelper.removeData(key: 'answer2');
                         questionsUICubit.resetQuestionFiveValue();
                       }
 
                       questionsCubit.answerValue(
                           questionsNumber, answer[index].id!);
                       questionsUICubit.questionNumber == 2
-                          ? CacheHelper().saveData(
+                          ? cacheHelper.saveData(
                               key: 'answer', value: answer[index].answer)
                           : null;
                       questionsCubit.answersList();

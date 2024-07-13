@@ -5,7 +5,11 @@ sealed class DataScreenState {}
 
 final class DataScreenInitial extends DataScreenState {}
 
-final class ContinueRegisterSuccess extends DataScreenState {}
+final class ContinueRegisterSuccess extends DataScreenState {
+  final ContinueRegisterModel continueRegisterModel;
+
+  ContinueRegisterSuccess({required this.continueRegisterModel});
+}
 
 final class ContinueRegisterLoading extends DataScreenState {}
 
@@ -14,7 +18,11 @@ final class ContinueRegisterFailure extends DataScreenState {
   ContinueRegisterFailure({this.error});
 }
 
-final class ContinueGoogleRegisterSuccess extends DataScreenState {}
+final class ContinueGoogleRegisterSuccess extends DataScreenState {
+  final ContinueRegisterModel continueRegisterModel;
+
+  ContinueGoogleRegisterSuccess({required this.continueRegisterModel});
+}
 
 final class ContinueGoogleRegisterLoading extends DataScreenState {}
 

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 import '../../feature/auth/data/models/continue_register_model.dart';
@@ -174,6 +176,8 @@ class AuthRequests {
     cacheHelper.saveData(
         key: AppConstants.isFirstQuestionsComplete,
         value: value.data!['user'][AppConstants.isFirstQuestionsComplete]);
+    cacheHelper.saveData(key: 'bmi', value: value.data!['user']['mass_index']);
+    log('${cacheHelper.getData(key: 'bmi')}');
     value.data!['user'][AppConstants.isFirstQuestionsComplete] == 'no'
         ? Navigator.pushNamedAndRemoveUntil(
             context,

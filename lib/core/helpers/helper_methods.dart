@@ -118,6 +118,12 @@ class HelperMethods {
   }
 
   static String getMealImage(String meal) {
+    if (meal.contains('الجبن') || meal.contains('جبن')) {
+      return Assets.imagesMealsSingleCheese;
+    }
+    if (meal.contains('شوفان') || meal.contains('الشوفان')) {
+      return Assets.imagesMealsOat;
+    }
     {
       if (meal.contains('رغيف') ||
           meal.contains('خبز') ||
@@ -127,7 +133,7 @@ class HelperMethods {
         return Assets.imagesMealsBrownToast;
       }
     }
-    if (meal.contains('تمر')) {
+    if (meal.contains('تمر') || meal.contains('بلح')) {
       return Assets.imagesMealsDate;
     }
     if (meal.contains('فاكهة') ||
@@ -136,6 +142,7 @@ class HelperMethods {
         meal.contains('ثمرة فاكهة') ||
         meal.contains('موز') ||
         meal.contains('مشمش') ||
+        meal.contains('خوخ') ||
         meal.contains('كيوي') ||
         meal.contains('برتقالة') ||
         meal.contains('تفاحة') ||
@@ -146,6 +153,14 @@ class HelperMethods {
         meal.contains('فراولة') ||
         meal.contains('موزة')) {
       return Assets.imagesMealsFruits;
+    }
+    if (meal.contains('التونا') ||
+        meal.contains('تونا') ||
+        meal.contains('تونة') ||
+        meal.contains('تونه') ||
+        meal.contains('التونه') ||
+        meal.contains('التونة')) {
+      return Assets.imagesMealsTuna;
     }
     if (meal.contains('الفشار') || meal.contains('فشار')) {
       return Assets.imagesMealsPopcorn;
@@ -159,6 +174,11 @@ class HelperMethods {
         (meal.contains('جبن') && meal.contains('زيت')) ||
         meal.contains('جبنه قليلة الدسم')) {
       return Assets.imagesMealsLowFatCheese;
+    }
+
+    if (meal.contains('معلقه صغيره زيت') ||
+        meal.contains('معلقه زيت زيتون صغيره')) {
+      return Assets.imagesMealsOliveOil;
     }
     if (meal.contains('بيضة') ||
         meal.contains('بيضه') ||
@@ -181,9 +201,6 @@ class HelperMethods {
         meal.contains('بيضة مقلية') ||
         meal.contains('بيضه مقليه')) {
       return Assets.imagesMealsOmleteEyes;
-    }
-    if (meal == 'معلقه صغيره زيت') {
-      return Assets.imagesMealsOliveOil;
     }
     if (meal == ' خس' || meal == 'خس ' || meal == 'خس') {
       return Assets.imagesMealsLettuce;
@@ -223,7 +240,9 @@ class HelperMethods {
       return Assets.imagesMealsSpaghetti;
     }
 
-    if (meal.contains('سمكة') || meal.contains('سمكه')) {
+    if (meal.contains('سمكة') ||
+        meal.contains('سمكه') ||
+        meal.contains('سلمون')) {
       return Assets.imagesMealsFish;
     }
     if (meal.contains('جبن مع الخضراوات')) {
@@ -285,9 +304,6 @@ class HelperMethods {
         return Assets.imagesMealsBiscuit;
       }
     }
-    if (meal.contains('شوفان') || meal.contains('الشوفان')) {
-      return Assets.imagesMealsOat;
-    }
     if (meal.contains('بطاطا')) {
       return Assets.imagesMealsSweetPotato;
     }
@@ -321,7 +337,9 @@ class HelperMethods {
     if (meal.contains('بسكوت') || meal.contains('بسكويت')) {
       return Assets.imagesMealsBiscuit;
     }
-    if (meal.contains('كبدة') || meal.contains('كبده')) {
+    if (meal.contains('كبدة') ||
+        meal.contains('كبده') ||
+        meal.contains('كبد')) {
       return Assets.imagesMealsLiver;
     }
     if (meal.contains('شيكولاتة') ||
@@ -338,10 +356,6 @@ class HelperMethods {
     if (meal.contains('خيار وجزر')) {
       return Assets.imagesMealsCarrotCucmber;
     }
-    if (meal.contains('الجبن') || meal.contains('جبن')) {
-      return Assets.imagesMealsSingleCheese;
-    }
-
     if (meal.contains('جبن قريش بالبقدونس')) {
       return Assets.imagesMealsCottageCheese;
     }
@@ -365,14 +379,6 @@ class HelperMethods {
     }
     if (meal.contains('ستيك') || meal.contains('لحم') || meal.contains('كفت')) {
       return Assets.imagesMealsMeat;
-    }
-    if (meal.contains('التونا') ||
-        meal.contains('تونا') ||
-        meal.contains('تونة') ||
-        meal.contains('تونه') ||
-        meal.contains('التونه') ||
-        meal.contains('التونة')) {
-      return Assets.imagesMealsTuna;
     } else {
       return Assets.imagesMealsDefaultFood;
     }
